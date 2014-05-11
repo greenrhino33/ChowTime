@@ -22,3 +22,11 @@ build/
 /.project
 /.classpath
 /.settings/
+
+#allout's autocommitter stuff
+autocommit
+
+#IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
