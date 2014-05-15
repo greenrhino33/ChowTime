@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class ItemCone extends Item {
+public class ItemCone extends CTItem {
 
     public ItemCone(){
         super();

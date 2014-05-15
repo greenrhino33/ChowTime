@@ -10,6 +10,5 @@ public class BlockIceCream extends CTBlock {
 
     public BlockIceCream(Material material) {
         super(material);
-        this.setCreativeTab(ChowTime.creativeTab);
     }
 }

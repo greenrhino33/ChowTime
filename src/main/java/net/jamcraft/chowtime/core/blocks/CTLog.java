@@ -23,7 +23,7 @@ public class CTLog extends Block{
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconregister)
     {
-        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":logBasic");
+        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":" + this.getUnlocalizedName().substring(5));
     }
 
     @SideOnly(Side.CLIENT)

@@ -22,6 +22,6 @@ public class CTBlock extends Block{
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconregister)
     {
-        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":" + this.getUnlocalizedName());
+        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":" + this.getUnlocalizedName().substring(5));
     }
 }

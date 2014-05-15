@@ -35,7 +35,7 @@ public class CTLeaves extends BlockLeaves{
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconregister)
     {
-        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":" + this.getUnlocalizedName());
+        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":" + this.getUnlocalizedName().substring(5));
     }
 
     @Override
