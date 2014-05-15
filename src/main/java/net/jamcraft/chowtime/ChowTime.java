@@ -1,6 +1,6 @@
 package net.jamcraft.chowtime;
 
-import cpw.mods.fml.common.mod;
+import cpw.mods.fml.common.Mod;
 
 /**
  * Created by James Hollowell on 5/14/2014.
