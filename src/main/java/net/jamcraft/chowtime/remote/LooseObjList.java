@@ -3,9 +3,7 @@ package net.jamcraft.chowtime.remote;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,20 +19,28 @@ public class LooseObjList
         return descriptions;
     }
 
-    public void writeToJson(File out) throws IOException, JsonIOException
+    public void writeToFile(File out) throws IOException, JsonIOException
     {
         if(!out.exists())out.createNewFile();
-        Gson gson=new Gson();
-        String s=gson.toJson(descriptions,descriptions.getClass());
+        String
         FileWriter fw=new FileWriter(out);
         fw.write(s);
         fw.close();
     }
 
-    public void readFromJson(String jsonText)
+    public void readFromFile(File in)
     {
-        Gson gson=new Gson();
-        descriptions=gson.fromJson(jsonText,descriptions.getClass());
+        try
+        {
+            FileReader fr = new FileReader(in);
+            BufferedReader br = new BufferedReader(fr);
+            while (br.ready())
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
