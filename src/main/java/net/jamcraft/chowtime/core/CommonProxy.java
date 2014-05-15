@@ -5,4 +5,7 @@ package net.jamcraft.chowtime.core;
  */
 public class CommonProxy
 {
+    public void registerRenderers()
+    {
+    }
 }

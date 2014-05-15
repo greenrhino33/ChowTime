@@ -1,5 +1,6 @@
 package net.jamcraft.chowtime.core.blocks.machines;
 
+import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -16,6 +17,7 @@ public class Juicer extends BlockContainer {
 
     public Juicer(){
         super(Material.iron);
+        this.setCreativeTab(ChowTime.creativeTab);
     }
 
     public static ItemStack OnUse(ItemStack food){

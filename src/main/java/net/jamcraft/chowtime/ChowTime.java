@@ -74,6 +74,7 @@ public class ChowTime
         CTRegistry.CTLiquids();
         CTRegistry.CTCrops();
         CTRegistry.CTItems();
+        CTRegistry.CTTileEntities();
         DynItems.registerRecipes();
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
