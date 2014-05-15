@@ -6,9 +6,7 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.jamcraft.chowtime.core.CommonProxy;
-import net.jamcraft.chowtime.core.Config;
-import net.jamcraft.chowtime.core.ModConstants;
+import net.jamcraft.chowtime.core.*;
 import net.jamcraft.chowtime.dyn.DynMain;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.Block;
@@ -76,6 +74,7 @@ public class ChowTime
     public void init(FMLInitializationEvent event)
     {
         //FMLInterModComms.sendMessage("prisoncraft", "blacklist", Block.blockRegistry.getNameForObject(Blocks.bookshelf));
+        CTRegistry.CTBlocks();
     }
 
     @Mod.EventHandler
