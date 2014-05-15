@@ -19,7 +19,7 @@ apply plugin: 'forge'
 
 version = "1.0"
 group= "net.jam-craft.chowTime" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "ChowTime"
+archivesBaseName = "net.jamcraft.chowtime.ChowTime"
 
 minecraft {
     version = "1.7.2-10.12.1.1065"
