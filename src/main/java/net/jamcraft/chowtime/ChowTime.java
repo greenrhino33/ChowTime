@@ -9,6 +9,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.jamcraft.chowtime.core.CommonProxy;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.ModConstants;
+import net.jamcraft.chowtime.dyn.DynMain;
+import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -57,6 +59,8 @@ public class ChowTime
         logger = event.getModLog();
 
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
+        DynMain.init();
+        RemoteMain.init();
         //        configBase=event.getModConfigurationDirectory();
 
 //        MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
