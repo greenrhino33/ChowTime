@@ -1,15 +1,13 @@
 package net.jamcraft.chowtime.remote;
 
-import scala.Int;
-
 /**
  * Created by James Hollowell on 5/15/2014.
  */
 public class Version
 {
-    private int Major=0;
-    private int Minor=0;
-    private int Build=0;
+    private int Major = 0;
+    private int Minor = 0;
+    private int Build = 0;
 
     public int getMajor()
     {
@@ -35,13 +33,20 @@ public class Version
 
     @Override public String toString()
     {
-        return Major+"."+Minor+"."+Build;
+        return Major + "." + Minor + "." + Build;
     }
 
     public void readFromString(String string)
     {
-        Major=Integer.parseInt(string.split('.')[0]);
-        Minor =Integer.parseInt(string.split('.')[1]);
-        Build= Integer.parseInt(string.split('.')[2]);
+        Major = Integer.parseInt(string.split(".")[0]);
+        Minor = Integer.parseInt(string.split(".")[1]);
+        Build = Integer.parseInt(string.split(".")[2]);
+    }
+
+    @Override public boolean equals(Object o)
+    {
+        if (!(o instanceof Version)) return false;
+        Version other = (Version) o;
+        return other.getMajor() == Major && other.getMinor() == Minor && other.getBuild() == Build;
     }
 }
