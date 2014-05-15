@@ -8,12 +8,9 @@ import java.util.List;
  */
 public class DynMain
 {
-    public static List<String> load = new ArrayList<String>();
-
     public static void init()
     {
         DynTextures.addDynTP();
-        load.add("net.jamcraft.chowtime.dyn.items.Temp");
 
         DynItems.registerRecipes();
     }

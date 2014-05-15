@@ -15,21 +15,17 @@ import java.util.List;
  */
 public class RemoteMain
 {
-    private static LooseObjList local = new LooseObjList();
+    public static LooseObjList local = new LooseObjList();
     private static LooseObjList remote = new LooseObjList();
 
     public static void init()
     {
-//        DynClassDescription desc=new DynClassDescription();
-//        desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
-//        desc.version=new Version(0,0,1);
-//        DownloadClass(desc);
         LoadLocal();
         LoadRemote();
         if(!local.equals(remote))
         {
             //Download the classes that need to be updated
-            List<DynClassDescription> list=local.difference(remote);
+            List<DynClassDescription> list = remote.difference(local);
             for(DynClassDescription desc:list)
             {
                 DownloadClass(desc);
@@ -70,6 +66,7 @@ public class RemoteMain
             while(br.ready())
             {
                 fw.write(br.readLine());
+                fw.write("\n");
             }
             fw.close();
 

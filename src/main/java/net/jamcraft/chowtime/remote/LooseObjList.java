@@ -28,7 +28,7 @@ public class LooseObjList
         {
             String s=desc.classname+" "+desc.version.toString();
             bw.write(s);
-            bw.newLine();;
+            bw.newLine();
         }
 
         bw.close();
