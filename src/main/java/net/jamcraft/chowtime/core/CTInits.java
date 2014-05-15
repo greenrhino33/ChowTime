@@ -14,4 +14,8 @@ public class CTInits {
     //Item Inits
 
     //Effect Inits
+
+    //Machine Inits
+    public static Block Juicer;
+    public static Block Fermenter;
 }

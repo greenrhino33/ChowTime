@@ -29,6 +29,6 @@ public class CTLog extends Block{
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockAccess p_149720_1_, int p_149720_2_, int p_149720_3_, int p_149720_4_)
     {
-        return 0x61380B;
+        return 0x190B07;
     }
 }
