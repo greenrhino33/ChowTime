@@ -8,9 +8,12 @@ import net.minecraftforge.common.config.Configuration;
 public class Config
 {
     //and public static vars here
+    public static String remoteLoc;
 
     public static void init(Configuration conf)
     {
-
+        conf.load();
+        conf.get("Dynamic","RemoteLocation","http://jam-craft.github.io/ChowTime/");
+        conf.save();
     }
 }
