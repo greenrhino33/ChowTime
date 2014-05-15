@@ -8,6 +8,8 @@
 *.war
 *.ear
 
+!/gradle/gradle-wrapper.jar
+
 #eclipse
 .metadata/
 
