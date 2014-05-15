@@ -20,6 +20,7 @@ public class CTStrings {
     public static String ItemIceCream_Strawberry = "ItemIceCream_Strawberry";
     public static String Item_Barley = "Item_Barley";
     public static String ItemSeed_Barley = "ItemSeed_Barley";
+    public static String Item_Bucket = "Item_Bucket";
 
     public static String ItemFood_IceCreamCone_Strawberry = "ItemFood_IceCreamCone_Strawberry";
     public static String ItemFood_CottonCandy_Blue = "ItemFood_CottonCandy_Blue";

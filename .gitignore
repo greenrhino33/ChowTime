@@ -33,3 +33,7 @@ autocommit
 *.iml
 *.ipr
 *.iws
+
+saves/*
+logs/*
+
