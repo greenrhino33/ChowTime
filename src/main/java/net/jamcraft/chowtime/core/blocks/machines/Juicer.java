@@ -1,4 +1,4 @@
-package net.jamcraft.chowtime.core.machines;
+package net.jamcraft.chowtime.core.blocks.machines;
 
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.block.BlockContainer;

@@ -3,12 +3,14 @@ package net.jamcraft.chowtime;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.jamcraft.chowtime.core.CTRegistry;
 import net.jamcraft.chowtime.core.CommonProxy;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.ModConstants;
+import net.jamcraft.chowtime.core.gen.BasicTreeGen;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
@@ -80,7 +82,7 @@ public class ChowTime
         CTRegistry.CTLiquids();
         CTRegistry.CTCrops();
         CTRegistry.CTItems();
-        DynItems.registerRecipes();;
+        DynItems.registerRecipes();
     }
 
     @Mod.EventHandler

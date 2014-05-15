@@ -1,4 +1,4 @@
-package net.jamcraft.chowtime.core.liquids;
+package net.jamcraft.chowtime.core.blocks.liquids;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

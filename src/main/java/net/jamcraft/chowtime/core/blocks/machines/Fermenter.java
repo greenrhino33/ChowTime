@@ -1,4 +1,4 @@
-package net.jamcraft.chowtime.core.machines;
+package net.jamcraft.chowtime.core.blocks.machines;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

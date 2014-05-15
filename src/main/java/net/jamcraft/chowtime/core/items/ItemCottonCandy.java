@@ -1,6 +1,7 @@
 package net.jamcraft.chowtime.core.items;
 
 import net.jamcraft.chowtime.ChowTime;
+import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,7 @@ public class ItemCottonCandy extends ItemFood{
     public ItemCottonCandy() {
         super(3, 2.0F, false);
         this.setCreativeTab(ChowTime.creativeTab);
+        this.setTextureName(ModConstants.MODID + ":cottonCandy");
     }
 //
 //    protected void onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
