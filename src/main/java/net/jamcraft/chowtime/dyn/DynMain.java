@@ -15,6 +15,6 @@ public class DynMain
         DynTextures.addDynTP();
         load.add("net.jamcraft.chowtime.dyn.items.Temp");
 
-        DynItems.init();
+        DynItems.registerRecipes();
     }
 }

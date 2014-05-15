@@ -10,6 +10,7 @@ import net.jamcraft.chowtime.core.CommonProxy;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
+import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.material.Material;
@@ -79,6 +80,7 @@ public class ChowTime
         CTRegistry.CTLiquids();
         CTRegistry.CTCrops();
         CTRegistry.CTItems();
+        DynItems.registerRecipes();;
     }
 
     @Mod.EventHandler

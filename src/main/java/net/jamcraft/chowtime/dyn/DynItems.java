@@ -21,12 +21,6 @@ public class DynItems
 {
     public static Map<String, Item> items = new HashMap<String, Item>();
 
-    //TODO: Remove me and just call loadList() directly
-    public static void init()
-    {
-        loadList();
-    }
-
     /**
      * Add all the required classes to the classpath and register them with Forge
      */
