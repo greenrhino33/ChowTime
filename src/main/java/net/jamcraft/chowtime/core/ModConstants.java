@@ -7,4 +7,5 @@ public class ModConstants
 {
     public static final String MODID="chowtime";
     public static final String NAME="ChowTime";
+    public static final String DYN_LOC=Minecraft.getMinecraft().mcDataDir.getAbsolutePath()+"/mods/ChowTimeDyn";
 }
