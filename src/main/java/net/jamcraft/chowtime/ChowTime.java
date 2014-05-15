@@ -3,23 +3,19 @@ package net.jamcraft.chowtime;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.jamcraft.chowtime.core.*;
+import net.jamcraft.chowtime.core.CTRegistry;
+import net.jamcraft.chowtime.core.CommonProxy;
+import net.jamcraft.chowtime.core.Config;
+import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.dyn.DynMain;
 import net.jamcraft.chowtime.remote.RemoteMain;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.world.storage.SaveHandler;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
-
-import java.io.File;
 
 /**
  * Created by James Hollowell on 5/14/2014.

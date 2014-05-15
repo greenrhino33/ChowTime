@@ -12,6 +12,7 @@ import net.jamcraft.chowtime.core.items.SeedBarley;
 import net.jamcraft.chowtime.core.liquids.CTFluid;
 import net.jamcraft.chowtime.core.machines.Fermenter;
 import net.jamcraft.chowtime.core.machines.Juicer;
+import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -57,5 +58,9 @@ public class CTRegistry {
         GameRegistry.registerItem(CTInits.BarleyCrop, "barley");
         CTInits.IceCreamBall = new ItemIceCream();
         GameRegistry.registerItem(CTInits.IceCreamBall, "iceCreamBall");
+    }
+
+    public static void CTTileEntities(){
+        GameRegistry.registerTileEntity(TEJuicer.class, "TEJuicer");
     }
 }
