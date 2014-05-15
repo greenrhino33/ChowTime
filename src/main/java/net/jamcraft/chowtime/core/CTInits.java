@@ -13,7 +13,7 @@ public class CTInits {
     public static Block CTLeaves;
     public static Block CTLog;
     public static Block IceCream;
-    public static Block CottonCandy;
+    public static Block CottonCandyBLUE;
 
     //Liquid Inits
     public static Block ChocolateMilk;

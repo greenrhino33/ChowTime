@@ -2,6 +2,7 @@ package net.jamcraft.chowtime.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.jamcraft.chowtime.ChowTime;
+import net.jamcraft.chowtime.core.blocks.BlockCottonCandy;
 import net.jamcraft.chowtime.core.blocks.BlockIceCream;
 import net.jamcraft.chowtime.core.blocks.CTLeaves;
 import net.jamcraft.chowtime.core.blocks.CTLog;
@@ -30,6 +31,8 @@ public class CTRegistry {
         GameRegistry.registerBlock(CTInits.CTLog, "CTLog");
         CTInits.IceCream = new BlockIceCream();
         GameRegistry.registerBlock(CTInits.IceCream, "IceCream");
+        CTInits.CottonCandyBLUE = new BlockCottonCandy().setBlockTextureName(ModConstants.MODID + ":cottonCandy");
+        GameRegistry.registerBlock(CTInits.CottonCandyBLUE, "cottonCandyBLUE");
     }
 
     public static void CTMachines(){
@@ -64,6 +67,6 @@ public class CTRegistry {
     }
 
     public static void CTTileEntities(){
-        GameRegistry.registerTileEntity(TEJuicer.class, "TEJuicer");
+       // GameRegistry.registerTileEntity(TEJuicer.class, "TEJuicer");
     }
 }
