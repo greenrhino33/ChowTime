@@ -2,10 +2,7 @@ package net.jamcraft.chowtime.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.jamcraft.chowtime.ChowTime;
-import net.jamcraft.chowtime.core.blocks.BlockCottonCandy;
-import net.jamcraft.chowtime.core.blocks.BlockIceCream;
-import net.jamcraft.chowtime.core.blocks.CTLeaves;
-import net.jamcraft.chowtime.core.blocks.CTLog;
+import net.jamcraft.chowtime.core.blocks.*;
 import net.jamcraft.chowtime.core.crops.CropBarley;
 import net.jamcraft.chowtime.core.items.*;
 import net.jamcraft.chowtime.core.liquids.CTFluid;
@@ -22,10 +19,12 @@ import net.minecraftforge.fluids.FluidRegistry;
 public class CTRegistry {
 
     public static void CTBlocks(){
-        CTInits.CTLeaves = new CTLeaves();
+        CTInits.CTLeaves = new CTLeaves("leavesBasic");
         GameRegistry.registerBlock(CTInits.CTLeaves, "CTLeaves");
         CTInits.CTLog = new CTLog();
         GameRegistry.registerBlock(CTInits.CTLog, "CTLog");
+        CTInits.CTSapling = new CTSapling();
+        GameRegistry.registerBlock(CTInits.CTSapling, "CTSaplings");
         CTInits.IceCream = new BlockIceCream();
         GameRegistry.registerBlock(CTInits.IceCream, "IceCream");
         CTInits.CottonCandyBLUE = new BlockCottonCandy().setBlockTextureName(ModConstants.MODID + ":cottonCandy");

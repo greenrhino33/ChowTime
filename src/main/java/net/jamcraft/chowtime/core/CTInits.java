@@ -12,6 +12,7 @@ public class CTInits {
     //Block Inits
     public static Block CTLeaves;
     public static Block CTLog;
+    public static Block CTSapling;
     public static Block IceCream;
     public static Block CottonCandyBLUE;
 

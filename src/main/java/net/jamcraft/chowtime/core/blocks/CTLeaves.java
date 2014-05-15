@@ -6,27 +6,75 @@ import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.CTInits;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class CTLeaves extends Block{
+public class CTLeaves extends BlockLeaves{
 
-    public CTLeaves(){
-        super(Material.leaves);
+    private String name;
+
+    public CTLeaves(String par1){
+        super();
+        this.name = par1;
+        this.setTickRandomly(true);
+        this.setHardness(0.2F);
+        this.setLightOpacity(1);
+        this.setStepSound(Block.soundTypeGrass);
+        this.setBlockName("floraLeaves");
         this.setCreativeTab(ChowTime.creativeTab);
-        this.setHardness(0.1F);
-        this.setBlockTextureName(ModConstants.MODID + ":leavesBasic");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconregister)
     {
-        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":leavesBasic");
+        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":" + name);
+    }
+
+    @Override
+    public void updateTick (World world, int x, int y, int z, Random random)
+    {
+        if (!world.isRemote)
+        {
+            int meta = world.getBlockMetadata(x, y, z);
+
+            if ((meta & 4) == 0)
+            {
+                boolean nearbyTree = false;
+                byte range = 4;
+                for (int posX = x - range; posX <= x + range; posX++)
+                {
+                    for (int posY = y - range; posY <= y + range; posY++)
+                    {
+                        for (int posZ = z - range; posZ <= z + range; posZ++)
+                        {
+                            Block block = world.getBlock(posX, posY, posZ);
+                            if (block != null && block.canSustainLeaves(world, posX, posY, posZ))
+                                nearbyTree = true;
+                        }
+                    }
+                }
+
+                if (!nearbyTree)
+                    this.removeLeaves(world, x, y, z);
+            }
+        }
+    }
+
+    public void removeLeaves (World world, int x, int y, int z)
+    {
+        this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+        world.setBlock(x, y, z, Blocks.air, 0, 7);
     }
 
     @SideOnly(Side.CLIENT)
@@ -44,6 +92,16 @@ public class CTLeaves extends Block{
     public boolean isOpaqueCube()
     {
         return false;
+    }
+
+    @Override
+    public IIcon getIcon(int var1, int var2) {
+        return null;
+    }
+
+    @Override
+    public String[] func_150125_e() {
+        return new String[0];
     }
 
     @Override
