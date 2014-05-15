@@ -1,15 +1,19 @@
 package net.jamcraft.chowtime.core.items;
 
 import net.jamcraft.chowtime.ChowTime;
-import net.minecraft.item.ItemSeedFood;
+import net.jamcraft.chowtime.core.CTInits;
+import net.jamcraft.chowtime.core.ModConstants;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemSeeds;
 
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class SeedBarley extends ItemSeedFood {
+public class SeedBarley extends ItemSeeds {
 
     public SeedBarley(){
-        super(2, 2.0F, null, null);
+        super(CTInits.CropBarley, Blocks.farmland);
         this.setCreativeTab(ChowTime.creativeTab);
+        this.setTextureName(ModConstants.MODID + ":barleySeeds");
     }
 }

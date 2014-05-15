@@ -4,6 +4,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.blocks.CTLeaves;
 import net.jamcraft.chowtime.core.blocks.CTLog;
+import net.jamcraft.chowtime.core.crops.CropBarley;
+import net.jamcraft.chowtime.core.items.ItemBarley;
+import net.jamcraft.chowtime.core.items.SeedBarley;
 import net.jamcraft.chowtime.core.liquids.CTFluid;
 import net.jamcraft.chowtime.core.machines.Fermenter;
 import net.jamcraft.chowtime.core.machines.Juicer;
@@ -31,10 +34,22 @@ public class CTRegistry {
     }
 
     public static void CTLiquids() {
-        CTInits.ChocolateMilkFluid = new Fluid("ChocolateMilk");
+        CTInits.ChocolateMilkFluid = new Fluid("chocolateMilk");
         FluidRegistry.registerFluid(CTInits.ChocolateMilkFluid);
         CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "chocolateMilk").setCreativeTab(ChowTime.creativeTab);
         GameRegistry.registerBlock(CTInits.ChocolateMilk, "Chocolate Milk Fluid");
 
+    }
+
+    public static void CTCrops() {
+        CTInits.CropBarley = new CropBarley();
+        GameRegistry.registerBlock(CTInits.CropBarley, "barleyCrop");
+        CTInits.BarleySeeds = new SeedBarley();
+        GameRegistry.registerItem(CTInits.BarleySeeds, "barleySeed");
+    }
+
+    public static void CTItems(){
+        CTInits.BarleyCrop = new ItemBarley();
+        GameRegistry.registerItem(CTInits.BarleyCrop, "barley");
     }
 }

@@ -75,8 +75,10 @@ public class ChowTime
     {
         //FMLInterModComms.sendMessage("prisoncraft", "blacklist", Block.blockRegistry.getNameForObject(Blocks.bookshelf));
         CTRegistry.CTBlocks();
-        CTRegistry.CTMachines();;
+        CTRegistry.CTMachines();
         CTRegistry.CTLiquids();
+        CTRegistry.CTCrops();
+        CTRegistry.CTItems();
     }
 
     @Mod.EventHandler

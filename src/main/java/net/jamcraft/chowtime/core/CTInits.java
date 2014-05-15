@@ -1,6 +1,7 @@
 package net.jamcraft.chowtime.core;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraftforge.fluids.Fluid;
 
 /**
@@ -17,10 +18,15 @@ public class CTInits {
     public static Fluid ChocolateMilkFluid;
 
     //Item Inits
+    public static Item BarleyCrop;
 
     //Effect Inits
 
     //Machine Inits
     public static Block Juicer;
     public static Block Fermenter;
+
+    //Crop Inits
+    public static Block CropBarley;
+    public static Item BarleySeeds;
 }
