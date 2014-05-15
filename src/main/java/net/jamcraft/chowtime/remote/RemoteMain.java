@@ -19,25 +19,25 @@ public class RemoteMain
 
     public static void init()
     {
-//        DynClassDescription desc=new DynClassDescription();
-//        desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
-//        desc.version=new Version(0,0,1);
-//        local.add(desc);
-//
-//        File f = new File(ModConstants.DYN_LOC + "/local.json");
-//        try
-//        {
-//            local.writeToJson(f);
-//        }
-//        catch (IOException e)
-//        {
-//            e.printStackTrace();
-//        }
-        LoadLocal();
-        for(DynClassDescription desc: local.getObjects())
+        DynClassDescription desc=new DynClassDescription();
+        desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
+        desc.version=new Version(0,0,1);
+        local.add(desc);
+
+        File f = new File(ModConstants.DYN_LOC + "/local.json");
+        try
         {
-            ChowTime.logger.debug("Desc: v:"+desc.version.toString()+" cn:"+desc.classname);
+            local.writeToFile(f);
         }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+//        LoadLocal();
+//        for(DynClassDescription desc: local.getObjects())
+//        {
+//            ChowTime.logger.debug("Desc: v:"+desc.version.toString()+" cn:"+desc.classname);
+//        }
         //LoadRemote();
     }
 
@@ -46,10 +46,7 @@ public class RemoteMain
         try
         {
             File f = new File(ModConstants.DYN_LOC + "/local.json");
-            FileReader fr=new FileReader(f);
-            BufferedReader br=new BufferedReader(fr);
-            String json = br.readLine();
-            local.readFromJson(json);
+            local.readFromFile(f);
             return true;
         }
         catch (IOException e)
@@ -71,9 +68,16 @@ public class RemoteMain
             URL url = new URL(Config.remoteLoc + "/dyn/current.json");
             URLConnection con = url.openConnection();
             InputStreamReader isr = new InputStreamReader(con.getInputStream());
-            BufferedReader br = new BufferedReader(isr);
-            String json = br.readLine();
-            remote.readFromJson(json);
+            BufferedReader br=new BufferedReader(isr);
+            File dyn=new File(ModConstants.DYN_LOC+"/remote.json");
+            if(!dyn.exists())dyn.createNewFile();
+            FileWriter fw=new FileWriter(dyn);
+            while(br.ready())
+            {
+                fw.write(br.readLine());
+            }
+
+            remote.readFromFile(dyn);
             return true;
         }
         catch (IOException e)

@@ -36,12 +36,12 @@ public class Version
         return Major + "." + Minor + "." + Build;
     }
 
-//    public void readFromString(String string)
-//    {
-//        Major = Integer.parseInt(string.split(".")[0]);
-//        Minor = Integer.parseInt(string.split(".")[1]);
-//        Build = Integer.parseInt(string.split(".")[2]);
-//    }
+    public void readFromString(String string)
+    {
+        Major = Integer.parseInt(string.split(".")[0]);
+        Minor = Integer.parseInt(string.split(".")[1]);
+        Build = Integer.parseInt(string.split(".")[2]);
+    }
 
     @Override public boolean equals(Object o)
     {

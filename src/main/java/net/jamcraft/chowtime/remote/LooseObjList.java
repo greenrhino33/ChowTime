@@ -22,10 +22,16 @@ public class LooseObjList
     public void writeToFile(File out) throws IOException, JsonIOException
     {
         if(!out.exists())out.createNewFile();
-        String
         FileWriter fw=new FileWriter(out);
-        fw.write(s);
-        fw.close();
+        BufferedWriter bw=new BufferedWriter(fw);
+        for(DynClassDescription desc:descriptions)
+        {
+            String s=desc.classname+" "+desc.version.toString();
+            bw.write(s);
+            bw.newLine();;
+        }
+
+        bw.close();
     }
 
     public void readFromFile(File in)
@@ -35,7 +41,15 @@ public class LooseObjList
             FileReader fr = new FileReader(in);
             BufferedReader br = new BufferedReader(fr);
             while (br.ready())
-
+            {
+                String line=br.readLine();
+                DynClassDescription desc=new DynClassDescription();
+                desc.classname=line.split(" ")[0];
+                desc.version=new Version(0,0,0);
+                desc.version.readFromString(line.split(" ")[1]);
+                descriptions.add(desc);
+            }
+            br.close();
         }
         catch (IOException e)
         {
