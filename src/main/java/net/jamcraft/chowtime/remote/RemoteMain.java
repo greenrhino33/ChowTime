@@ -8,6 +8,7 @@ import net.jamcraft.chowtime.core.ModConstants;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 
 /**
  * Created by James Hollowell on 5/14/2014.
@@ -19,9 +20,20 @@ public class RemoteMain
 
     public static void init()
     {
-        LoadLocal();
-        LoadRemote();
-        if()
+        DynClassDescription desc=new DynClassDescription();
+        desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
+        desc.version=new Version(0,0,1);
+        DownloadClass(desc);
+//        LoadLocal();
+//        LoadRemote();
+//        if(!local.equals(remote))
+//        {
+//            List<DynClassDescription> list=local.difference(remote);
+//            for(DynClassDescription desc:list)
+//            {
+//                DownloadClass(desc);
+//            }
+//        }
     }
 
     public static boolean LoadLocal()
@@ -61,5 +73,37 @@ public class RemoteMain
         }
 
         return false;
+    }
+
+    public static void DownloadClass(DynClassDescription desc)
+    {
+        String newPath = "/" + desc.classname.replace('.', '/')+".class";
+
+        try
+        {
+            final int blk_size = 1024;
+            URL url = new URL(Config.remoteLoc + "dyn/current" + newPath);
+            URLConnection con = url.openConnection();
+            InputStream reader = url.openStream();
+            File f=new File(ModConstants.DYN_LOC + newPath);
+            if(!f.exists())f.createNewFile();
+            FileOutputStream writer = new FileOutputStream(ModConstants.DYN_LOC + newPath);
+            int total = con.getContentLength();
+            int size_dl = 0;
+            byte[] buffer = new byte[blk_size];
+            int bytesRead = 0;
+            while ((bytesRead = reader.read(buffer)) > 0)
+            {
+                size_dl += bytesRead;
+                writer.write(buffer, 0, bytesRead);
+                buffer = new byte[blk_size];
+            }
+            writer.close();
+            reader.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
