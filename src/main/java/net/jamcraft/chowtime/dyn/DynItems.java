@@ -42,14 +42,14 @@ public class DynItems
             {
                 String n = classname.replace('.', '/');
                 String path = dynLoc.getAbsolutePath() + "/" + n.substring(0, n.lastIndexOf("/"));
-                File dir = new File(path);
+                File dir = dynLoc;
 
                 if (dir.isDirectory())
                 {
                     ClassLoader loader = null;
                     loader = new URLClassLoader(new URL[] { dir.toURI().toURL() }, DynItems.class.getClassLoader());
 
-                    for (File f : dir.listFiles())
+                    /*for (File f : dir.listFiles())
                     {
                         if (f.isDirectory())
                         {
@@ -58,22 +58,16 @@ public class DynItems
                         if (f.getName().endsWith(".class"))
                         {
                             String name = f.getAbsolutePath().substring(dynLoc.getAbsolutePath().length() + 1, f.getAbsolutePath().length() - 6);
-                            name = name.replace("\\", ".");
+                            name = name.replace("\\", ".");*/
 
-                            File classFile = new File(dir.getAbsolutePath() + "/" + classname.substring(classname.lastIndexOf(".") + 1) + ".class");
-                            if (!classFile.exists())
-                            {
-                                throw new Exception();
-                            }
+//                            File classFile = new File(dir.getAbsolutePath() + "/" + classname.substring(classname.lastIndexOf(".") + 1) + ".class");
+//                            if (!classFile.exists())
+//                            {
+//                                throw new Exception();
+//                            }
 
-                            Class<?> clazz = loader.loadClass(name);
+                            Class<?> clazz = loader.loadClass(classname);
 
-                            //Object o = null;
-                /*
-                URL url = cl.toURI().toURL();
-                URL[] urls=new URL[]{url};
-                ClassLoader classLoader=new URLClassLoader(urls,DynItems.class.getClassLoader());
-                Class<?> clazz=classLoader.loadClass(classname);*/
 
                             if (IDynItem.class.isAssignableFrom(clazz))
                             {
@@ -93,8 +87,8 @@ public class DynItems
                             }
 
                         }
-                    }
-                }
+//                    }
+//                }
             }
             catch (Exception e)
             {
