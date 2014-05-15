@@ -38,12 +38,12 @@ public class Version
 
     public void readFromString(String s)
     {
-        String[] split=s.split(".");
+        String[] split=s.split("\\.");
         if(split.length==3)
         {
-            Major = Integer.parseInt(s.split(".")[0]);
-            Minor = Integer.parseInt(s.split(".")[1]);
-            Build = Integer.parseInt(s.split(".")[2]);
+            Major = Integer.parseInt(s.split("\\.")[0]);
+            Minor = Integer.parseInt(s.split("\\.")[1]);
+            Build = Integer.parseInt(s.split("\\.")[2]);
         }
     }
 

@@ -36,9 +36,13 @@ public class RemoteMain
         LoadLocal();
         for(DynClassDescription desc: local.getObjects())
         {
-            ChowTime.logger.debug("Desc: v:"+desc.version.toString()+" cn:"+desc.classname);
+            System.out.println("Local Desc: v:"+desc.version.toString()+" cn:"+desc.classname);
         }
-        //LoadRemote();
+        LoadRemote();
+        for(DynClassDescription desc: remote.getObjects())
+        {
+            System.out.println("Remote Desc: v:"+desc.version.toString()+" cn:"+desc.classname);
+        }
     }
 
     public static boolean LoadLocal()
