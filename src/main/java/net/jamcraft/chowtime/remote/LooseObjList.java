@@ -25,7 +25,10 @@ public class LooseObjList
     {
         if(!out.exists())out.createNewFile();
         Gson gson=new Gson();
-        gson.toJson(descriptions,descriptions.getClass(),new FileWriter(out));
+        String s=gson.toJson(descriptions,descriptions.getClass());
+        FileWriter fw=new FileWriter(out);
+        fw.write(s);
+        fw.close();
     }
 
     public void readFromJson(String jsonText)

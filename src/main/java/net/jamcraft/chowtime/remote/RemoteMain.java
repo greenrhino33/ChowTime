@@ -19,21 +19,25 @@ public class RemoteMain
 
     public static void init()
     {
-        DynClassDescription desc=new DynClassDescription();
-        desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
-        desc.version=new Version(0,0,1);
-        local.add(desc);
-
-        File f = new File(ModConstants.DYN_LOC + "/local.json");
-        try
+//        DynClassDescription desc=new DynClassDescription();
+//        desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
+//        desc.version=new Version(0,0,1);
+//        local.add(desc);
+//
+//        File f = new File(ModConstants.DYN_LOC + "/local.json");
+//        try
+//        {
+//            local.writeToJson(f);
+//        }
+//        catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+        LoadLocal();
+        for(DynClassDescription desc: local.getObjects())
         {
-            local.writeToJson(f);
+            ChowTime.logger.debug("Desc: v:"+desc.version.toString()+" cn:"+desc.classname);
         }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        //LoadLocal();
         //LoadRemote();
     }
 
