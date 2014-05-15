@@ -1,17 +1,25 @@
 package net.jamcraft.chowtime.core;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.jamcraft.chowtime.ChowTime;
-import net.jamcraft.chowtime.core.blocks.*;
-import net.jamcraft.chowtime.core.crops.CropBarley;
-import net.jamcraft.chowtime.core.items.*;
+import net.jamcraft.chowtime.core.blocks.BlockCottonCandy;
+import net.jamcraft.chowtime.core.blocks.CTBlock;
+import net.jamcraft.chowtime.core.blocks.CTLeaves;
+import net.jamcraft.chowtime.core.blocks.CTLog;
+import net.jamcraft.chowtime.core.blocks.CTSapling;
 import net.jamcraft.chowtime.core.blocks.liquids.CTFluid;
 import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
 import net.jamcraft.chowtime.core.blocks.machines.Juicer;
+import net.jamcraft.chowtime.core.crops.CropBarley;
+import net.jamcraft.chowtime.core.items.CTItem;
+import net.jamcraft.chowtime.core.items.CTItemBucket;
+import net.jamcraft.chowtime.core.items.CTItemFood;
+import net.jamcraft.chowtime.core.items.SeedBarley;
 import net.jamcraft.chowtime.core.lib.CTStrings;
+import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Created by Kayla Marie on 5/14/14.
@@ -67,6 +75,6 @@ public class CTRegistry {
     }
 
     public static void CTTileEntities(){
-       // GameRegistry.registerTileEntity(TEJuicer.class, "TEJuicer");
+        GameRegistry.registerTileEntity(TEFermenter.class, "TEFermenter");
     }
 }
