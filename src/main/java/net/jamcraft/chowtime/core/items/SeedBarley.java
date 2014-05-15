@@ -9,7 +9,7 @@ import net.minecraft.item.ItemSeedFood;
 public class SeedBarley extends ItemSeedFood {
 
     public SeedBarley(){
-        super();
+        super(2, 2.0F, null, null);
         this.setCreativeTab(ChowTime.creativeTab);
     }
 }
