@@ -12,6 +12,6 @@ public class DynMain
     {
         DynTextures.addDynTP();
 
-        DynItems.registerRecipes();
+        DynItems.loadList();
     }
 }

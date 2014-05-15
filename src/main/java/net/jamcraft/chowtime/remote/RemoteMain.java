@@ -47,6 +47,7 @@ public class RemoteMain
 
     public static boolean LoadLocal()
     {
+        local.getObjects().clear();
         File f = new File(ModConstants.DYN_LOC + "/local.json");
         local.readFromFile(f);
         return true;

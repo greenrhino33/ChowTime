@@ -13,6 +13,6 @@ public class DynClassDescription
     {
         if (!(o instanceof DynClassDescription)) return false;
         DynClassDescription other = (DynClassDescription) o;
-        return other.version == version && other.classname.equals(classname);
+        return other.version.equals(version) && other.classname.equals(classname);
     }
 }
