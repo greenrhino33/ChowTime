@@ -7,6 +7,7 @@ import net.jamcraft.chowtime.core.blocks.CTLeaves;
 import net.jamcraft.chowtime.core.blocks.CTLog;
 import net.jamcraft.chowtime.core.crops.CropBarley;
 import net.jamcraft.chowtime.core.items.ItemBarley;
+import net.jamcraft.chowtime.core.items.ItemCone;
 import net.jamcraft.chowtime.core.items.ItemIceCream;
 import net.jamcraft.chowtime.core.items.SeedBarley;
 import net.jamcraft.chowtime.core.liquids.CTFluid;
@@ -58,6 +59,8 @@ public class CTRegistry {
         GameRegistry.registerItem(CTInits.BarleyCrop, "barley");
         CTInits.IceCreamBall = new ItemIceCream();
         GameRegistry.registerItem(CTInits.IceCreamBall, "iceCreamBall");
+        CTInits.Cone = new ItemCone();
+        GameRegistry.registerItem(CTInits.Cone, "Cone");
     }
 
     public static void CTTileEntities(){

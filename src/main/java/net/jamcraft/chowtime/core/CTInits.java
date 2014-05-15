@@ -22,6 +22,7 @@ public class CTInits {
     //Item Inits
     public static Item BarleyCrop;
     public static Item IceCreamBall;
+    public static Item Cone;
 
     //Effect Inits
 
