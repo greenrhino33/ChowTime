@@ -6,9 +6,11 @@ import net.jamcraft.chowtime.dyn.common.IDynItem;
 import net.minecraft.item.Item;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,23 +19,31 @@ import java.util.Map;
  */
 public class DynItems
 {
-    public Map<String, Item> items = new HashMap<String, Item>();
+    public static Map<String, Item> items = new HashMap<String, Item>();
 
+    //TODO: Remove me and just call loadList() directly
     public static void init()
     {
         loadList();
     }
 
     /**
-     * Add
+     * Add all the required classes to the classpath and register them with Forge
      */
 
-    private static void loadList()
+    public static void loadList()
     {
         File dynLoc = new File(ModConstants.DYN_LOC);
         if (!dynLoc.exists())
         {
-            //Error?
+            try
+            {
+                throw new FileNotFoundException();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
         try
         {
@@ -41,10 +51,12 @@ public class DynItems
 
             for (String classname : DynMain.load)
             {
+                //Actually load the class
                 Class<?> clazz = loader.loadClass(classname);
 
                 if (IDynItem.class.isAssignableFrom(clazz))
                 {
+                    //Initialize the obj and do checks to make sure it is usable.
                     Object o = null;
                     if (clazz.isInterface()) continue;
                     if (Modifier.isAbstract(clazz.getModifiers()))
@@ -52,11 +64,15 @@ public class DynItems
                     if (clazz.getConstructor((Class<?>[]) null) != null)
                         o = clazz.newInstance();
 
+                    //Do the actual registration stuff
                     if (o instanceof IDynItem && o instanceof Item)
                     {
+                        //Register with Forge
                         String rn = ((IDynItem) o).getRegistrationName();
                         GameRegistry.registerItem(((Item) o), rn);
-                        ((IDynItem) o).registerRecipe();
+
+                        //Add the item to our list
+                        items.put(rn, (Item) o);
                     }
                 }
             }
@@ -64,6 +80,16 @@ public class DynItems
         catch (Exception e)
         {
             e.printStackTrace();
+        }
+    }
+
+    public static void registerRecipes()
+    {
+        for (int i = 0; i < items.size(); i++)
+        {
+            String key = (String) items.keySet().toArray()[i];
+            Item item = items.get(key);
+            ((IDynItem) item).registerRecipe();
         }
     }
 }
