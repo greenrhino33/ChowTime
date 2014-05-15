@@ -6,6 +6,8 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.jamcraft.chowtime.core.CommonProxy;
+import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -38,8 +40,8 @@ public class ChowTime
     @Mod.Instance(ModConstants.MODID)
     public static ChowTime instance;
 
-//    @SidedProxy(clientSide = "allout58.mods.prisoncraft.client.ClientProxy", serverSide = "allout58.mods.prisoncraft.CommonProxy")
-//    public static CommonProxy proxy;
+    @SidedProxy(clientSide = "net.jamcraft.chowtime.core.client.ClientProxy", serverSide = "net.jamcraft.chowtime.core.CommonProxy")
+    public static CommonProxy proxy;
 
     public static Logger logger;
 
@@ -54,7 +56,7 @@ public class ChowTime
 //        proxy.registerRenderers();
         logger = event.getModLog();
 
-//        Config.init(new Configuration(event.getSuggestedConfigurationFile()));
+        Config.init(new Configuration(event.getSuggestedConfigurationFile()));
         //        configBase=event.getModConfigurationDirectory();
 
 //        MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
