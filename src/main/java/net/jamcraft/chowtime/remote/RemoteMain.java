@@ -28,11 +28,24 @@ public class RemoteMain
         LoadRemote();
         if(!local.equals(remote))
         {
+            //Download the classes that need to be updated
             List<DynClassDescription> list=local.difference(remote);
             for(DynClassDescription desc:list)
             {
                 DownloadClass(desc);
             }
+
+            //Update local file
+            try
+            {
+                remote.writeToFile(new File(ModConstants.DYN_LOC + "/local.json"));
+            }
+            catch (IOException ioe)
+            {
+                ChowTime.logger.error("Could not update the local file from the remote location");
+            }
+            //Reload local
+            LoadLocal();
         }
     }
 
