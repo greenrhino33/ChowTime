@@ -23,8 +23,18 @@ public class RemoteMain
         desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
         desc.version=new Version(0,0,1);
         local.add(desc);
-        LoadLocal();
-        LoadRemote();
+
+        File f = new File(ModConstants.DYN_LOC + "/local.json");
+        try
+        {
+            local.writeToJson(f);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        //LoadLocal();
+        //LoadRemote();
     }
 
     public static boolean LoadLocal()
