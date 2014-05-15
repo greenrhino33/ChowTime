@@ -9,8 +9,10 @@ import net.jamcraft.chowtime.core.CTRegistry;
 import net.jamcraft.chowtime.core.CommonProxy;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.ModConstants;
+import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.dyn.DynMain;
 import net.jamcraft.chowtime.remote.RemoteMain;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -35,6 +37,8 @@ public class ChowTime
 
     @Mod.Instance(ModConstants.MODID)
     public static ChowTime instance;
+
+    public static Material cloud = new CloudMaterial();
 
     @SidedProxy(clientSide = "net.jamcraft.chowtime.core.client.ClientProxy", serverSide = "net.jamcraft.chowtime.core.CommonProxy")
     public static CommonProxy proxy;
