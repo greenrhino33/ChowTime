@@ -7,6 +7,11 @@ import net.minecraft.block.Block;
  */
 public class CTInits {
 
+    //Block Inits
     public static Block CTLeaves;
     public static Block CTLog;
+
+    //Item Inits
+
+    //Effect Inits
 }
