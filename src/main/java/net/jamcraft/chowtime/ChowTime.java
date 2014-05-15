@@ -29,7 +29,7 @@ import java.io.File;
 @Mod(modid = ModConstants.MODID, name = ModConstants.NAME)
 public class ChowTime
 {
-    public static CreativeTabs creativeTab = new CreativeTabs("PrisonCraft")
+    public static CreativeTabs creativeTab = new CreativeTabs("ChowTime")
     {
         @Override
         @SideOnly(Side.CLIENT)
