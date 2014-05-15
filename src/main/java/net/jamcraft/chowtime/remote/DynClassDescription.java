@@ -6,5 +6,6 @@ package net.jamcraft.chowtime.remote;
  */
 public class DynClassDescription
 {
-
+    public static Version version;
+    public static String classname;
 }
