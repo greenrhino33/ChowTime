@@ -31,3 +31,5 @@ autocommit
 *.iml
 *.ipr
 *.iws
+.idea/
+out/
