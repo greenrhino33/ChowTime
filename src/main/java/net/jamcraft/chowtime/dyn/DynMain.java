@@ -7,6 +7,6 @@ public class DynMain
 {
     public static void init()
     {
-
+        DynTextures.addDynTP();
     }
 }
