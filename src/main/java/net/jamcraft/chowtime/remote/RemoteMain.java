@@ -19,46 +19,33 @@ public class RemoteMain
 
     public static void init()
     {
-        DynClassDescription desc=new DynClassDescription();
-        desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
-        desc.version=new Version(0,0,1);
-        local.add(desc);
-
-        File f = new File(ModConstants.DYN_LOC + "/local.json");
-        try
-        {
-            local.writeToFile(f);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-//        LoadLocal();
-//        for(DynClassDescription desc: local.getObjects())
+//        DynClassDescription desc=new DynClassDescription();
+//        desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
+//        desc.version=new Version(0,0,1);
+//        local.add(desc);
+//
+//        File f = new File(ModConstants.DYN_LOC + "/local.json");
+//        try
 //        {
-//            ChowTime.logger.debug("Desc: v:"+desc.version.toString()+" cn:"+desc.classname);
+//            local.writeToFile(f);
 //        }
+//        catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+        LoadLocal();
+        for(DynClassDescription desc: local.getObjects())
+        {
+            ChowTime.logger.debug("Desc: v:"+desc.version.toString()+" cn:"+desc.classname);
+        }
         //LoadRemote();
     }
 
     public static boolean LoadLocal()
     {
-        try
-        {
-            File f = new File(ModConstants.DYN_LOC + "/local.json");
-            local.readFromFile(f);
-            return true;
-        }
-        catch (IOException e)
-        {
-            ChowTime.logger.error("Error reading remote JSON file; falling back to local only");
-        }
-        catch (JsonIOException je)
-        {
-            ChowTime.logger.error("Error parsing remote JSON file; falling back to local only");
-        }
-
-        return false;
+        File f = new File(ModConstants.DYN_LOC + "/local.json");
+        local.readFromFile(f);
+        return true;
     }
 
     public static boolean LoadRemote()
