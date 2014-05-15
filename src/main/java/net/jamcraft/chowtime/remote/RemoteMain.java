@@ -20,20 +20,20 @@ public class RemoteMain
 
     public static void init()
     {
-        DynClassDescription desc=new DynClassDescription();
-        desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
-        desc.version=new Version(0,0,1);
-        DownloadClass(desc);
-//        LoadLocal();
-//        LoadRemote();
-//        if(!local.equals(remote))
-//        {
-//            List<DynClassDescription> list=local.difference(remote);
-//            for(DynClassDescription desc:list)
-//            {
-//                DownloadClass(desc);
-//            }
-//        }
+//        DynClassDescription desc=new DynClassDescription();
+//        desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
+//        desc.version=new Version(0,0,1);
+//        DownloadClass(desc);
+        LoadLocal();
+        LoadRemote();
+        if(!local.equals(remote))
+        {
+            List<DynClassDescription> list=local.difference(remote);
+            for(DynClassDescription desc:list)
+            {
+                DownloadClass(desc);
+            }
+        }
     }
 
     public static boolean LoadLocal()
@@ -86,7 +86,11 @@ public class RemoteMain
             URLConnection con = url.openConnection();
             InputStream reader = url.openStream();
             File f=new File(ModConstants.DYN_LOC + newPath);
-            if(!f.exists())f.createNewFile();
+            if(!f.exists())
+            {
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+            }
             FileOutputStream writer = new FileOutputStream(ModConstants.DYN_LOC + newPath);
             int total = con.getContentLength();
             int size_dl = 0;

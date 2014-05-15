@@ -58,8 +58,8 @@ public class ChowTime
         logger = event.getModLog();
 
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
-        DynMain.init();
         RemoteMain.init();
+        DynMain.init();
         //        configBase=event.getModConfigurationDirectory();
 
 //        MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
