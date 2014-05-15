@@ -21,11 +21,8 @@ import java.util.Random;
  */
 public class CTLeaves extends BlockLeaves{
 
-    private String name;
-
-    public CTLeaves(String par1){
+    public CTLeaves(){
         super();
-        this.name = par1;
         this.setTickRandomly(true);
         this.setHardness(0.2F);
         this.setLightOpacity(1);
@@ -38,7 +35,7 @@ public class CTLeaves extends BlockLeaves{
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconregister)
     {
-        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":" + name);
+        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":" + this.getUnlocalizedName());
     }
 
     @Override

@@ -8,30 +8,30 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.common.EnumPlantType;
-import net.minecraftforge.common.util.ForgeDirection;
+    import net.minecraft.util.IIcon;
+    import net.minecraft.world.IBlockAccess;
+    import net.minecraft.world.World;
+    import net.minecraftforge.common.EnumPlantType;
+    import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.Random;
+    import java.util.Random;
 
-/**
- * Created by Kayla Marie on 5/15/14.
- */
-public class CTSapling extends BlockSapling{
+    /**
+     * Created by Kayla Marie on 5/15/14.
+     */
+    public class CTSapling extends BlockSapling{
 
-    public CTSapling(){
-        super();
-        float f = 0.4F;
-        setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-        this.setHardness(0.0F);
-        this.setStepSound(Block.soundTypeGrass);
-        this.setCreativeTab(ChowTime.creativeTab);
-    }
+        public CTSapling(){
+            super();
+            float f = 0.4F;
+            setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
+            this.setHardness(0.0F);
+            this.setStepSound(Block.soundTypeGrass);
+            this.setCreativeTab(ChowTime.creativeTab);
+        }
 
-    @Override
-    @SideOnly(Side.CLIENT)
+        @Override
+        @SideOnly(Side.CLIENT)
     public void registerBlockIcons (IIconRegister iconRegister)
     {
         blockIcon = iconRegister.registerIcon(ModConstants.MODID + ":saplingBasic");

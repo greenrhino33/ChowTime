@@ -1,17 +1,15 @@
 package net.jamcraft.chowtime.core.blocks;
 
 import net.jamcraft.chowtime.ChowTime;
-import net.jamcraft.chowtime.core.ModConstants;
-import net.minecraft.block.BlockSnowBlock;
+import net.minecraft.block.material.Material;
 
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class BlockIceCream extends BlockSnowBlock {
+public class BlockIceCream extends CTBlock {
 
-    public BlockIceCream() {
-        super();
+    public BlockIceCream(Material material) {
+        super(material);
         this.setCreativeTab(ChowTime.creativeTab);
-        this.setBlockTextureName(ModConstants.MODID + ":IceCream");
     }
 }
