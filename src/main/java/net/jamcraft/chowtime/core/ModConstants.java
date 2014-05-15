@@ -5,5 +5,6 @@ package net.jamcraft.chowtime.core;
  */
 public class ModConstants
 {
-    public static String modname="chowtime";
+    public static final String MODID="chowtime";
+    public static final String NAME="ChowTime";
 }
