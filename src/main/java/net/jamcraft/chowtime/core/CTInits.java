@@ -12,6 +12,7 @@ public class CTInits {
     //Block Inits
     public static Block CTLeaves;
     public static Block CTLog;
+    public static Block IceCream;
 
     //Liquid Inits
     public static Block ChocolateMilk;
@@ -19,8 +20,10 @@ public class CTInits {
 
     //Item Inits
     public static Item BarleyCrop;
+    public static Item IceCreamBall;
 
     //Effect Inits
+    
 
     //Machine Inits
     public static Block Juicer;

@@ -2,10 +2,12 @@ package net.jamcraft.chowtime.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.jamcraft.chowtime.ChowTime;
+import net.jamcraft.chowtime.core.blocks.BlockIceCream;
 import net.jamcraft.chowtime.core.blocks.CTLeaves;
 import net.jamcraft.chowtime.core.blocks.CTLog;
 import net.jamcraft.chowtime.core.crops.CropBarley;
 import net.jamcraft.chowtime.core.items.ItemBarley;
+import net.jamcraft.chowtime.core.items.ItemIceCream;
 import net.jamcraft.chowtime.core.items.SeedBarley;
 import net.jamcraft.chowtime.core.liquids.CTFluid;
 import net.jamcraft.chowtime.core.machines.Fermenter;
@@ -24,6 +26,8 @@ public class CTRegistry {
         GameRegistry.registerBlock(CTInits.CTLeaves, "CTLeaves");
         CTInits.CTLog = new CTLog();
         GameRegistry.registerBlock(CTInits.CTLog, "CTLog");
+        CTInits.IceCream = new BlockIceCream();
+        GameRegistry.registerBlock(CTInits.IceCream, "IceCream");
     }
 
     public static void CTMachines(){
@@ -51,5 +55,7 @@ public class CTRegistry {
     public static void CTItems(){
         CTInits.BarleyCrop = new ItemBarley();
         GameRegistry.registerItem(CTInits.BarleyCrop, "barley");
+        CTInits.IceCreamBall = new ItemIceCream();
+        GameRegistry.registerItem(CTInits.IceCreamBall, "iceCreamBall");
     }
 }
