@@ -20,6 +20,6 @@ public class CTItem extends Item {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon(ModConstants.MODID + ":" + this.getUnlocalizedName());
+        this.itemIcon = par1IconRegister.registerIcon(ModConstants.MODID + ":" + this.getUnlocalizedName().substring(5));
     }
 }

@@ -14,6 +14,6 @@ public class SeedBarley extends ItemSeeds {
     public SeedBarley(){
         super(CTInits.CropBarley, Blocks.farmland);
         this.setCreativeTab(ChowTime.creativeTab);
-        this.setTextureName(ModConstants.MODID + ":barleySeeds");
+        this.setTextureName(ModConstants.MODID + ":" + "ItemSeed_Barley");
     }
 }

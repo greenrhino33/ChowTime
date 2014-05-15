@@ -8,13 +8,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
-    import net.minecraft.util.IIcon;
-    import net.minecraft.world.IBlockAccess;
-    import net.minecraft.world.World;
-    import net.minecraftforge.common.EnumPlantType;
-    import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.util.ForgeDirection;
 
-    import java.util.Random;
+import java.util.Random;
 
     /**
      * Created by Kayla Marie on 5/15/14.
@@ -34,7 +33,7 @@ import net.minecraft.init.Blocks;
         @SideOnly(Side.CLIENT)
     public void registerBlockIcons (IIconRegister iconRegister)
     {
-        blockIcon = iconRegister.registerIcon(ModConstants.MODID + ":saplingBasic");
+        blockIcon = iconRegister.registerIcon(ModConstants.MODID + ":" + this.getUnlocalizedName().substring(5));
     }
 
     @Override
@@ -57,7 +56,7 @@ import net.minecraft.init.Blocks;
     }
     public boolean canThisPlantGrowOnThisBlock (Block id)
     {
-        return id == Blocks.grass || id == Blocks.dirt || id == Blocks.soul_sand || id == Blocks.netherrack;
+        return id == Blocks.grass || id == Blocks.dirt;
     }
 
     @Override
