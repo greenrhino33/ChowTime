@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 
 import java.io.File;
 import java.lang.reflect.Modifier;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashMap;
@@ -42,22 +41,15 @@ public class DynItems
             try
             {
                 String n = classname.replace('.', '/');
-                String path = dynLoc.getCanonicalPath() + "/" + n.substring(0, n.lastIndexOf("/"));
+                String path = dynLoc.getAbsolutePath() + "/" + n.substring(0, n.lastIndexOf("/"));
                 File dir = new File(path);
 
                 if (dir.isDirectory())
                 {
                     ClassLoader loader = null;
-                    try
-                    {
-                        loader = new URLClassLoader(new URL[] { dir.toURI().toURL() }, DynItems.class.getClassLoader());
-                    }
-                    catch (MalformedURLException e)
-                    {
-                        e.printStackTrace();
-                    }
+                    loader = new URLClassLoader(new URL[] { dir.toURI().toURL() }, DynItems.class.getClassLoader());
 
-                    for (File f : dir.listFiles())
+                    /*for (File f : dir.listFiles())
                     {
                         if (f.isDirectory())
                         {
@@ -66,34 +58,43 @@ public class DynItems
                         if (f.getName().endsWith(".class"))
                         {
                             String name = f.getAbsolutePath().substring(dynLoc.getAbsolutePath().length() + 1, f.getAbsolutePath().length() - 6);
-                            name = name.replace("\\", ".");
-                            Class<?> clazz = loader.loadClass(name);
-                            //Object o = null;
+                            name = name.replace("\\", ".");*/
+
+                    File classFile = new File(dir.getAbsolutePath() + "/" + classname.substring(classname.lastIndexOf(".") + 1) + ".class");
+                    if (!classFile.exists())
+                    {
+                        throw new Exception();
+                    }
+
+                    Class<?> clazz = loader.loadClass(classname);
+
+                    //Object o = null;
                 /*
                 URL url = cl.toURI().toURL();
                 URL[] urls=new URL[]{url};
                 ClassLoader classLoader=new URLClassLoader(urls,DynItems.class.getClassLoader());
                 Class<?> clazz=classLoader.loadClass(classname);*/
-                            if (IDynItem.class.isAssignableFrom(clazz))
-                            {
-                                Object o = null;
-                                if (clazz.isInterface()) continue;
-                                if (Modifier.isAbstract(clazz.getModifiers()))
-                                    continue;
-                                if (clazz.getConstructor((Class<?>[]) null) != null)
-                                    o = clazz.newInstance();
 
-                                if (o instanceof IDynItem && o instanceof Item)
-                                {
-                                    String rn = ((IDynItem) o).getRegistrationName();
-                                    GameRegistry.registerItem(((Item) o), rn);
-                                    ((IDynItem) o).registerRecipe();
-                                }
-                            }
+                    if (IDynItem.class.isAssignableFrom(clazz))
+                    {
+                        Object o = null;
+                        if (clazz.isInterface()) continue;
+                        if (Modifier.isAbstract(clazz.getModifiers()))
+                            continue;
+                        if (clazz.getConstructor((Class<?>[]) null) != null)
+                            o = clazz.newInstance();
 
+                        if (o instanceof IDynItem && o instanceof Item)
+                        {
+                            String rn = ((IDynItem) o).getRegistrationName();
+                            GameRegistry.registerItem(((Item) o), rn);
+                            ((IDynItem) o).registerRecipe();
                         }
                     }
+
+                    //                        }
                 }
+                //            }
             }
             catch (Exception e)
             {
