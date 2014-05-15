@@ -8,15 +8,11 @@ import java.util.List;
  */
 public class RemoteMain
 {
-    private static List<DynClassDescription> local=new ArrayList<DynClassDescription>();
-    private static List<DynClassDescription> remote=new ArrayList<DynClassDescription>();
+    private static LooseObjList local=new LooseObjList();
+    private static LooseObjList remote=new LooseObjList();
+
     public static void init()
     {
         
-    }
-
-    private static void parseLocal()
-    {
-
     }
 }

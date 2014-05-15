@@ -57,7 +57,8 @@ public class LooseObjList
         List<DynClassDescription> diff=new ArrayList<DynClassDescription>();
         for(DynClassDescription desc: descriptions)
         {
-            
+            if(!other.getObjects().contains(desc)) diff.add(desc);
         }
+        return diff;
     }
 }
