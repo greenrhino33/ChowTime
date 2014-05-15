@@ -55,6 +55,9 @@ public class LooseObjList
     public List<DynClassDescription> difference(LooseObjList other)
     {
         List<DynClassDescription> diff=new ArrayList<DynClassDescription>();
-        for(DynClassDescription desc:)
+        for(DynClassDescription desc: descriptions)
+        {
+            
+        }
     }
 }
