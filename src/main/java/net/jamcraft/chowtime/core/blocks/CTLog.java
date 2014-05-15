@@ -11,18 +11,17 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class CTLeaves extends Block{
+public class CTLog extends Block{
 
-    public CTLeaves(){
-        super(Material.leaves);
+    public CTLog(){
+        super(Material.wood);
         this.setCreativeTab(ChowTime.creativeTab);
-        this.setHardness(0.1F);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconregister)
     {
-        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":leavesBasic");
+        blockIcon = iconregister.registerIcon(ModConstants.MODID + ":woodBasic");
     }
 }

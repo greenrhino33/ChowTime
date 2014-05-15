@@ -8,4 +8,5 @@ import net.minecraft.block.Block;
 public class CTInits {
 
     public static Block CTLeaves;
+    public static Block CTLog;
 }
