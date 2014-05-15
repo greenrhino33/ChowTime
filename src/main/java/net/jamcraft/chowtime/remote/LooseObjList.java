@@ -61,4 +61,9 @@ public class LooseObjList
         }
         return diff;
     }
+
+    public void add(DynClassDescription desc)
+    {
+        descriptions.add(desc);
+    }
 }

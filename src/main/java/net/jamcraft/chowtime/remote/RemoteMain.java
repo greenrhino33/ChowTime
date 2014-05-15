@@ -3,10 +3,9 @@ package net.jamcraft.chowtime.remote;
 import com.google.gson.JsonIOException;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.Config;
+import net.jamcraft.chowtime.core.ModConstants;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -20,10 +19,38 @@ public class RemoteMain
 
     public static void init()
     {
-
+        DynClassDescription desc=new DynClassDescription();
+        desc.classname="net.jamcraft.chowtime.dyn.items.Temp";
+        desc.version=new Version(0,0,1);
+        local.add(desc);
+        LoadLocal();
+        LoadRemote();
     }
 
-    public boolean LoadRemote()
+    public static boolean LoadLocal()
+    {
+        try
+        {
+            File f = new File(ModConstants.DYN_LOC + "/local.json");
+            FileReader fr=new FileReader(f);
+            BufferedReader br=new BufferedReader(fr);
+            String json = br.readLine();
+            local.readFromJson(json);
+            return true;
+        }
+        catch (IOException e)
+        {
+            ChowTime.logger.error("Error reading remote JSON file; falling back to local only");
+        }
+        catch (JsonIOException je)
+        {
+            ChowTime.logger.error("Error parsing remote JSON file; falling back to local only");
+        }
+
+        return false;
+    }
+
+    public static boolean LoadRemote()
     {
         try
         {
