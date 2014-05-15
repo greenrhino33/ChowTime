@@ -49,52 +49,52 @@ public class DynItems
                     ClassLoader loader = null;
                     loader = new URLClassLoader(new URL[] { dir.toURI().toURL() }, DynItems.class.getClassLoader());
 
-                    /*for (File f : dir.listFiles())
+                    for (File f : dir.listFiles())
                     {
                         if (f.isDirectory())
                         {
-
+                            throw new Exception();
                         }
                         if (f.getName().endsWith(".class"))
                         {
                             String name = f.getAbsolutePath().substring(dynLoc.getAbsolutePath().length() + 1, f.getAbsolutePath().length() - 6);
-                            name = name.replace("\\", ".");*/
+                            name = name.replace("\\", ".");
 
-                    File classFile = new File(dir.getAbsolutePath() + "/" + classname.substring(classname.lastIndexOf(".") + 1) + ".class");
-                    if (!classFile.exists())
-                    {
-                        throw new Exception();
-                    }
+                            File classFile = new File(dir.getAbsolutePath() + "/" + classname.substring(classname.lastIndexOf(".") + 1) + ".class");
+                            if (!classFile.exists())
+                            {
+                                throw new Exception();
+                            }
 
-                    Class<?> clazz = loader.loadClass(classname);
+                            Class<?> clazz = loader.loadClass(name);
 
-                    //Object o = null;
+                            //Object o = null;
                 /*
                 URL url = cl.toURI().toURL();
                 URL[] urls=new URL[]{url};
                 ClassLoader classLoader=new URLClassLoader(urls,DynItems.class.getClassLoader());
                 Class<?> clazz=classLoader.loadClass(classname);*/
 
-                    if (IDynItem.class.isAssignableFrom(clazz))
-                    {
-                        Object o = null;
-                        if (clazz.isInterface()) continue;
-                        if (Modifier.isAbstract(clazz.getModifiers()))
-                            continue;
-                        if (clazz.getConstructor((Class<?>[]) null) != null)
-                            o = clazz.newInstance();
+                            if (IDynItem.class.isAssignableFrom(clazz))
+                            {
+                                Object o = null;
+                                if (clazz.isInterface()) continue;
+                                if (Modifier.isAbstract(clazz.getModifiers()))
+                                    continue;
+                                if (clazz.getConstructor((Class<?>[]) null) != null)
+                                    o = clazz.newInstance();
 
-                        if (o instanceof IDynItem && o instanceof Item)
-                        {
-                            String rn = ((IDynItem) o).getRegistrationName();
-                            GameRegistry.registerItem(((Item) o), rn);
-                            ((IDynItem) o).registerRecipe();
+                                if (o instanceof IDynItem && o instanceof Item)
+                                {
+                                    String rn = ((IDynItem) o).getRegistrationName();
+                                    GameRegistry.registerItem(((Item) o), rn);
+                                    ((IDynItem) o).registerRecipe();
+                                }
+                            }
+
                         }
                     }
-
-                    //                        }
                 }
-                //            }
             }
             catch (Exception e)
             {
