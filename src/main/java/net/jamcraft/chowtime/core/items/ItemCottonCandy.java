@@ -14,7 +14,7 @@ public class ItemCottonCandy extends ItemFood{
 
     private boolean alwaysEdible = true;
 
-    public ItemCottonCandy(int p_i45339_1_, float p_i45339_2_, boolean p_i45339_3_) {
+    public ItemCottonCandy() {
         super(3, 2.0F, false);
         this.setCreativeTab(ChowTime.creativeTab);
     }
