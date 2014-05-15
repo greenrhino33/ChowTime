@@ -35,65 +35,35 @@ public class DynItems
         {
             //Error?
         }
-
-        for (String classname : DynMain.load)
+        try
         {
-            try
-            {
-                String n = classname.replace('.', '/');
-                String path = dynLoc.getAbsolutePath() + "/" + n.substring(0, n.lastIndexOf("/"));
-                File dir = dynLoc;
+            ClassLoader loader = new URLClassLoader(new URL[] { dynLoc.toURI().toURL() }, DynItems.class.getClassLoader());
 
-                if (dir.isDirectory())
+            for (String classname : DynMain.load)
+            {
+                Class<?> clazz = loader.loadClass(classname);
+
+                if (IDynItem.class.isAssignableFrom(clazz))
                 {
-                    ClassLoader loader = null;
-                    loader = new URLClassLoader(new URL[] { dir.toURI().toURL() }, DynItems.class.getClassLoader());
+                    Object o = null;
+                    if (clazz.isInterface()) continue;
+                    if (Modifier.isAbstract(clazz.getModifiers()))
+                        continue;
+                    if (clazz.getConstructor((Class<?>[]) null) != null)
+                        o = clazz.newInstance();
 
-                    /*for (File f : dir.listFiles())
+                    if (o instanceof IDynItem && o instanceof Item)
                     {
-                        if (f.isDirectory())
-                        {
-                            throw new Exception();
-                        }
-                        if (f.getName().endsWith(".class"))
-                        {
-                            String name = f.getAbsolutePath().substring(dynLoc.getAbsolutePath().length() + 1, f.getAbsolutePath().length() - 6);
-                            name = name.replace("\\", ".");*/
-
-//                            File classFile = new File(dir.getAbsolutePath() + "/" + classname.substring(classname.lastIndexOf(".") + 1) + ".class");
-//                            if (!classFile.exists())
-//                            {
-//                                throw new Exception();
-//                            }
-
-                            Class<?> clazz = loader.loadClass(classname);
-
-
-                            if (IDynItem.class.isAssignableFrom(clazz))
-                            {
-                                Object o = null;
-                                if (clazz.isInterface()) continue;
-                                if (Modifier.isAbstract(clazz.getModifiers()))
-                                    continue;
-                                if (clazz.getConstructor((Class<?>[]) null) != null)
-                                    o = clazz.newInstance();
-
-                                if (o instanceof IDynItem && o instanceof Item)
-                                {
-                                    String rn = ((IDynItem) o).getRegistrationName();
-                                    GameRegistry.registerItem(((Item) o), rn);
-                                    ((IDynItem) o).registerRecipe();
-                                }
-                            }
-
-                        }
-//                    }
-//                }
+                        String rn = ((IDynItem) o).getRegistrationName();
+                        GameRegistry.registerItem(((Item) o), rn);
+                        ((IDynItem) o).registerRecipe();
+                    }
+                }
             }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 }
