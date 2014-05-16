@@ -17,6 +17,7 @@ public class Fermenter extends BlockContainer
     {
         super(Material.iron);
         this.setCreativeTab(ChowTime.creativeTab);
+        setBlockName("fermenter");
     }
 
     @Override
@@ -25,15 +26,15 @@ public class Fermenter extends BlockContainer
         return new TEFermenter();
     }
 
-    @Override
-    public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
-
-    @Override
-    public int getRenderType()
-    {
-        return -1;
-    }
+//    @Override
+//    public boolean renderAsNormalBlock()
+//    {
+//        return false;
+//    }
+//
+//    @Override
+//    public int getRenderType()
+//    {
+//        return -1;
+//    }
 }
