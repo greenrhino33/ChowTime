@@ -25,14 +25,14 @@ public class RemoteMain
         LoadRemote();
         if (!local.equals(remote) || !local.isLoaded())
         {
-            //TODO: Remove old files local.difference(remote)?
+            //Remove old files
             List<DynDescription> old=local.difference(local);
-            for (DynDescription desc : list)
+            for (DynDescription desc : old)
             {
                 if (desc instanceof DynClassDescription)
-                    DownloadFile("/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
+                    new File("/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class").delete();
                 if (desc instanceof DynResourceDescription)
-                    DownloadFile("/assets/chowtime/" + ((DynResourceDescription) desc).path);
+                    new File("/assets/chowtime/" + ((DynResourceDescription) desc).path).delete();
             }
 
 
@@ -41,9 +41,9 @@ public class RemoteMain
             for (DynDescription desc : list)
             {
                 if (desc instanceof DynClassDescription)
-                    DownloadFile("/" + (ObfHelper.isObf?"obf":"deobf") + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
+                    DownloadFile("/" + (ObfHelper.isObf?"obf":"deobf") + ((DynClassDescription) desc).classname.replace('.', '/') + ".class","/" +  ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
                 if (desc instanceof DynResourceDescription)
-                    DownloadFile("/assets/chowtime/" + ((DynResourceDescription) desc).path);
+                    DownloadFile("/assets/chowtime/" + ((DynResourceDescription) desc).path,null);
             }
 
             //Update local file
