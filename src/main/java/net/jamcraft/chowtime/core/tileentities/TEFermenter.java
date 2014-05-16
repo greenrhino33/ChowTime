@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -133,6 +134,18 @@ public class TEFermenter extends TileEntity implements ISidedInventory
         return slot==1;//&&side!=ForgeDirection.UP.flag;
     }
 
+
+    @Override
+    public void writeToNBT(NBTTagCompound tags)
+    {
+
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tags)
+    {
+
+    }
 
     @Override
     public void updateEntity()
