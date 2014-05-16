@@ -20,7 +20,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
     public TEFermenter()
     {
-        FermenterRecipies.AddRecipe(new ItemStack(Items.apple),new ItemStack(Items.arrow),10);
+        FermenterRecipies.AddRecipe(new ItemStack(Items.apple),new ItemStack(Items.arrow),60);
     }
 
     @Override public int getSizeInventory()
@@ -145,7 +145,8 @@ public class TEFermenter extends TileEntity implements ISidedInventory
                 {
                     if(r.getInput().getItem().equals(inventory[0].getItem()))
                     {
-                        //ticksLeft=r.getTime();
+                        ticksLeft=r.getTime();
+                        if(inventory[0].stackSize<=0) inventory[0]=null;
                         inventory[0].stackSize--;
                         if(inventory[1]==null)
                             inventory[1]=r.getOutput().copy();
