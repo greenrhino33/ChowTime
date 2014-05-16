@@ -12,24 +12,47 @@ import java.util.List;
  */
 public class LooseObjList
 {
-    protected List<DynClassDescription> descriptions=new ArrayList<DynClassDescription>();
+    protected List<DynDescription> descriptions = new ArrayList<DynDescription>();
 
-    public List<DynClassDescription> getObjects()
+    public List<DynDescription> getObjects()
     {
         return descriptions;
     }
 
     public void writeToFile(File out) throws IOException, JsonIOException
     {
+        /* FILE DESCRIPTION:
+        *********************************
+        classes
+        {
+        net.jamcraft.chowtime. 0.0.1
+        ...
+        }
+        resources
+        {
+        //based in DYN_LOC/assets/chowtime
+        textures/items/Temp.png 0.0.1
+        lang/en_US.lang 0.0.1
+        }
+        ***********************************
+         */
+
+        
+
         if(!out.exists())out.createNewFile();
         FileWriter fw=new FileWriter(out);
         BufferedWriter bw=new BufferedWriter(fw);
-        for(DynClassDescription desc:descriptions)
+
+        bw.write("classes\n{\n");
+
+        for (DynDescription desc : descriptions)
         {
-            String s=desc.classname+" "+desc.version.toString();
-            bw.write(s);
-            bw.newLine();
+
         }
+
+        String s = desc.classname + " " + desc.version.toString();
+        bw.write(s);
+        bw.newLine();
 
         bw.close();
     }
@@ -75,17 +98,17 @@ public class LooseObjList
         return true;
     }
 
-    public List<DynClassDescription> difference(LooseObjList other)
+    public List<DynDescription> difference(LooseObjList other)
     {
-        List<DynClassDescription> diff=new ArrayList<DynClassDescription>();
-        for(DynClassDescription desc: descriptions)
+        List<DynDescription> diff = new ArrayList<DynDescription>();
+        for (DynDescription desc : descriptions)
         {
             if(!other.getObjects().contains(desc)) diff.add(desc);
         }
         return diff;
     }
 
-    public void add(DynClassDescription desc)
+    public void add(DynDescription desc)
     {
         descriptions.add(desc);
     }
