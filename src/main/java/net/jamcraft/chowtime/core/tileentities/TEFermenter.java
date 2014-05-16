@@ -141,12 +141,16 @@ public class TEFermenter extends TileEntity implements ISidedInventory
         {
             if(ticksLeft<=0)
             {
-
                 for(Recipe r:FermenterRecipies.recipeList)
                 {
                     if(r.getInput().getItem().equals(inventory[0].getItem()))
                     {
-                        ticksLeft=r.getTime();
+                        //ticksLeft=r.getTime();
+                        inventory[0].stackSize--;
+                        if(inventory[1]==null)
+                            inventory[1]=r.getOutput().copy();
+                        else
+                            inventory[1].stackSize+=r.getOutput().stackSize;
                         break;
                     }
                 }
