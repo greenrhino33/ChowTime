@@ -70,8 +70,8 @@ public class ChowTime
         //        logger.error("Running in "+ (ObfHelper.isObf?"obf":"deobf") + " environment");
 
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
-        DynMain.init();
         RemoteMain.init();
+        DynMain.init();
 
         CTRegistry.CTBlocks();
         CTRegistry.CTMachines();

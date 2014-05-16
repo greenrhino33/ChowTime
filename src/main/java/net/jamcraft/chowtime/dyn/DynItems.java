@@ -52,7 +52,7 @@ public class DynItems
             {
                 if (!(desc instanceof DynClassDescription)) continue;
                 String classname = ((DynClassDescription) desc).classname;
-                ChowTime.logger.debug("Loading new item: " + classname);
+                ChowTime.logger.error("Loading new item: " + classname);
                 //Actually load the class
                 Class<?> clazz = loader.loadClass(classname);
 
