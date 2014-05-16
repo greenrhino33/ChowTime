@@ -13,10 +13,6 @@ import net.minecraftforge.event.world.WorldEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-/**
- * Code taken from OpenBlocks
- */
-
 public class EntityEventHandler
 {
     @SubscribeEvent
