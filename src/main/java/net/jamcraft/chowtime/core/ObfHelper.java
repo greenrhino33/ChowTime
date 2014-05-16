@@ -5,18 +5,18 @@ package net.jamcraft.chowtime.core;
  */
 public class ObfHelper
 {
-    public static boolean isObf=false;
+    public static boolean isObf=true;
 
     public static void init()
     {
         try
         {
             Class.forName("net.minecraft.block.Block");
-            isObf=true;
+            isObf=false;
         }
         catch (Exception e)
         {
-            isObf=false;
+            isObf=true;
         }
     }
 }
