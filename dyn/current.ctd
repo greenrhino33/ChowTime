@@ -6,5 +6,6 @@ net.jamcraft.chowtime.dyn.items.Test2 0.0.2
 resources
 {
 textures/items/Temp.png 0.0.1
+textures/items/Test2.png 0.0.1
 lang/en_US.lang 0.0.1
 }
