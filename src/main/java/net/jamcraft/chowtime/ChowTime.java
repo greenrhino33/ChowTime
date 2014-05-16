@@ -1,11 +1,13 @@
 package net.jamcraft.chowtime;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.jamcraft.chowtime.core.CTInits;
 import net.jamcraft.chowtime.core.CTRegistry;
 import net.jamcraft.chowtime.core.CommonProxy;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.core.events.BucketHandler;
+import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
@@ -14,6 +16,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
@@ -35,6 +38,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = ModConstants.MODID, name = ModConstants.NAME)
 public class ChowTime
 {
+
+    public static final BiomeGenBase TutorialBiome1 = new BiomeGenCandyLand(55);
+
     public static CreativeTabs creativeTab = new CreativeTabs("ChowTime")
     {
         @Override
@@ -93,6 +99,7 @@ public class ChowTime
     public void init(FMLInitializationEvent event)
     {
         //FMLInterModComms.sendMessage("prisoncraft", "blacklist", Block.blockRegistry.getNameForObject(Blocks.bookshelf));
+        //GameRegistry.registerWorldGenerator();
     }
 
     @Mod.EventHandler
