@@ -2,7 +2,6 @@ classes
 {
 net.jamcraft.chowtime.dyn.items.ItemCone 0.0.2
 net.jamcraft.chowtime.dyn.items.ItemCottonCandy 0.0.3
-net.jamcraft.chowtime.dyn.items.ItemIceCream 0.0.2
 }
 resources
 {
