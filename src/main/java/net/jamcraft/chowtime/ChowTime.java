@@ -70,7 +70,7 @@ public class ChowTime
         logger = event.getModLog();
         ObfHelper.init();
 
-        logger.error("Running in "+ (ObfHelper.isObf?"obf":"deobf") + " environment");
+//        logger.error("Running in "+ (ObfHelper.isObf?"obf":"deobf") + " environment");
 
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
         RemoteMain.init();

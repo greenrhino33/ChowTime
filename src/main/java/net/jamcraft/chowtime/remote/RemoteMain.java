@@ -31,10 +31,12 @@ public class RemoteMain
             List<DynDescription> old=local.difference(remote);
             for (DynDescription desc : old)
             {
+                File f=null;
                 if (desc instanceof DynClassDescription)
-                    new File("/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class").delete();
+                    f=new File(ModConstants.DYN_LOC + "/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
                 if (desc instanceof DynResourceDescription)
-                    new File("/assets/chowtime/" + ((DynResourceDescription) desc).path).delete();
+                    f=new File(ModConstants.DYN_LOC + "/assets/chowtime/" + ((DynResourceDescription) desc).path);
+                f.delete();
             }
 
 
