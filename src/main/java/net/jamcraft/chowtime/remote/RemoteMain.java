@@ -107,6 +107,7 @@ public class RemoteMain
     {
         try
         {
+//            ChowTime.logger.error("Downloading remote "+remotepath+" to local "+localpath);
             if(remotepath==null) remotepath=localpath;
             final int blk_size = 1024;
             URL url = new URL(Config.remoteLoc + "dyn/current" + remotepath);
@@ -131,6 +132,7 @@ public class RemoteMain
             }
             writer.close();
             reader.close();
+//            ChowTime.logger.error("Download complete...");
         }
         catch (IOException e)
         {
