@@ -1,11 +1,10 @@
 classes
 {
-net.jamcraft.chowtime.dyn.items.Temp 0.0.3
-net.jamcraft.chowtime.dyn.items.Test2 0.0.2
+net.jamcraft.chowtime.dyn.items.ItemCone 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemCottonCandy 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemIceCream 0.0.1
 }
 resources
 {
-textures/items/Temp.png 0.0.1
-textures/items/Test2.png 0.0.1
 lang/en_US.lang 0.0.1
 }
