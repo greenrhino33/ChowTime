@@ -7,6 +7,10 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -138,13 +142,43 @@ public class TEFermenter extends TileEntity implements ISidedInventory
     @Override
     public void writeToNBT(NBTTagCompound tags)
     {
+        super.writeToNBT(tags);
 
+        tags.setInteger("timeleft",ticksLeft);
+
+        // Write the ItemStacks in the inventory to NBT
+        NBTTagList tagList = new NBTTagList();
+        for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex)
+        {
+            if (inventory[currentIndex] != null)
+            {
+                NBTTagCompound tagCompound = new NBTTagCompound();
+                tagCompound.setByte("Slot", (byte) currentIndex);
+                inventory[currentIndex].writeToNBT(tagCompound);
+                tagList.appendTag(tagCompound);
+            }
+        }
+        tags.setTag("Items", tagList);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tags)
     {
+        super.readFromNBT(tags);
 
+        ticksLeft=tags.getInteger("timeleft");
+
+        NBTTagList tagList = tags.getTagList("Items",INV_SIZE);
+        inventory = new ItemStack[this.getSizeInventory()];
+        for (int i = 0; i < tagList.tagCount(); ++i)
+        {
+            NBTTagCompound tagCompound = (NBTTagCompound) tagList.getCompoundTagAt(i);
+            byte slot = tagCompound.getByte("Slot");
+            if (slot >= 0 && slot < inventory.length)
+            {
+                inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
+            }
+        }
     }
 
     @Override
@@ -178,5 +212,21 @@ public class TEFermenter extends TileEntity implements ISidedInventory
         {
             ticksLeft=0;
         }
+    }
+
+    /* Packets */
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound tag = new NBTTagCompound();
+        writeToNBT(tag);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+    {
+        readFromNBT(packet.func_148857_g());
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 }
