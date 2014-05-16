@@ -1,9 +1,6 @@
 package net.jamcraft.chowtime.dyn.items;
 
 import net.jamcraft.chowtime.ChowTime;
-import net.jamcraft.chowtime.core.ModConstants;
-import net.jamcraft.chowtime.core.lib.CTStrings;
-import net.jamcraft.chowtime.dyn.common.IDynItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -37,7 +34,7 @@ public class ItemCottonCandy extends ItemFood implements IDynItem{
         this.alwaysEdible = true;
         return this;
     }
-
+    
     @Override public String getRegistrationName()
     {
         return CTStrings.ItemFood_CottonCandy_Blue;

@@ -10,25 +10,27 @@ import net.minecraft.world.World;
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class Fermenter extends BlockContainer{
+public class Fermenter extends BlockContainer
+{
 
-    public Fermenter(){
+    public Fermenter()
+    {
         super(Material.iron);
         this.setCreativeTab(ChowTime.creativeTab);
-        this.setBlockName("fermenter");
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1, int var2) {
+    public TileEntity createNewTileEntity(World var1, int var2)
+    {
         return new TEFermenter();
     }
-    
+
     @Override
     public boolean renderAsNormalBlock()
     {
         return false;
     }
-    
+
     @Override
     public int getRenderType()
     {

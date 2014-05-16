@@ -1,32 +1,28 @@
 package net.jamcraft.chowtime.core;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.jamcraft.chowtime.ChowTime;
-import net.jamcraft.chowtime.core.blocks.BlockCottonCandy;
-import net.jamcraft.chowtime.core.blocks.CTBlock;
-import net.jamcraft.chowtime.core.blocks.CTLeaves;
-import net.jamcraft.chowtime.core.blocks.CTLog;
-import net.jamcraft.chowtime.core.blocks.CTSapling;
+import net.jamcraft.chowtime.core.blocks.*;
 import net.jamcraft.chowtime.core.blocks.liquids.CTFluid;
+import net.jamcraft.chowtime.core.crops.CropBarley;
+import net.jamcraft.chowtime.core.items.*;
+import net.jamcraft.chowtime.core.lib.CTStrings;
 import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
 import net.jamcraft.chowtime.core.blocks.machines.Juicer;
-import net.jamcraft.chowtime.core.crops.CropBarley;
-import net.jamcraft.chowtime.core.items.CTItem;
-import net.jamcraft.chowtime.core.items.CTItemBucket;
-import net.jamcraft.chowtime.core.items.CTItemFood;
-import net.jamcraft.chowtime.core.items.SeedBarley;
-import net.jamcraft.chowtime.core.lib.CTStrings;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
+import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class CTRegistry {
+public class CTRegistry
+{
 
-    public static void CTBlocks(){
+    public static void CTBlocks()
+    {
         CTInits.CTLeaves = new CTLeaves().setBlockName(CTStrings.BlockLeaves_Basic);
         GameRegistry.registerBlock(CTInits.CTLeaves, CTStrings.BlockLeaves_Basic);
         CTInits.CTLog = new CTLog().setBlockName(CTStrings.BlockLogs_Basic);
@@ -39,7 +35,8 @@ public class CTRegistry {
         GameRegistry.registerBlock(CTInits.CottonCandyBLUE, CTStrings.BlockCottonCandy_Blue);
     }
 
-    public static void CTMachines(){
+    public static void CTMachines()
+    {
         CTInits.Juicer = new Juicer();
         GameRegistry.registerBlock(CTInits.Juicer, "Juicer");
         CTInits.Fermenter = new Fermenter();
@@ -47,18 +44,18 @@ public class CTRegistry {
     }
 
     public static void CTLiquids() {
-        CTInits.ChocolateMilkFluid = new Fluid(CTStrings.Fluid_ChocolateMilk).setUnlocalizedName(CTStrings.Fluid_ChocolateMilk + "_flow");
+        CTInits.ChocolateMilkFluid = new Fluid("chocolateMilk");
         FluidRegistry.registerFluid(CTInits.ChocolateMilkFluid);
-        CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, CTStrings.Fluid_ChocolateMilk).setBlockName(CTStrings.Fluid_ChocolateMilk).setCreativeTab(ChowTime.creativeTab);
-        GameRegistry.registerBlock(CTInits.ChocolateMilk, CTStrings.Fluid_ChocolateMilk);
+        CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "chocolateMilk").setCreativeTab(ChowTime.creativeTab);
+        GameRegistry.registerBlock(CTInits.ChocolateMilk, "Chocolate Milk Fluid");
 
     }
 
     public static void CTCrops() {
-        CTInits.CropBarley = new CropBarley().setBlockName(CTStrings.BlockCrop_Barley);
-        GameRegistry.registerBlock(CTInits.CropBarley, CTStrings.BlockCrop_Barley);
-        CTInits.BarleySeeds = new SeedBarley().setUnlocalizedName(CTStrings.ItemSeed_Barley);
-        GameRegistry.registerItem(CTInits.BarleySeeds, CTStrings.ItemSeed_Barley);
+        CTInits.CropBarley = new CropBarley();
+        GameRegistry.registerBlock(CTInits.CropBarley, "barleyCrop");
+        CTInits.BarleySeeds = new SeedBarley();
+        GameRegistry.registerItem(CTInits.BarleySeeds, "barleySeed");
     }
 
     public static void CTItems(){
