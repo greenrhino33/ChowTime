@@ -84,7 +84,7 @@ public class ChowTime
         DynItems.registerRecipes();
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
-        //        configBase=event.getModConfigurationDirectory();
+//        configBase=event.getModConfigurationDirectory();
 
 //        MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
 
