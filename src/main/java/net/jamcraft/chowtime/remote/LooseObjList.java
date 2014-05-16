@@ -14,6 +14,8 @@ public class LooseObjList
 {
     protected List<DynDescription> descriptions = new ArrayList<DynDescription>();
 
+    private boolean isLoaded = false;
+
     public List<DynDescription> getObjects()
     {
         return descriptions;
@@ -80,17 +82,21 @@ public class LooseObjList
         bw.newLine();
 
         bw.close();
+        isLoaded = true;
     }
 
     public void readFromFile(File in)
     {
         try
         {
+            if (!in.exists()) return;
             FileReader fr = new FileReader(in);
             BufferedReader br = new BufferedReader(fr);
 
-            if (br.readLine() != "classes") return;
-            if (br.readLine() != "{") return;
+            String l = br.readLine();
+            if (!l.equals("classes")) return;
+            l = br.readLine();
+            if (!l.equals("{")) return;
             while (br.ready())
             {
                 String line=br.readLine();
@@ -102,8 +108,10 @@ public class LooseObjList
                 descriptions.add(desc);
             }
 
-            if (br.readLine() != "resources") return;
-            if (br.readLine() != "{") return;
+            l = br.readLine();
+            if (l != "resources") return;
+            l = br.readLine();
+            if (l != "{") return;
             while (br.ready())
             {
                 String line = br.readLine();
@@ -154,5 +162,10 @@ public class LooseObjList
     public void add(DynDescription desc)
     {
         descriptions.add(desc);
+    }
+
+    public boolean isLoaded()
+    {
+        return isLoaded;
     }
 }

@@ -22,7 +22,7 @@ public class RemoteMain
     {
         LoadLocal();
         LoadRemote();
-        if(!local.equals(remote))
+        if (!local.equals(remote) || !local.isLoaded())
         {
             //Download the classes that need to be updated
             List<DynDescription> list = remote.difference(local);
