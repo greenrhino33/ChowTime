@@ -100,7 +100,7 @@ public class LooseObjList
             while (br.ready())
             {
                 String line=br.readLine();
-                if (line == "}") break;
+                if (line.equals("}")) break;
                 DynClassDescription desc=new DynClassDescription();
                 desc.classname=line.split(" ")[0];
                 desc.version=new Version(0,0,0);
@@ -109,13 +109,13 @@ public class LooseObjList
             }
 
             l = br.readLine();
-            if (l != "resources") return;
+            if (!l.equals("resources")) return;
             l = br.readLine();
-            if (l != "{") return;
+            if (!l.equals("{")) return;
             while (br.ready())
             {
                 String line = br.readLine();
-                if (line == "}") break;
+                if (line.equals("}")) break;
                 DynResourceDescription desc = new DynResourceDescription();
                 desc.path = line.split(" ")[0];
                 desc.version = new Version(0, 0, 0);
