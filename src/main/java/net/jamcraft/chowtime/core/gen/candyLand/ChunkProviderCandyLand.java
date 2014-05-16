@@ -253,25 +253,30 @@ public class ChunkProviderCandyLand implements IChunkProvider{
         }
     }
 
-    private double[] initializeNoiseField(double[] par1ArrayOfDouble, int par2, int par3, int par4, int par5, int par6, int par7) {
+    private double[] initializeNoiseField(double[] par1ArrayOfDouble, int par2, int par3, int par4, int par5, int par6, int par7)
+    {
         ChunkProviderEvent.InitNoiseField event = new ChunkProviderEvent.InitNoiseField(this, par1ArrayOfDouble, par2, par3, par4, par5, par6, par7);
         MinecraftForge.EVENT_BUS.post(event);
         if (event.getResult() == Event.Result.DENY)
             return event.noisefield;
 
-        if (par1ArrayOfDouble == null) {
+        if (par1ArrayOfDouble == null)
+        {
             par1ArrayOfDouble = new double[par5 * par6 * par7];
         }
 
-        if (this.parabolicField == null) {
+        if (this.parabolicField == null)
+        {
             this.parabolicField = new float[25];
 
-            for (int k1 = -2; k1 <= 2; ++k1) {
-                for (int l1 = -2; l1 <= 2; ++l1) {
+            for (int k1 = -2; k1 <= 2; ++k1)
+            {
+                for (int l1 = -2; l1 <= 2; ++l1)
+                {
                     float f = 10.0F / MathHelper.sqrt_float((float) (k1 * k1 + l1 * l1) + 0.2F);
                     this.parabolicField[k1 + 2 + (l1 + 2) * 5] = f;
                 }
             }
         }
-
+    }
 }

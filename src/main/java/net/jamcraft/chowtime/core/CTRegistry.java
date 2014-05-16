@@ -64,12 +64,15 @@ public class CTRegistry {
     public static void CTItems(){
         CTInits.BarleyCrop = new CTItem().setUnlocalizedName(CTStrings.Item_Barley);
         GameRegistry.registerItem(CTInits.BarleyCrop, CTStrings.Item_Barley);
+        //These are moved to dynamic
+        /*
         CTInits.IceCreamBall = new CTItem().setUnlocalizedName(CTStrings.ItemIceCream_Strawberry);
         GameRegistry.registerItem(CTInits.IceCreamBall, CTStrings.ItemIceCream_Strawberry);
         CTInits.Cone = new CTItem().setUnlocalizedName(CTStrings.Item_Cone);
         GameRegistry.registerItem(CTInits.Cone, CTStrings.Item_Cone);
         CTInits.ItemCottonCandy = new CTItemFood(3, 2.0F, false).setUnlocalizedName(CTStrings.ItemFood_CottonCandy_Blue);
         GameRegistry.registerItem(CTInits.ItemCottonCandy, CTStrings.ItemFood_CottonCandy_Blue);
+        */
         CTInits.ItemBucketChoco = new CTItemBucket(CTInits.ChocolateMilk, CTInits.ItemBucketChoco, "bucket_chocolate").setUnlocalizedName(CTStrings.Item_Bucket);
         GameRegistry.registerItem(CTInits.ItemBucketChoco, CTStrings.Item_Bucket);
     }
