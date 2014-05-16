@@ -8,6 +8,7 @@ import net.jamcraft.chowtime.core.CommonProxy;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.core.events.BucketHandler;
+import net.jamcraft.chowtime.core.events.EntityEventHandler;
 import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.dyn.DynItems;
@@ -89,6 +90,7 @@ public class ChowTime
         CTRegistry.CTItems();
         CTRegistry.CTTileEntities();
         DynItems.registerRecipes();
+        MinecraftForge.EVENT_BUS.register(new EntityEventHandler()); 
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
         dir = event.getModConfigurationDirectory();

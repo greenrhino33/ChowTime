@@ -29,7 +29,8 @@ public class EntityEventHandler
     {
         if (!event.world.isRemote)
         {
-            ChowTime.harvestingLVL = new File(ChowTime.dir, "CT" + event.world.getWorldInfo().getWorldName() + ".cfg");
+            new File(ChowTime.dir + File.separator + "ChowTime").mkdirs();
+            ChowTime.harvestingLVL = new File(ChowTime.dir + File.separator + "ChowTime", "CT" + event.world.getWorldInfo().getWorldName() + ".cfg");
             try
             {
                 if (!ChowTime.harvestingLVL.exists()) ChowTime.harvestingLVL.createNewFile();
