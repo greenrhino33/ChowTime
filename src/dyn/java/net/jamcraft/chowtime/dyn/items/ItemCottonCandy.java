@@ -21,6 +21,7 @@ public class ItemCottonCandy extends ItemFood implements IDynItem{
         super(3, 2.0F, false);
         this.setCreativeTab(ChowTime.creativeTab);
         this.setTextureName(ModConstants.MODID + ":cottonCandy");
+        this.setUnlocalizedName(CTStrings.ItemFood_IceCreamCone_Strawberry);
     }
 //
 //    protected void onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)

@@ -15,6 +15,7 @@ public class ItemIceCream extends ItemSnowball implements IDynItem{
         super();
         this.setCreativeTab(ChowTime.creativeTab);
         this.setTextureName(ModConstants.MODID + ":IceCream");
+        this.setUnlocalizedName(CTStrings.ItemFood_IceCreamCone_Strawberry);
     }
 
     @Override public String getRegistrationName()

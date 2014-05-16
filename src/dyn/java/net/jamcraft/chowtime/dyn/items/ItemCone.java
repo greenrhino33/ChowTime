@@ -16,6 +16,7 @@ public class ItemCone extends CTItem implements IDynItem
         super();
         this.setCreativeTab(ChowTime.creativeTab);
         this.setTextureName(ModConstants.MODID + ":cone");
+        this.setUnlocalizedName(CTStrings.Item_Cone);
     }
 
     @Override public String getRegistrationName()
