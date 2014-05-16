@@ -5,13 +5,13 @@ package net.jamcraft.chowtime.remote;
  */
 public class DynResourceDescription extends DynDescription
 {
-    public String classname;
+    public String path;
 
     @Override
     public boolean equals(Object o)
     {
         if (!(o instanceof DynResourceDescription)) return false;
         DynResourceDescription other = (DynResourceDescription) o;
-        return other.version.equals(version) && other.classname.equals(classname);
+        return other.version.equals(version) && other.path.equals(path);
     }
 }

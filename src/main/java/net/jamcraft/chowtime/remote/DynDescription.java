@@ -12,6 +12,6 @@ public class DynDescription
     {
         if (!(o instanceof DynDescription)) return false;
         DynDescription other = (DynDescription) o;
-        return other.version.equals(version));
+        return other.version.equals(version);
     }
 }

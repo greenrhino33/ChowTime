@@ -37,21 +37,46 @@ public class LooseObjList
         ***********************************
          */
 
-        
+        //Sort into two seperate lists...
+        List<DynClassDescription> classes = new ArrayList<DynClassDescription>();
+        List<DynResourceDescription> resources = new ArrayList<DynResourceDescription>();
+
+        for (DynDescription desc : descriptions)
+        {
+            if (desc instanceof DynClassDescription)
+                classes.add((DynClassDescription) desc);
+            if (desc instanceof DynResourceDescription)
+                resources.add((DynResourceDescription) desc);
+        }
 
         if(!out.exists())out.createNewFile();
         FileWriter fw=new FileWriter(out);
         BufferedWriter bw=new BufferedWriter(fw);
 
-        bw.write("classes\n{\n");
-
-        for (DynDescription desc : descriptions)
+        bw.write("classes");
+        bw.newLine();
+        bw.write("{");
+        bw.newLine();
+        for (DynClassDescription d : classes)
         {
-
+            String s = d.classname + " " + d.version.toString();
+            bw.write(s);
+            bw.newLine();
         }
+        bw.write("}");
+        bw.newLine();
 
-        String s = desc.classname + " " + desc.version.toString();
-        bw.write(s);
+        bw.write("resources");
+        bw.newLine();
+        bw.write("{");
+        bw.newLine();
+        for (DynResourceDescription d : resources)
+        {
+            String s = d.path + " " + d.version.toString();
+            bw.write(s);
+            bw.newLine();
+        }
+        bw.write("}");
         bw.newLine();
 
         bw.close();
@@ -63,15 +88,33 @@ public class LooseObjList
         {
             FileReader fr = new FileReader(in);
             BufferedReader br = new BufferedReader(fr);
+
+            if (br.readLine() != "classes") return;
+            if (br.readLine() != "{") return;
             while (br.ready())
             {
                 String line=br.readLine();
+                if (line == "}") break;
                 DynClassDescription desc=new DynClassDescription();
                 desc.classname=line.split(" ")[0];
                 desc.version=new Version(0,0,0);
                 desc.version.readFromString(line.split(" ")[1]);
                 descriptions.add(desc);
             }
+
+            if (br.readLine() != "resources") return;
+            if (br.readLine() != "{") return;
+            while (br.ready())
+            {
+                String line = br.readLine();
+                if (line == "}") break;
+                DynResourceDescription desc = new DynResourceDescription();
+                desc.path = line.split(" ")[0];
+                desc.version = new Version(0, 0, 0);
+                desc.version.readFromString(line.split(" ")[1]);
+                descriptions.add(desc);
+            }
+
             br.close();
         }
         catch (IOException e)

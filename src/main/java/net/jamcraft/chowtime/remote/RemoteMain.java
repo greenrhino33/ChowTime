@@ -25,16 +25,19 @@ public class RemoteMain
         if(!local.equals(remote))
         {
             //Download the classes that need to be updated
-            List<DynClassDescription> list = remote.difference(local);
-            for(DynClassDescription desc:list)
+            List<DynDescription> list = remote.difference(local);
+            for (DynDescription desc : list)
             {
-                DownloadClass(desc);
+                if (desc instanceof DynClassDescription)
+                    DownloadFile("/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
+                if (desc instanceof DynResourceDescription)
+                    DownloadFile("/assets/chowtime/" + ((DynResourceDescription) desc).path);
             }
 
             //Update local file
             try
             {
-                remote.writeToFile(new File(ModConstants.DYN_LOC + "/local.json"));
+                remote.writeToFile(new File(ModConstants.DYN_LOC + "/local.ctd"));
             }
             catch (IOException ioe)
             {
@@ -48,7 +51,7 @@ public class RemoteMain
     public static boolean LoadLocal()
     {
         local.getObjects().clear();
-        File f = new File(ModConstants.DYN_LOC + "/local.json");
+        File f = new File(ModConstants.DYN_LOC + "/local.ctd");
         local.readFromFile(f);
         return true;
     }
@@ -57,11 +60,11 @@ public class RemoteMain
     {
         try
         {
-            URL url = new URL(Config.remoteLoc + "/dyn/current.json");
+            URL url = new URL(Config.remoteLoc + "/dyn/current.ctd");
             URLConnection con = url.openConnection();
             InputStreamReader isr = new InputStreamReader(con.getInputStream());
             BufferedReader br=new BufferedReader(isr);
-            File dyn=new File(ModConstants.DYN_LOC+"/remote.json");
+            File dyn = new File(ModConstants.DYN_LOC + "/remote.ctd");
             if(!dyn.exists())dyn.createNewFile();
             FileWriter fw=new FileWriter(dyn);
             while(br.ready())
@@ -76,33 +79,31 @@ public class RemoteMain
         }
         catch (IOException e)
         {
-            ChowTime.logger.error("Error reading remote JSON file; falling back to local only");
+            ChowTime.logger.error("Error reading remote CT file; falling back to local only");
         }
         catch (JsonIOException je)
         {
-            ChowTime.logger.error("Error parsing remote JSON file; falling back to local only");
+            ChowTime.logger.error("Error parsing remote CT file; falling back to local only");
         }
 
         return false;
     }
 
-    public static void DownloadClass(DynClassDescription desc)
+    private static void DownloadFile(String path)
     {
-        String newPath = "/" + desc.classname.replace('.', '/')+".class";
-
         try
         {
             final int blk_size = 1024;
-            URL url = new URL(Config.remoteLoc + "dyn/current" + newPath);
+            URL url = new URL(Config.remoteLoc + "dyn/current" + path);
             URLConnection con = url.openConnection();
             InputStream reader = url.openStream();
-            File f=new File(ModConstants.DYN_LOC + newPath);
+            File f = new File(ModConstants.DYN_LOC + path);
             if(!f.exists())
             {
                 f.getParentFile().mkdirs();
                 f.createNewFile();
             }
-            FileOutputStream writer = new FileOutputStream(ModConstants.DYN_LOC + newPath);
+            FileOutputStream writer = new FileOutputStream(ModConstants.DYN_LOC + path);
             int total = con.getContentLength();
             int size_dl = 0;
             byte[] buffer = new byte[blk_size];
