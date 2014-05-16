@@ -181,7 +181,7 @@ public class ChunkProviderCandyLand implements IChunkProvider{
         this.mobSpawnerNoise = new NoiseGeneratorOctaves(this.rand, 8);
 
         NoiseGeneratorOctaves[] noiseGens = { noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6, mobSpawnerNoise };
-        noiseGens = TerrainGen.getModdedNoiseGenerators(world, this.rand, noiseGens);
+//        noiseGens = TerrainGen.getModdedNoiseGenerators(world, this.rand, noiseGens);
         this.noiseGen1 = noiseGens[0];
         this.noiseGen2 = noiseGens[1];
         this.noiseGen3 = noiseGens[2];
@@ -199,7 +199,7 @@ public class ChunkProviderCandyLand implements IChunkProvider{
         byte b3 = 17;
         int l = b0 + 1;
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, k + 5, l + 5);
-        this.noiseArray = this.initalizeNoiseField(this.noiseArray, par1 * b0, 0, par2 * b0, k, b3, l);
+//        this.noiseArray = this.initalizeNoiseField(this.noiseArray, par1 * b0, 0, par2 * b0, k, b3, l);
 
         for(int i1 = 0; i1 < b0; i1++){
             for (int j1 = 0; j1 < b0; ++j1) {
@@ -231,11 +231,11 @@ public class ChunkProviderCandyLand implements IChunkProvider{
 
                             for (int k2 = 0; k2 < 4; ++k2) {
                                 if ((d16 += d15) > 0.0D) {
-                                    par3ArrayOfByte[j2 += short1] = (byte) Blocks.stone;//Block.stone.blockID;
+//                                    par3ArrayOfByte[j2 += short1] = (byte) Blocks.stone;//Block.stone.blockID;
                                 } else if (k1 * 8 + l1 < b2) {
-                                    par3ArrayOfByte[j2 += short1] = (byte) Blocks.waterStill;
+//                                    par3ArrayOfByte[j2 += short1] = (byte) Blocks.waterStill;
                                 } else {
-                                    par3ArrayOfByte[j2 += short1] = 0;
+//                                    par3ArrayOfByte[j2 += short1] = 0;
                                 }
                             }
 
@@ -278,5 +278,6 @@ public class ChunkProviderCandyLand implements IChunkProvider{
                 }
             }
         }
+        return null;
     }
 }
