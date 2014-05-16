@@ -2,6 +2,7 @@ package net.jamcraft.chowtime.dyn;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.jamcraft.chowtime.core.ModConstants;
+import net.jamcraft.chowtime.core.ObfHelper;
 import net.jamcraft.chowtime.dyn.common.IDynItem;
 import net.jamcraft.chowtime.remote.DynClassDescription;
 import net.jamcraft.chowtime.remote.DynDescription;

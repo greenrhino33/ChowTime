@@ -21,6 +21,8 @@ public class RemoteMain
 
     public static void init()
     {
+        File dyndir=new File(ModConstants.DYN_LOC);
+        if(!dyndir.exists()) dyndir.mkdir();
         LoadLocal();
         LoadRemote();
         if (!local.equals(remote) || !local.isLoaded())
@@ -41,7 +43,7 @@ public class RemoteMain
             for (DynDescription desc : list)
             {
                 if (desc instanceof DynClassDescription)
-                    DownloadFile("/" + (ObfHelper.isObf?"obf":"deobf") + ((DynClassDescription) desc).classname.replace('.', '/') + ".class","/" +  ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
+                    DownloadFile("/"  + ((DynClassDescription) desc).classname.replace('.', '/') + ".class","/" + (ObfHelper.isObf?"obf/":"deobf/") + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
                 if (desc instanceof DynResourceDescription)
                     DownloadFile("/assets/chowtime/" + ((DynResourceDescription) desc).path,null);
             }

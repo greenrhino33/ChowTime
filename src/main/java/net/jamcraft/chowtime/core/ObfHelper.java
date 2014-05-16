@@ -11,7 +11,7 @@ public class ObfHelper
     {
         try
         {
-            Class.forName("net.minecraft.block.Block");
+            Class.forName("net.minecraft.block.Block").getDeclaredField("blockRegistry");
             isObf=false;
         }
         catch (Exception e)
