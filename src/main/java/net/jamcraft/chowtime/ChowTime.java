@@ -1,6 +1,7 @@
 package net.jamcraft.chowtime;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import java.io.File;
+
 import net.jamcraft.chowtime.core.CTInits;
 import net.jamcraft.chowtime.core.CTRegistry;
 import net.jamcraft.chowtime.core.CommonProxy;
@@ -16,6 +17,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -38,9 +40,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = ModConstants.MODID, name = ModConstants.NAME)
 public class ChowTime
 {
-
+    
     public static final BiomeGenBase TutorialBiome1 = new BiomeGenCandyLand(55);
-
+    
     public static CreativeTabs creativeTab = new CreativeTabs("ChowTime")
     {
         @Override
@@ -50,28 +52,33 @@ public class ChowTime
             return Items.chainmail_chestplate;
         }
     };
-
+    
     @Mod.Instance(ModConstants.MODID)
     public static ChowTime instance;
-
+    
     public static Material cloud = new CloudMaterial();
-
+    public static NBTTagCompound saveData = new NBTTagCompound();
+    public static File harvestingLVL;
+    public static File dir;
+    
     @SidedProxy(clientSide = "net.jamcraft.chowtime.core.client.ClientProxy", serverSide = "net.jamcraft.chowtime.core.CommonProxy")
     public static CommonProxy proxy;
-
+    
     public static Logger logger;
-
-    //    private File configBase;
-
+    
+    // private File configBase;
+    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-//        FMLInterModComms.sendMessage("Waila", "register", "allout58.mods.prisoncraft.compat.waila.WailaProvider.callbackRegister");
-
-//        channels = NetworkRegistry.INSTANCE.newChannel(ModConstants.MODID, new ChannelHandler());
-//        proxy.registerRenderers();
+        // FMLInterModComms.sendMessage("Waila", "register",
+        // "allout58.mods.prisoncraft.compat.waila.WailaProvider.callbackRegister");
+        
+        // channels = NetworkRegistry.INSTANCE.newChannel(ModConstants.MODID,
+        // new ChannelHandler());
+        // proxy.registerRenderers();
         logger = event.getModLog();
-
+        
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
         DynMain.init();
         RemoteMain.init();
@@ -84,36 +91,38 @@ public class ChowTime
         DynItems.registerRecipes();
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
-        //        configBase=event.getModConfigurationDirectory();
-
-//        MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
-
-//        BlockList.init();
-//        ItemList.init();
-//        TileEntityList.init();
-
-        //NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
+        dir = event.getModConfigurationDirectory();
+        // configBase=event.getModConfigurationDirectory();
+        
+        // MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
+        
+        // BlockList.init();
+        // ItemList.init();
+        // TileEntityList.init();
+        
+        // NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
     }
-
+    
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        //FMLInterModComms.sendMessage("prisoncraft", "blacklist", Block.blockRegistry.getNameForObject(Blocks.bookshelf));
-        //GameRegistry.registerWorldGenerator();
+        // FMLInterModComms.sendMessage("prisoncraft", "blacklist",
+        // Block.blockRegistry.getNameForObject(Blocks.bookshelf));
+        // GameRegistry.registerWorldGenerator();
     }
-
+    
     @Mod.EventHandler
     public void handleIMC(FMLInterModComms.IMCEvent event)
     {
-        //IMCHandler.HandleIMC(event.getMessages());
+        // IMCHandler.HandleIMC(event.getMessages());
     }
-
+    
     @Mod.EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
-//        event.registerServerCommand(new JailCommand());
+        // event.registerServerCommand(new JailCommand());
     }
-
+    
     @Mod.EventHandler
     public void serverUnload(FMLServerStoppingEvent event)
     {

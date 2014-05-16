@@ -24,9 +24,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class CTRegistry {
-
-    public static void CTBlocks(){
+public class CTRegistry
+{
+    
+    public static void CTBlocks()
+    {
         CTInits.CTLeaves = new CTLeaves().setBlockName(CTStrings.BlockLeaves_Basic);
         GameRegistry.registerBlock(CTInits.CTLeaves, CTStrings.BlockLeaves_Basic);
         CTInits.CTLog = new CTLog().setBlockName(CTStrings.BlockLogs_Basic);
@@ -38,30 +40,34 @@ public class CTRegistry {
         CTInits.CottonCandyBLUE = new BlockCottonCandy().setBlockName(CTStrings.BlockCottonCandy_Blue);
         GameRegistry.registerBlock(CTInits.CottonCandyBLUE, CTStrings.BlockCottonCandy_Blue);
     }
-
-    public static void CTMachines(){
+    
+    public static void CTMachines()
+    {
         CTInits.Juicer = new Juicer();
         GameRegistry.registerBlock(CTInits.Juicer, "Juicer");
         CTInits.Fermenter = new Fermenter();
         GameRegistry.registerBlock(CTInits.Fermenter, "Fermenter");
     }
-
-    public static void CTLiquids() {
+    
+    public static void CTLiquids()
+    {
         CTInits.ChocolateMilkFluid = new Fluid(CTStrings.Fluid_ChocolateMilk).setUnlocalizedName(CTStrings.Fluid_ChocolateMilk + "_flow");
         FluidRegistry.registerFluid(CTInits.ChocolateMilkFluid);
         CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, CTStrings.Fluid_ChocolateMilk).setBlockName(CTStrings.Fluid_ChocolateMilk).setCreativeTab(ChowTime.creativeTab);
         GameRegistry.registerBlock(CTInits.ChocolateMilk, CTStrings.Fluid_ChocolateMilk);
-
+        
     }
-
-    public static void CTCrops() {
+    
+    public static void CTCrops()
+    {
         CTInits.CropBarley = new CropBarley().setBlockName(CTStrings.BlockCrop_Barley);
         GameRegistry.registerBlock(CTInits.CropBarley, CTStrings.BlockCrop_Barley);
         CTInits.BarleySeeds = new SeedBarley().setUnlocalizedName(CTStrings.ItemSeed_Barley);
         GameRegistry.registerItem(CTInits.BarleySeeds, CTStrings.ItemSeed_Barley);
     }
-
-    public static void CTItems(){
+    
+    public static void CTItems()
+    {
         CTInits.BarleyCrop = new CTItem().setUnlocalizedName(CTStrings.Item_Barley);
         GameRegistry.registerItem(CTInits.BarleyCrop, CTStrings.Item_Barley);
         CTInits.IceCreamBall = new CTItem().setUnlocalizedName(CTStrings.ItemIceCream_Strawberry);
@@ -73,8 +79,9 @@ public class CTRegistry {
         CTInits.ItemBucketChoco = new CTItemBucket(CTInits.ChocolateMilk, CTInits.ItemBucketChoco, "bucket_chocolate").setUnlocalizedName(CTStrings.Item_Bucket);
         GameRegistry.registerItem(CTInits.ItemBucketChoco, CTStrings.Item_Bucket);
     }
-
-    public static void CTTileEntities(){
+    
+    public static void CTTileEntities()
+    {
         GameRegistry.registerTileEntity(TEFermenter.class, "TEFermenter");
     }
 }
