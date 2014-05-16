@@ -24,7 +24,7 @@ public class RemoteMain
         LoadRemote();
         if (!local.equals(remote) || !local.isLoaded())
         {
-            //TODO: Remove old files
+            //TODO: Remove old files local.difference(remote)?
             //Download the classes that need to be updated
             List<DynDescription> list = remote.difference(local);
             for (DynDescription desc : list)
