@@ -27,6 +27,13 @@ public class RemoteMain
         {
             //TODO: Remove old files local.difference(remote)?
             List<DynDescription> old=local.difference(local);
+            for (DynDescription desc : list)
+            {
+                if (desc instanceof DynClassDescription)
+                    DownloadFile("/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
+                if (desc instanceof DynResourceDescription)
+                    DownloadFile("/assets/chowtime/" + ((DynResourceDescription) desc).path);
+            }
 
 
             //Download the classes that need to be updated
@@ -94,21 +101,22 @@ public class RemoteMain
         return false;
     }
 
-    private static void DownloadFile(String path)
+    private static void DownloadFile(String localpath, String remotepath)
     {
         try
         {
+            if(remotepath==null) remotepath=localpath;
             final int blk_size = 1024;
-            URL url = new URL(Config.remoteLoc + "dyn/current" + path);
+            URL url = new URL(Config.remoteLoc + "dyn/current" + remotepath);
             URLConnection con = url.openConnection();
             InputStream reader = url.openStream();
-            File f = new File(ModConstants.DYN_LOC + path);
+            File f = new File(ModConstants.DYN_LOC + localpath);
             if(!f.exists())
             {
                 f.getParentFile().mkdirs();
                 f.createNewFile();
             }
-            FileOutputStream writer = new FileOutputStream(ModConstants.DYN_LOC + path);
+            FileOutputStream writer = new FileOutputStream(ModConstants.DYN_LOC + localpath);
             int total = con.getContentLength();
             int size_dl = 0;
             byte[] buffer = new byte[blk_size];
