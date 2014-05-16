@@ -106,12 +106,12 @@ public class TEFermenter extends TileEntity implements ISidedInventory
     @Override public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
         if (slot!=0) return false;
-//        for(Recipe r: FermenterRecipies.recipeList)
-//        {
-//            if (r.getInput().equals(stack)) return true;
-//        }
-//        return false;
-        return true;
+        for(Recipe r: FermenterRecipies.recipeList)
+        {
+            if (r.getInput().getItem().equals(stack.getItem())) return true;
+        }
+        return false;
+//        return true;
     }
 
     @Override public int[] getAccessibleSlotsFromSide(int side)
@@ -143,7 +143,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
             {
                 for(Recipe r:FermenterRecipies.recipeList)
                 {
-                    if(r.getInput().equals(inventory[0]))
+                    if(r.getInput().getItem().equals(inventory[0].getItem()))
                     {
                         ticksLeft=r.getTime();
                         break;

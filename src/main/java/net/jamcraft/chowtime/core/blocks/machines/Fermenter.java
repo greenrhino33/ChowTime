@@ -17,6 +17,7 @@ public class Fermenter extends BlockContainer
     {
         super(Material.iron);
         this.setCreativeTab(ChowTime.creativeTab);
+        setBlockName("fermenter");
     }
 
     @Override
