@@ -106,28 +106,31 @@ public class TEFermenter extends TileEntity implements ISidedInventory
     @Override public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
         if (slot!=0) return false;
-        for(Recipe r: FermenterRecipies.recipeList)
-        {
-            if (r.getInput().equals(stack)) return true;
-        }
-        return false;
+//        for(Recipe r: FermenterRecipies.recipeList)
+//        {
+//            if (r.getInput().equals(stack)) return true;
+//        }
+//        return false;
+        return true;
     }
 
     @Override public int[] getAccessibleSlotsFromSide(int side)
     {
-        if(ForgeDirection.UP.flag==side) return new int[]{ 0 };
-        return new int[0];
+        //if(ForgeDirection.UP.flag==side) return new int[]{ 0 };
+        return new int[]{0,1};
     }
 
     @Override public boolean canInsertItem(int slot, ItemStack itemStack, int side)
     {
-        if(slot!=0||side!=ForgeDirection.UP.flag) return false;
-        return isItemValidForSlot(slot,itemStack);
+        return true;
+//        if(slot!=0||side!=ForgeDirection.UP.flag) return false;
+//        return isItemValidForSlot(slot,itemStack);
     }
 
     @Override public boolean canExtractItem(int slot, ItemStack itemStack, int side)
     {
-        return slot==1&&side!=ForgeDirection.UP.flag;
+//        return true;
+        return slot==1;//&&side!=ForgeDirection.UP.flag;
     }
 
 
