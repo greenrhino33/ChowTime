@@ -10,11 +10,11 @@ import java.util.List;
  */
 public class FermenterRecipies
 {
-    public static List<Recipe> recipeList=new ArrayList<Recipe>();
+    public static List<Recipe> recipeList = new ArrayList<Recipe>();
 
     public static void AddRecipe(ItemStack input, ItemStack output, int time)
     {
-        Recipe r=new Recipe(input,output,time);
+        Recipe r = new Recipe(input, output, time);
         recipeList.add(r);
     }
 }
