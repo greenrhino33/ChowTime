@@ -28,7 +28,7 @@ public class RemoteMain
         if (!local.equals(remote) || !local.isLoaded())
         {
             //Remove old files
-            List<DynDescription> old=local.difference(local);
+            List<DynDescription> old=local.difference(remote);
             for (DynDescription desc : old)
             {
                 if (desc instanceof DynClassDescription)

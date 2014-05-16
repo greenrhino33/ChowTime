@@ -6,11 +6,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 /**
- * Created by Kayla Marie on 5/14/14.
+ * Created by James Hollowell on 5/16/2014.
  */
-public class TEJuicer extends TileEntity implements IInventory
+public class TEIceCreamMaker extends TileEntity implements IInventory
 {
-
     @Override public int getSizeInventory()
     {
         return 0;
