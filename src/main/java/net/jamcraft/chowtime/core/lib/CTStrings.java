@@ -5,16 +5,16 @@ package net.jamcraft.chowtime.core.lib;
  */
 public class CTStrings {
 
-    public static String BlockLogs_Basic = "BlockLog_Basic";
-    public static String BlockLeaves_Basic = "BlockLeaves_Basic";
-    public static String BlockSapling_Basic = "BlockSapling_Basic";
+    public static String BlockLogs_Basic = "log_Basic";
+    public static String BlockLeaves_Basic = "leaves_Basic";
+    public static String BlockSapling_Basic = "sapling_Basic";
 
     public static String BlockIceCream_Strawberry = "blockIceCream_Strawberry";
     public static String BlockCottonCandy_Blue = "blockCottonCandy_Blue";
 
-    public static String BlockCrop_Barley = "BlockCrop_Barley";
+    public static String BlockCrop_Barley = "crop_Barley";
 
-    public static String Fluid_ChocolateMilk = "Fluid_ChocolateMilk";
+    public static String Fluid_ChocolateMilk = "fluid_ChocolateMilk";
 
     public static String Item_Cone = "cone";
     public static String ItemIceCream_Strawberry = "iceCream_Strawberry";
