@@ -1,11 +1,7 @@
 package net.jamcraft.chowtime;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.jamcraft.chowtime.core.CTInits;
-import net.jamcraft.chowtime.core.CTRegistry;
-import net.jamcraft.chowtime.core.CommonProxy;
-import net.jamcraft.chowtime.core.Config;
-import net.jamcraft.chowtime.core.ModConstants;
+import net.jamcraft.chowtime.core.*;
 import net.jamcraft.chowtime.core.events.BucketHandler;
 import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
@@ -72,6 +68,7 @@ public class ChowTime
 //        channels = NetworkRegistry.INSTANCE.newChannel(ModConstants.MODID, new ChannelHandler());
 //        proxy.registerRenderers();
         logger = event.getModLog();
+        ObfHelper.init();
 
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
         RemoteMain.init();
