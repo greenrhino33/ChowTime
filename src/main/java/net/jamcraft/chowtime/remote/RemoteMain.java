@@ -4,6 +4,7 @@ import com.google.gson.JsonIOException;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.ModConstants;
+import net.jamcraft.chowtime.core.ObfHelper;
 
 import java.io.*;
 import java.net.URL;
@@ -25,12 +26,15 @@ public class RemoteMain
         if (!local.equals(remote) || !local.isLoaded())
         {
             //TODO: Remove old files local.difference(remote)?
+            List<DynDescription> old=local.difference(local);
+
+
             //Download the classes that need to be updated
             List<DynDescription> list = remote.difference(local);
             for (DynDescription desc : list)
             {
                 if (desc instanceof DynClassDescription)
-                    DownloadFile("/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
+                    DownloadFile("/" + (ObfHelper.isObf?"obf":"deobf") + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
                 if (desc instanceof DynResourceDescription)
                     DownloadFile("/assets/chowtime/" + ((DynResourceDescription) desc).path);
             }
