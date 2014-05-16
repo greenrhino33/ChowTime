@@ -1,2 +1,10 @@
+classes
+{
 net.jamcraft.chowtime.dyn.items.Temp 0.0.3
 net.jamcraft.chowtime.dyn.items.Test2 0.0.2
+}
+resources
+{
+textures/items/Temp.png 0.0.1
+lang/en_US.lang 0.0.1
+}
