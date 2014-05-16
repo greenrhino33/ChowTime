@@ -11,6 +11,7 @@ import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
+import net.jamcraft.chowtime.remote.DynClassDescription;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -73,7 +74,6 @@ public class ChowTime
         logger = event.getModLog();
 
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
-        DynMain.init();
         RemoteMain.init();
         CTRegistry.CTBlocks();
         CTRegistry.CTMachines();
@@ -84,6 +84,7 @@ public class ChowTime
         DynItems.registerRecipes();
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
+        DynMain.init();
         //        configBase=event.getModConfigurationDirectory();
 
 //        MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
@@ -98,6 +99,7 @@ public class ChowTime
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+        DynItems.registerRecipes();
         //FMLInterModComms.sendMessage("prisoncraft", "blacklist", Block.blockRegistry.getNameForObject(Blocks.bookshelf));
         //GameRegistry.registerWorldGenerator();
     }
