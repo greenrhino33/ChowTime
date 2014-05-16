@@ -5,9 +5,13 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.stats.AchievementList;
+import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 
 /**
@@ -15,8 +19,13 @@ import net.minecraft.world.World;
  */
 public class EntitySeedMob extends EntityAnimal{
 
+    private int inLove;
+    private int breeding;
+    private EntityPlayer field_146084_br;
+
     public EntitySeedMob(World par1World) {
         super(par1World);
+
         this.setHealth(10.0F);
         this.getNavigator().setSpeed(0.222);
         this.setSize(0.5F, 0.5F);
@@ -35,6 +44,84 @@ public class EntitySeedMob extends EntityAnimal{
 
     public boolean isAIEnabled(){
         return true;
+    }
+
+    public boolean isBreedingItem(ItemStack par1ItemStack)
+    {
+        return par1ItemStack.getItem() == Items.apple;
+    }
+
+    public void onLivingUpdate()
+    {
+        super.onLivingUpdate();
+
+        if (this.getGrowingAge() != 0)
+        {
+            this.inLove = 0;
+        }
+
+        if (this.inLove > 0)
+        {
+            --this.inLove;
+            String s = "heart";
+
+            if (this.inLove % 10 == 0)
+            {
+                double d0 = this.rand.nextGaussian() * 0.02D;
+                double d1 = this.rand.nextGaussian() * 0.02D;
+                double d2 = this.rand.nextGaussian() * 0.02D;
+                this.worldObj.spawnParticle(s, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+            }
+        }
+        else
+        {
+            this.breeding = 0;
+        }
+    }
+
+    private void procreate(EntitySeedMob par1EntityAnimal)
+    {
+        EntityAgeable entityageable = this.createChild(par1EntityAnimal);
+
+        if (entityageable != null)
+        {
+            System.out.println("Working?");
+            if (this.field_146084_br == null && par1EntityAnimal.func_146083_cb() != null)
+            {
+                this.field_146084_br = par1EntityAnimal.func_146083_cb();
+            }
+
+            if (this.field_146084_br != null)
+            {
+                this.field_146084_br.triggerAchievement(StatList.field_151186_x);
+
+            }
+
+            this.setGrowingAge(6000);
+            par1EntityAnimal.setGrowingAge(6000);
+            this.inLove = 0;
+            this.breeding = 0;
+            par1EntityAnimal.breeding = 0;
+            par1EntityAnimal.inLove = 0;
+            entityageable.setGrowingAge(-24000);
+            entityageable.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+
+            for (int i = 0; i < 7; ++i)
+            {
+                double d0 = this.rand.nextGaussian() * 0.02D;
+                double d1 = this.rand.nextGaussian() * 0.02D;
+                double d2 = this.rand.nextGaussian() * 0.02D;
+                this.worldObj.spawnParticle("heart", this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+            }
+
+            this.worldObj.spawnEntityInWorld(entityageable);
+            this.setScale(0.1F);
+        }
+    }
+
+    protected boolean canDespawn()
+    {
+        return false;
     }
 
     protected String getLivingSound() {
@@ -58,6 +145,6 @@ public class EntitySeedMob extends EntityAnimal{
     }
 
     public EntityAgeable createChild(EntityAgeable var1) {
-        return null;
+        return new EntitySeedMob(this.worldObj);
     }
 }
