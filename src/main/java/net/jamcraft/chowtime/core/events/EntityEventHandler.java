@@ -51,8 +51,7 @@ public class EntityEventHandler
             {
                 e.printStackTrace();
             }
-        }
-        
+        }        
     }
     
     @SubscribeEvent
