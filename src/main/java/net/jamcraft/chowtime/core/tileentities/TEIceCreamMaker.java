@@ -1,72 +1,25 @@
 package net.jamcraft.chowtime.core.tileentities;
 
+import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
+import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
+import net.jamcraft.chowtime.core.recipies.Recipe;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by James Hollowell on 5/16/2014.
  */
-public class TEIceCreamMaker extends TileEntity implements IInventory
+public class TEIceCreamMaker extends TileEntity
 {
-    @Override public int getSizeInventory()
-    {
-        return 0;
-    }
-
-    @Override public ItemStack getStackInSlot(int var1)
-    {
-        return null;
-    }
-
-    @Override public ItemStack decrStackSize(int var1, int var2)
-    {
-        return null;
-    }
-
-    @Override public ItemStack getStackInSlotOnClosing(int var1)
-    {
-        return null;
-    }
-
-    @Override public void setInventorySlotContents(int var1, ItemStack var2)
+    public TEIceCreamMaker()
     {
 
     }
 
-    @Override public String getInventoryName()
-    {
-        return null;
-    }
 
-    @Override public boolean hasCustomInventoryName()
-    {
-        return false;
-    }
-
-    @Override public int getInventoryStackLimit()
-    {
-        return 0;
-    }
-
-    @Override public boolean isUseableByPlayer(EntityPlayer var1)
-    {
-        return false;
-    }
-
-    @Override public void openInventory()
-    {
-
-    }
-
-    @Override public void closeInventory()
-    {
-
-    }
-
-    @Override public boolean isItemValidForSlot(int var1, ItemStack var2)
-    {
-        return false;
-    }
 }
