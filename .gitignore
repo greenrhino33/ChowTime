@@ -8,6 +8,8 @@
 *.war
 *.ear
 
+!/gradle/gradle-wrapper.jar
+
 #eclipse
 .metadata/
 
@@ -31,7 +33,13 @@ autocommit
 *.iml
 *.ipr
 *.iws
+.idea/
+out/
 
 saves/*
+<<<<<<< HEAD
 logs/*
 config
+=======
+logs/*
+>>>>>>> 5caba8321735e939d27b073e94f562bd896e5733

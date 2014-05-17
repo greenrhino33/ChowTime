@@ -1,8 +1,13 @@
 package net.jamcraft.chowtime.dyn;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.ModConstants;
+import net.jamcraft.chowtime.core.ObfHelper;
 import net.jamcraft.chowtime.dyn.common.IDynItem;
+import net.jamcraft.chowtime.remote.DynClassDescription;
+import net.jamcraft.chowtime.remote.DynDescription;
+import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.item.Item;
 
 import java.io.File;
@@ -43,8 +48,11 @@ public class DynItems
         {
             ClassLoader loader = new URLClassLoader(new URL[] { dynLoc.toURI().toURL() }, DynItems.class.getClassLoader());
 
-            for (String classname : DynMain.load)
+            for (DynDescription desc : RemoteMain.local.getObjects())
             {
+                if (!(desc instanceof DynClassDescription)) continue;
+                String classname = ((DynClassDescription) desc).classname;
+                ChowTime.logger.error("Loading new item: " + classname);
                 //Actually load the class
                 Class<?> clazz = loader.loadClass(classname);
 

@@ -19,7 +19,7 @@ public class EntityEventHandler
     public void onEntityJoinWorld(EntityJoinWorldEvent event)
     {
     }
-    
+
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event)
     {
@@ -29,19 +29,21 @@ public class EntityEventHandler
             ChowTime.harvestingLVL = new File(ChowTime.dir + File.separator + "ChowTime", "CT" + event.world.getWorldInfo().getWorldName() + ".cfg");
             try
             {
-                if (!ChowTime.harvestingLVL.exists()) ChowTime.harvestingLVL.createNewFile();
+                if (!ChowTime.harvestingLVL.exists())
+                    ChowTime.harvestingLVL.createNewFile();
             }
             catch (IOException e)
             {
                 e.printStackTrace();
             }
         }
-        
+
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
             try
             {
-                if (ChowTime.harvestingLVL.exists()) ChowTime.saveData = CompressedStreamTools.readCompressed(new FileInputStream(ChowTime.harvestingLVL));
+                if (ChowTime.harvestingLVL.exists())
+                    ChowTime.saveData = CompressedStreamTools.readCompressed(new FileInputStream(ChowTime.harvestingLVL));
             }
             catch (EOFException e)
             {
@@ -51,9 +53,9 @@ public class EntityEventHandler
             {
                 e.printStackTrace();
             }
-        }        
+        }
     }
-    
+
     @SubscribeEvent
     public void onWorldSave(WorldEvent.Save event)
     {
@@ -61,7 +63,8 @@ public class EntityEventHandler
         {
             try
             {
-                if (ChowTime.harvestingLVL.exists()) CompressedStreamTools.writeCompressed(ChowTime.saveData, new FileOutputStream(ChowTime.harvestingLVL));
+                if (ChowTime.harvestingLVL.exists())
+                    CompressedStreamTools.writeCompressed(ChowTime.saveData, new FileOutputStream(ChowTime.harvestingLVL));
             }
             catch (EOFException e)
             {

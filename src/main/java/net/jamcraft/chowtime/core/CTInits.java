@@ -33,6 +33,7 @@ public class CTInits {
     //Machine Inits
     public static Block Juicer;
     public static Block Fermenter;
+    public static Block IceCreamMaker;
 
     //Crop Inits
     public static Block CropBarley;

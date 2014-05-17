@@ -17,12 +17,14 @@ import java.util.Random;
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class CropBarley extends BlockCrops {
+public class CropBarley extends BlockCrops
+{
 
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
-    public CropBarley(){
+    public CropBarley()
+    {
         super();
         float f = 0.5F;
         this.setTickRandomly(true);
@@ -64,7 +66,7 @@ public class CropBarley extends BlockCrops {
             {
                 float f = this.func_149864_n(p_149674_1_, p_149674_2_, p_149674_3_, p_149674_4_);
 
-                if (p_149674_5_.nextInt((int)(25.0F / f) + 1) == 0)
+                if (p_149674_5_.nextInt((int) (25.0F / f) + 1) == 0)
                 {
                     ++l;
                     p_149674_1_.setBlockMetadataWithNotify(p_149674_2_, p_149674_3_, p_149674_4_, l, 2);
@@ -131,6 +133,5 @@ public class CropBarley extends BlockCrops {
 
         return f;
     }
-
 
 }
