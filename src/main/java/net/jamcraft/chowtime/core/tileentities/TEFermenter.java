@@ -1,12 +1,10 @@
 package net.jamcraft.chowtime.core.tileentities;
 
-import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.recipies.Recipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -181,7 +179,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
         super.readFromNBT(tags);
 
         ticksLeft = tags.getInteger("timeleft");
-        maxTicks=tags.getInteger("maxTime");
+        maxTicks = tags.getInteger("maxTime");
 
         if (tags.hasKey("slot1"))
         {
@@ -209,43 +207,38 @@ public class TEFermenter extends TileEntity implements ISidedInventory
     public void updateEntity()
     {
         //Something in input and nothing currently processing
-        if(inventory[0]!=null && ticksLeft==0)
+        if (inventory[0] != null && ticksLeft == 0)
         {
-            Recipe r=FermenterRecipies.GetRecipeFromStack(inventory[0]);
-            if(r!=null)
+            Recipe r = FermenterRecipies.GetRecipeFromStack(inventory[0]);
+            if (r != null)
             {
-                maxTicks=r.getTime();
+                maxTicks = r.getTime();
             }
         }
-        if(ticksLeft>0)
+        if (ticksLeft < maxTicks)
         {
-
+            ticksLeft++;
         }
-//        if (inventory[0] != null)
-//        {
-//            if (ticksLeft <= 0)
-//            {
-//
-//                        ticksLeft = r.getTime();
-//                        if (inventory[0].stackSize <= 0) inventory[0] = null;
-//                        if (inventory[0] != null) inventory[0].stackSize--;
-//                        if (inventory[1] == null)
-//                            inventory[1] = r.getOutput().copy();
-//                        else
-//                            inventory[1].stackSize += r.getOutput().stackSize;
-//                        break;
-//                    }
-//                }
-//            }
-//            else
-//            {
-//                ticksLeft--;
-//            }
-//        }
-//        else
-//        {
-//            ticksLeft = 0;
-//        }
+        if (ticksLeft == maxTicks)
+        {
+            ticksLeft = 0;
+            ferment();
+        }
+    }
+
+    private void ferment()
+    {
+        ItemStack res = FermenterRecipies.GetRecipeFromStack(inventory[0]).getOutput();
+        if (inventory[1] == null)
+            inventory[1] = res.copy();
+        else
+            inventory[1].stackSize += res.stackSize;
+
+        inventory[0].stackSize--;
+        if (inventory[0].stackSize <= 0)
+        {
+            inventory[0] = null;
+        }
     }
 
     /* Packets */
