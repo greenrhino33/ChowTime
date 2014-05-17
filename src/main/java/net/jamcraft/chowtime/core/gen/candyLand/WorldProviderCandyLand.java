@@ -19,11 +19,6 @@ public class WorldProviderCandyLand extends WorldProviderSurface {
     {
         BiomeGenBase biome = super.getBiomeGenForCoords(x, z);
         if (biome == null) {
-<<<<<<< HEAD
-            //biome = TFBiomeBase.twilightForest;
-=======
-//            biome = TFBiomeBase.twilightForest;
->>>>>>> c5461fb26731e97d407b4ee6231b4cb5ce5ede60
         }
         return biome;
     }

@@ -79,8 +79,7 @@ public class CTRegistry
     }
 
     public static void CTDrinks(){
-        CTInits.appleJuice = new CTItemDrink().setUnlocalizedName("appleJuice");
-        GameRegistry.registerItem(CTInits.appleJuice, "appleJuice");
+
     }
 
     public static void CTTileEntities(){

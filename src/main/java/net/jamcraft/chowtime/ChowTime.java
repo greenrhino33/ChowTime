@@ -5,15 +5,14 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.jamcraft.chowtime.core.*;
+import net.jamcraft.chowtime.core.effects.CTPotionEffectHandler;
 import net.jamcraft.chowtime.core.events.BucketHandler;
 import net.jamcraft.chowtime.core.events.EntityEventHandler;
-<<<<<<< HEAD
-=======
-//import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
->>>>>>> c5461fb26731e97d407b4ee6231b4cb5ce5ede60
+import net.jamcraft.chowtime.core.items.CTPotions;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
 import net.jamcraft.chowtime.dyn.DynItems;
