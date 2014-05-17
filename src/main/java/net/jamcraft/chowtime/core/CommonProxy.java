@@ -6,6 +6,7 @@ import net.jamcraft.chowtime.core.client.GuiJuicer;
 import net.jamcraft.chowtime.core.container.ContainerFermenter;
 import net.jamcraft.chowtime.core.container.ContainerJuicer;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
+import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -35,6 +36,11 @@ public class CommonProxy implements IGuiHandler
             TEJuicer te=(TEJuicer) world.getTileEntity(x,y,z);
             return new ContainerJuicer(player.inventory,te);
         }
+        if(ID==GuiIDS.ICMaker_Gui)
+        {
+            TEIceCreamMaker te=(TEIceCreamMaker) world.getTileEntity(x,y,z);
+            return new ContainerICMaker(player.inventory,te);
+        }
         return null;
     }
 
@@ -49,6 +55,11 @@ public class CommonProxy implements IGuiHandler
         {
             TEJuicer te=(TEJuicer) world.getTileEntity(x,y,z);
             return new GuiJuicer(player.inventory,te);
+        }
+        if(ID==GuiIDS.ICMaker_Gui)
+        {
+            TEIceCreamMaker te=(TEIceCreamMaker) world.getTileEntity(x,y,z);
+            return new GuiICMaker(player.inventory,te);
         }
         return null;
     }

@@ -217,7 +217,14 @@ public class TEFermenter extends TileEntity implements ISidedInventory
         }
         if (ticksLeft < maxTicks && FermenterRecipies.GetRecipeFromStack(inventory[0])!=null)
         {
-            ticksLeft++;
+            if(inventory[1]==null||FermenterRecipies.GetRecipeFromStack(inventory[0]).getOutput().getItem().equals(inventory[1].getItem()))
+            {
+                ticksLeft++;
+            }
+            else
+            {
+                ticksLeft=0;
+            }
         }
         if(FermenterRecipies.GetRecipeFromStack(inventory[0])==null&&ticksLeft>0)
         {

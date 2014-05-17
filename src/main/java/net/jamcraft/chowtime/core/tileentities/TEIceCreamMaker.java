@@ -244,4 +244,10 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         readFromNBT(packet.func_148857_g());
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
+
+    public int getScaledProgress(int scale)
+    {
+        if(maxTicks==0) return 0;
+        return ticksLeft * scale/maxTicks;
+    }
 }
