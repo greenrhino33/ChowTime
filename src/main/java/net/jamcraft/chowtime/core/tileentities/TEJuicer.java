@@ -1,5 +1,6 @@
 package net.jamcraft.chowtime.core.tileentities;
 
+import net.jamcraft.chowtime.core.blocks.machines.Juicer;
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
 import net.jamcraft.chowtime.core.recipies.Recipe1_1;
@@ -184,7 +185,7 @@ public class TEJuicer extends TileEntity implements ISidedInventory
         //Something in input and nothing currently processing
         if (inventory[0] != null && ticksLeft == 0)
         {
-            Recipe1_1 r = FermenterRecipies.GetRecipeFromStack(inventory[0]);
+            Recipe1_1 r = JuicerRecipes.GetRecipeFromStack(inventory[0]);
             if (r != null)
             {
                 maxTicks = r.getTime();
