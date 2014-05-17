@@ -7,8 +7,9 @@ net.jamcraft.chowtime.dyn.items.ItemVinegar 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemAJuice 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemCJuice 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemPJuice 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemWatermellonIceCream 0.0.1
 }
 resources
 {
-lang/en_US.lang 0.0.3
+lang/en_US.lang 0.0.4
 }
