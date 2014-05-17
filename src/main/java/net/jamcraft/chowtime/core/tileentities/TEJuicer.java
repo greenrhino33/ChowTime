@@ -2,10 +2,9 @@ package net.jamcraft.chowtime.core.tileentities;
 
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
-import net.jamcraft.chowtime.core.recipies.Recipe;
+import net.jamcraft.chowtime.core.recipies.Recipe1_1;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -112,7 +111,7 @@ public class TEJuicer extends TileEntity implements ISidedInventory
     @Override public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
         if (slot != 0) return false;
-        for (Recipe r : JuicerRecipes.recipeList)
+        for (Recipe1_1 r : JuicerRecipes.recipe11List)
         {
             if (r.getInput().getItem().equals(stack.getItem())) return true;
         }
@@ -185,7 +184,7 @@ public class TEJuicer extends TileEntity implements ISidedInventory
         //Something in input and nothing currently processing
         if (inventory[0] != null && ticksLeft == 0)
         {
-            Recipe r = FermenterRecipies.GetRecipeFromStack(inventory[0]);
+            Recipe1_1 r = FermenterRecipies.GetRecipeFromStack(inventory[0]);
             if (r != null)
             {
                 maxTicks = r.getTime();

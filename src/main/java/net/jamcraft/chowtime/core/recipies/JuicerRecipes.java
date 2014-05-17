@@ -10,17 +10,17 @@ import java.util.List;
  */
 public class JuicerRecipes
 {
-    public static List<Recipe> recipeList = new ArrayList<Recipe>();
+    public static List<Recipe1_1> recipe11List = new ArrayList<Recipe1_1>();
 
     public static void AddRecipe(ItemStack input, ItemStack output, int time)
     {
-        Recipe r = new Recipe(input, output, time);
-        recipeList.add(r);
+        Recipe1_1 r = new Recipe1_1(input, output, time);
+        recipe11List.add(r);
     }
 
-    public static Recipe GetRecipeFromStack(ItemStack stack)
+    public static Recipe1_1 GetRecipeFromStack(ItemStack stack)
     {
-        for (Recipe r : recipeList)
+        for (Recipe1_1 r : recipe11List)
         {
             if (r.getInput().getItem().equals(stack.getItem())) return r;
         }
