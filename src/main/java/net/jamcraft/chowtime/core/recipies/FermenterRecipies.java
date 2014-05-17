@@ -17,4 +17,13 @@ public class FermenterRecipies
         Recipe r = new Recipe(input, output, time);
         recipeList.add(r);
     }
+
+    public static Recipe GetRecipeFromStack(ItemStack stack)
+    {
+        for (Recipe r : recipeList)
+        {
+            if (r.getInput().getItem().equals(stack.getItem())) return r;
+        }
+        return null;
+    }
 }

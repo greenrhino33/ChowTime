@@ -1,10 +1,12 @@
 package net.jamcraft.chowtime.core.tileentities;
 
+import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.recipies.Recipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -20,6 +22,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
     public static final int INV_SIZE = 2;
     private ItemStack[] inventory = new ItemStack[INV_SIZE];
     private int ticksLeft = 0;
+    private int maxTicks = 0;
 
     public TEFermenter()
     {
@@ -142,6 +145,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
         super.writeToNBT(tags);
 
         tags.setInteger("timeleft", ticksLeft);
+        tags.setInteger("maxTime", maxTicks);
 
         if (inventory[0] != null)
         {
@@ -177,6 +181,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
         super.readFromNBT(tags);
 
         ticksLeft = tags.getInteger("timeleft");
+        maxTicks=tags.getInteger("maxTime");
 
         if (tags.hasKey("slot1"))
         {
@@ -203,34 +208,44 @@ public class TEFermenter extends TileEntity implements ISidedInventory
     @Override
     public void updateEntity()
     {
-        if (inventory[0] != null)
+        //Something in input and nothing currently processing
+        if(inventory[0]!=null && ticksLeft==0)
         {
-            if (ticksLeft <= 0)
+            Recipe r=FermenterRecipies.GetRecipeFromStack(inventory[0]);
+            if(r!=null)
             {
-                for (Recipe r : FermenterRecipies.recipeList)
-                {
-                    if (r.getInput().getItem().equals(inventory[0].getItem()))
-                    {
-                        ticksLeft = r.getTime();
-                        if (inventory[0].stackSize <= 0) inventory[0] = null;
-                        if (inventory[0] != null) inventory[0].stackSize--;
-                        if (inventory[1] == null)
-                            inventory[1] = r.getOutput().copy();
-                        else
-                            inventory[1].stackSize += r.getOutput().stackSize;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                ticksLeft--;
+                maxTicks=r.getTime();
             }
         }
-        else
+        if(ticksLeft>0)
         {
-            ticksLeft = 0;
+
         }
+//        if (inventory[0] != null)
+//        {
+//            if (ticksLeft <= 0)
+//            {
+//
+//                        ticksLeft = r.getTime();
+//                        if (inventory[0].stackSize <= 0) inventory[0] = null;
+//                        if (inventory[0] != null) inventory[0].stackSize--;
+//                        if (inventory[1] == null)
+//                            inventory[1] = r.getOutput().copy();
+//                        else
+//                            inventory[1].stackSize += r.getOutput().stackSize;
+//                        break;
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                ticksLeft--;
+//            }
+//        }
+//        else
+//        {
+//            ticksLeft = 0;
+//        }
     }
 
     /* Packets */
