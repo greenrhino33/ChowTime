@@ -2,6 +2,7 @@ package net.jamcraft.chowtime.core.container;
 
 import net.jamcraft.chowtime.core.container.slot.SlotFermenter;
 import net.jamcraft.chowtime.core.container.slot.SlotICMaker;
+import net.jamcraft.chowtime.core.container.slot.SlotIceFuel;
 import net.jamcraft.chowtime.core.container.slot.SlotOutput;
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
@@ -23,9 +24,11 @@ public class ContainerICMaker extends Container
         // Add input 1
         this.addSlotToContainer(new SlotICMaker(te,0, 54, 34));
 
-        this.addSlotToContainer(new SlotICMaker(te,0, 32,34));
+        this.addSlotToContainer(new SlotICMaker(te,1, 32,34));
 
-        this.addSlotToContainer(new SlotOutput(te,1,116,34));
+        this.addSlotToContainer(new SlotOutput(te,2,116,34));
+
+        this.addSlotToContainer(new SlotIceFuel(te,3,8, 62));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)

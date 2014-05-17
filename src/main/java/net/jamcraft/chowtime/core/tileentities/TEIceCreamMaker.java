@@ -252,10 +252,10 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
                 {
                     temp-=iceFuelValue(inventory[3]);
 
-                    inventory[0].stackSize--;
-                    if (inventory[0].stackSize <= 0)
+                    inventory[3].stackSize--;
+                    if (inventory[3].stackSize <= 0)
                     {
-                        inventory[0] = null;
+                        inventory[3] = null;
                     }
                 }
             }
@@ -313,7 +313,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     public int getScaledTemp(int scale)
     {
-        return temp * scale / 28000;
+        return (ROOM_TEMP-temp) * scale / 28000;
     }
 
     public int getTemp()

@@ -29,9 +29,12 @@ public class GuiICMaker extends GuiContainer
         String invName=StatCollector.translateToLocal("container.inventory");
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
         fontRendererObj.drawString(invName, xSize - fontRendererObj.getStringWidth(invName)-5, ySize - 128 + 2, 4210752);
+        GL11.glPushMatrix();
+        GL11.glScaled(0.51F,0.51F,0.51F);
         double tempD=te.getTemp()/1000;
-        String temp=Double.toString(tempD)+" °C";
-        fontRendererObj.drawString(temp,13 , 30, 4210752);
+        String temp=Double.toString(tempD)+"°C";
+        fontRendererObj.drawString(temp,18 , 55, 4210752);
+        GL11.glPopMatrix();
     }
 
     @Override
