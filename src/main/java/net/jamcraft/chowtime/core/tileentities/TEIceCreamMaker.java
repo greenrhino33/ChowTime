@@ -18,13 +18,18 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 {
-    public static final int INV_SIZE = 3;
+    public static final int IN1_LOC=1;
+    public static final int IN2_LOC=2;
+    public static final int OUT_LOC=3;
+    public static final int FUEL_LOC=4;
+    public static final int FREEZING_TEMP=-1000;
+    public static final int ROOM_TEMP=25000;
+
+    public static final int INV_SIZE = 4;
     private ItemStack[] inventory = new ItemStack[INV_SIZE];
     private int ticksLeft = 0;
     private int maxTicks = 0;
     private int temp=25000; //room temperature (1000=1 Degree Celcius)
-
-    private static final int freezingTemp=-1000;
 
     public TEIceCreamMaker()
     {
@@ -142,6 +147,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
         tags.setInteger("timeleft", ticksLeft);
         tags.setInteger("maxTime", maxTicks);
+        tags.setInteger("temp",temp);
 
         if (inventory[0] != null)
         {
@@ -173,6 +179,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
         ticksLeft = tags.getInteger("timeleft");
         maxTicks = tags.getInteger("maxTime");
+        temp=tags.setInteger("temp");
 
         if (tags.hasKey("slot1"))
         {
@@ -255,8 +262,20 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         return ticksLeft * scale / maxTicks;
     }
 
+    public int getScaledTemp(int scale)
+    {
+        return temp*scale/26000;
+    }
+
+    public int getTemp()
+    {
+        return temp;
+    }
+
     public static boolean isIceFuel(ItemStack stack)
     {
         return stack.getItem().equals(Items.snowball)||stack.getItem().equals(Blocks.snow)||stack.getItem().equals(Blocks.ice)||stack.getItem().equals(Blocks.packed_ice);
     }
+
+
 }

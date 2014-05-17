@@ -29,6 +29,9 @@ public class GuiICMaker extends GuiContainer
         String invName=StatCollector.translateToLocal("container.inventory");
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
         fontRendererObj.drawString(invName, xSize - fontRendererObj.getStringWidth(invName)-5, ySize - 128 + 2, 4210752);
+        double tempD=te.getTemp()/1000;
+        String temp=Double.toString(tempD)+" °C";
+        fontRendererObj.drawString(temp,13 , 30, 4210752);
     }
 
     @Override
@@ -45,6 +48,7 @@ public class GuiICMaker extends GuiContainer
         int i1 = this.te.getScaledProgress(24);
         this.drawTexturedModalRect(xStart + 79, yStart + 34, 176, 14, i1 + 1, 16);
 
-        i1=this.te.getScaledTemp()
+        i1=this.te.getScaledTemp(46);
+        this.drawTexturedModalRect(xStart+ 8, yStart + 7, 176, 31, 15, i1+1);
     }
 }
