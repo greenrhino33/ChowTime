@@ -22,9 +22,9 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
     public static final int IN2_LOC = 2;
     public static final int OUT_LOC = 3;
     public static final int FUEL_LOC = 4;
-    public static final int FREEZING_TEMP = -1000;
+    public static final int FREEZING_TEMP = -21000;
     public static final int ROOM_TEMP = 25000;
-    public static final int MIN_TEMP=-10000;
+    public static final int MIN_TEMP=-50000;
 
     public static final int INV_SIZE = 4;
     private ItemStack[] inventory = new ItemStack[INV_SIZE];

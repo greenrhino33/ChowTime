@@ -62,10 +62,10 @@ public class CTRegistry
         GameRegistry.registerBlock(CTInits.ChocolateMilk, "Chocolate Milk Fluid");
 
 
-        CTInits.FruitPunchFluid = new Fluid("fruitPunch");
-        FluidRegistry.registerFluid(CTInits.FruitPunchFluid);
-        CTInits.FruitPunch = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "fruitPunch").setCreativeTab(ChowTime.creativeTab);
-        GameRegistry.registerBlock(CTInits.FruitPunch, "Fruit Punch");
+//        CTInits.FruitPunchFluid = new Fluid("fruitPunch");
+//        FluidRegistry.registerFluid(CTInits.FruitPunchFluid);
+//        CTInits.FruitPunch = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "fruitPunch").setCreativeTab(ChowTime.creativeTab);
+//        GameRegistry.registerBlock(CTInits.FruitPunch, "Fruit Punch");
     }
     
     public static void CTCrops()
