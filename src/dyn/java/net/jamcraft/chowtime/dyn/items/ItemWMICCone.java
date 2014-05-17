@@ -15,7 +15,7 @@ public class ItemWMICCone extends ItemFood implements IDynItem
 {
     public ItemWMICCone()
     {
-        super(100, false);
+        super(1, false);
         setCreativeTab(ChowTime.creativeTab);
         setTextureName(ModConstants.MODID + ":wmiccone");
         setUnlocalizedName("wmiccone");

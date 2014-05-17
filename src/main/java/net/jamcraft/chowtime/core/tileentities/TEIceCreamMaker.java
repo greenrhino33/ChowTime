@@ -244,7 +244,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             }
         }
 
-        if(inventory[3]!=null && this.worldObj.getWorldTime()%3==0)
+        if(inventory[3]!=null && this.worldObj.getTotalWorldTime()%3==0)
         {
             if(temp>MIN_TEMP)
             {
@@ -261,7 +261,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             }
         }
 
-        if(temp<ROOM_TEMP && this.worldObj.getWorldTime()%10==0)
+        if(temp<ROOM_TEMP && this.worldObj.getTotalWorldTime()%10==0)
         {
             temp++;
         }
