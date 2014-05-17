@@ -1,17 +1,19 @@
 package net.jamcraft.chowtime.core.mobs.SeedMob;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelCow;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
+import net.minecraft.util.MathHelper;
+import org.lwjgl.opengl.GL11;
 
 /**
  * Created by Kayla Marie on 5/16/14.
  */
 public class ModelSeedMob extends ModelBase{
 
+    protected float field_78145_g = 8.0F;
+    protected float field_78151_h = 4.0F;
     //fields
     ModelRenderer Base;
     ModelRenderer Leg;
@@ -21,8 +23,7 @@ public class ModelSeedMob extends ModelBase{
     ModelRenderer FrontLeg2;
     ModelRenderer Shape1;
 
-    public ModelSeedMob()
-    {
+    public ModelSeedMob() {
         textureWidth = 84;
         textureHeight = 31;
 
@@ -70,17 +71,46 @@ public class ModelSeedMob extends ModelBase{
         setRotation(Shape1, 0F, 1.570796F, 0F);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {;
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        Base.render(f5);
-        Leg.render(f5);
-        Leg2.render(f5);
-        Head.render(f5);
-        FrontLeg.render(f5);
-        FrontLeg2.render(f5);
-        Shape1.render(f5);
+        if (this.isChild)
+        {
+            float f6 = 2.0F;
+//            GL11.glPushMatrix();
+//            GL11.glTranslatef(0.0F, this.field_78145_g * f5, this.field_78151_h * f5);
+//
+//            GL11.glPopMatrix();
+            GL11.glPushMatrix();
+            GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
+            GL11.glTranslatef(0.0F, 24.0F * f5, 0.0F);
+            this.Head.render(f5);
+            this.Base.render(f5);
+            this.Shape1.render(f5);
+            this.Leg.render(f5);
+            this.Leg2.render(f5);
+            this.FrontLeg.render(f5);
+            this.FrontLeg2.render(f5);
+            GL11.glPopMatrix();
+        }
+        else
+        {
+            this.Head.render(f5);
+            this.Shape1.render(f5);
+            this.Base.render(f5);
+            this.Shape1.render(f5);
+            this.Leg.render(f5);
+            this.Leg2.render(f5);
+            this.FrontLeg.render(f5);
+            this.FrontLeg2.render(f5);
+        }
+//        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+//        Base.render(f5);
+//        Leg.render(f5);
+//        Leg2.render(f5);
+//        Head.render(f5);
+//        FrontLeg.render(f5);
+//        FrontLeg2.render(f5);
+//        Shape1.render(f5);
     }
 
 
@@ -94,7 +124,14 @@ public class ModelSeedMob extends ModelBase{
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
     {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-//        this.FrontLeg.rotateAngleX ;
-//        this.FrontLeg2.rotateAngleX ;
+
+        float f6 = (180F / (float)Math.PI);
+        this.Head.rotateAngleX = f4 / (180F / (float)Math.PI);
+        this.Head.rotateAngleY = f3 / (180F / (float)Math.PI);
+        this.Base.rotateAngleX = ((float)Math.PI / 2F);
+        this.FrontLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+        this.FrontLeg2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f2;
+        this.Leg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f2;
+        this.Leg2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f2;
     }
 }

@@ -85,7 +85,6 @@ public class EntitySeedMob extends EntityAnimal{
 
         if (entityageable != null)
         {
-            System.out.println("Working?");
             if (this.field_146084_br == null && par1EntityAnimal.func_146083_cb() != null)
             {
                 this.field_146084_br = par1EntityAnimal.func_146083_cb();
@@ -115,7 +114,6 @@ public class EntitySeedMob extends EntityAnimal{
             }
 
             this.worldObj.spawnEntityInWorld(entityageable);
-            this.setScale(0.1F);
         }
     }
 
@@ -123,6 +121,13 @@ public class EntitySeedMob extends EntityAnimal{
     {
         return false;
     }
+
+    public boolean isChild()
+    {
+        //this.setSize(0.1F, 0.1F);
+        return this.getGrowingAge() < 0;
+    }
+
 
     protected String getLivingSound() {
         return "mob.glog.say";
@@ -138,6 +143,29 @@ public class EntitySeedMob extends EntityAnimal{
 
     protected void playStepSound(int par1, int par2, int par3, int par4){
         this.worldObj.playSoundAtEntity(this, "mob.glog.step", 0.1F, 1.0F);
+    }
+
+    public boolean interact(EntityPlayer par1EntityPlayer)
+    {
+        ItemStack itemstack = par1EntityPlayer.inventory.getCurrentItem();
+
+        if (itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
+        {
+            if (itemstack.stackSize-- == 1)
+            {
+                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(CTInits.BarleySeeds));
+            }
+            else if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.BarleySeeds)))
+            {
+                par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.BarleySeeds, 1, 0), false);
+            }
+
+            return true;
+        }
+        else
+        {
+            return super.interact(par1EntityPlayer);
+        }
     }
 
     @Override
