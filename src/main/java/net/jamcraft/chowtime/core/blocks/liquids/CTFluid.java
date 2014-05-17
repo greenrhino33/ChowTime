@@ -26,7 +26,6 @@ public class CTFluid extends BlockFluidClassic {
     public CTFluid(Fluid fluid, Material material, String textureName) {
         super(fluid, material);
         texture = textureName;
-        setCreativeTab(ChowTime.creativeTab);
     }
 
     @Override
@@ -37,8 +36,8 @@ public class CTFluid extends BlockFluidClassic {
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister register) {
-        stillIcon = register.registerIcon(ModConstants.MODID + ":" + texture);
-        flowingIcon = register.registerIcon(ModConstants.MODID + ":" + texture + "_flow");
+        stillIcon = register.registerIcon(ModConstants.MODID + ":" + "Fluid_" + texture);
+        flowingIcon = register.registerIcon(ModConstants.MODID + ":" + "Fluid_" + texture + "_flow");
     }
 
     @Override

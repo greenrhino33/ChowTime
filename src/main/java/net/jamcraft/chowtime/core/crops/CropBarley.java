@@ -7,11 +7,14 @@ import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -19,7 +22,6 @@ import java.util.Random;
  */
 public class CropBarley extends BlockCrops
 {
-
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
@@ -30,7 +32,7 @@ public class CropBarley extends BlockCrops
         this.setTickRandomly(true);
         this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
         this.disableStats();
-        this.setBlockTextureName(ModConstants.MODID + ":barley");
+//        this.setBlockTextureName(ModConstants.MODID + ":barley");
     }
 
     public int getRenderType()
@@ -39,85 +41,92 @@ public class CropBarley extends BlockCrops
     }
 
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int p_149691_1_, int p_149691_2_)
+    public IIcon getIcon(int side, int meta)
     {
-        if (p_149691_2_ < 0 || p_149691_2_ > 7)
+        if (meta < 0 || meta > 7)
         {
-            p_149691_2_ = 7;
+            meta = 7;
         }
 
-        return this.icons[p_149691_2_];
+        return this.icons[meta];
     }
 
-    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
+    @Override
+    public Item getItemDropped(int meta, Random rand, int p_149650_3_)
     {
-        return p_149650_1_ == 7 ? CTInits.BarleyCrop : CTInits.BarleySeeds;
+        return meta == 7 ? CTInits.BarleyCrop : CTInits.BarleySeeds;
+    }
+    
+    @Override
+    protected Item func_149866_i()
+    {
+        return CTInits.BarleySeeds;
     }
 
-    public void updateTick(World p_149674_1_, int p_149674_2_, int p_149674_3_, int p_149674_4_, Random p_149674_5_)
+    public void updateTick(World world, int x, int y, int z, Random rand)
     {
-        super.updateTick(p_149674_1_, p_149674_2_, p_149674_3_, p_149674_4_, p_149674_5_);
+        super.updateTick(world, x, y, z, rand);
 
-        if (p_149674_1_.getBlockLightValue(p_149674_2_, p_149674_3_ + 1, p_149674_4_) >= 9)
+        if (world.getBlockLightValue(x, y + 1, z) >= 9)
         {
-            int l = p_149674_1_.getBlockMetadata(p_149674_2_, p_149674_3_, p_149674_4_);
+            int l = world.getBlockMetadata(x, y, z);
 
             if (l < 7)
             {
-                float f = this.func_149864_n(p_149674_1_, p_149674_2_, p_149674_3_, p_149674_4_);
+                float f = this.growPlant(world, x, y, z);
 
-                if (p_149674_5_.nextInt((int) (25.0F / f) + 1) == 0)
+                if (rand.nextInt((int) (25.0F / f) + 1) == 0)
                 {
                     ++l;
-                    p_149674_1_.setBlockMetadataWithNotify(p_149674_2_, p_149674_3_, p_149674_4_, l, 2);
+                    world.setBlockMetadataWithNotify(x, y, z, l, 2);
                 }
             }
         }
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_)
+    public void registerBlockIcons(IIconRegister icon)
     {
         this.icons = new IIcon[8];
 
         for (int i = 0; i < this.icons.length; ++i)
         {
-            this.icons[i] = p_149651_1_.registerIcon(this.getTextureName() + "_stage_" + i);
+            this.icons[i] = icon.registerIcon(ModConstants.MODID + ":" + "barley_stage_" + i);
         }
     }
 
-    private float func_149864_n(World p_149864_1_, int p_149864_2_, int p_149864_3_, int p_149864_4_)
+    private float growPlant(World world, int x, int y, int z)
     {
         float f = 1.0F;
-        Block block = p_149864_1_.getBlock(p_149864_2_, p_149864_3_, p_149864_4_ - 1);
-        Block block1 = p_149864_1_.getBlock(p_149864_2_, p_149864_3_, p_149864_4_ + 1);
-        Block block2 = p_149864_1_.getBlock(p_149864_2_ - 1, p_149864_3_, p_149864_4_);
-        Block block3 = p_149864_1_.getBlock(p_149864_2_ + 1, p_149864_3_, p_149864_4_);
-        Block block4 = p_149864_1_.getBlock(p_149864_2_ - 1, p_149864_3_, p_149864_4_ - 1);
-        Block block5 = p_149864_1_.getBlock(p_149864_2_ + 1, p_149864_3_, p_149864_4_ - 1);
-        Block block6 = p_149864_1_.getBlock(p_149864_2_ + 1, p_149864_3_, p_149864_4_ + 1);
-        Block block7 = p_149864_1_.getBlock(p_149864_2_ - 1, p_149864_3_, p_149864_4_ + 1);
+        Block block = world.getBlock(x, y, z - 1);
+        Block block1 = world.getBlock(x, y, z + 1);
+        Block block2 = world.getBlock(x - 1, y, z);
+        Block block3 = world.getBlock(x + 1, y, z);
+        Block block4 = world.getBlock(x - 1, y, z - 1);
+        Block block5 = world.getBlock(x + 1, y, z - 1);
+        Block block6 = world.getBlock(x + 1, y, z + 1);
+        Block block7 = world.getBlock(x - 1, y, z + 1);
         boolean flag = block2 == this || block3 == this;
         boolean flag1 = block == this || block1 == this;
         boolean flag2 = block4 == this || block5 == this || block6 == this || block7 == this;
 
-        for (int l = p_149864_2_ - 1; l <= p_149864_2_ + 1; ++l)
+        for (int l = x - 1; l <= x + 1; ++l)
         {
-            for (int i1 = p_149864_4_ - 1; i1 <= p_149864_4_ + 1; ++i1)
+            for (int i1 = z - 1; i1 <= z + 1; ++i1)
             {
                 float f1 = 0.0F;
 
-                if (p_149864_1_.getBlock(l, p_149864_3_ - 1, i1).canSustainPlant(p_149864_1_, l, p_149864_3_ - 1, i1, ForgeDirection.UP, this))
+                if (world.getBlock(l, y - 1, i1).canSustainPlant(world, l, y - 1, i1, ForgeDirection.UP, this))
                 {
                     f1 = 1.0F;
 
-                    if (p_149864_1_.getBlock(l, p_149864_3_ - 1, i1).isFertile(p_149864_1_, l, p_149864_3_ - 1, i1))
+                    if (world.getBlock(l, y - 1, i1).isFertile(world, l, y - 1, i1))
                     {
                         f1 = 3.0F;
                     }
                 }
 
-                if (l != p_149864_2_ || i1 != p_149864_4_)
+                if (l != x || i1 != z)
                 {
                     f1 /= 4.0F;
                 }

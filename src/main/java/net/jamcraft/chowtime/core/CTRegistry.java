@@ -66,7 +66,7 @@ public class CTRegistry
     public static void CTCrops()
     {
         CTInits.CropBarley = new CropBarley();
-        GameRegistry.registerBlock(CTInits.CropBarley, "barleyCrop");
+        GameRegistry.registerBlock(CTInits.CropBarley, "barleyCrop").setBlockName("barley");
         CTInits.BarleySeeds = new SeedBarley();
         GameRegistry.registerItem(CTInits.BarleySeeds, "barleySeed");
     }
