@@ -1,4 +1,4 @@
-package net.jamcraft.chowtime.core.mobs;
+package net.jamcraft.chowtime.core.mobs.GingerbreadMan;
 
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.entity.Entity;

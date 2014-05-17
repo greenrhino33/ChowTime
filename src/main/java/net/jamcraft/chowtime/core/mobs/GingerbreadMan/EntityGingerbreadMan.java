@@ -1,4 +1,4 @@
-package net.jamcraft.chowtime.core.mobs;
+package net.jamcraft.chowtime.core.mobs.GingerbreadMan;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
