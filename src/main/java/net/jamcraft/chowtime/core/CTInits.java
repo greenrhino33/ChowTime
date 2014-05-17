@@ -39,4 +39,7 @@ public class CTInits {
     public static Block CropBarley;
     public static Item BarleySeeds;
 
+    //Drink Inits
+    public static Item appleJuice;
+
 }

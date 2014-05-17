@@ -78,6 +78,11 @@ public class CTRegistry
         GameRegistry.registerItem(CTInits.ItemBucketChoco, CTStrings.Item_Bucket);
     }
 
+    public static void CTDrinks(){
+        CTInits.appleJuice = new CTItemDrink().setUnlocalizedName("appleJuice");
+        GameRegistry.registerItem(CTInits.appleJuice, "appleJuice");
+    }
+
     public static void CTTileEntities(){
         GameRegistry.registerTileEntity(TEFermenter.class, "TEFermenter");
         GameRegistry.registerTileEntity(TEJuicer.class,"TEJuicer");
