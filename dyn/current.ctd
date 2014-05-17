@@ -1,9 +1,11 @@
 classes
 {
-net.jamcraft.chowtime.dyn.items.ItemCone 0.0.2
-net.jamcraft.chowtime.dyn.items.ItemCottonCandy 0.0.3
+net.jamcraft.chowtime.dyn.items.ItemCone 0.0.3
+net.jamcraft.chowtime.dyn.items.ItemCottonCandy 0.0.4
+net.jamcraft.chowtime.dyn.items.ItemIceCream 0.0.2
+net.jamcraft.chowtime.dyn.items.ItemVinegar 0.0.1
 }
 resources
 {
-lang/en_US.lang 0.0.1
+lang/en_US.lang 0.0.2
 }
