@@ -1,10 +1,11 @@
 package net.jamcraft.chowtime.core.tileentities;
 
-import net.jamcraft.chowtime.core.recipies.IceCreamRecipies;
-import net.jamcraft.chowtime.core.recipies.Recipe2_1;
+import net.jamcraft.chowtime.core.recipies.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -17,14 +18,23 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 {
-    public static final int INV_SIZE = 3;
+    public static final int IN1_LOC = 1;
+    public static final int IN2_LOC = 2;
+    public static final int OUT_LOC = 3;
+    public static final int FUEL_LOC = 4;
+    public static final int FREEZING_TEMP = -1000;
+    public static final int ROOM_TEMP = 25000;
+    public static final int MIN_TEMP=-10000;
+
+    public static final int INV_SIZE = 4;
     private ItemStack[] inventory = new ItemStack[INV_SIZE];
     private int ticksLeft = 0;
     private int maxTicks = 0;
+    private int temp = ROOM_TEMP; //room temperature (1000=1 Degree Celcius)
 
     public TEIceCreamMaker()
     {
-        IceCreamRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.carrot), new ItemStack(Items.arrow), 60);
+//        IceCreamRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.carrot), new ItemStack(Items.arrow), 60);
     }
 
     @Override public int getSizeInventory()
@@ -81,7 +91,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     @Override public String getInventoryName()
     {
-        return "containter.IceCreamMaker";
+        return "container.IceCreamMaker";
     }
 
     @Override public boolean hasCustomInventoryName()
@@ -138,6 +148,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
         tags.setInteger("timeleft", ticksLeft);
         tags.setInteger("maxTime", maxTicks);
+        tags.setInteger("temp", temp);
 
         if (inventory[0] != null)
         {
@@ -160,6 +171,13 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             tags.setTag("slot3", sl3);
         }
 
+        if(inventory[3] != null)
+        {
+            NBTTagCompound sl4 = new NBTTagCompound();
+            inventory[3].writeToNBT(sl4);
+            tags.setTag("slot4",sl4);
+        }
+
     }
 
     @Override
@@ -169,6 +187,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
         ticksLeft = tags.getInteger("timeleft");
         maxTicks = tags.getInteger("maxTime");
+        temp = tags.getInteger("temp");
 
         if (tags.hasKey("slot1"))
         {
@@ -181,6 +200,10 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         if (tags.hasKey("slot3"))
         {
             inventory[2] = ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot3"));
+        }
+        if(tags.hasKey("slot4"))
+        {
+            inventory[3] = ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot4"));
         }
     }
 
@@ -196,14 +219,51 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
                 maxTicks = r.getTime();
             }
         }
-        if (ticksLeft < maxTicks)
+        //Actual processing
+        if(temp<FREEZING_TEMP)
         {
-            ticksLeft++;
+            if (ticksLeft < maxTicks && IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]) != null)
+            {
+                if (inventory[2] == null || IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]).getOutput().getItem().equals(inventory[2].getItem()))
+                {
+                    ticksLeft++;
+                }
+                else
+                {
+                    ticksLeft = 0;
+                }
+            }
+            if(IceCreamRecipies.GetRecipeFromStack(inventory[0],inventory[1])==null&&ticksLeft>0)
+            {
+                ticksLeft = 0;
+            }
+            if (ticksLeft == maxTicks)
+            {
+                ticksLeft = 0;
+                make();
+            }
         }
-        if (ticksLeft == maxTicks)
+
+        if(inventory[3]!=null && this.worldObj.getTotalWorldTime()%3==0)
         {
-            ticksLeft = 0;
-            make();
+            if(temp>MIN_TEMP)
+            {
+                if(isIceFuel(inventory[3]))
+                {
+                    temp-=iceFuelValue(inventory[3]);
+
+                    inventory[3].stackSize--;
+                    if (inventory[3].stackSize <= 0)
+                    {
+                        inventory[3] = null;
+                    }
+                }
+            }
+        }
+
+        if(temp<ROOM_TEMP && this.worldObj.getTotalWorldTime()%10==0)
+        {
+            temp++;
         }
     }
 
@@ -227,6 +287,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         {
             inventory[0] = null;
         }
+        temp+=200;
     }
 
     /* Packets */
@@ -243,5 +304,49 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
     {
         readFromNBT(packet.func_148857_g());
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
+
+    public int getScaledProgress(int scale)
+    {
+        if (maxTicks == 0) return 0;
+        return ticksLeft * scale / maxTicks;
+    }
+
+    public int getScaledTemp(int scale)
+    {
+        return (ROOM_TEMP-temp) * scale / (ROOM_TEMP-MIN_TEMP);
+    }
+
+    public int getTemp()
+    {
+        return temp;
+    }
+
+    public static boolean isIceFuel(ItemStack stack)
+    {
+        return iceFuelValue(stack)!=0;
+    }
+
+    public static int iceFuelValue(ItemStack stack)
+    {
+        if(stack==null) return 0;
+        Item i=stack.getItem();
+        if(i.equals(Items.snowball))
+        {
+            return 100;
+        }
+        if(i.equals(Item.getItemFromBlock(Blocks.snow)))
+        {
+            return 400;
+        }
+        if(i.equals(Item.getItemFromBlock(Blocks.ice)))
+        {
+            return 300;
+        }
+        if(i.equals(Item.getItemFromBlock(Blocks.packed_ice)))
+        {
+            return 1000;
+        }
+        return 0;
     }
 }

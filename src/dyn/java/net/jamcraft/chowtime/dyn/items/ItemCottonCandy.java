@@ -1,6 +1,9 @@
 package net.jamcraft.chowtime.dyn.items;
 
 import net.jamcraft.chowtime.ChowTime;
+import net.jamcraft.chowtime.core.ModConstants;
+import net.jamcraft.chowtime.core.lib.CTStrings;
+import net.jamcraft.chowtime.dyn.common.IDynItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -10,7 +13,8 @@ import net.minecraft.world.World;
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class ItemCottonCandy extends ItemFood implements IDynItem{
+public class ItemCottonCandy extends ItemFood implements IDynItem
+{
 
     private boolean alwaysEdible = true;
 

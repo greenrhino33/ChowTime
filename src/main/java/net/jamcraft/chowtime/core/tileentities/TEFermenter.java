@@ -1,5 +1,6 @@
 package net.jamcraft.chowtime.core.tileentities;
 
+import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.recipies.Recipe1_1;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +25,6 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
     public TEFermenter()
     {
-        FermenterRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.arrow), 60);
     }
 
     @Override public int getSizeInventory()
@@ -81,7 +81,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
     @Override public String getInventoryName()
     {
-        return "containter.Fermenter";
+        return "container.Fermenter";
     }
 
     @Override public boolean hasCustomInventoryName()
@@ -215,11 +215,18 @@ public class TEFermenter extends TileEntity implements ISidedInventory
                 maxTicks = r.getTime();
             }
         }
-        if (ticksLeft < maxTicks && inventory[0]!=null)
+        if (ticksLeft < maxTicks && FermenterRecipies.GetRecipeFromStack(inventory[0])!=null)
         {
-            ticksLeft++;
+            if(inventory[1]==null||FermenterRecipies.GetRecipeFromStack(inventory[0]).getOutput().getItem().equals(inventory[1].getItem()))
+            {
+                ticksLeft++;
+            }
+            else
+            {
+                ticksLeft=0;
+            }
         }
-        if(inventory[0]==null&&ticksLeft>0)
+        if(FermenterRecipies.GetRecipeFromStack(inventory[0])==null&&ticksLeft>0)
         {
             ticksLeft=0;
         }
@@ -232,7 +239,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
     private void ferment()
     {
-        if(inventory[0]==null) return;
+        if(FermenterRecipies.GetRecipeFromStack(inventory[0])==null) return;
         ItemStack res = FermenterRecipies.GetRecipeFromStack(inventory[0]).getOutput();
         if (inventory[1] == null)
             inventory[1] = res.copy();
@@ -264,6 +271,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
     public int getScaledProgress(int scale)
     {
+        if(maxTicks==0) return 0;
         return ticksLeft * scale/maxTicks;
     }
 }
