@@ -1,5 +1,7 @@
 package net.jamcraft.chowtime.core.container.slot;
 
+import net.jamcraft.chowtime.core.blocks.machines.IceCreamMaker;
+import net.jamcraft.chowtime.core.recipies.IceCreamRecipies;
 import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -18,6 +20,6 @@ public class SlotICMaker extends Slot
     @Override
     public boolean isItemValid(ItemStack stack)
     {
-        return JuicerRecipes.GetRecipeFromStack(stack)!=null;
+        return IceCreamRecipies.GetRecipesFromStack(stack)!=null;
     }
 }
