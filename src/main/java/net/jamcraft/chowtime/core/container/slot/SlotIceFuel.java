@@ -1,6 +1,7 @@
 package net.jamcraft.chowtime.core.container.slot;
 
 
+import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -18,6 +19,6 @@ public class SlotIceFuel extends Slot
     @Override
     public boolean isItemValid(ItemStack par1ItemStack)
     {
-        return false;
+        return TEIceCreamMaker.isIceFuel(par1ItemStack);
     }
 }

@@ -3,6 +3,7 @@ package net.jamcraft.chowtime.core.tileentities;
 import net.jamcraft.chowtime.core.recipies.IceCreamRecipies;
 import net.jamcraft.chowtime.core.recipies.Recipe2_1;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -21,6 +22,9 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
     private ItemStack[] inventory = new ItemStack[INV_SIZE];
     private int ticksLeft = 0;
     private int maxTicks = 0;
+    private int temp=25000; //room temperature (1000=1 Degree Celcius)
+
+    private static final int freezingTemp=-1000;
 
     public TEIceCreamMaker()
     {
@@ -247,9 +251,12 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     public int getScaledProgress(int scale)
     {
-        if(maxTicks==0) return 0;
-        return ticksLeft * scale/maxTicks;
+        if (maxTicks == 0) return 0;
+        return ticksLeft * scale / maxTicks;
     }
 
-    public static boolean
+    public static boolean isIceFuel(ItemStack stack)
+    {
+        return stack.getItem().equals(Items.snowball)||stack.getItem().equals(Blocks.snow)||stack.getItem().equals(Blocks.ice)||stack.getItem().equals(Blocks.packed_ice);
+    }
 }

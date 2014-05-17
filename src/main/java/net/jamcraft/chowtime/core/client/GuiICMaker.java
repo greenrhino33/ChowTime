@@ -44,5 +44,7 @@ public class GuiICMaker extends GuiContainer
 
         int i1 = this.te.getScaledProgress(24);
         this.drawTexturedModalRect(xStart + 79, yStart + 34, 176, 14, i1 + 1, 16);
+
+        i1=this.te.getScaledTemp()
     }
 }
