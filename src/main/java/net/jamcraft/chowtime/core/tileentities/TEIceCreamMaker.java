@@ -1,9 +1,10 @@
 package net.jamcraft.chowtime.core.tileentities;
 
-import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
-import net.jamcraft.chowtime.core.recipies.Recipe1_1;
+import net.jamcraft.chowtime.core.recipies.IceCreamRecipies;
+import net.jamcraft.chowtime.core.recipies.Recipe2_1;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -14,16 +15,16 @@ import net.minecraft.tileentity.TileEntity;
 /**
  * Created by James Hollowell on 5/16/2014.
  */
-public class TEIceCreamMaker extends TileEntity
+public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 {
-    public static final int INV_SIZE = 2;
+    public static final int INV_SIZE = 3;
     private ItemStack[] inventory = new ItemStack[INV_SIZE];
     private int ticksLeft = 0;
     private int maxTicks = 0;
 
     public TEIceCreamMaker()
     {
-        FermenterRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.arrow), 60);
+        IceCreamRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.carrot), new ItemStack(Items.arrow), 60);
     }
 
     @Override public int getSizeInventory()
@@ -80,7 +81,7 @@ public class TEIceCreamMaker extends TileEntity
 
     @Override public String getInventoryName()
     {
-        return "containter.Fermenter";
+        return "containter.IceCreamMaker";
     }
 
     @Override public boolean hasCustomInventoryName()
@@ -108,19 +109,13 @@ public class TEIceCreamMaker extends TileEntity
 
     @Override public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
-        if (slot != 0) return false;
-        for (Recipe1_1 r : FermenterRecipies.recipe11List)
-        {
-            if (r.getInput().getItem().equals(stack.getItem())) return true;
-        }
-        return false;
-        //        return true;
+        return (slot == 0 || slot == 1) && IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]) != null;
     }
 
     @Override public int[] getAccessibleSlotsFromSide(int side)
     {
         //if(ForgeDirection.UP.flag==side) return new int[]{ 0 };
-        return new int[] { 0, 1 };
+        return new int[] { 0, 1, 2 };
     }
 
     @Override public boolean canInsertItem(int slot, ItemStack itemStack, int side)
@@ -133,7 +128,7 @@ public class TEIceCreamMaker extends TileEntity
     @Override public boolean canExtractItem(int slot, ItemStack itemStack, int side)
     {
         //        return true;
-        return slot == 1;//&&side!=ForgeDirection.UP.flag;
+        return slot == 2;//&&side!=ForgeDirection.UP.flag;
     }
 
     @Override
@@ -157,19 +152,14 @@ public class TEIceCreamMaker extends TileEntity
             inventory[1].writeToNBT(sl2);
             tags.setTag("slot2", sl2);
         }
-        //        // Write the ItemStacks in the inventory to NBT
-        //        NBTTagList tagList = new NBTTagList();
-        //        for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex)
-        //        {
-        //            if (inventory[currentIndex] != null)
-        //            {
-        //                NBTTagCompound tagCompound = new NBTTagCompound();
-        //                tagCompound.setByte("Slot", (byte) currentIndex);
-        //                inventory[currentIndex].writeToNBT(tagCompound);
-        //                tagList.appendTag(tagCompound);
-        //            }
-        //        }
-        //        tags.setTag("Items", tagList);
+
+        if (inventory[2] != null)
+        {
+            NBTTagCompound sl3 = new NBTTagCompound();
+            inventory[2].writeToNBT(sl3);
+            tags.setTag("slot3", sl3);
+        }
+
     }
 
     @Override
@@ -188,27 +178,19 @@ public class TEIceCreamMaker extends TileEntity
         {
             inventory[1] = ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot2"));
         }
-
-        //        NBTTagList tagList = tags.getTagList("Items",INV_SIZE);
-        //        inventory = new ItemStack[this.getSizeInventory()];
-        //        for (int i = 0; i < tagList.tagCount(); ++i)
-        //        {
-        //            NBTTagCompound tagCompound = (NBTTagCompound) tagList.getCompoundTagAt(i);
-        //            byte slot = tagCompound.getByte("Slot");
-        //            if (slot >= 0 && slot < inventory.length)
-        //            {
-        //                inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
-        //            }
-        //        }
+        if (tags.hasKey("slot3"))
+        {
+            inventory[2] = ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot3"));
+        }
     }
 
     @Override
     public void updateEntity()
     {
         //Something in input and nothing currently processing
-        if (inventory[0] != null && ticksLeft == 0)
+        if (inventory[0] != null && inventory[1] != null && ticksLeft == 0)
         {
-            Recipe1_1 r = FermenterRecipies.GetRecipeFromStack(inventory[0]);
+            Recipe2_1 r = IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]);
             if (r != null)
             {
                 maxTicks = r.getTime();
@@ -221,18 +203,24 @@ public class TEIceCreamMaker extends TileEntity
         if (ticksLeft == maxTicks)
         {
             ticksLeft = 0;
-            ferment();
+            make();
         }
     }
 
-    private void ferment()
+    private void make()
     {
-        if(inventory[0]==null) return;
-        ItemStack res = FermenterRecipies.GetRecipeFromStack(inventory[0]).getOutput();
-        if (inventory[1] == null)
-            inventory[1] = res.copy();
+        if (inventory[0] == null || inventory[1] == null) return;
+        ItemStack res = IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]).getOutput();
+        if (inventory[2] == null)
+            inventory[2] = res.copy();
         else
-            inventory[1].stackSize += res.stackSize;
+            inventory[2].stackSize += res.stackSize;
+
+        inventory[1].stackSize--;
+        if (inventory[1].stackSize <= 0)
+        {
+            inventory[1] = null;
+        }
 
         inventory[0].stackSize--;
         if (inventory[0].stackSize <= 0)

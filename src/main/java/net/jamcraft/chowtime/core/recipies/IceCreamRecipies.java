@@ -18,11 +18,14 @@ public class IceCreamRecipies
         recipe11List.add(r);
     }
 
-    public static Recipe1_1 GetRecipeFromStack(ItemStack stack1, Item)
+    public static Recipe2_1 GetRecipeFromStack(ItemStack stack1, ItemStack stack2)
     {
         for (Recipe2_1 r : recipe11List)
         {
-            if (r.getInput().getItem().equals(stack.getItem())) return r;
+            if (r.getInput1().getItem().equals(stack1.getItem()) && r.getInput2().getItem().equals(stack2.getItem()))
+                return r;
+            if (r.getInput2().getItem().equals(stack1.getItem()) && r.getInput1().getItem().equals(stack2.getItem()))
+                return r;
         }
         return null;
     }

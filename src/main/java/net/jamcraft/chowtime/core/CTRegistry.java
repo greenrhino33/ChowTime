@@ -41,6 +41,7 @@ public class CTRegistry
         GameRegistry.registerBlock(CTInits.Juicer, "Juicer");
         CTInits.Fermenter = new Fermenter();
         GameRegistry.registerBlock(CTInits.Fermenter, "Fermenter");
+        CTInits.Ice
     }
 
     public static void CTLiquids() {
