@@ -1,9 +1,10 @@
 package net.jamcraft.chowtime.core.client;
 
-import net.jamcraft.chowtime.core.container.ContainterFermenter;
+import net.jamcraft.chowtime.core.container.ContainerFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -14,9 +15,17 @@ public class GuiFermenter extends GuiContainer
     TEFermenter te;
     public GuiFermenter(InventoryPlayer playerInv, TEFermenter te)
     {
-        super(new ContainterFermenter(playerInv, te));
+        super(new ContainerFermenter(playerInv, te));
         ySize = 200;
         this.te = te;
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int x, int y)
+    {
+        String containerName = StatCollector.translateToLocal(te.getInventoryName());
+        fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
+        fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 126 + 2, 4210752);
     }
 
     @Override

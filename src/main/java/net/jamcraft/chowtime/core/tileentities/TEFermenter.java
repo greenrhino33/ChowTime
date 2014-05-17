@@ -82,7 +82,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
     @Override public String getInventoryName()
     {
-        return "containter.Fermenter";
+        return "container.Fermenter";
     }
 
     @Override public boolean hasCustomInventoryName()

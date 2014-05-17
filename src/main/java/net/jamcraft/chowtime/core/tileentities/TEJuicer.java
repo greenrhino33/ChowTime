@@ -82,7 +82,7 @@ public class TEJuicer extends TileEntity implements ISidedInventory
 
     @Override public String getInventoryName()
     {
-        return "containter.Juicer";
+        return "container.Juicer";
     }
 
     @Override public boolean hasCustomInventoryName()

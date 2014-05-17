@@ -1,0 +1,6 @@
+container.Juicer=Juicer
+container.Fermenter=Fermenter
+container.IceCreamMaker=Ice Cream Maker
+tile.juicer.name=Juicer
+tile.fermetner.name=Fermenter
+tile.icecreammaker.name=Ice Cream Maker

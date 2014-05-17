@@ -3,8 +3,8 @@ package net.jamcraft.chowtime.core;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.jamcraft.chowtime.core.client.GuiFermenter;
 import net.jamcraft.chowtime.core.client.GuiJuicer;
-import net.jamcraft.chowtime.core.container.ContainterFermenter;
-import net.jamcraft.chowtime.core.container.ContainterJuicer;
+import net.jamcraft.chowtime.core.container.ContainerFermenter;
+import net.jamcraft.chowtime.core.container.ContainerJuicer;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,12 +28,12 @@ public class CommonProxy implements IGuiHandler
         if(ID== GuiIDS.Fermenter_Gui)
         {
             TEFermenter te=(TEFermenter) world.getTileEntity(x,y,z);
-            return new ContainterFermenter(player.inventory,te);
+            return new ContainerFermenter(player.inventory,te);
         }
         if(ID==GuiIDS.Juicer_Gui)
         {
             TEJuicer te=(TEJuicer) world.getTileEntity(x,y,z);
-            return new ContainterJuicer(player.inventory,te);
+            return new ContainerJuicer(player.inventory,te);
         }
         return null;
     }

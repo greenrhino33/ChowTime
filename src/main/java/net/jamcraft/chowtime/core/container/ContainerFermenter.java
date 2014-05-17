@@ -1,10 +1,9 @@
 package net.jamcraft.chowtime.core.container;
 
-import net.jamcraft.chowtime.core.container.slot.SlotJuicer;
+import net.jamcraft.chowtime.core.container.slot.SlotFermenter;
 import net.jamcraft.chowtime.core.container.slot.SlotOutput;
-import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
+import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
-import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -14,13 +13,13 @@ import net.minecraft.item.ItemStack;
 /**
  * Created by James Hollowell on 5/16/2014.
  */
-public class ContainterJuicer extends Container
+public class ContainerFermenter extends Container
 {
 
-    public ContainterJuicer(InventoryPlayer playerInv, TEJuicer te)
+    public ContainerFermenter(InventoryPlayer playerInv, TEFermenter te)
     {
         // Add input
-        this.addSlotToContainer(new SlotJuicer(te,0, 54, 34));
+        this.addSlotToContainer(new SlotFermenter(te,0, 54, 34));
 
         this.addSlotToContainer(new SlotOutput(te,1,116,34));
 
@@ -62,24 +61,22 @@ public class ContainterJuicer extends Container
              * container, attempt to put it in the first available slot in the
              * player's inventory
              */
-            if (slotIndex < TEJuicer.INV_SIZE)
+            if (slotIndex < TEFermenter.INV_SIZE)
             {
-
-                if (!this.mergeItemStack(slotItemStack, TEJuicer.INV_SIZE, inventorySlots.size(), false))
+                if (!this.mergeItemStack(slotItemStack, TEFermenter.INV_SIZE, inventorySlots.size(), false))
                 {
                     return null;
                 }
             }
             else
             {
-
                 /**
                  * If the stack being shift-clicked into the assembler's
                  * container is a fuel, try to put it in the fuel slot.
                  */
-                if (JuicerRecipes.GetRecipeFromStack(slotItemStack) != null)
+                if(FermenterRecipies.GetRecipeFromStack(slotItemStack)!=null)
                 {
-                    if (!this.mergeItemStack(slotItemStack, 0, TEJuicer.INV_SIZE, false))
+                    if (!this.mergeItemStack(slotItemStack, 0, TEFermenter.INV_SIZE, false))
                     {
                         return null;
                     }
