@@ -22,7 +22,6 @@ public class GuiFermenter extends GuiContainer
     @Override
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y)
     {
-
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         this.mc.getTextureManager().bindTexture(Textures.Gui_Fermenter);
@@ -30,5 +29,8 @@ public class GuiFermenter extends GuiContainer
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
+
+        int i1 = this.te.getScaledProgress(24);
+        this.drawTexturedModalRect(xStart + 79, yStart + 34, 176, 14, i1 + 1, 16);
     }
 }

@@ -215,9 +215,13 @@ public class TEFermenter extends TileEntity implements ISidedInventory
                 maxTicks = r.getTime();
             }
         }
-        if (ticksLeft < maxTicks)
+        if (ticksLeft < maxTicks && inventory[0]!=null)
         {
             ticksLeft++;
+        }
+        if(inventory[0]==null&&ticksLeft>0)
+        {
+            ticksLeft=0;
         }
         if (ticksLeft == maxTicks)
         {
@@ -256,5 +260,10 @@ public class TEFermenter extends TileEntity implements ISidedInventory
     {
         readFromNBT(packet.func_148857_g());
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
+
+    public int getScaledProgress(int scale)
+    {
+        return ticksLeft * scale/maxTicks;
     }
 }
