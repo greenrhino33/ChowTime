@@ -228,6 +228,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
     private void ferment()
     {
+        if(inventory[0]==null) return;
         ItemStack res = FermenterRecipies.GetRecipeFromStack(inventory[0]).getOutput();
         if (inventory[1] == null)
             inventory[1] = res.copy();
