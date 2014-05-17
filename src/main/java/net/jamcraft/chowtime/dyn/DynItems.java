@@ -1,6 +1,7 @@
 package net.jamcraft.chowtime.dyn;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.core.ObfHelper;
 import net.jamcraft.chowtime.dyn.common.IDynItem;
@@ -51,6 +52,7 @@ public class DynItems
             {
                 if (!(desc instanceof DynClassDescription)) continue;
                 String classname = ((DynClassDescription) desc).classname;
+                ChowTime.logger.error("Loading new item: " + classname);
                 //Actually load the class
                 Class<?> clazz = loader.loadClass(classname);
 

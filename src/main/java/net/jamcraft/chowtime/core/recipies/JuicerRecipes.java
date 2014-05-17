@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by James Hollowell on 5/16/2014.
  */
-public class FermenterRecipies
+public class JuicerRecipes
 {
     public static List<Recipe1_1> recipe11List = new ArrayList<Recipe1_1>();
 

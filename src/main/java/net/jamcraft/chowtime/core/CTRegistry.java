@@ -4,12 +4,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.blocks.*;
 import net.jamcraft.chowtime.core.blocks.liquids.CTFluid;
+import net.jamcraft.chowtime.core.blocks.machines.IceCreamMaker;
 import net.jamcraft.chowtime.core.crops.CropBarley;
 import net.jamcraft.chowtime.core.items.*;
 import net.jamcraft.chowtime.core.lib.CTStrings;
 import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
 import net.jamcraft.chowtime.core.blocks.machines.Juicer;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
+import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.Fluid;
@@ -41,6 +43,8 @@ public class CTRegistry
         GameRegistry.registerBlock(CTInits.Juicer, "Juicer");
         CTInits.Fermenter = new Fermenter();
         GameRegistry.registerBlock(CTInits.Fermenter, "Fermenter");
+        CTInits.IceCreamMaker = new IceCreamMaker();
+        GameRegistry.registerBlock(CTInits.IceCreamMaker, "IceCreamMaker");
     }
 
     public static void CTLiquids() {
@@ -76,5 +80,7 @@ public class CTRegistry
 
     public static void CTTileEntities(){
         GameRegistry.registerTileEntity(TEFermenter.class, "TEFermenter");
+        GameRegistry.registerTileEntity(TEJuicer.class,"TEJuicer");
+        GameRegistry.registerTileEntity(TEIceCreamMaker.class,"TEIceCreamMaker");
     }
 }

@@ -3,6 +3,7 @@ package net.jamcraft.chowtime;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -70,8 +71,8 @@ public class ChowTime
         //        logger.error("Running in "+ (ObfHelper.isObf?"obf":"deobf") + " environment");
 
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
-        DynMain.init();
         RemoteMain.init();
+        DynMain.init();
 
         CTRegistry.CTBlocks();
         CTRegistry.CTMachines();
@@ -91,7 +92,7 @@ public class ChowTime
         //        ItemList.init();
         //        TileEntityList.init();
 
-        //NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
     }
 
     @Mod.EventHandler
