@@ -25,7 +25,6 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
     public TEFermenter()
     {
-        FermenterRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.arrow), 60);
     }
 
     @Override public int getSizeInventory()

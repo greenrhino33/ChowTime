@@ -25,7 +25,7 @@ public class GuiJuicer extends GuiContainer
     {
         String containerName = StatCollector.translateToLocal(te.getInventoryName());
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
-        fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 129 + 2, 4210752);
+        fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 128 + 2, 4210752);
     }
     @Override
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y)
