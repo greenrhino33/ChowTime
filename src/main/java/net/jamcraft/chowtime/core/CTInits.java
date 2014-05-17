@@ -21,6 +21,9 @@ public class CTInits {
     public static Block ChocolateMilk;
     public static Fluid ChocolateMilkFluid;
 
+    public static Block FruitPunch;
+    public static Fluid FruitPunchFluid;
+
     //Item Inits
     public static Item BarleyCrop;
     public static Item IceCreamBall;

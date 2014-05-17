@@ -12,11 +12,6 @@ import net.jamcraft.chowtime.core.*;
 import net.jamcraft.chowtime.core.effects.CTPotionEffectHandler;
 import net.jamcraft.chowtime.core.events.BucketHandler;
 import net.jamcraft.chowtime.core.events.EntityEventHandler;
-<<<<<<< HEAD
-import net.jamcraft.chowtime.core.items.CTPotions;
-=======
-//import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
->>>>>>> 92f22ec9f48f4aea8ef7dc2f538246be249a5e7a
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
 import net.jamcraft.chowtime.dyn.DynItems;
