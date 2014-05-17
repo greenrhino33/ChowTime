@@ -1,5 +1,6 @@
 package net.jamcraft.chowtime.core;
 
+import net.jamcraft.chowtime.core.items.CTItemDrink;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fluids.Fluid;
