@@ -2,6 +2,7 @@ package net.jamcraft.chowtime.core.blocks.machines;
 
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.GuiIDS;
+import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -20,6 +21,7 @@ public class Fermenter extends BlockContainer
         super(Material.iron);
         this.setCreativeTab(ChowTime.creativeTab);
         setBlockName("fermenter");
+        setBlockTextureName(ModConstants.MODID+":fermenter");
     }
 
     @Override

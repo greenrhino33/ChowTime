@@ -53,14 +53,19 @@ public class CTRegistry
         CTInits.IceCreamMaker = new IceCreamMaker();
         GameRegistry.registerBlock(CTInits.IceCreamMaker, "IceCreamMaker");
     }
-    
+
     public static void CTLiquids()
     {
         CTInits.ChocolateMilkFluid = new Fluid("chocolateMilk");
         FluidRegistry.registerFluid(CTInits.ChocolateMilkFluid);
-        CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "chocolateMilk").setCreativeTab(ChowTime.creativeTab);
+        CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "Fluid_ChocolateMilk").setCreativeTab(ChowTime.creativeTab);
         GameRegistry.registerBlock(CTInits.ChocolateMilk, "Chocolate Milk Fluid");
-        
+
+
+        CTInits.FruitPunchFluid = new Fluid("fruitPunch");
+        FluidRegistry.registerFluid(CTInits.FruitPunchFluid);
+        CTInits.FruitPunch = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "fruitPunch").setCreativeTab(ChowTime.creativeTab);
+        GameRegistry.registerBlock(CTInits.FruitPunch, "Fruit Punch");
     }
     
     public static void CTCrops()
@@ -94,8 +99,7 @@ public class CTRegistry
     
     public static void CTDrinks()
     {
-        // CTInits.appleJuice = new CTItemDrink(24, false,
-        // 2431323).setPotionName("appleJuice");
+
     }
     
     public static void CTTileEntities()
