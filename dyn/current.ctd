@@ -4,8 +4,11 @@ net.jamcraft.chowtime.dyn.items.ItemCone 0.0.3
 net.jamcraft.chowtime.dyn.items.ItemCottonCandy 0.0.4
 net.jamcraft.chowtime.dyn.items.ItemIceCream 0.0.2
 net.jamcraft.chowtime.dyn.items.ItemVinegar 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemAJuice 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemCJuice 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemPJuice 0.0.1
 }
 resources
 {
-lang/en_US.lang 0.0.2
+lang/en_US.lang 0.0.3
 }
