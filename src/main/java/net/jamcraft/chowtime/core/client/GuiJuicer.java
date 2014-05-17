@@ -27,7 +27,7 @@ public class GuiJuicer extends GuiContainer
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.getTextureManager().bindTexture(Textures.Gui_Fermenter);
+        this.mc.getTextureManager().bindTexture(Textures.Gui_Juicer);
 
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;

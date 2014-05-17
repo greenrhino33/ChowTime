@@ -89,6 +89,7 @@ public class CTItemDrink extends ItemPotion{
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamageForRenderPass(int par1, int par2)
     {
-        return par2 == 0 ? this.field_94592_ct : super.getIconFromDamageForRenderPass(par1, par2);
+        return super.getIconFromDamageForRenderPass(par1,par2);
+//        return par2 == 0 ? this.field_94592_ct : super.getIconFromDamageForRenderPass(par1, par2);
     }
 }
