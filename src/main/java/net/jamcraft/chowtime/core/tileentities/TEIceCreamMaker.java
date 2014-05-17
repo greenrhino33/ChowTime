@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -186,7 +187,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
         ticksLeft = tags.getInteger("timeleft");
         maxTicks = tags.getInteger("maxTime");
-        temp = tags.setInteger("temp");
+        temp = tags.getInteger("temp");
 
         if (tags.hasKey("slot1"))
         {
@@ -249,6 +250,8 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             {
                 if(isIceFuel(inventory[3]))
                 {
+                    temp-=iceFuelValue(inventory[3]);
+
                     inventory[0].stackSize--;
                     if (inventory[0].stackSize <= 0)
                     {
@@ -258,7 +261,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             }
         }
 
-        if(temp<ROOM_TEMP)
+        if(temp<ROOM_TEMP && this.worldObj.getWorldTime()%5==0)
         {
             temp++;
         }
@@ -320,7 +323,29 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     public static boolean isIceFuel(ItemStack stack)
     {
-        return stack.getItem().equals(Items.snowball) || stack.getItem().equals(Blocks.snow) || stack.getItem().equals(Blocks.ice) || stack.getItem().equals(Blocks.packed_ice);
+        return iceFuelValue(stack)!=0;
     }
 
+    public static int iceFuelValue(ItemStack stack)
+    {
+        if(stack==null) return 0;
+        Item i=stack.getItem();
+        if(i.equals(Items.snowball))
+        {
+            return 100;
+        }
+        if(i.equals(Item.getItemFromBlock(Blocks.snow)))
+        {
+            return 400;
+        }
+        if(i.equals(Item.getItemFromBlock(Blocks.ice)))
+        {
+            return 300;
+        }
+        if(i.equals(Item.getItemFromBlock(Blocks.packed_ice)))
+        {
+            return 1000;
+        }
+        return 0;
+    }
 }
