@@ -24,17 +24,17 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
     public static final int FUEL_LOC = 4;
     public static final int FREEZING_TEMP = -1000;
     public static final int ROOM_TEMP = 25000;
-    public static final int MIN_TEMP=-5000;
+    public static final int MIN_TEMP=-10000;
 
     public static final int INV_SIZE = 4;
     private ItemStack[] inventory = new ItemStack[INV_SIZE];
     private int ticksLeft = 0;
     private int maxTicks = 0;
-    private int temp = 25000; //room temperature (1000=1 Degree Celcius)
+    private int temp = ROOM_TEMP; //room temperature (1000=1 Degree Celcius)
 
     public TEIceCreamMaker()
     {
-        IceCreamRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.carrot), new ItemStack(Items.arrow), 60);
+//        IceCreamRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.carrot), new ItemStack(Items.arrow), 60);
     }
 
     @Override public int getSizeInventory()
@@ -244,7 +244,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             }
         }
 
-        if(inventory[3]!=null)
+        if(inventory[3]!=null && this.worldObj.getWorldTime()%3==0)
         {
             if(temp>MIN_TEMP)
             {
