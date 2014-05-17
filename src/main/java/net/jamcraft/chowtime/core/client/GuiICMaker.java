@@ -26,8 +26,9 @@ public class GuiICMaker extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
         String containerName = StatCollector.translateToLocal(te.getInventoryName());
+        String invName=StatCollector.translateToLocal("container.inventory");
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
-        fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 128 + 2, 4210752);
+        fontRendererObj.drawString(invName, xSize - fontRendererObj.getStringWidth(invName)-5, ySize - 128 + 2, 4210752);
     }
 
     @Override

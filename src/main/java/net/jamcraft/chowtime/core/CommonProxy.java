@@ -2,8 +2,10 @@ package net.jamcraft.chowtime.core;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.jamcraft.chowtime.core.client.GuiFermenter;
+import net.jamcraft.chowtime.core.client.GuiICMaker;
 import net.jamcraft.chowtime.core.client.GuiJuicer;
 import net.jamcraft.chowtime.core.container.ContainerFermenter;
+import net.jamcraft.chowtime.core.container.ContainerICMaker;
 import net.jamcraft.chowtime.core.container.ContainerJuicer;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;

@@ -81,7 +81,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     @Override public String getInventoryName()
     {
-        return "containter.IceCreamMaker";
+        return "container.IceCreamMaker";
     }
 
     @Override public boolean hasCustomInventoryName()
@@ -250,4 +250,6 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         if(maxTicks==0) return 0;
         return ticksLeft * scale/maxTicks;
     }
+
+    public static boolean
 }

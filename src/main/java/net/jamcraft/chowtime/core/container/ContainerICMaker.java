@@ -23,7 +23,7 @@ public class ContainerICMaker extends Container
         // Add input 1
         this.addSlotToContainer(new SlotICMaker(te,0, 54, 34));
 
-        this.addSlotToContainer(new SlotICMaker(te,0, 30,34));
+        this.addSlotToContainer(new SlotICMaker(te,0, 32,34));
 
         this.addSlotToContainer(new SlotOutput(te,1,116,34));
 
