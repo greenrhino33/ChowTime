@@ -31,7 +31,7 @@ public class GuiICMaker extends GuiContainer
         fontRendererObj.drawString(invName, xSize - fontRendererObj.getStringWidth(invName)-5, ySize - 128 + 2, 4210752);
         GL11.glPushMatrix();
         GL11.glScaled(0.51F,0.51F,0.51F);
-        double tempD=te.getTemp()/1000;
+        double tempD=((double)te.getTemp())/1000;
         String temp=Double.toString(tempD)+"°C";
         fontRendererObj.drawString(temp,18 , 55, 4210752);
         GL11.glPopMatrix();

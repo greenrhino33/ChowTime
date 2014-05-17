@@ -24,7 +24,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
     public static final int FUEL_LOC = 4;
     public static final int FREEZING_TEMP = -1000;
     public static final int ROOM_TEMP = 25000;
-    public static final int MIN_TEMP=-3000;
+    public static final int MIN_TEMP=-5000;
 
     public static final int INV_SIZE = 4;
     private ItemStack[] inventory = new ItemStack[INV_SIZE];
@@ -261,7 +261,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             }
         }
 
-        if(temp<ROOM_TEMP && this.worldObj.getWorldTime()%5==0)
+        if(temp<ROOM_TEMP && this.worldObj.getWorldTime()%10==0)
         {
             temp++;
         }
@@ -287,6 +287,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         {
             inventory[0] = null;
         }
+        temp+=200;
     }
 
     /* Packets */
@@ -313,7 +314,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     public int getScaledTemp(int scale)
     {
-        return (ROOM_TEMP-temp) * scale / 28000;
+        return (ROOM_TEMP-temp) * scale / (ROOM_TEMP-MIN_TEMP);
     }
 
     public int getTemp()
