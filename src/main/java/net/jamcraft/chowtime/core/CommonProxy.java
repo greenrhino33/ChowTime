@@ -28,7 +28,7 @@ public class CommonProxy implements IGuiHandler
 
     @Override public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
-        if(ID=GuiIDS.Fermenter_Gui)
+        if(ID==GuiIDS.Fermenter_Gui)
         {
             TEFermenter te=(TEFermenter) world.getTileEntity(x,y,z);
             return new GuiFermenter(player.inventory,te);

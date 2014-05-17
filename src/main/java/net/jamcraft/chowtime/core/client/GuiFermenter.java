@@ -14,14 +14,9 @@ public class GuiFermenter extends GuiContainer
     TEFermenter te;
     public GuiFermenter(InventoryPlayer playerInv, TEFermenter te)
     {
-        super(new ContainterFermenter(playerInv,te));
-        ySize=200;
-        this.te=te;
-    }
-
-    @Override protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
-    {
-        
+        super(new ContainterFermenter(playerInv, te));
+        ySize = 200;
+        this.te = te;
     }
 
     @Override
@@ -30,7 +25,7 @@ public class GuiFermenter extends GuiContainer
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.getTextureManager().bindTexture();
+        this.mc.getTextureManager().bindTexture(Textures.Gui_Fermenter);
 
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
