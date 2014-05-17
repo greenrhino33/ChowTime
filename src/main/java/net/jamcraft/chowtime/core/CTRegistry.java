@@ -53,29 +53,19 @@ public class CTRegistry
         CTInits.IceCreamMaker = new IceCreamMaker();
         GameRegistry.registerBlock(CTInits.IceCreamMaker, "IceCreamMaker");
     }
-<<<<<<< HEAD
 
-    public static void CTLiquids() {
-        CTInits.ChocolateMilkFluid = new Fluid("Fluid_ChocolateMilk");
-=======
-    
     public static void CTLiquids()
     {
         CTInits.ChocolateMilkFluid = new Fluid("chocolateMilk");
->>>>>>> f4ddf769ec35d230348f29bc0fe6b515100668a9
         FluidRegistry.registerFluid(CTInits.ChocolateMilkFluid);
         CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "Fluid_ChocolateMilk").setCreativeTab(ChowTime.creativeTab);
         GameRegistry.registerBlock(CTInits.ChocolateMilk, "Chocolate Milk Fluid");
-<<<<<<< HEAD
+
 
         CTInits.FruitPunchFluid = new Fluid("fruitPunch");
         FluidRegistry.registerFluid(CTInits.FruitPunchFluid);
         CTInits.FruitPunch = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "fruitPunch").setCreativeTab(ChowTime.creativeTab);
         GameRegistry.registerBlock(CTInits.FruitPunch, "Fruit Punch");
-
-=======
-        
->>>>>>> f4ddf769ec35d230348f29bc0fe6b515100668a9
     }
     
     public static void CTCrops()
@@ -106,17 +96,10 @@ public class CTRegistry
         CTInits.ItemBucketChoco = new CTItemBucket(CTInits.ChocolateMilk, CTInits.ItemBucketChoco, "bucket_chocolate").setUnlocalizedName(CTStrings.Item_Bucket);
         GameRegistry.registerItem(CTInits.ItemBucketChoco, CTStrings.Item_Bucket);
     }
-<<<<<<< HEAD
-
-    public static void CTDrinks(){
-
-=======
     
     public static void CTDrinks()
     {
-        // CTInits.appleJuice = new CTItemDrink(24, false,
-        // 2431323).setPotionName("appleJuice");
->>>>>>> f4ddf769ec35d230348f29bc0fe6b515100668a9
+
     }
     
     public static void CTTileEntities()
