@@ -96,7 +96,6 @@ public class CTRegistry
     {
         // CTInits.appleJuice = new CTItemDrink(24, false,
         // 2431323).setPotionName("appleJuice");
-        GameRegistry.registerItem(CTInits.appleJuice, "appleJuice");
     }
     
     public static void CTTileEntities()
