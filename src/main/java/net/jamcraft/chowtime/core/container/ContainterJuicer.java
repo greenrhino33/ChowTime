@@ -1,5 +1,6 @@
 package net.jamcraft.chowtime.core.container;
 
+import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -74,9 +75,12 @@ public class ContainterJuicer extends Container
                  * If the stack being shift-clicked into the assembler's
                  * container is a fuel, try to put it in the fuel slot.
                  */
-                if (!this.mergeItemStack(slotItemStack, 0, TEJuicer.INV_SIZE, false))
+                if (JuicerRecipes.GetRecipeFromStack(slotItemStack) != null)
                 {
-                    return null;
+                    if (!this.mergeItemStack(slotItemStack, 0, TEJuicer.INV_SIZE, false))
+                    {
+                        return null;
+                    }
                 }
             }
 

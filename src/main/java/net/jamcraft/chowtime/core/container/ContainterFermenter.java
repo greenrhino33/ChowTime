@@ -1,5 +1,6 @@
 package net.jamcraft.chowtime.core.container;
 
+import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -60,7 +61,6 @@ public class ContainterFermenter extends Container
              */
             if (slotIndex < TEFermenter.INV_SIZE)
             {
-
                 if (!this.mergeItemStack(slotItemStack, TEFermenter.INV_SIZE, inventorySlots.size(), false))
                 {
                     return null;
@@ -68,14 +68,16 @@ public class ContainterFermenter extends Container
             }
             else
             {
-
                 /**
                  * If the stack being shift-clicked into the assembler's
                  * container is a fuel, try to put it in the fuel slot.
                  */
-                if (!this.mergeItemStack(slotItemStack, 0, TEFermenter.INV_SIZE, false))
+                if(FermenterRecipies.GetRecipeFromStack(slotItemStack)!=null)
                 {
-                    return null;
+                    if (!this.mergeItemStack(slotItemStack, 0, TEFermenter.INV_SIZE, false))
+                    {
+                        return null;
+                    }
                 }
             }
 

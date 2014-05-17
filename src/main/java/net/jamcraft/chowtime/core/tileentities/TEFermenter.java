@@ -264,6 +264,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
     public int getScaledProgress(int scale)
     {
+        if(maxTicks==0) return 0;
         return ticksLeft * scale/maxTicks;
     }
 }
