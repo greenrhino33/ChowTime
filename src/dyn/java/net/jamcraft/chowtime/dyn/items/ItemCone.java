@@ -21,7 +21,7 @@ public class ItemCone extends CTItem implements IDynItem
 
     @Override public String getRegistrationName()
     {
-        return CTStrings.Item_Cone;
+        return "cone";
     }
 
     @Override public void registerRecipe()

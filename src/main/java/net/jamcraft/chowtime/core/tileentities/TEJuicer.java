@@ -1,5 +1,6 @@
 package net.jamcraft.chowtime.core.tileentities;
 
+import net.jamcraft.chowtime.core.blocks.machines.Juicer;
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
 import net.jamcraft.chowtime.core.recipies.Recipe1_1;
@@ -82,7 +83,7 @@ public class TEJuicer extends TileEntity implements ISidedInventory
 
     @Override public String getInventoryName()
     {
-        return "containter.Juicer";
+        return "container.Juicer";
     }
 
     @Override public boolean hasCustomInventoryName()
@@ -184,17 +185,24 @@ public class TEJuicer extends TileEntity implements ISidedInventory
         //Something in input and nothing currently processing
         if (inventory[0] != null && ticksLeft == 0)
         {
-            Recipe1_1 r = FermenterRecipies.GetRecipeFromStack(inventory[0]);
+            Recipe1_1 r = JuicerRecipes.GetRecipeFromStack(inventory[0]);
             if (r != null)
             {
                 maxTicks = r.getTime();
             }
         }
-        if (ticksLeft < maxTicks && inventory[0]!=null)
+        if (ticksLeft < maxTicks && JuicerRecipes.GetRecipeFromStack(inventory[0])!=null)
         {
-            ticksLeft++;
+            if(inventory[1]==null||JuicerRecipes.GetRecipeFromStack(inventory[0]).getOutput().getItem().equals(inventory[1].getItem()))
+            {
+                ticksLeft++;
+            }
+            else
+            {
+                ticksLeft=0;
+            }
         }
-        if(inventory[0]==null&&ticksLeft>0)
+        if(JuicerRecipes.GetRecipeFromStack(inventory[0])==null&&ticksLeft>0)
         {
             ticksLeft=0;
         }
@@ -207,7 +215,7 @@ public class TEJuicer extends TileEntity implements ISidedInventory
 
     private void juice()
     {
-        if(inventory[0]==null) return;
+        if(JuicerRecipes.GetRecipeFromStack(inventory[0])==null) return;
         ItemStack res = JuicerRecipes.GetRecipeFromStack(inventory[0]).getOutput();
         if (inventory[1] == null)
             inventory[1] = res.copy();
@@ -239,6 +247,7 @@ public class TEJuicer extends TileEntity implements ISidedInventory
 
     public int getScaledProgress(int scale)
     {
+        if(maxTicks==0) return 0;
         return ticksLeft * scale/maxTicks;
     }
 }
