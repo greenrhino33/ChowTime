@@ -39,11 +39,11 @@ public class Juicer extends BlockContainer {
         {
             if (!world.isRemote)
             {
-                TEFermenter logic = (TEFermenter) world.getTileEntity(x, y, z);
+                TEJuicer logic = (TEJuicer) world.getTileEntity(x, y, z);
 
                 if (logic != null)
                 {
-                    entityPlayer.openGui(ChowTime.instance, GuiIDS.Fermenter_Gui, world, x, y, z);
+                    entityPlayer.openGui(ChowTime.instance, GuiIDS.Juicer_Gui, world, x, y, z);
                 }
             }
 

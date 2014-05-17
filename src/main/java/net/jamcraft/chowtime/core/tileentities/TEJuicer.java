@@ -26,7 +26,7 @@ public class TEJuicer extends TileEntity implements ISidedInventory
 
     public TEJuicer()
     {
-        FermenterRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.blaze_powder), 60);
+        JuicerRecipes.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.blaze_powder), 60);
     }
 
     @Override public int getSizeInventory()
