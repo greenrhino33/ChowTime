@@ -207,7 +207,7 @@ public class TEJuicer extends TileEntity implements ISidedInventory
 
     private void juice()
     {
-        if(inventory[0]==null) return;
+        if(JuicerRecipes.GetRecipeFromStack(inventory[0])==null) return;
         ItemStack res = JuicerRecipes.GetRecipeFromStack(inventory[0]).getOutput();
         if (inventory[1] == null)
             inventory[1] = res.copy();

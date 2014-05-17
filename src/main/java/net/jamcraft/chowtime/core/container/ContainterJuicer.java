@@ -84,6 +84,10 @@ public class ContainterJuicer extends Container
                         return null;
                     }
                 }
+                else
+                {
+                    return null;
+                }
             }
 
             if (slotItemStack.stackSize == 0)
