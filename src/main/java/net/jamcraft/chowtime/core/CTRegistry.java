@@ -29,7 +29,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
  */
 public class CTRegistry
 {
-
+    
     public static void CTBlocks()
     {
         CTInits.CTLeaves = new CTLeaves().setBlockName(CTStrings.BlockLeaves_Basic);
@@ -43,7 +43,7 @@ public class CTRegistry
         CTInits.CottonCandyBLUE = new BlockCottonCandy().setBlockName(CTStrings.BlockCottonCandy_Blue);
         GameRegistry.registerBlock(CTInits.CottonCandyBLUE, CTStrings.BlockCottonCandy_Blue);
     }
-
+    
     public static void CTMachines()
     {
         CTInits.Juicer = new Juicer();
@@ -53,46 +53,56 @@ public class CTRegistry
         CTInits.IceCreamMaker = new IceCreamMaker();
         GameRegistry.registerBlock(CTInits.IceCreamMaker, "IceCreamMaker");
     }
-
-    public static void CTLiquids() {
+    
+    public static void CTLiquids()
+    {
         CTInits.ChocolateMilkFluid = new Fluid("chocolateMilk");
         FluidRegistry.registerFluid(CTInits.ChocolateMilkFluid);
         CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "chocolateMilk").setCreativeTab(ChowTime.creativeTab);
         GameRegistry.registerBlock(CTInits.ChocolateMilk, "Chocolate Milk Fluid");
-
+        
     }
-
-    public static void CTCrops() {
+    
+    public static void CTCrops()
+    {
         CTInits.CropBarley = new CropBarley();
         GameRegistry.registerBlock(CTInits.CropBarley, "barleyCrop");
         CTInits.BarleySeeds = new SeedBarley();
         GameRegistry.registerItem(CTInits.BarleySeeds, "barleySeed");
     }
-
-    public static void CTItems(){
+    
+    public static void CTItems()
+    {
         CTInits.BarleyCrop = new CTItem().setUnlocalizedName(CTStrings.Item_Barley);
         GameRegistry.registerItem(CTInits.BarleyCrop, CTStrings.Item_Barley);
-        //These are moved to dynamic
+        // These are moved to dynamic
         /*
-        CTInits.IceCreamBall = new CTItem().setUnlocalizedName(CTStrings.ItemIceCream_Strawberry);
-        GameRegistry.registerItem(CTInits.IceCreamBall, CTStrings.ItemIceCream_Strawberry);
-        CTInits.Cone = new CTItem().setUnlocalizedName(CTStrings.Item_Cone);
-        GameRegistry.registerItem(CTInits.Cone, CTStrings.Item_Cone);
-        CTInits.ItemCottonCandy = new CTItemFood(3, 2.0F, false).setUnlocalizedName(CTStrings.ItemFood_CottonCandy_Blue);
-        GameRegistry.registerItem(CTInits.ItemCottonCandy, CTStrings.ItemFood_CottonCandy_Blue);
-        */
+         * CTInits.IceCreamBall = new
+         * CTItem().setUnlocalizedName(CTStrings.ItemIceCream_Strawberry);
+         * GameRegistry.registerItem(CTInits.IceCreamBall,
+         * CTStrings.ItemIceCream_Strawberry); CTInits.Cone = new
+         * CTItem().setUnlocalizedName(CTStrings.Item_Cone);
+         * GameRegistry.registerItem(CTInits.Cone, CTStrings.Item_Cone);
+         * CTInits.ItemCottonCandy = new CTItemFood(3, 2.0F,
+         * false).setUnlocalizedName(CTStrings.ItemFood_CottonCandy_Blue);
+         * GameRegistry.registerItem(CTInits.ItemCottonCandy,
+         * CTStrings.ItemFood_CottonCandy_Blue);
+         */
         CTInits.ItemBucketChoco = new CTItemBucket(CTInits.ChocolateMilk, CTInits.ItemBucketChoco, "bucket_chocolate").setUnlocalizedName(CTStrings.Item_Bucket);
         GameRegistry.registerItem(CTInits.ItemBucketChoco, CTStrings.Item_Bucket);
     }
-
-    public static void CTDrinks(){
-//        CTInits.appleJuice = new CTItemDrink(24, false, 2431323).setPotionName("appleJuice");
+    
+    public static void CTDrinks()
+    {
+        // CTInits.appleJuice = new CTItemDrink(24, false,
+        // 2431323).setPotionName("appleJuice");
         GameRegistry.registerItem(CTInits.appleJuice, "appleJuice");
     }
-
-    public static void CTTileEntities(){
+    
+    public static void CTTileEntities()
+    {
         GameRegistry.registerTileEntity(TEFermenter.class, "TEFermenter");
-        GameRegistry.registerTileEntity(TEJuicer.class,"TEJuicer");
-        GameRegistry.registerTileEntity(TEIceCreamMaker.class,"TEIceCreamMaker");
+        GameRegistry.registerTileEntity(TEJuicer.class, "TEJuicer");
+        GameRegistry.registerTileEntity(TEIceCreamMaker.class, "TEIceCreamMaker");
     }
 }

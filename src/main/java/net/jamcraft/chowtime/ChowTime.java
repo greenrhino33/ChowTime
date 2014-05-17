@@ -44,40 +44,45 @@ public class ChowTime
             return Items.chainmail_chestplate;
         }
     };
-
+    
     @Mod.Instance(ModConstants.MODID)
     public static ChowTime instance;
-
+    
     public static Material cloud = new CloudMaterial();
-
+    
     public static NBTTagCompound saveData = new NBTTagCompound();
     public static File harvestingLVL;
     public static File dir;
-
+    public static int harvestXP = 0;
+    public static int harvestLVL = 0;
+    
     @SidedProxy(clientSide = "net.jamcraft.chowtime.core.client.ClientProxy", serverSide = "net.jamcraft.chowtime.core.CommonProxy")
     public static CommonProxy proxy;
-
+    
     public static Logger logger;
-
-    //    private File configBase;
-
+    
+    // private File configBase;
+    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        //        FMLInterModComms.sendMessage("Waila", "register", "allout58.mods.prisoncraft.compat.waila.WailaProvider.callbackRegister");
-
-        //        channels = NetworkRegistry.INSTANCE.newChannel(ModConstants.MODID, new ChannelHandler());
-        //        proxy.registerRenderers();
+        // FMLInterModComms.sendMessage("Waila", "register",
+        // "allout58.mods.prisoncraft.compat.waila.WailaProvider.callbackRegister");
+        
+        // channels = NetworkRegistry.INSTANCE.newChannel(ModConstants.MODID,
+        // new ChannelHandler());
+        // proxy.registerRenderers();
         logger = event.getModLog();
-
+        
         ObfHelper.init();
-        //        logger.error("Running in "+ (ObfHelper.isObf?"obf":"deobf") + " environment");
-
+        // logger.error("Running in "+ (ObfHelper.isObf?"obf":"deobf") +
+        // " environment");
+        
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
         
         RemoteMain.init();
         DynMain.init();
-
+        
         CTRegistry.CTBlocks();
         CTRegistry.CTMachines();
         CTRegistry.CTLiquids();
@@ -88,40 +93,41 @@ public class ChowTime
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
         dir = event.getModConfigurationDirectory();
-        //        configBase=event.getModConfigurationDirectory();
-
-        //        MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
-
-        //        BlockList.init();
-        //        ItemList.init();
-        //        TileEntityList.init();
-
+        // configBase=event.getModConfigurationDirectory();
+        
+        // MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
+        
+        // BlockList.init();
+        // ItemList.init();
+        // TileEntityList.init();
+        
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
     }
-
+    
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        //FMLInterModComms.sendMessage("prisoncraft", "blacklist", Block.blockRegistry.getNameForObject(Blocks.bookshelf));
+        // FMLInterModComms.sendMessage("prisoncraft", "blacklist",
+        // Block.blockRegistry.getNameForObject(Blocks.bookshelf));
         DynItems.registerRecipes();
-
+        
         proxy.registerRenderers();
         EntityRegistry.registerModEntity(EntitySeedMob.class, "SeedMob", 2, this, 40, 3, true);
         EntityRegistry.addSpawn(EntitySeedMob.class, 5, 10, 30, EnumCreatureType.monster, BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.plains);
     }
-
+    
     @Mod.EventHandler
     public void handleIMC(FMLInterModComms.IMCEvent event)
     {
-        //IMCHandler.HandleIMC(event.getMessages());
+        // IMCHandler.HandleIMC(event.getMessages());
     }
-
+    
     @Mod.EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
-        //        event.registerServerCommand(new JailCommand());
+        // event.registerServerCommand(new JailCommand());
     }
-
+    
     @Mod.EventHandler
     public void serverUnload(FMLServerStoppingEvent event)
     {
