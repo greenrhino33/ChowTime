@@ -8,7 +8,7 @@ net.jamcraft.chowtime.dyn.items.ItemAJuice 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemCJuice 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemPJuice 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemWatermellonIceCream 0.0.1
-net.jamcraft.chowtime.dyn.items.ItemWMICCone 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemWMICCone 0.0.2
 }
 resources
 {
