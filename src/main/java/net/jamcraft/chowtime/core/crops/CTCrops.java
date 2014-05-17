@@ -3,7 +3,6 @@ package net.jamcraft.chowtime.core.crops;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.jamcraft.chowtime.core.CTInits;
-import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
