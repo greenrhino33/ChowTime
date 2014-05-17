@@ -146,19 +146,29 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
         tags.setInteger("timeleft",ticksLeft);
 
-        // Write the ItemStacks in the inventory to NBT
-        NBTTagList tagList = new NBTTagList();
-        for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex)
-        {
-            if (inventory[currentIndex] != null)
-            {
-                NBTTagCompound tagCompound = new NBTTagCompound();
-                tagCompound.setByte("Slot", (byte) currentIndex);
-                inventory[currentIndex].writeToNBT(tagCompound);
-                tagList.appendTag(tagCompound);
-            }
-        }
-        tags.setTag("Items", tagList);
+        NBTTagCompound sl1=new NBTTagCompound();
+        inventory[0].writeToNBT(sl1);
+
+        tags.setTag("slot1", sl1);
+
+        NBTTagCompound sl2=new NBTTagCompound();
+        inventory[1].writeToNBT(sl2);
+
+        tags.setTag("slot2",sl2);
+
+//        // Write the ItemStacks in the inventory to NBT
+//        NBTTagList tagList = new NBTTagList();
+//        for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex)
+//        {
+//            if (inventory[currentIndex] != null)
+//            {
+//                NBTTagCompound tagCompound = new NBTTagCompound();
+//                tagCompound.setByte("Slot", (byte) currentIndex);
+//                inventory[currentIndex].writeToNBT(tagCompound);
+//                tagList.appendTag(tagCompound);
+//            }
+//        }
+//        tags.setTag("Items", tagList);
     }
 
     @Override
@@ -168,17 +178,20 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
         ticksLeft=tags.getInteger("timeleft");
 
-        NBTTagList tagList = tags.getTagList("Items",INV_SIZE);
-        inventory = new ItemStack[this.getSizeInventory()];
-        for (int i = 0; i < tagList.tagCount(); ++i)
-        {
-            NBTTagCompound tagCompound = (NBTTagCompound) tagList.getCompoundTagAt(i);
-            byte slot = tagCompound.getByte("Slot");
-            if (slot >= 0 && slot < inventory.length)
-            {
-                inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
-            }
-        }
+        inventory[0]=ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot1"));
+        inventory[1]=ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot2"));
+
+//        NBTTagList tagList = tags.getTagList("Items",INV_SIZE);
+//        inventory = new ItemStack[this.getSizeInventory()];
+//        for (int i = 0; i < tagList.tagCount(); ++i)
+//        {
+//            NBTTagCompound tagCompound = (NBTTagCompound) tagList.getCompoundTagAt(i);
+//            byte slot = tagCompound.getByte("Slot");
+//            if (slot >= 0 && slot < inventory.length)
+//            {
+//                inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
+//            }
+//        }
     }
 
     @Override
