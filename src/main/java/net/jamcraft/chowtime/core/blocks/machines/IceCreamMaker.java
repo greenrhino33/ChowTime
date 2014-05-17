@@ -41,7 +41,7 @@ public class IceCreamMaker extends BlockContainer
 
                 if (logic != null)
                 {
-                    entityPlayer.openGui(ChowTime.instance, GuiIDS.Juicer_Gui, world, x, y, z);
+                    entityPlayer.openGui(ChowTime.instance, GuiIDS.ICMaker_Gui, world, x, y, z);
                 }
             }
 

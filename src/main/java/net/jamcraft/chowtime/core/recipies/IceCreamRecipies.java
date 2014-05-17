@@ -20,6 +20,7 @@ public class IceCreamRecipies
 
     public static Recipe2_1 GetRecipeFromStack(ItemStack stack1, ItemStack stack2)
     {
+        if(stack1==null||stack2==null) return null;
         for (Recipe2_1 r : recipe11List)
         {
             if (r.getInput1().getItem().equals(stack1.getItem()) && r.getInput2().getItem().equals(stack2.getItem()))
@@ -28,5 +29,17 @@ public class IceCreamRecipies
                 return r;
         }
         return null;
+    }
+
+    public static Recipe2_1[] GetRecipesFromStack(ItemStack stack)
+    {
+        List<Recipe2_1> out=new ArrayList<Recipe2_1>();
+        if(stack==null) return null;
+        for (Recipe2_1 r : recipe11List)
+        {
+            if (r.getInput1().getItem().equals(stack.getItem())||r.getInput2().getItem().equals(stack.getItem()))
+                out.add(r);
+        }
+        return out.toArray(new Recipe2_1[0]);
     }
 }

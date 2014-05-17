@@ -38,5 +38,6 @@ out/
 
 saves/*
 logs/*
-config
-mods
+config/*
+mods/*
+crash-reports/*
