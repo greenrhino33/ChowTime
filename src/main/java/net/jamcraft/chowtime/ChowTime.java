@@ -106,7 +106,7 @@ public class ChowTime
 
         proxy.registerRenderers();
         EntityRegistry.registerModEntity(EntitySeedMob.class, "SeedMob", 2, this, 40, 3, true);
-        EntityRegistry.addSpawn(EntitySeedMob.class, 20, 100, 300, EnumCreatureType.monster, BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.plains);
+        EntityRegistry.addSpawn(EntitySeedMob.class, 5, 10, 30, EnumCreatureType.monster, BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.plains);
     }
 
     @Mod.EventHandler

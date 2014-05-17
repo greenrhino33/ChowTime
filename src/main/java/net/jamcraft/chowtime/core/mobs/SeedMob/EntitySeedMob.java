@@ -140,6 +140,7 @@ public class EntitySeedMob extends EntityAnimal{
         this.worldObj.playSoundAtEntity(this, "mob.glog.step", 0.1F, 1.0F);
     }
 
+    @Override
     protected Item getDropItem() {
         return CTInits.BarleySeeds;
     }
