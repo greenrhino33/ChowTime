@@ -9,8 +9,10 @@ net.jamcraft.chowtime.dyn.items.ItemCJuice 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemPJuice 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemWatermellonIceCream 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemWMICCone 0.0.2
+net.jamcraft.chowtime.dyn.items.ItemChocoIceCreamCone 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemChocoIceCream 0.0.1
 }
 resources
 {
-lang/en_US.lang 0.0.5
+lang/en_US.lang 0.0.6
 }
