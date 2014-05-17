@@ -1,44 +1,89 @@
 package net.jamcraft.chowtime.core.tileentities;
 
+import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
+import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
+import net.jamcraft.chowtime.core.recipies.Recipe;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class TEJuicer extends TileEntity implements IInventory
+public class TEJuicer extends TileEntity implements ISidedInventory
 {
+    public static final int INV_SIZE = 2;
+    private ItemStack[] inventory = new ItemStack[INV_SIZE];
+    private int ticksLeft = 0;
+    private int maxTicks = 0;
+
+    public TEJuicer()
+    {
+        FermenterRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.blaze_powder), 60);
+    }
 
     @Override public int getSizeInventory()
     {
-        return 0;
+        return INV_SIZE;
     }
 
     @Override public ItemStack getStackInSlot(int var1)
     {
-        return null;
+        if (var1 > INV_SIZE) return null;
+        return inventory[var1];
     }
 
-    @Override public ItemStack decrStackSize(int var1, int var2)
+    @Override public ItemStack decrStackSize(int slot, int amount)
     {
-        return null;
+        ItemStack itemStack = getStackInSlot(slot);
+        if (itemStack != null)
+        {
+            if (itemStack.stackSize <= amount)
+            {
+                setInventorySlotContents(slot, null);
+            }
+            else
+            {
+                itemStack = itemStack.splitStack(amount);
+                if (itemStack.stackSize == 0)
+                {
+                    setInventorySlotContents(slot, null);
+                }
+            }
+        }
+
+        return itemStack;
     }
 
-    @Override public ItemStack getStackInSlotOnClosing(int var1)
+    @Override public ItemStack getStackInSlotOnClosing(int slot)
     {
-        return null;
+        ItemStack itemStack = getStackInSlot(slot);
+        if (itemStack != null)
+        {
+            setInventorySlotContents(slot, null);
+        }
+        return itemStack;
     }
 
-    @Override public void setInventorySlotContents(int var1, ItemStack var2)
+    @Override public void setInventorySlotContents(int slot, ItemStack itemStack)
     {
-
+        inventory[slot] = itemStack;
+        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit())
+        {
+            itemStack.stackSize = getInventoryStackLimit();
+        }
     }
 
     @Override public String getInventoryName()
     {
-        return null;
+        return "containter.Juicer";
     }
 
     @Override public boolean hasCustomInventoryName()
@@ -48,26 +93,144 @@ public class TEJuicer extends TileEntity implements IInventory
 
     @Override public int getInventoryStackLimit()
     {
-        return 0;
+        return 64;
     }
 
     @Override public boolean isUseableByPlayer(EntityPlayer var1)
     {
-        return false;
+        return true;
     }
 
     @Override public void openInventory()
     {
-
     }
 
     @Override public void closeInventory()
     {
-
     }
 
-    @Override public boolean isItemValidForSlot(int var1, ItemStack var2)
+    @Override public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
+        if (slot != 0) return false;
+        for (Recipe r : JuicerRecipes.recipeList)
+        {
+            if (r.getInput().getItem().equals(stack.getItem())) return true;
+        }
         return false;
+    }
+
+    @Override public int[] getAccessibleSlotsFromSide(int side)
+    {
+        //if(ForgeDirection.UP.flag==side) return new int[]{ 0 };
+        return new int[] { 0, 1 };
+    }
+
+    @Override public boolean canInsertItem(int slot, ItemStack itemStack, int side)
+    {
+        return true;
+        //        if(slot!=0||side!=ForgeDirection.UP.flag) return false;
+        //        return isItemValidForSlot(slot,itemStack);
+    }
+
+    @Override public boolean canExtractItem(int slot, ItemStack itemStack, int side)
+    {
+        //        return true;
+        return slot == 1;//&&side!=ForgeDirection.UP.flag;
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tags)
+    {
+        super.writeToNBT(tags);
+
+        tags.setInteger("timeleft", ticksLeft);
+        tags.setInteger("maxTime", maxTicks);
+
+        if (inventory[0] != null)
+        {
+            NBTTagCompound sl1 = new NBTTagCompound();
+            inventory[0].writeToNBT(sl1);
+            tags.setTag("slot1", sl1);
+        }
+
+        if (inventory[1] != null)
+        {
+            NBTTagCompound sl2 = new NBTTagCompound();
+            inventory[1].writeToNBT(sl2);
+            tags.setTag("slot2", sl2);
+        }
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tags)
+    {
+        super.readFromNBT(tags);
+
+        ticksLeft = tags.getInteger("timeleft");
+        maxTicks = tags.getInteger("maxTime");
+
+        if (tags.hasKey("slot1"))
+        {
+            inventory[0] = ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot1"));
+        }
+        if (tags.hasKey("slot2"))
+        {
+            inventory[1] = ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot2"));
+        }
+    }
+
+    @Override
+    public void updateEntity()
+    {
+        //Something in input and nothing currently processing
+        if (inventory[0] != null && ticksLeft == 0)
+        {
+            Recipe r = FermenterRecipies.GetRecipeFromStack(inventory[0]);
+            if (r != null)
+            {
+                maxTicks = r.getTime();
+            }
+        }
+        if (ticksLeft < maxTicks)
+        {
+            ticksLeft++;
+        }
+        if (ticksLeft == maxTicks)
+        {
+            ticksLeft = 0;
+            juice();
+        }
+    }
+
+    private void juice()
+    {
+        if(inventory[0]==null) return;
+        ItemStack res = JuicerRecipes.GetRecipeFromStack(inventory[0]).getOutput();
+        if (inventory[1] == null)
+            inventory[1] = res.copy();
+        else
+            inventory[1].stackSize += res.stackSize;
+
+        inventory[0].stackSize--;
+        if (inventory[0].stackSize <= 0)
+        {
+            inventory[0] = null;
+        }
+    }
+
+    /* Packets */
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound tag = new NBTTagCompound();
+        writeToNBT(tag);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+    {
+        readFromNBT(packet.func_148857_g());
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 }

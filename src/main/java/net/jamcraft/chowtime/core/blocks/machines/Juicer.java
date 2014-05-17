@@ -1,9 +1,12 @@
 package net.jamcraft.chowtime.core.blocks.machines;
 
 import net.jamcraft.chowtime.ChowTime;
+import net.jamcraft.chowtime.core.GuiIDS;
+import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,15 +21,33 @@ public class Juicer extends BlockContainer {
     public Juicer(){
         super(Material.iron);
         this.setCreativeTab(ChowTime.creativeTab);
+        setBlockName("juicer");
     }
 
-    public static ItemStack OnUse(ItemStack food){
-        return new ItemStack(Items.apple);
-    }
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return null;
-        // /return new TEJuicer();
+        return new TEJuicer();
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
+    {
+        super.onBlockActivated(world, x, y, z, entityPlayer, par6, par7, par8, par9);
+        if (entityPlayer.isSneaking()) return false;
+        else
+        {
+            if (!world.isRemote)
+            {
+                TEFermenter logic = (TEFermenter) world.getTileEntity(x, y, z);
+
+                if (logic != null)
+                {
+                    entityPlayer.openGui(ChowTime.instance, GuiIDS.Fermenter_Gui, world, x, y, z);
+                }
+            }
+
+            return true;
+        }
     }
 }

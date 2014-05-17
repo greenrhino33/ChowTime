@@ -76,5 +76,6 @@ public class CTRegistry
 
     public static void CTTileEntities(){
         GameRegistry.registerTileEntity(TEFermenter.class, "TEFermenter");
+        GameRegistry.registerTileEntity(TEJuicer.class,"TEJuicer");
     }
 }
