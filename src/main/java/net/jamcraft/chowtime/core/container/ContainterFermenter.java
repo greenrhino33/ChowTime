@@ -1,5 +1,7 @@
 package net.jamcraft.chowtime.core.container;
 
+import net.jamcraft.chowtime.core.container.slot.SlotFermenter;
+import net.jamcraft.chowtime.core.container.slot.SlotOutput;
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +19,9 @@ public class ContainterFermenter extends Container
     public ContainterFermenter(InventoryPlayer playerInv, TEFermenter te)
     {
         // Add input
-        this.addSlotToContainer(new Slot(te,0, 54, 34));
+        this.addSlotToContainer(new SlotFermenter(te,0, 54, 34));
 
-        this.addSlotToContainer(new Slot(te,1,116,34));
+        this.addSlotToContainer(new SlotOutput(te,1,116,34));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)

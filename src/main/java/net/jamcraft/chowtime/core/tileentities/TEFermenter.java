@@ -1,5 +1,6 @@
 package net.jamcraft.chowtime.core.tileentities;
 
+import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.recipies.Recipe1_1;
 import net.minecraft.entity.player.EntityPlayer;
@@ -215,11 +216,11 @@ public class TEFermenter extends TileEntity implements ISidedInventory
                 maxTicks = r.getTime();
             }
         }
-        if (ticksLeft < maxTicks && inventory[0]!=null)
+        if (ticksLeft < maxTicks && FermenterRecipies.GetRecipeFromStack(inventory[0])!=null)
         {
             ticksLeft++;
         }
-        if(inventory[0]==null&&ticksLeft>0)
+        if(FermenterRecipies.GetRecipeFromStack(inventory[0])==null&&ticksLeft>0)
         {
             ticksLeft=0;
         }
@@ -232,7 +233,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
 
     private void ferment()
     {
-        if(inventory[0]==null) return;
+        if(FermenterRecipies.GetRecipeFromStack(inventory[0])==null) return;
         ItemStack res = FermenterRecipies.GetRecipeFromStack(inventory[0]).getOutput();
         if (inventory[1] == null)
             inventory[1] = res.copy();
