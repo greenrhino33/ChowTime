@@ -1,11 +1,16 @@
 package net.jamcraft.chowtime.remote;
 
 import com.google.gson.JsonIOException;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.core.ObfHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 
 import java.io.*;
 import java.net.URL;
@@ -188,6 +193,14 @@ public class RemoteMain
     public static boolean IsSyncedWithServer(String serverHash)
     {
         isSyncedWithServer=serverHash.equals(localHash);
+        if(!isSyncedWithServer && player!=null)
+        {
+            player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("string.nosync")));
+            if(FMLCommonHandler.instance().getEffectiveSide().isClient())
+            {
+                Minecraft.getMinecraft().theWorld.sendQuittingDisconnectingPacket();
+            }
+        }
         return isSyncedWithServer;
     }
 }
