@@ -1,6 +1,7 @@
 package net.jamcraft.chowtime.core.network;
 
 import io.netty.buffer.ByteBuf;
+import net.jamcraft.chowtime.remote.RemoteMain;
 
 /**
  * Created by James Hollowell on 5/18/2014.
@@ -29,6 +30,6 @@ public class SHA1Packet implements IPacket
 
     @Override public void postProcess()
     {
-
+        RemoteMain.IsSyncedWithServer(sha1);
     }
 }

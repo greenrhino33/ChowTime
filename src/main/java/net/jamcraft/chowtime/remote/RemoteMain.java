@@ -154,7 +154,6 @@ public class RemoteMain
     {
         try
         {
-
             MessageDigest md = MessageDigest.getInstance("SHA1");
             FileInputStream fis = new FileInputStream(ModConstants.DYN_LOC + "/local.ctd");
             byte[] dataBytes = new byte[1024];
@@ -182,5 +181,11 @@ public class RemoteMain
         {
 
         }
+    }
+
+    public static boolean IsSyncedWithServer(String serverHash)
+    {
+        isSyncedWithServer=serverHash.equals(localHash);
+        return isSyncedWithServer;
     }
 }

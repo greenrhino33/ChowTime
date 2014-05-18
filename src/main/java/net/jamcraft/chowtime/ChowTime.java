@@ -32,6 +32,7 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.util.EnumMap;
 
 /**
  * Created by James Hollowell on 5/14/2014.
