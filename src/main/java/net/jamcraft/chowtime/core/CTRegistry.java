@@ -58,7 +58,7 @@ public class CTRegistry
 //        GameRegistry.registerBlock(CTInits.CTLog, CTStrings.BlockLogs_Basic);
 //        CTInits.CTSapling = new CTSapling().setBlockName(CTStrings.BlockSapling_Basic);
 //        GameRegistry.registerBlock(CTInits.CTSapling, CTStrings.BlockSapling_Basic);
-        CTInits.IceCream = new CTBlock(Material.snow).setBlockName("blockIceCream");
+        CTInits.IceCream = new CTBlock(Material.snow).setBlockName(CTStrings.BlockIceCream_Strawberry);
         GameRegistry.registerBlock(CTInits.IceCream, CTStrings.BlockIceCream_Strawberry);
         CTInits.CottonCandyBLUE = new BlockCottonCandy().setBlockName(CTStrings.BlockCottonCandy_Blue);
         GameRegistry.registerBlock(CTInits.CottonCandyBLUE, CTStrings.BlockCottonCandy_Blue);
@@ -76,10 +76,10 @@ public class CTRegistry
     
     public static void CTLiquids()
     {
-        CTInits.ChocolateMilkFluid = new Fluid("ChocolateMilk").setUnlocalizedName("ChocolateMilk");
-        FluidRegistry.registerFluid(CTInits.ChocolateMilkFluid);
-        CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "ChocolateMilk").setBlockName("ChocolateMilk").setCreativeTab(ChowTime.creativeTab);
-        GameRegistry.registerBlock(CTInits.ChocolateMilk, "Chocolate Milk Fluid");
+//        CTInits.ChocolateMilkFluid = new Fluid("ChocolateMilk").setUnlocalizedName("ChocolateMilk");
+//        FluidRegistry.registerFluid(CTInits.ChocolateMilkFluid);
+//        CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "ChocolateMilk").setBlockName("ChocolateMilk").setCreativeTab(ChowTime.creativeTab);
+//        GameRegistry.registerBlock(CTInits.ChocolateMilk, "Chocolate Milk Fluid");
 
         //        CTInits.FruitPunchFluid = new Fluid("fruitPunch");
         //        FluidRegistry.registerFluid(CTInits.FruitPunchFluid);

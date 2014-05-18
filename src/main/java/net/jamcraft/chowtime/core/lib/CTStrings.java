@@ -10,7 +10,7 @@ public class CTStrings
     public static String BlockLeaves_Basic = "leaves_Basic";
     public static String BlockSapling_Basic = "sapling_Basic";
 
-    public static String BlockIceCream_Strawberry = "blockIceCream_Strawberry";
+    public static String BlockIceCream_Strawberry = "iceCreamBlock";
     public static String BlockCottonCandy_Blue = "blockCottonCandy_Blue";
 
     public static String BlockCrop_Barley = "crop_Barley";
