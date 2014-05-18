@@ -7,7 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemSeeds;
 
 /**
- * Created by Kayla Marie on 5/17/14.
+ * Created by DarkKnight on 5/18/14.
  */
 public class SeedStrawberry extends ItemSeeds{
 

@@ -56,7 +56,7 @@ public class DynTextures
                     IResourcePack rp = new DynFolderResourcePack(dirLoad);
                     ((List) rpList).add(rp);
                 }
-                FMLClientHandler.instance().updateResourcePackList();
+              //  FMLClientHandler.instance().updateResourcePackList();
             }
             catch (Exception e)
             {

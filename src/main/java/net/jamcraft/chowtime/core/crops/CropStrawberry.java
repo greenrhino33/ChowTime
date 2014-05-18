@@ -1,5 +1,6 @@
 package net.jamcraft.chowtime.core.crops;
 
+import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.jamcraft.chowtime.core.CTInits;
@@ -12,10 +13,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.Random;
-
 /**
- * Created by Kayla Marie on 5/17/14.
+ * Created by DarkKnight on 5/18/14.
  */
 public class CropStrawberry extends BlockCrops{
 
@@ -139,5 +138,4 @@ public class CropStrawberry extends BlockCrops{
 
         return f;
     }
-
 }

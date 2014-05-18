@@ -20,9 +20,7 @@ public class WorldProviderCandyLand extends WorldProviderSurface
     public BiomeGenBase getBiomeGenForCoords(int x, int z)
     {
         BiomeGenBase biome = super.getBiomeGenForCoords(x, z);
-        if (biome == null)
-        {
-
+        if (biome == null) {
         }
         return biome;
     }

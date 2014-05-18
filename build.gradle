@@ -22,7 +22,7 @@ group= "net.jam-craft.chowTime" // http://maven.apache.org/guides/mini/guide-nam
 archivesBaseName = "ChowTime"
 
 minecraft {
-    version = "1.7.2-10.12.1.1065"
+    version = "1.7.2-10.12.1.1082"
     assetDir = "eclipse/assets"
 }
 
