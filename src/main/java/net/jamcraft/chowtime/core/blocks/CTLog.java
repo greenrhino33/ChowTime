@@ -12,9 +12,11 @@ import net.minecraft.world.IBlockAccess;
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class CTLog extends Block{
+public class CTLog extends Block
+{
 
-    public CTLog(){
+    public CTLog()
+    {
         super(Material.wood);
         this.setCreativeTab(ChowTime.creativeTab);
     }

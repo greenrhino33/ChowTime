@@ -33,7 +33,6 @@ public class CTSapling extends BlockSapling
         this.setStepSound(Block.soundTypeGrass);
         this.setCreativeTab(ChowTime.creativeTab);
     }
-    
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
@@ -58,7 +57,6 @@ public class CTSapling extends BlockSapling
         }
         return false;
     }
-    
     public boolean canThisPlantGrowOnThisBlock(Block id)
     {
         return id == Blocks.grass || id == Blocks.dirt;

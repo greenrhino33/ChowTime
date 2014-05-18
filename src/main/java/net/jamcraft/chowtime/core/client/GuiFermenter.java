@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiFermenter extends GuiContainer
 {
     TEFermenter te;
+
     public GuiFermenter(InventoryPlayer playerInv, TEFermenter te)
     {
         super(new ContainerFermenter(playerInv, te));

@@ -18,8 +18,8 @@ public class ItemAJuice extends Item implements IDynItem
     {
         super();
         setCreativeTab(ChowTime.creativeTab);
-        setTextureName(ModConstants.MODID + ":ajuice");
-        setUnlocalizedName("ajuice");
+        setTextureName(ModConstants.MODID + ":appleJuice");
+        setUnlocalizedName("appleJuice");
     }
 
     @Override public String getRegistrationName()
@@ -29,6 +29,6 @@ public class ItemAJuice extends Item implements IDynItem
 
     @Override public void registerRecipe()
     {
-        JuicerRecipes.AddRecipe(new ItemStack(Items.apple),new ItemStack(this),200);
+        JuicerRecipes.AddRecipe(new ItemStack(Items.apple), new ItemStack(this), 200);
     }
 }

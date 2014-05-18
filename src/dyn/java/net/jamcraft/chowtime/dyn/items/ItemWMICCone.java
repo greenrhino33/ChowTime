@@ -17,8 +17,8 @@ public class ItemWMICCone extends ItemFood implements IDynItem
     {
         super(1, false);
         setCreativeTab(ChowTime.creativeTab);
-        setTextureName(ModConstants.MODID + ":wmiccone");
-        setUnlocalizedName("wmiccone");
+        setTextureName(ModConstants.MODID + ":watermelonIceCreamCone");
+        setUnlocalizedName("watermelonIceCreamCcone");
     }
 
     @Override public String getRegistrationName()
@@ -28,6 +28,6 @@ public class ItemWMICCone extends ItemFood implements IDynItem
 
     @Override public void registerRecipe()
     {
-        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(this),new ItemStack(DynItems.items.get("cone")),new ItemStack(DynItems.items.get("wmicecream")));
+        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(this), new ItemStack(DynItems.items.get("cone")), new ItemStack(DynItems.items.get("wmicecream")));
     }
 }

@@ -2,7 +2,6 @@ package net.jamcraft.chowtime.core.blocks.liquids;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,7 +14,8 @@ import net.minecraftforge.fluids.Fluid;
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class CTFluid extends BlockFluidClassic {
+public class CTFluid extends BlockFluidClassic
+{
 
     @SideOnly(Side.CLIENT)
     protected IIcon stillIcon;
@@ -23,32 +23,37 @@ public class CTFluid extends BlockFluidClassic {
     protected IIcon flowingIcon;
     private String texture;
 
-    public CTFluid(Fluid fluid, Material material, String textureName) {
+    public CTFluid(Fluid fluid, Material material, String textureName)
+    {
         super(fluid, material);
         texture = textureName;
     }
 
     @Override
-    public IIcon getIcon(int side, int meta) {
-        return (side == 0 || side == 1)? stillIcon : flowingIcon;
+    public IIcon getIcon(int side, int meta)
+    {
+        return (side == 0 || side == 1) ? stillIcon : flowingIcon;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerBlockIcons(IIconRegister register) {
+    public void registerBlockIcons(IIconRegister register)
+    {
         stillIcon = register.registerIcon(ModConstants.MODID + ":" + "Fluid_" + texture);
         flowingIcon = register.registerIcon(ModConstants.MODID + ":" + "Fluid_" + texture + "_flow");
     }
 
     @Override
-    public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
+    public boolean canDisplace(IBlockAccess world, int x, int y, int z)
+    {
         if (world.getBlock(x, y, z).getMaterial().isLiquid())
             return false;
         return super.canDisplace(world, x, y, z);
     }
 
     @Override
-    public boolean displaceIfPossible(World world, int x, int y, int z) {
+    public boolean displaceIfPossible(World world, int x, int y, int z)
+    {
         if (world.getBlock(x, y, z).getMaterial().isLiquid())
             return false;
         return super.displaceIfPossible(world, x, y, z);

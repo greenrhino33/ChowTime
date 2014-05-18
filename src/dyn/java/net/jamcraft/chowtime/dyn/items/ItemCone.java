@@ -12,7 +12,8 @@ import net.jamcraft.chowtime.dyn.common.IDynItem;
 public class ItemCone extends CTItem implements IDynItem
 {
 
-    public ItemCone(){
+    public ItemCone()
+    {
         super();
         this.setCreativeTab(ChowTime.creativeTab);
         this.setTextureName(ModConstants.MODID + ":cone");

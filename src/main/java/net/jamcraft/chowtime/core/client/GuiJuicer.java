@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiJuicer extends GuiContainer
 {
     TEJuicer te;
+
     public GuiJuicer(InventoryPlayer playerInv, TEJuicer te)
     {
         super(new ContainerJuicer(playerInv, te));
@@ -27,6 +28,7 @@ public class GuiJuicer extends GuiContainer
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
         fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 128 + 2, 4210752);
     }
+
     @Override
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y)
     {

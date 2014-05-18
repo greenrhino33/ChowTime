@@ -4,3 +4,16 @@ container.IceCreamMaker=Ice Cream Maker
 tile.juicer.name=Juicer
 tile.fermenter.name=Fermenter
 tile.icecreammaker.name=Ice Cream Maker
+tile.barleyCrop.name=Barley Crop
+tile.strawberryCrop.name=Strawberry Crop
+tile.grapeCrop.name=Grape Crop
+
+string.updated=ChowTime has updated! Look for new foods and recipies.
+string.warnlocal=[ChowTime]Warning! Remote update has been disabled!
+
+item.barley.name=Barley
+item.seedBarley.name=Barley Seeds
+item.grapeSeeds.name=Grape Seeds
+item.strawberrySeeds.name=Strawberry Seeds
+item.strawberry.name=Strawberry
+item.grape.name=Grape

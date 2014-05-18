@@ -14,13 +14,18 @@ import net.minecraft.world.World;
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class CTItemFood extends ItemFood{
+public class CTItemFood extends ItemFood
+{
 
     public final int itemUseDuration;
-    /** The amount this food item heals the player. */
+    /**
+     * The amount this food item heals the player.
+     */
     private final int healAmount;
     private final float saturationModifier;
-    /** Whether wolves like this food (true for raw and cooked porkchop). */
+    /**
+     * Whether wolves like this food (true for raw and cooked porkchop).
+     */
     private final boolean isWolfsFavoriteMeat;
     /**
      * If this field is true, the food can be consumed even if the player don't need to eat.
@@ -30,14 +35,21 @@ public class CTItemFood extends ItemFood{
      * represents the potion effect that will occurr upon eating this food. Set by setPotionEffect
      */
     private int potionId;
-    /** set by setPotionEffect */
+    /**
+     * set by setPotionEffect
+     */
     private int potionDuration;
-    /** set by setPotionEffect */
+    /**
+     * set by setPotionEffect
+     */
     private int potionAmplifier;
-    /** probably of the set potion effect occurring */
+    /**
+     * probably of the set potion effect occurring
+     */
     private float potionEffectProbability;
 
-    public CTItemFood(int filling, float saturation, boolean wolfMeat){
+    public CTItemFood(int filling, float saturation, boolean wolfMeat)
+    {
         super(filling, saturation, wolfMeat);
         this.itemUseDuration = 32;
         this.healAmount = filling;

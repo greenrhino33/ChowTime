@@ -19,9 +19,9 @@ public class ContainerFermenter extends Container
     public ContainerFermenter(InventoryPlayer playerInv, TEFermenter te)
     {
         // Add input
-        this.addSlotToContainer(new SlotFermenter(te,0, 54, 34));
+        this.addSlotToContainer(new SlotFermenter(te, 0, 54, 34));
 
-        this.addSlotToContainer(new SlotOutput(te,1,116,34));
+        this.addSlotToContainer(new SlotOutput(te, 1, 116, 34));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
@@ -74,7 +74,7 @@ public class ContainerFermenter extends Container
                  * If the stack being shift-clicked into the assembler's
                  * container is a fuel, try to put it in the fuel slot.
                  */
-                if(FermenterRecipies.GetRecipeFromStack(slotItemStack)!=null)
+                if (FermenterRecipies.GetRecipeFromStack(slotItemStack) != null)
                 {
                     if (!this.mergeItemStack(slotItemStack, 0, TEFermenter.INV_SIZE, false))
                     {

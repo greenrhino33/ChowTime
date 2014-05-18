@@ -3,7 +3,6 @@ package net.jamcraft.chowtime.core.container;
 import net.jamcraft.chowtime.core.container.slot.SlotJuicer;
 import net.jamcraft.chowtime.core.container.slot.SlotOutput;
 import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
-import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -20,9 +19,9 @@ public class ContainerJuicer extends Container
     public ContainerJuicer(InventoryPlayer playerInv, TEJuicer te)
     {
         // Add input
-        this.addSlotToContainer(new SlotJuicer(te,0, 54, 34));
+        this.addSlotToContainer(new SlotJuicer(te, 0, 54, 34));
 
-        this.addSlotToContainer(new SlotOutput(te,1,116,34));
+        this.addSlotToContainer(new SlotOutput(te, 1, 116, 34));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)

@@ -19,36 +19,40 @@ public class RemoteMain
     public static LooseObjList local = new LooseObjList();
     private static LooseObjList remote = new LooseObjList();
 
+    public static boolean hasUpdated = false;
+
     public static void init()
     {
-        File dyndir=new File(ModConstants.DYN_LOC);
-        if(!dyndir.exists()) dyndir.mkdir();
+        File dyndir = new File(ModConstants.DYN_LOC);
+        if (!dyndir.exists()) dyndir.mkdir();
         LoadLocal();
+        if (Config.forceLocal) return;
         LoadRemote();
-        if (!local.equals(remote) || !local.isLoaded())
+        if (!local.equals(remote))
         {
             //Remove old files
-            List<DynDescription> old=local.difference(remote);
+            List<DynDescription> old = local.difference(remote);
             for (DynDescription desc : old)
             {
-                File f=null;
+                File f = null;
                 if (desc instanceof DynClassDescription)
-                    f=new File(ModConstants.DYN_LOC + "/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
+                    f = new File(ModConstants.DYN_LOC + "/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
                 if (desc instanceof DynResourceDescription)
-                    f=new File(ModConstants.DYN_LOC + "/assets/chowtime/" + ((DynResourceDescription) desc).path);
+                    f = new File(ModConstants.DYN_LOC + "/assets/chowtime/" + ((DynResourceDescription) desc).path);
                 f.delete();
             }
-
 
             //Download the classes that need to be updated
             List<DynDescription> list = remote.difference(local);
             for (DynDescription desc : list)
             {
                 if (desc instanceof DynClassDescription)
-                    DownloadFile("/"  + ((DynClassDescription) desc).classname.replace('.', '/') + ".class","/" + (ObfHelper.isObf?"obf/":"deobf/") + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
+                    DownloadFile("/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class", "/" + (ObfHelper.isObf ? "obf/" : "deobf/") + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
                 if (desc instanceof DynResourceDescription)
-                    DownloadFile("/assets/chowtime/" + ((DynResourceDescription) desc).path,null);
+                    DownloadFile("/assets/chowtime/" + ((DynResourceDescription) desc).path, null);
             }
+
+            hasUpdated = true;
 
             //Update local file
             try
@@ -79,11 +83,11 @@ public class RemoteMain
             URL url = new URL(Config.remoteLoc + "/dyn/current.ctd");
             URLConnection con = url.openConnection();
             InputStreamReader isr = new InputStreamReader(con.getInputStream());
-            BufferedReader br=new BufferedReader(isr);
+            BufferedReader br = new BufferedReader(isr);
             File dyn = new File(ModConstants.DYN_LOC + "/remote.ctd");
-            if(!dyn.exists())dyn.createNewFile();
-            FileWriter fw=new FileWriter(dyn);
-            while(br.ready())
+            if (!dyn.exists()) dyn.createNewFile();
+            FileWriter fw = new FileWriter(dyn);
+            while (br.ready())
             {
                 fw.write(br.readLine());
                 fw.write("\n");
@@ -109,14 +113,14 @@ public class RemoteMain
     {
         try
         {
-//            ChowTime.logger.error("Downloading remote "+remotepath+" to local "+localpath);
-            if(remotepath==null) remotepath=localpath;
+            //            ChowTime.logger.error("Downloading remote "+remotepath+" to local "+localpath);
+            if (remotepath == null) remotepath = localpath;
             final int blk_size = 1024;
             URL url = new URL(Config.remoteLoc + "dyn/current" + remotepath);
             URLConnection con = url.openConnection();
             InputStream reader = url.openStream();
             File f = new File(ModConstants.DYN_LOC + localpath);
-            if(!f.exists())
+            if (!f.exists())
             {
                 f.getParentFile().mkdirs();
                 f.createNewFile();
@@ -134,7 +138,7 @@ public class RemoteMain
             }
             writer.close();
             reader.close();
-//            ChowTime.logger.error("Download complete...");
+            //            ChowTime.logger.error("Download complete...");
         }
         catch (IOException e)
         {

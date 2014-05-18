@@ -11,9 +11,11 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class CTBlock extends Block{
+public class CTBlock extends Block
+{
 
-    public CTBlock(Material material){
+    public CTBlock(Material material)
+    {
         super(material);
         this.setCreativeTab(ChowTime.creativeTab);
     }

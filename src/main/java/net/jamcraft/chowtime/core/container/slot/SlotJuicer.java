@@ -18,6 +18,6 @@ public class SlotJuicer extends Slot
     @Override
     public boolean isItemValid(ItemStack stack)
     {
-        return JuicerRecipes.GetRecipeFromStack(stack)!=null;
+        return JuicerRecipes.GetRecipeFromStack(stack) != null;
     }
 }

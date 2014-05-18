@@ -18,6 +18,6 @@ public class SlotFermenter extends Slot
     @Override
     public boolean isItemValid(ItemStack stack)
     {
-        return FermenterRecipies.GetRecipeFromStack(stack)!=null;
+        return FermenterRecipies.GetRecipeFromStack(stack) != null;
     }
 }

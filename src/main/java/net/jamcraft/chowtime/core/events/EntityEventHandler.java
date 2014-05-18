@@ -1,24 +1,24 @@
 package net.jamcraft.chowtime.core.events;
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.jamcraft.chowtime.ChowTime;
+import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.crops.CropBarley;
 import net.jamcraft.chowtime.core.crops.CropStrawberry;
+import net.jamcraft.chowtime.remote.RemoteMain;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
+import java.io.*;
 
 public class EntityEventHandler
 {
@@ -27,11 +27,25 @@ public class EntityEventHandler
     {
         if (event.entity instanceof EntityPlayer)
         {
-            ChowTime.harvestXP = ChowTime.saveData.getInteger("harvestXP" + ((EntityPlayer) event.entity).getCommandSenderName());
-            ChowTime.harvestLVL = ChowTime.saveData.getInteger("harvestLVL" + ((EntityPlayer) event.entity).getCommandSenderName());
+            EntityPlayer player = (EntityPlayer) event.entity;
+
+            ChowTime.harvestXP = ChowTime.saveData.getInteger("harvestXP" + (player).getCommandSenderName());
+            ChowTime.harvestLVL = ChowTime.saveData.getInteger("harvestLVL" + (player).getCommandSenderName());
+
+            if (event.world.isRemote)
+            {
+                if (RemoteMain.hasUpdated)
+                {
+                    player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("string.updated")));
+                }
+                if (Config.forceLocal)
+                {
+                    player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("string.warnlocal")));
+                }
+            }
         }
     }
-    
+
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event)
     {
@@ -41,19 +55,21 @@ public class EntityEventHandler
             ChowTime.harvestingLVL = new File(ChowTime.dir + File.separator + "ChowTime", "CT" + event.world.getWorldInfo().getWorldName() + ".cfg");
             try
             {
-                if (!ChowTime.harvestingLVL.exists()) ChowTime.harvestingLVL.createNewFile();
+                if (!ChowTime.harvestingLVL.exists())
+                    ChowTime.harvestingLVL.createNewFile();
             }
             catch (IOException e)
             {
                 e.printStackTrace();
             }
         }
-        
+
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
             try
             {
-                if (ChowTime.harvestingLVL.exists()) ChowTime.saveData = CompressedStreamTools.readCompressed(new FileInputStream(ChowTime.harvestingLVL));
+                if (ChowTime.harvestingLVL.exists())
+                    ChowTime.saveData = CompressedStreamTools.readCompressed(new FileInputStream(ChowTime.harvestingLVL));
             }
             catch (EOFException e)
             {
@@ -65,7 +81,7 @@ public class EntityEventHandler
             }
         }
     }
-    
+
     @SubscribeEvent
     public void onWorldSave(WorldEvent.Save event)
     {
@@ -73,11 +89,13 @@ public class EntityEventHandler
         {
             try
             {
-                if (ChowTime.harvestingLVL.exists()) CompressedStreamTools.writeCompressed(ChowTime.saveData, new FileOutputStream(ChowTime.harvestingLVL));
+                if (ChowTime.harvestingLVL.exists())
+                    CompressedStreamTools.writeCompressed(ChowTime.saveData, new FileOutputStream(ChowTime.harvestingLVL));
                 int i = event.world.playerEntities.size();
-                for(int j = 0; j < i; j++){
-                    ChowTime.saveData.setInteger("harvestXP" + ((EntityPlayer)event.world.playerEntities.get(j)).getCommandSenderName(), ChowTime.harvestXP);
-                    ChowTime.saveData.setInteger("harvestLVL" + ((EntityPlayer)event.world.playerEntities.get(j)).getCommandSenderName(), ChowTime.harvestLVL);    
+                for (int j = 0; j < i; j++)
+                {
+                    ChowTime.saveData.setInteger("harvestXP" + ((EntityPlayer) event.world.playerEntities.get(j)).getCommandSenderName(), ChowTime.harvestXP);
+                    ChowTime.saveData.setInteger("harvestLVL" + ((EntityPlayer) event.world.playerEntities.get(j)).getCommandSenderName(), ChowTime.harvestLVL);
                 }
             }
             catch (EOFException e)
@@ -90,7 +108,7 @@ public class EntityEventHandler
             }
         }
     }
-    
+
     @SubscribeEvent
     public void onEntityUpdate(LivingEvent.LivingUpdateEvent event)
     {
@@ -101,34 +119,34 @@ public class EntityEventHandler
             }
         }
     }
-    
+
     @SubscribeEvent
     public void onItemUseStart(PlayerUseItemEvent.Start event)
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-            
+
         }
     }
-    
+
     @SubscribeEvent
     public void onItemUseTick(PlayerUseItemEvent.Tick event)
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-            
+
         }
     }
-    
+
     @SubscribeEvent
     public void onItemUseStopBeforeFinish(PlayerUseItemEvent.Stop event)
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-            
+
         }
     }
-    
+
     @SubscribeEvent
     public void onItemUseFinish(PlayerUseItemEvent.Finish event)
     {
@@ -141,7 +159,7 @@ public class EntityEventHandler
             // ChatComponentText("Munch munch munch"));
         }
     }
-    
+
     @SubscribeEvent
     public void breakSpeed(PlayerEvent.BreakSpeed event)
     {
@@ -158,13 +176,13 @@ public class EntityEventHandler
             }
         }
     }
-    
+
     @SubscribeEvent
     public void harvestCheck(PlayerEvent.HarvestCheck event)
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-            
+
         }
     }
 }

@@ -10,9 +10,11 @@ import net.minecraft.item.Item;
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class CTItem extends Item {
+public class CTItem extends Item
+{
 
-    public CTItem(){
+    public CTItem()
+    {
         super();
         this.setCreativeTab(ChowTime.creativeTab);
     }
