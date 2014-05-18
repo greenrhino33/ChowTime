@@ -36,7 +36,7 @@ public class EntitySeedMob extends EntityAnimal
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.33F));
         this.tasks.addTask(2, new EntityAIMate(this, var2));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.3F, Items.apple, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.3F, CTInits.Strawberry, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
         this.tasks.addTask(5, new EntityAIWander(this, 0.25F));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 5.0F));
@@ -50,7 +50,7 @@ public class EntitySeedMob extends EntityAnimal
 
     public boolean isBreedingItem(ItemStack par1ItemStack)
     {
-        return par1ItemStack.getItem() == Items.apple;
+        return par1ItemStack.getItem() == CTInits.Strawberry;
     }
 
     public void onLivingUpdate()
