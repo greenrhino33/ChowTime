@@ -239,7 +239,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             {
                 ticksLeft = 0;
             }
-            if (ticksLeft == maxTicks)
+            if (ticksLeft == maxTicks && maxTicks!=0)
             {
                 ticksLeft = 0;
                 make();
