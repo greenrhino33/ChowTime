@@ -14,6 +14,7 @@ import net.jamcraft.chowtime.core.items.SeedStrawberry;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.entity.player.EntityPlayer;
+import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
@@ -47,6 +48,7 @@ public class EntityEventHandler
                 if (RemoteMain.hasUpdated)
                 {
                     player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("string.updated")));
+                    RemoteMain.hasUpdated=false;
                 }
                 if (Config.forceLocal)
                 {

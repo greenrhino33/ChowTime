@@ -36,7 +36,7 @@ public class EntitySeedMob extends EntityAnimal
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.33F));
         this.tasks.addTask(2, new EntityAIMate(this, var2));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.3F, Items.apple, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.3F, CTInits.Strawberry, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
         this.tasks.addTask(5, new EntityAIWander(this, 0.25F));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 5.0F));
@@ -50,7 +50,7 @@ public class EntitySeedMob extends EntityAnimal
 
     public boolean isBreedingItem(ItemStack par1ItemStack)
     {
-        return par1ItemStack.getItem() == Items.apple;
+        return par1ItemStack.getItem() == CTInits.Strawberry;
     }
 
     public void onLivingUpdate()
@@ -154,70 +154,61 @@ public class EntitySeedMob extends EntityAnimal
         ItemStack itemstack = par1EntityPlayer.inventory.getCurrentItem();
 
         Random random = new Random();
-        int n = rand.nextInt(9);
+        int n = random.nextInt(9);
+        int produce = random.nextInt(10) + 6;
 
-//        if (itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
-//        {
-//            if (itemstack.stackSize-- == 1)
-//            {
-//                switch(n){
-//                case 0:
-//                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(CTInits.BarleySeeds));
-//                    break;
-//                case 1:
-//                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(CTInits.StrawberrySeeds));
-//                    break;
-//                case 2:
-//                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(CTInits.GrapeSeeds));
-//                    break;
-//                case 3:
-//
-//                    break;
-//                    default:
-//                        break;
-//                }
-//            }
-//            else /*if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.BarleySeeds)))*/
-//            {
+//        if(){
+
+        if (itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
+        {
                 switch(n){
                     case 0:
-                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.BarleySeeds, 1, 0), false);
+                        par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.BarleySeeds, 1, 0));
+                        par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
                         break;
                     case 1:
-                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.StrawberrySeeds, 1, 0), false);
+                        par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.StrawberrySeeds, 1, 0));
+                        par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
                         break;
                     case 2:
-                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.GrapeSeeds, 1, 0), false);
+                        par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.GrapeSeeds, 1, 0));
+                        par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
                         break;
                     case 3:
-                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.CornSeeds, 1, 0), false);
+                        par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.CornSeeds, 1, 0));
+                        par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
                         break;
                     case 4:
-                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.RaspberrySeeds, 1, 0), false);
+                        par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.RaspberrySeeds, 1, 0));
+                        par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
                         break;
                     case 5:
-                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.BlueberrySeeds, 1, 0), false);
+                        par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.BlueberrySeeds, 1, 0));
+                        par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
                         break;
                     case 6:
-                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.CranberrySeeds, 1, 0), false);
+                        par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.CranberrySeeds, 1, 0));
+                        par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
                         break;
                     case 7:
-                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.CornSeeds, 1, 0), false);
+                        par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.CornSeeds, 1, 0));
+                        par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
                         break;
                     case 8:
-                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.TomatoSeeds, 1, 0), false);
+                        par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.TomatoSeeds, 1, 0));
+                        par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
                         break;
                     default:
                         break;
                 }
-          //  }
-
             return true;
-        //}
-//        else
-//        {
-//            return super.interact(par1EntityPlayer);
-//        }
+          }
+        else
+        {
+            return super.interact(par1EntityPlayer);
+        }
+       //}
+
     }
 
     @Override

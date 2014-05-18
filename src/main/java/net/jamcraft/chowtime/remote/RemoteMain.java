@@ -28,16 +28,16 @@ public class RemoteMain
         LoadLocal();
         if (Config.forceLocal) return;
         LoadRemote();
-        if (!local.equals(remote))
+        if (!local.equals(remote) && remote.descriptions.size() > 0)
         {
             //Remove old files
             List<DynDescription> old = local.difference(remote);
             for (DynDescription desc : old)
             {
-                File f = null;
+                File f = new File("");
                 if (desc instanceof DynClassDescription)
                     f = new File(ModConstants.DYN_LOC + "/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
-                if (desc instanceof DynResourceDescription)
+                else if (desc instanceof DynResourceDescription)
                     f = new File(ModConstants.DYN_LOC + "/assets/chowtime/" + ((DynResourceDescription) desc).path);
                 f.delete();
             }
@@ -48,7 +48,7 @@ public class RemoteMain
             {
                 if (desc instanceof DynClassDescription)
                     DownloadFile("/" + ((DynClassDescription) desc).classname.replace('.', '/') + ".class", "/" + (ObfHelper.isObf ? "obf/" : "deobf/") + ((DynClassDescription) desc).classname.replace('.', '/') + ".class");
-                if (desc instanceof DynResourceDescription)
+                else if (desc instanceof DynResourceDescription)
                     DownloadFile("/assets/chowtime/" + ((DynResourceDescription) desc).path, null);
             }
 
@@ -113,7 +113,7 @@ public class RemoteMain
     {
         try
         {
-            //            ChowTime.logger.error("Downloading remote "+remotepath+" to local "+localpath);
+            ChowTime.logger.warn("Downloading remote " + remotepath + " to local " + localpath);
             if (remotepath == null) remotepath = localpath;
             final int blk_size = 1024;
             URL url = new URL(Config.remoteLoc + "dyn/current" + remotepath);
@@ -138,7 +138,7 @@ public class RemoteMain
             }
             writer.close();
             reader.close();
-            //            ChowTime.logger.error("Download complete...");
+            ChowTime.logger.warn("Download complete...");
         }
         catch (IOException e)
         {
