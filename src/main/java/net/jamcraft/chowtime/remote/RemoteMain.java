@@ -185,7 +185,7 @@ public class RemoteMain
 
     public static boolean IsSyncedWithServer(String serverHash)
     {
-        isSyncedWithServer=serverHash.equals(localHash);
+        isSyncedWithServer=false;//serverHash.equals(localHash);
         return isSyncedWithServer;
     }
 }

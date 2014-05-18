@@ -1,5 +1,6 @@
 package net.jamcraft.chowtime;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
@@ -96,7 +97,6 @@ public class ChowTime
         CTRegistry.CTItems();
         CTRegistry.CTTileEntities();
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
-        MinecraftForge.EVENT_BUS.register(new ConnectionHandler());
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
         dir = event.getModConfigurationDirectory();
@@ -116,6 +116,8 @@ public class ChowTime
     {
         // FMLInterModComms.sendMessage("prisoncraft", "blacklist",
         // Block.blockRegistry.getNameForObject(Blocks.bookshelf));
+        FMLCommonHandler.instance().bus().register(new ConnectionHandler());
+
         DynItems.registerRecipes();
 
         proxy.registerRenderers();

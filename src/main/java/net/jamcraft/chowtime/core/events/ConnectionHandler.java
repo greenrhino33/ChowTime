@@ -1,9 +1,12 @@
 package net.jamcraft.chowtime.core.events;
 
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
 import cpw.mods.fml.relauncher.Side;
+import io.netty.channel.ChannelFutureListener;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.network.SHA1Packet;
 import net.jamcraft.chowtime.remote.RemoteMain;
@@ -14,13 +17,11 @@ import net.jamcraft.chowtime.remote.RemoteMain;
 public class ConnectionHandler
 {
     @SubscribeEvent
-    public void clientConnected(FMLNetworkEvent.ClientConnectedToServerEvent e)
+    public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event)
     {
-        if(!e.isLocal)
-        {
-            ChowTime.channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
-            ChowTime.channels.get(Side.CLIENT).writeOutbound(new SHA1Packet(RemoteMain.localHash));
-        }
+        ChowTime.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
+        ChowTime.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(event.player);
+        ChowTime.channels.get(Side.SERVER).writeAndFlush(new SHA1Packet(RemoteMain.localHash)).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
     }
 
     @SubscribeEvent
