@@ -13,8 +13,8 @@ import org.lwjgl.opengl.GL11;
  */
 public class ModelSeedMob extends ModelBase{
 
-    protected float field_78145_g = 8.0F;
-    protected float field_78151_h = 4.0F;
+    protected float field_78145_g = 5.0F;
+    protected float field_78151_h = 3.0F;
     //fields
     ModelRenderer Base;
     ModelRenderer Leg;
@@ -78,7 +78,7 @@ public class ModelSeedMob extends ModelBase{
         {
             float f6 = 2.0F;
 //            GL11.glPushMatrix();
-//            GL11.glTranslatef(0.5F, this.field_78145_g * f5, this.field_78151_h * f5);
+//            GL11.glTranslatef(0.0F, this.field_78145_g * f5, this.field_78151_h * f5);
 //
 //            GL11.glPopMatrix();
             GL11.glPushMatrix();
