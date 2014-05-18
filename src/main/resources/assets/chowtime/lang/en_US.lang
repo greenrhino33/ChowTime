@@ -16,6 +16,7 @@ tile.ChocolateMilk.name=Chocolate Milk
 
 string.updated=ChowTime has updated! Look for new foods and recipies.
 string.warnlocal=[ChowTime]Warning! Remote update has been disabled!
+string.nosync=[ChowTime] Client dynamic version different than server.. Disconnecting.
 
 item.barley.name=Barley
 item.seedBarley.name=Barley Seeds
