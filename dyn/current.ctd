@@ -16,7 +16,7 @@ net.jamcraft.chowtime.dyn.items.ItemStrawberryIceCream 0.0.1
 resources
 {
 textures/items/appleJuice.png 0.0.1
-textures/items/carronJuice.png 0.0.1
+textures/items/carrotJuice.png 0.0.1
 textures/items/chocolateIceCream.png 0.0.1
 textures/items/chocolateIceCreamCone.png 0.0.1
 textures/items/cone.png 0.0.1
