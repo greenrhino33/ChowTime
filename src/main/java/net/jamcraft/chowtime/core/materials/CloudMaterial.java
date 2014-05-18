@@ -6,33 +6,35 @@ import net.minecraft.block.material.Material;
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class CloudMaterial extends Material {
+public class CloudMaterial extends Material
+{
 
-    public CloudMaterial() {
+    public CloudMaterial()
+    {
         super(MapColor.snowColor);
         this.setNoPushMobility();
     }
 
     @Override
-    public boolean isLiquid ()
+    public boolean isLiquid()
     {
         return false;
     }
 
     @Override
-    public boolean blocksMovement ()
+    public boolean blocksMovement()
     {
         return false;
     }
 
     @Override
-    public boolean isSolid ()
+    public boolean isSolid()
     {
         return false;
     }
 
     @Override
-    public boolean getCanBlockGrass ()
+    public boolean getCanBlockGrass()
     {
         return false;
     }

@@ -2,28 +2,27 @@ package net.jamcraft.chowtime.core.mobs.SeedMob;
 
 import net.jamcraft.chowtime.core.CTInits;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 
 /**
  * Created by Kayla Marie on 5/16/14.
  */
-public class EntitySeedMob extends EntityAnimal{
+public class EntitySeedMob extends EntityAnimal
+{
 
     private int inLove;
     private int breeding;
     private EntityPlayer field_146084_br;
 
-    public EntitySeedMob(World par1World) {
+    public EntitySeedMob(World par1World)
+    {
         super(par1World);
 
         this.setHealth(10.0F);
@@ -34,7 +33,7 @@ public class EntitySeedMob extends EntityAnimal{
 
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.33F));
-        this.tasks.addTask(2, new EntityAIMate(this,var2));
+        this.tasks.addTask(2, new EntityAIMate(this, var2));
         this.tasks.addTask(3, new EntityAITempt(this, 0.3F, Items.apple, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
         this.tasks.addTask(5, new EntityAIWander(this, 0.25F));
@@ -42,7 +41,8 @@ public class EntitySeedMob extends EntityAnimal{
         this.tasks.addTask(7, new EntityAILookIdle(this));
     }
 
-    public boolean isAIEnabled(){
+    public boolean isAIEnabled()
+    {
         return true;
     }
 
@@ -70,7 +70,7 @@ public class EntitySeedMob extends EntityAnimal{
                 double d0 = this.rand.nextGaussian() * 0.02D;
                 double d1 = this.rand.nextGaussian() * 0.02D;
                 double d2 = this.rand.nextGaussian() * 0.02D;
-                this.worldObj.spawnParticle(s, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+                this.worldObj.spawnParticle(s, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
             }
         }
         else
@@ -110,7 +110,7 @@ public class EntitySeedMob extends EntityAnimal{
                 double d0 = this.rand.nextGaussian() * 0.02D;
                 double d1 = this.rand.nextGaussian() * 0.02D;
                 double d2 = this.rand.nextGaussian() * 0.02D;
-                this.worldObj.spawnParticle("heart", this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+                this.worldObj.spawnParticle("heart", this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
             }
 
             this.worldObj.spawnEntityInWorld(entityageable);
@@ -127,20 +127,23 @@ public class EntitySeedMob extends EntityAnimal{
         return this.getGrowingAge() < 0;
     }
 
-
-    protected String getLivingSound() {
+    protected String getLivingSound()
+    {
         return "mob.glog.say";
     }
 
-    protected String getHurtSound() {
+    protected String getHurtSound()
+    {
         return "mob.glog.say";
     }
 
-    protected String getDeathSound() {
+    protected String getDeathSound()
+    {
         return "mob.glog.death";
     }
 
-    protected void playStepSound(int par1, int par2, int par3, int par4){
+    protected void playStepSound(int par1, int par2, int par3, int par4)
+    {
         this.worldObj.playSoundAtEntity(this, "mob.glog.step", 0.1F, 1.0F);
     }
 
@@ -168,11 +171,13 @@ public class EntitySeedMob extends EntityAnimal{
     }
 
     @Override
-    protected Item getDropItem() {
+    protected Item getDropItem()
+    {
         return CTInits.BarleySeeds;
     }
 
-    public EntityAgeable createChild(EntityAgeable var1) {
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
         return new EntitySeedMob(this.worldObj);
     }
 }

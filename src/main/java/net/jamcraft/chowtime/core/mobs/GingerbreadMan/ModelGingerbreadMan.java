@@ -1,16 +1,14 @@
 package net.jamcraft.chowtime.core.mobs.GingerbreadMan;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.model.ModelZombie;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class ModelGingerbreadMan extends ModelBase {
+public class ModelGingerbreadMan extends ModelBase
+{
     //fields
     ModelRenderer head;
     ModelRenderer body;

@@ -18,17 +18,17 @@ public class ItemGrapeJuice extends Item implements IDynItem
     {
         super();
         setCreativeTab(ChowTime.creativeTab);
-        setTextureName(ModConstants.MODID + ":strawberryJuice");
-        setUnlocalizedName("strawberryJuice");
+        setTextureName(ModConstants.MODID + ":grapeJuice");
+        setUnlocalizedName("grapeJuice");
     }
 
     @Override public String getRegistrationName()
     {
-        return "strawberryJuice";
+        return "grapeJuice";
     }
 
     @Override public void registerRecipe()
     {
-        JuicerRecipes.AddRecipe(new ItemStack(CTInits.Strawberry),new ItemStack(this),200);
+        JuicerRecipes.AddRecipe(new ItemStack(CTInits.Grape), new ItemStack(this), 200);
     }
 }

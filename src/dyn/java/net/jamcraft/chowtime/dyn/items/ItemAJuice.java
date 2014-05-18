@@ -29,6 +29,6 @@ public class ItemAJuice extends Item implements IDynItem
 
     @Override public void registerRecipe()
     {
-        JuicerRecipes.AddRecipe(new ItemStack(Items.apple),new ItemStack(this),200);
+        JuicerRecipes.AddRecipe(new ItemStack(Items.apple), new ItemStack(this), 200);
     }
 }

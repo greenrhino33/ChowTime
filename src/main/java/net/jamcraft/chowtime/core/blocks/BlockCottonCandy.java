@@ -13,14 +13,16 @@ import java.util.Random;
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class BlockCottonCandy extends CTBlock{
+public class BlockCottonCandy extends CTBlock
+{
 
-    public BlockCottonCandy(){
+    public BlockCottonCandy()
+    {
         super(ChowTime.cloud);
     }
 
     @Override
-    public void onEntityCollidedWithBlock (World world, int x, int y, int z, Entity entity)
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
     {
         if (entity.motionY < 0.0D)
         {
@@ -30,16 +32,17 @@ public class BlockCottonCandy extends CTBlock{
     }
 
     @Override
-    public int getRenderBlockPass ()
+    public int getRenderBlockPass()
     {
         return 1;
     }
 
     @Override
-    public boolean isBlockSolid (IBlockAccess iblockaccess, int x, int y, int z, int l)
+    public boolean isBlockSolid(IBlockAccess iblockaccess, int x, int y, int z, int l)
     {
         return false;
     }
+
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
@@ -49,13 +52,13 @@ public class BlockCottonCandy extends CTBlock{
     }
 
     @Override
-    public boolean isOpaqueCube ()
+    public boolean isOpaqueCube()
     {
         return false;
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool (World world, int x, int y, int z)
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
     {
         if (world.getBlock(x, y - 1, z) == CTInits.CottonCandyBLUE)
         {

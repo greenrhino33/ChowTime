@@ -2,7 +2,6 @@ package net.jamcraft.chowtime.dyn.items;
 
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.ModConstants;
-import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.dyn.common.IDynItem;
 import net.minecraft.init.Items;
@@ -29,7 +28,7 @@ public class ItemVinegar extends Item implements IDynItem
 
     @Override public void registerRecipe()
     {
-        FermenterRecipies.AddRecipe(new ItemStack(Items.apple),new ItemStack(this),200);
-        FermenterRecipies.AddRecipe(new ItemStack(Items.carrot), new ItemStack(this),280);
+        FermenterRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(this), 200);
+        FermenterRecipies.AddRecipe(new ItemStack(Items.carrot), new ItemStack(this), 280);
     }
 }

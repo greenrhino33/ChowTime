@@ -1,8 +1,6 @@
 package net.jamcraft.chowtime.core.client;
 
-import net.jamcraft.chowtime.core.container.ContainerFermenter;
 import net.jamcraft.chowtime.core.container.ContainerICMaker;
-import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiICMaker extends GuiContainer
 {
     TEIceCreamMaker te;
+
     public GuiICMaker(InventoryPlayer playerInv, TEIceCreamMaker te)
     {
         super(new ContainerICMaker(playerInv, te));
@@ -26,14 +25,14 @@ public class GuiICMaker extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
         String containerName = StatCollector.translateToLocal(te.getInventoryName());
-        String invName=StatCollector.translateToLocal("container.inventory");
+        String invName = StatCollector.translateToLocal("container.inventory");
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
-        fontRendererObj.drawString(invName, xSize - fontRendererObj.getStringWidth(invName)-5, ySize - 128 + 2, 4210752);
+        fontRendererObj.drawString(invName, xSize - fontRendererObj.getStringWidth(invName) - 5, ySize - 128 + 2, 4210752);
         GL11.glPushMatrix();
-        GL11.glScaled(0.51F,0.51F,0.51F);
-        double tempD=((double)te.getTemp())/1000;
-        String temp=Double.toString(tempD)+"°C";
-        fontRendererObj.drawString(temp,18 , 55, 4210752);
+        GL11.glScaled(0.51F, 0.51F, 0.51F);
+        double tempD = ((double) te.getTemp()) / 1000;
+        String temp = Double.toString(tempD) + "°C";
+        fontRendererObj.drawString(temp, 18, 55, 4210752);
         GL11.glPopMatrix();
     }
 
@@ -51,7 +50,7 @@ public class GuiICMaker extends GuiContainer
         int i1 = this.te.getScaledProgress(24);
         this.drawTexturedModalRect(xStart + 79, yStart + 34, 176, 14, i1 + 1, 16);
 
-        i1=this.te.getScaledTemp(46);
-        this.drawTexturedModalRect(xStart+ 8, yStart + 7, 176, 31, 15, i1+1);
+        i1 = this.te.getScaledTemp(46);
+        this.drawTexturedModalRect(xStart + 8, yStart + 7, 176, 31, 15, i1 + 1);
     }
 }

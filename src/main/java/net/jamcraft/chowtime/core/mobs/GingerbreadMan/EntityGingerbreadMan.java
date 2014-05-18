@@ -6,14 +6,15 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeModContainer;
 
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class EntityGingerbreadMan extends EntityMob {
+public class EntityGingerbreadMan extends EntityMob
+{
 
-    public EntityGingerbreadMan(World par1World){
+    public EntityGingerbreadMan(World par1World)
+    {
         super(par1World);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
@@ -40,9 +41,9 @@ public class EntityGingerbreadMan extends EntityMob {
     protected void entityInit()
     {
         super.entityInit();
-        this.getDataWatcher().addObject(12, Byte.valueOf((byte)0));
-        this.getDataWatcher().addObject(13, Byte.valueOf((byte)0));
-        this.getDataWatcher().addObject(14, Byte.valueOf((byte)0));
+        this.getDataWatcher().addObject(12, Byte.valueOf((byte) 0));
+        this.getDataWatcher().addObject(13, Byte.valueOf((byte) 0));
+        this.getDataWatcher().addObject(14, Byte.valueOf((byte) 0));
     }
 
     protected boolean isAIEnabled()

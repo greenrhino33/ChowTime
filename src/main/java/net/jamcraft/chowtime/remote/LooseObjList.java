@@ -1,6 +1,5 @@
 package net.jamcraft.chowtime.remote;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
 import java.io.*;
@@ -51,9 +50,9 @@ public class LooseObjList
                 resources.add((DynResourceDescription) desc);
         }
 
-        if(!out.exists())out.createNewFile();
-        FileWriter fw=new FileWriter(out);
-        BufferedWriter bw=new BufferedWriter(fw);
+        if (!out.exists()) out.createNewFile();
+        FileWriter fw = new FileWriter(out);
+        BufferedWriter bw = new BufferedWriter(fw);
 
         bw.write("classes");
         bw.newLine();
@@ -99,11 +98,11 @@ public class LooseObjList
             if (!l.equals("{")) return;
             while (br.ready())
             {
-                String line=br.readLine();
+                String line = br.readLine();
                 if (line.equals("}")) break;
-                DynClassDescription desc=new DynClassDescription();
-                desc.classname=line.split(" ")[0];
-                desc.version=new Version(0,0,0);
+                DynClassDescription desc = new DynClassDescription();
+                desc.classname = line.split(" ")[0];
+                desc.version = new Version(0, 0, 0);
                 desc.version.readFromString(line.split(" ")[1]);
                 descriptions.add(desc);
             }
@@ -134,16 +133,16 @@ public class LooseObjList
     @Override
     public boolean equals(Object o)
     {
-        if(!(o instanceof LooseObjList)) return false;
+        if (!(o instanceof LooseObjList)) return false;
 
-        LooseObjList other=(LooseObjList)o;
+        LooseObjList other = (LooseObjList) o;
 
         //If they aren't the same size, they obviously aren't the same...
-        if(this.getObjects().size()!=other.getObjects().size()) return false;
+        if (this.getObjects().size() != other.getObjects().size()) return false;
 
-        for(int i=0;i<descriptions.size();i++)
+        for (int i = 0; i < descriptions.size(); i++)
         {
-            if(!descriptions.contains(other.getObjects().get(i))) return false;
+            if (!descriptions.contains(other.getObjects().get(i))) return false;
         }
 
         return true;
@@ -154,7 +153,7 @@ public class LooseObjList
         List<DynDescription> diff = new ArrayList<DynDescription>();
         for (DynDescription desc : descriptions)
         {
-            if(!other.getObjects().contains(desc)) diff.add(desc);
+            if (!other.getObjects().contains(desc)) diff.add(desc);
         }
         return diff;
     }

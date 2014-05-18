@@ -5,15 +5,16 @@ import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.item.Item;
 
 /**
- * Created by Kayla Marie on 5/15/14.
+ * Created by James Hollowell on 5/17/2014.
  */
-public class ItemBarley extends Item
+public class ItemGrape extends Item
 {
 
-    public ItemBarley()
+    public ItemGrape()
     {
         super();
         this.setCreativeTab(ChowTime.creativeTab);
-        this.setTextureName(ModConstants.MODID + ":barleyCrop");
+        setUnlocalizedName("grape");
+        this.setTextureName(ModConstants.MODID + ":grape");
     }
 }

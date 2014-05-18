@@ -28,6 +28,6 @@ public class ItemChocoIceCreamCone extends ItemFood implements IDynItem
 
     @Override public void registerRecipe()
     {
-        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(this),new ItemStack(DynItems.items.get("cone")),new ItemStack(DynItems.items.get("chocoicecream")));
+        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(this), new ItemStack(DynItems.items.get("cone")), new ItemStack(DynItems.items.get("chocoicecream")));
     }
 }

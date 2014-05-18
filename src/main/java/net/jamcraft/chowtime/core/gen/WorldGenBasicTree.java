@@ -13,9 +13,11 @@ import java.util.Random;
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class WorldGenBasicTree  extends WorldGenTrees{
+public class WorldGenBasicTree extends WorldGenTrees
+{
 
-    public WorldGenBasicTree(boolean par1) {
+    public WorldGenBasicTree(boolean par1)
+    {
         super(par1);
     }
 
@@ -72,13 +74,13 @@ public class WorldGenBasicTree  extends WorldGenTrees{
             {
                 Block block2 = par1World.getBlock(par3, par4 - 1, par5);
 
-                boolean isSoil = block2.canSustainPlant(par1World, par3, par4 - 1, par5, ForgeDirection.UP, (CTSapling)CTInits.CTSapling);
+                boolean isSoil = block2.canSustainPlant(par1World, par3, par4 - 1, par5, ForgeDirection.UP, (CTSapling) CTInits.CTSapling);
                 if (isSoil && par4 < 256 - l - 1)
                 {
-                    onPlantGrow(par1World, par3,     par4 - 1, par5,     par3, par4, par5);
-                    onPlantGrow(par1World, par3 + 1, par4 - 1, par5,     par3, par4, par5);
+                    onPlantGrow(par1World, par3, par4 - 1, par5, par3, par4, par5);
+                    onPlantGrow(par1World, par3 + 1, par4 - 1, par5, par3, par4, par5);
                     onPlantGrow(par1World, par3 + 1, par4 - 1, par5 + 1, par3, par4, par5);
-                    onPlantGrow(par1World, par3,     par4 - 1, par5 + 1, par3, par4, par5);
+                    onPlantGrow(par1World, par3, par4 - 1, par5 + 1, par3, par4, par5);
                     int j3 = par2Random.nextInt(4);
                     j1 = l - par2Random.nextInt(4);
                     k1 = 2 - par2Random.nextInt(3);

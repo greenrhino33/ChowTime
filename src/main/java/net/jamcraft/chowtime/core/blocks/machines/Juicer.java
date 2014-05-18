@@ -3,32 +3,30 @@ package net.jamcraft.chowtime.core.blocks.machines;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.GuiIDS;
 import net.jamcraft.chowtime.core.ModConstants;
-import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class Juicer extends BlockContainer {
+public class Juicer extends BlockContainer
+{
 
-    public Juicer(){
+    public Juicer()
+    {
         super(Material.iron);
         this.setCreativeTab(ChowTime.creativeTab);
         setBlockName("juicer");
-        setBlockTextureName(ModConstants.MODID+":juicer");
+        setBlockTextureName(ModConstants.MODID + ":juicer");
     }
 
-
     @Override
-    public TileEntity createNewTileEntity(World var1, int var2) {
+    public TileEntity createNewTileEntity(World var1, int var2)
+    {
         return new TEJuicer();
     }
 

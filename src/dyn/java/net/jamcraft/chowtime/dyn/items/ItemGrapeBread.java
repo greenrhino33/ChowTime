@@ -29,6 +29,6 @@ public class ItemGrapeBread extends ItemFood implements IDynItem
 
     @Override public void registerRecipe()
     {
-        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(this),new ItemStack(Items.bread),new ItemStack(DynItems.items.get("grapeJelly")));
+        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(this), new ItemStack(Items.bread), new ItemStack(DynItems.items.get("grapeJelly")));
     }
 }

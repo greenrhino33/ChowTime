@@ -3,7 +3,6 @@ package net.jamcraft.chowtime.dyn;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.ModConstants;
-import net.jamcraft.chowtime.core.ObfHelper;
 import net.jamcraft.chowtime.dyn.common.IDynItem;
 import net.jamcraft.chowtime.remote.DynClassDescription;
 import net.jamcraft.chowtime.remote.DynDescription;
@@ -15,7 +14,6 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.file.FileAlreadyExistsException;
 import java.util.HashMap;
 import java.util.Map;
 
