@@ -11,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 /**
  * Created by Kayla Marie on 5/16/14.
  */
@@ -151,15 +153,45 @@ public class EntitySeedMob extends EntityAnimal
     {
         ItemStack itemstack = par1EntityPlayer.inventory.getCurrentItem();
 
+        Random random = new Random();
+        int n = rand.nextInt(4);
+
         if (itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
         {
             if (itemstack.stackSize-- == 1)
             {
-                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(CTInits.BarleySeeds));
+                switch(n){
+                case 0:
+                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(CTInits.BarleySeeds));
+                    break;
+                case 1:
+                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(CTInits.StrawberrySeeds));
+                    break;
+                case 2:
+                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(CTInits.GrapeSeeds));
+                    break;
+                case 3:
+
+                    break;
+                    default:
+                        break;
+                }
             }
-            else if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.BarleySeeds)))
+            else /*if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.BarleySeeds)))*/
             {
-                par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.BarleySeeds, 1, 0), false);
+                switch(n){
+                    case 0:
+                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.BarleySeeds, 1, 0), false);
+                        break;
+                    case 1:
+                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.StrawberrySeeds, 1, 0), false);
+                        break;
+                    case 2:
+                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.GrapeSeeds, 1, 0), false);
+                        break;
+                    default:
+                        break;
+                }
             }
 
             return true;
@@ -173,7 +205,7 @@ public class EntitySeedMob extends EntityAnimal
     @Override
     protected Item getDropItem()
     {
-        return CTInits.BarleySeeds;
+        return null;
     }
 
     public EntityAgeable createChild(EntityAgeable var1)
