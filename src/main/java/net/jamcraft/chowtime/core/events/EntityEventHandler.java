@@ -7,11 +7,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import net.jamcraft.chowtime.ChowTime;
+import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.crops.CropBarley;
+import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -27,8 +30,22 @@ public class EntityEventHandler
     {
         if (event.entity instanceof EntityPlayer)
         {
-            ChowTime.harvestXP = ChowTime.saveData.getInteger("harvestXP" + ((EntityPlayer) event.entity).getCommandSenderName());
-            ChowTime.harvestLVL = ChowTime.saveData.getInteger("harvestLVL" + ((EntityPlayer) event.entity).getCommandSenderName());
+            EntityPlayer player=(EntityPlayer)event.entity;
+
+            ChowTime.harvestXP = ChowTime.saveData.getInteger("harvestXP" + (player).getCommandSenderName());
+            ChowTime.harvestLVL = ChowTime.saveData.getInteger("harvestLVL" + (player).getCommandSenderName());
+
+            if(event.world.isRemote)
+            {
+                if (RemoteMain.hasUpdated)
+                {
+                    player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("string.updated")));
+                }
+                if (Config.forceLocal)
+                {
+                    player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("string.warnlocal")));
+                }
+            }
         }
     }
     

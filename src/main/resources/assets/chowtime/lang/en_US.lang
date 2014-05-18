@@ -4,3 +4,6 @@ container.IceCreamMaker=Ice Cream Maker
 tile.juicer.name=Juicer
 tile.fermenter.name=Fermenter
 tile.icecreammaker.name=Ice Cream Maker
+
+string.updated=ChowTime has updated! Look for new foods and recipies.
+string.warnlocal=[ChowTime]Warning! Remote update has been disabled!

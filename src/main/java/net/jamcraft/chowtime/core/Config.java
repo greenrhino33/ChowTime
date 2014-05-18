@@ -9,7 +9,7 @@ public class Config
 {
     //and public static vars here
     public static String remoteLoc;
-    public static boolean forceUpdate;
+    public static boolean forceLocal;
 
     private static Configuration config;
 
@@ -18,7 +18,7 @@ public class Config
         config=conf;
         conf.load();
         remoteLoc=conf.get("Dynamic","RemoteLocation","http://jam-craft.github.io/ChowTime/").getString();
-        forceUpdate=conf.get("Dynamic","ForceUpdate",false).getBoolean(false);
+        forceLocal=conf.get("Dynamic","ForceLocal",false).getBoolean(false);
         conf.save();
     }
 
@@ -26,7 +26,7 @@ public class Config
     {
         config.removeCategory(config.getCategory("Dynamic"));
         config.get("Dynamic","RemoteLocation",remoteLoc);
-        config.get("Dynamic","ForceUpdate",forceUpdate);
+        config.get("Dynamic","ForceLocal",forceLocal);
         config.save();
     }
 }
