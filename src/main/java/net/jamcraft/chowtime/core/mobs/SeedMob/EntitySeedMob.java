@@ -156,10 +156,9 @@ public class EntitySeedMob extends EntityAnimal
         Random random = new Random();
         int n = random.nextInt(9);
         int produce = random.nextInt(10) + 6;
-<<<<<<< HEAD
+
 //        if(){
-=======
->>>>>>> 00ca2c06b296e364e98a6c2070eb79707b559701
+
         if (itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
         {
                 switch(n){
@@ -208,10 +207,8 @@ public class EntitySeedMob extends EntityAnimal
         {
             return super.interact(par1EntityPlayer);
         }
-<<<<<<< HEAD
        //}
-=======
->>>>>>> 00ca2c06b296e364e98a6c2070eb79707b559701
+
     }
 
     @Override
