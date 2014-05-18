@@ -77,6 +77,18 @@ public class Fermenter extends BlockContainer
         return this.top;
     }
 
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int p_149691_1_, int p_149691_2_)
+    {
+        int k = p_149691_2_ & 12;
+        int l = p_149691_2_ & 3;
+        return k == 0 && (p_149691_1_ == 1 || p_149691_1_ == 0) ? this.getTopIcon(l) : (k == 4 && (p_149691_1_ == 5 || p_149691_1_ == 4) ? this.getTopIcon(l) : (k == 8 && (p_149691_1_ == 2 || p_149691_1_ == 3) ? this.getTopIcon(l) : this.getSideIcon(l)));
+    }
+    public int getRenderType()
+    {
+        return 31;
+    }
+
     //    @Override
     //    public boolean renderAsNormalBlock()
     //    {
