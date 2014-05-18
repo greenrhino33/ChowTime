@@ -6,6 +6,7 @@ import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.core.lib.CTStrings;
 import net.jamcraft.chowtime.core.recipies.IceCreamRecipies;
 import net.jamcraft.chowtime.dyn.common.IDynItem;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemSnowball;
 import net.minecraft.item.ItemStack;
 
@@ -29,6 +30,6 @@ public class ItemStrawberryIceCream extends ItemSnowball implements IDynItem{
 
     @Override public void registerRecipe()
     {
-        IceCreamRecipies.AddRecipe(new ItemStack());
+        IceCreamRecipies.AddRecipe(new ItemStack(CTInits.Strawberry),new ItemStack(Items.milk_bucket),new ItemStack(this),60);
     }
 }

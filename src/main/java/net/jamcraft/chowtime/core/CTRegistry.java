@@ -78,7 +78,7 @@ public class CTRegistry
         CTInits.BarleyCrop = new CTItem().setUnlocalizedName(CTStrings.Item_Barley);
         GameRegistry.registerItem(CTInits.BarleyCrop, CTStrings.Item_Barley);
         CTInits.Strawberry=new ItemStrawberry();
-        GameRegistry.registerItem(CTInits.);
+        GameRegistry.registerItem(CTInits.Strawberry, "strawberry");
         CTInits.ItemBucketChoco = new CTItemBucket(CTInits.ChocolateMilk, CTInits.ItemBucketChoco, "bucket_chocolate").setUnlocalizedName(CTStrings.Item_Bucket);
         GameRegistry.registerItem(CTInits.ItemBucketChoco, CTStrings.Item_Bucket);
     }
