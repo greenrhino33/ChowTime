@@ -27,6 +27,7 @@ public class CTInits {
     //Item Inits
     public static Item BarleyCrop;
     public static Item Strawberry;
+    public static Item Grape;
     public static Item Cone;
     public static Item ItemCottonCandy;
     public static Item ItemBucketChoco;
