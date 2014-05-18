@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderSeedMob extends RenderLiving
 {
 
-    public static ResourceLocation texture = new ResourceLocation("chowtime:textures/mobs/seedMob/texture.png");
+    public static ResourceLocation texture = new ResourceLocation("chowtime:textures/mobs/seedMob/texture1.png");
 
     public RenderSeedMob(ModelBase par1ModelBase, float par2)
     {
