@@ -1,13 +1,17 @@
 package net.jamcraft.chowtime.core.blocks.machines;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.GuiIDS;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 /**
@@ -15,13 +19,16 @@ import net.minecraft.world.World;
  */
 public class Fermenter extends BlockContainer
 {
+    @SideOnly(Side.CLIENT)
+    protected IIcon top;
+    @SideOnly(Side.CLIENT)
+    protected IIcon side;
 
     public Fermenter()
     {
         super(Material.iron);
         this.setCreativeTab(ChowTime.creativeTab);
         setBlockName("fermenter");
-        setBlockTextureName(ModConstants.MODID + ":fermenter");
     }
 
     @Override
@@ -49,6 +56,25 @@ public class Fermenter extends BlockContainer
 
             return true;
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister par1IconRegister)
+    {
+        this.side = par1IconRegister.registerIcon(ModConstants.MODID + ":" + "fermenter_side");
+        this.top = par1IconRegister.registerIcon(ModConstants.MODID + ":" + "fermenter_top");
+    }
+
+    @SideOnly(Side.CLIENT)
+    protected IIcon getSideIcon(int p_150163_1_)
+    {
+        return this.side;
+    }
+
+    @SideOnly(Side.CLIENT)
+    protected IIcon getTopIcon(int p_150161_1_)
+    {
+        return this.top;
     }
 
     //    @Override
