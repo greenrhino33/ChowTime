@@ -11,6 +11,8 @@ import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
 import net.jamcraft.chowtime.core.blocks.machines.IceCreamMaker;
 import net.jamcraft.chowtime.core.blocks.machines.Juicer;
 import net.jamcraft.chowtime.core.crops.CropBarley;
+import net.jamcraft.chowtime.core.crops.CropGrape;
+import net.jamcraft.chowtime.core.crops.CropStrawberry;
 import net.jamcraft.chowtime.core.items.*;
 import net.jamcraft.chowtime.core.lib.CTStrings;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
@@ -68,9 +70,19 @@ public class CTRegistry
     public static void CTCrops()
     {
         CTInits.CropBarley = new CropBarley();
-        GameRegistry.registerBlock(CTInits.CropBarley, "barleyCrop").setBlockName("barley");
+        GameRegistry.registerBlock(CTInits.CropBarley, "barleyCrop").setBlockName("barleyCrop");
         CTInits.BarleySeeds = new SeedBarley();
         GameRegistry.registerItem(CTInits.BarleySeeds, "barleySeed");
+
+        CTInits.CropStrawberry = new CropStrawberry();
+        GameRegistry.registerBlock(CTInits.CropStrawberry, "strawberryCrop").setBlockName("strawberryCrop");
+        CTInits.StrawberrySeeds = new SeedStrawberry();
+        GameRegistry.registerItem(CTInits.StrawberrySeeds, "strawberrySeed");
+
+        CTInits.CropGrape = new CropGrape();
+        GameRegistry.registerBlock(CTInits.CropGrape, "grapeCrop").setBlockName("grapeCrop");
+        CTInits.GrapeSeeds = new SeedGrape();
+        GameRegistry.registerItem(CTInits.GrapeSeeds, "grapeSeed");
     }
     
     public static void CTItems()

@@ -43,4 +43,10 @@ public class CTInits {
     public static Block CropBarley;
     public static Item BarleySeeds;
 
+    public static Block CropStrawberry;
+    public static Item StrawberrySeeds;
+
+    public static Block CropGrape;
+    public static Item GrapeSeeds;
+
 }
