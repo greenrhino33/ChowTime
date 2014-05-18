@@ -19,11 +19,14 @@ public class RemoteMain
     public static LooseObjList local = new LooseObjList();
     private static LooseObjList remote = new LooseObjList();
 
+    public static boolean hasUpdated=false;
+
     public static void init()
     {
         File dyndir=new File(ModConstants.DYN_LOC);
         if(!dyndir.exists()) dyndir.mkdir();
         LoadLocal();
+        if(Config.forceLocal) return;
         LoadRemote();
         if (!local.equals(remote) || !local.isLoaded())
         {
@@ -49,6 +52,8 @@ public class RemoteMain
                 if (desc instanceof DynResourceDescription)
                     DownloadFile("/assets/chowtime/" + ((DynResourceDescription) desc).path,null);
             }
+
+            hasUpdated=true;
 
             //Update local file
             try
