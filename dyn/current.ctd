@@ -1,18 +1,31 @@
 classes
 {
 net.jamcraft.chowtime.dyn.items.ItemCone 0.0.4
-net.jamcraft.chowtime.dyn.items.ItemCottonCandy 0.0.4
-net.jamcraft.chowtime.dyn.items.ItemIceCream 0.0.2
-net.jamcraft.chowtime.dyn.items.ItemVinegar 0.0.1
-net.jamcraft.chowtime.dyn.items.ItemAJuice 0.0.1
-net.jamcraft.chowtime.dyn.items.ItemCJuice 0.0.1
-net.jamcraft.chowtime.dyn.items.ItemPJuice 0.0.1
-net.jamcraft.chowtime.dyn.items.ItemWatermellonIceCream 0.0.1
-net.jamcraft.chowtime.dyn.items.ItemWMICCone 0.0.2
-net.jamcraft.chowtime.dyn.items.ItemChocoIceCreamCone 0.0.1
-net.jamcraft.chowtime.dyn.items.ItemChocoIceCream 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemStrawberryJam 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemVinegar 0.0.2
+net.jamcraft.chowtime.dyn.items.ItemAJuice 0.0.2
+net.jamcraft.chowtime.dyn.items.ItemCJuice 0.0.2
+net.jamcraft.chowtime.dyn.items.ItemPJuice 0.0.2
+net.jamcraft.chowtime.dyn.items.ItemWatermellonIceCream 0.0.2
+net.jamcraft.chowtime.dyn.items.ItemWMICCone 0.0.3
+net.jamcraft.chowtime.dyn.items.ItemChocoIceCreamCone 0.0.2
+net.jamcraft.chowtime.dyn.items.ItemChocoIceCream 0.0.2
+net.jamcraft.chowtime.dyn.items.ItemStrawberryICCone 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemStrawberryIceCream 0.0.1
 }
 resources
 {
-lang/en_US.lang 0.0.7
+textures/items/appleJuice.png 0.0.1
+textures/items/carronJuice.png 0.0.1
+textures/items/chocolateIceCream.png 0.0.1
+textures/items/chocolateIceCreamCone.png 0.0.1
+textures/items/cone.png 0.0.1
+textures/items/pumpkinJuice.png 0.0.1
+textures/items/strawberryIceCream.png 0.0.1
+textures/items/strawberryIceCreamCone.png 0.0.1
+textures/items/strawberryJam.png 0.0.1
+textures/items/vinegar.png 0.0.1
+textures/items/watermelonIceCream.png 0.0.1
+textures/items/watermelonIceCreamCone.png 0.0.1
+lang/en_US.lang 0.0.8
 }
