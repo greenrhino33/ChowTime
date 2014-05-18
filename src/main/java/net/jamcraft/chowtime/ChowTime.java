@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.jamcraft.chowtime.core.*;
 import net.jamcraft.chowtime.core.events.BucketHandler;
+import net.jamcraft.chowtime.core.events.ConnectionHandler;
 import net.jamcraft.chowtime.core.events.EntityEventHandler;
 import net.jamcraft.chowtime.core.items.CTPotions;
 //import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
@@ -91,6 +92,7 @@ public class ChowTime
         CTRegistry.CTItems();
         CTRegistry.CTTileEntities();
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
+        MinecraftForge.EVENT_BUS.register(new ConnectionHandler());
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
         dir = event.getModConfigurationDirectory();
