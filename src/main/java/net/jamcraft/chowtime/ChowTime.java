@@ -1,6 +1,8 @@
 package net.jamcraft.chowtime;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
@@ -18,10 +20,12 @@ import net.jamcraft.chowtime.core.items.CTPotions;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
 import net.jamcraft.chowtime.core.network.PacketHandler;
+import net.jamcraft.chowtime.dyn.DynFolderResourcePack;
 import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.resources.IResourcePack;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Items;
@@ -33,7 +37,9 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.EnumMap;
+import java.util.List;
 
 /**
  * Created by James Hollowell on 5/14/2014.
@@ -74,6 +80,21 @@ public class ChowTime
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        try
+        {
+            Class<?> c = Loader.class;
+            Field rplField = c.getDeclaredField("canonicalModsDir");
+            rplField.setAccessible(true);
+            Object rpList = rplField.get(Loader.instance());
+            if (rpList instanceof File)
+            {
+                ModConstants.DYN_LOC = ((File) rpList).getCanonicalPath() + "/ChowTimeDyn";
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         // FMLInterModComms.sendMessage("Waila", "register",
         // "allout58.mods.prisoncraft.compat.waila.WailaProvider.callbackRegister");
 
