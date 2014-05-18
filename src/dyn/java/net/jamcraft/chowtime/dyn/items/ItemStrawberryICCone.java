@@ -11,23 +11,23 @@ import net.minecraft.item.crafting.CraftingManager;
 /**
  * Created by James Hollowell on 5/17/2014.
  */
-public class ItemChocoIceCreamCone extends ItemFood implements IDynItem
+public class ItemStrawberryICCone extends ItemFood implements IDynItem
 {
-    public ItemChocoIceCreamCone()
+    public ItemStrawberryICCone()
     {
         super(1, false);
         setCreativeTab(ChowTime.creativeTab);
-        setTextureName(ModConstants.MODID + ":chocolateIceCreamCone");
-        setUnlocalizedName("chocolateIceCreamCone");
+        setTextureName(ModConstants.MODID + ":strawberryIceCreamCone");
+        setUnlocalizedName("strawberryIceCreamCone");
     }
 
     @Override public String getRegistrationName()
     {
-        return "chocoicecreamcone";
+        return "strawberryiccone";
     }
 
     @Override public void registerRecipe()
     {
-        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(this),new ItemStack(DynItems.items.get("cone")),new ItemStack(DynItems.items.get("chocoicecream")));
+        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(this),new ItemStack(DynItems.items.get("cone")),new ItemStack(DynItems.items.get("strawberryIceCream")));
     }
 }

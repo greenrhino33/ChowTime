@@ -28,7 +28,7 @@ public class RemoteMain
         LoadLocal();
         if(Config.forceLocal) return;
         LoadRemote();
-        if (!local.equals(remote) || !local.isLoaded())
+        if (!local.equals(remote))
         {
             //Remove old files
             List<DynDescription> old=local.difference(remote);
