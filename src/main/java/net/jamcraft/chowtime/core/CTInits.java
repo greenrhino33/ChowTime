@@ -30,6 +30,7 @@ public class CTInits {
     public static Item Cone;
     public static Item ItemCottonCandy;
     public static Item ItemBucketChoco;
+    public static Item Strawberries;
 
     //Effect Inits
 
@@ -42,5 +43,7 @@ public class CTInits {
     //Crop Inits
     public static Block CropBarley;
     public static Item BarleySeeds;
+    public static Block CropStrawberry;
+    public static Item StrawberrySeeds;
 
 }

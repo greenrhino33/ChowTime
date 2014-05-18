@@ -12,11 +12,8 @@ import net.jamcraft.chowtime.core.*;
 import net.jamcraft.chowtime.core.effects.CTPotionEffectHandler;
 import net.jamcraft.chowtime.core.events.BucketHandler;
 import net.jamcraft.chowtime.core.events.EntityEventHandler;
-<<<<<<< HEAD
-=======
 import net.jamcraft.chowtime.core.items.CTPotions;
 //import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
->>>>>>> f4ddf769ec35d230348f29bc0fe6b515100668a9
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
 import net.jamcraft.chowtime.dyn.DynItems;
@@ -47,7 +44,7 @@ public class ChowTime
         @SideOnly(Side.CLIENT)
         public Item getTabIconItem()
         {
-            return Items.chainmail_chestplate;
+            return CTInits.BarleyCrop;
         }
     };
     

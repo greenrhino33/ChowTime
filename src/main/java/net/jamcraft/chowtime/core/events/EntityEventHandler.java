@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.crops.CropBarley;
-import net.minecraft.block.BlockDirt;
+import net.jamcraft.chowtime.core.crops.CropStrawberry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.util.ChatComponentText;
@@ -147,7 +147,10 @@ public class EntityEventHandler
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-            if (event.block instanceof BlockDirt && ChowTime.harvestXP < 50) event.setCanceled(true);
+            if (event.block instanceof CropStrawberry && ChowTime.harvestXP < 130){
+                event.newSpeed = -1;
+                event.entityPlayer.worldObj.scheduleBlockUpdate(event.x, event.y, event.z, event.block, 0);
+            }
             if (event.block instanceof CropBarley && event.metadata == 7)
             {
                 ChowTime.harvestXP++;

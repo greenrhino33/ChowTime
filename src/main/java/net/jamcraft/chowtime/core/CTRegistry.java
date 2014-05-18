@@ -11,15 +11,17 @@ import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
 import net.jamcraft.chowtime.core.blocks.machines.IceCreamMaker;
 import net.jamcraft.chowtime.core.blocks.machines.Juicer;
 import net.jamcraft.chowtime.core.crops.CropBarley;
+import net.jamcraft.chowtime.core.crops.CropStrawberry;
 import net.jamcraft.chowtime.core.items.CTItem;
 import net.jamcraft.chowtime.core.items.CTItemBucket;
-import net.jamcraft.chowtime.core.items.CTItemDrink;
 import net.jamcraft.chowtime.core.items.SeedBarley;
 import net.jamcraft.chowtime.core.lib.CTStrings;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemSeeds;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -53,29 +55,18 @@ public class CTRegistry
         CTInits.IceCreamMaker = new IceCreamMaker();
         GameRegistry.registerBlock(CTInits.IceCreamMaker, "IceCreamMaker");
     }
-<<<<<<< HEAD
-
-    public static void CTLiquids() {
-        CTInits.ChocolateMilkFluid = new Fluid("Fluid_ChocolateMilk");
-=======
     
     public static void CTLiquids()
     {
-        CTInits.ChocolateMilkFluid = new Fluid("chocolateMilk");
->>>>>>> f4ddf769ec35d230348f29bc0fe6b515100668a9
+        CTInits.ChocolateMilkFluid = new Fluid("ChocolateMilk");
         FluidRegistry.registerFluid(CTInits.ChocolateMilkFluid);
-        CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "Fluid_ChocolateMilk").setCreativeTab(ChowTime.creativeTab);
+        CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "ChocolateMilk").setCreativeTab(ChowTime.creativeTab);
         GameRegistry.registerBlock(CTInits.ChocolateMilk, "Chocolate Milk Fluid");
-<<<<<<< HEAD
 
         CTInits.FruitPunchFluid = new Fluid("fruitPunch");
         FluidRegistry.registerFluid(CTInits.FruitPunchFluid);
-        CTInits.FruitPunch = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "fruitPunch").setCreativeTab(ChowTime.creativeTab);
-        GameRegistry.registerBlock(CTInits.FruitPunch, "Fruit Punch");
-
-=======
-        
->>>>>>> f4ddf769ec35d230348f29bc0fe6b515100668a9
+//        CTInits.FruitPunch = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "fruitPunch").setCreativeTab(ChowTime.creativeTab);
+//        GameRegistry.registerBlock(CTInits.FruitPunch, "Fruit Punch");
     }
     
     public static void CTCrops()
@@ -84,6 +75,10 @@ public class CTRegistry
         GameRegistry.registerBlock(CTInits.CropBarley, "barleyCrop").setBlockName("barley");
         CTInits.BarleySeeds = new SeedBarley();
         GameRegistry.registerItem(CTInits.BarleySeeds, "barleySeed");
+        CTInits.CropStrawberry = new CropStrawberry();
+        GameRegistry.registerBlock(CTInits.CropStrawberry, "barleyStrawberry").setBlockName("strawberry");
+        CTInits.StrawberrySeeds = new ItemSeeds(CTInits.CropStrawberry, Blocks.farmland).setCreativeTab(ChowTime.creativeTab);
+        GameRegistry.registerItem(CTInits.StrawberrySeeds, "strawberrySeed");
     }
     
     public static void CTItems()
@@ -106,17 +101,10 @@ public class CTRegistry
         CTInits.ItemBucketChoco = new CTItemBucket(CTInits.ChocolateMilk, CTInits.ItemBucketChoco, "bucket_chocolate").setUnlocalizedName(CTStrings.Item_Bucket);
         GameRegistry.registerItem(CTInits.ItemBucketChoco, CTStrings.Item_Bucket);
     }
-<<<<<<< HEAD
-
-    public static void CTDrinks(){
-
-=======
-    
     public static void CTDrinks()
     {
         // CTInits.appleJuice = new CTItemDrink(24, false,
         // 2431323).setPotionName("appleJuice");
->>>>>>> f4ddf769ec35d230348f29bc0fe6b515100668a9
     }
     
     public static void CTTileEntities()
