@@ -28,6 +28,6 @@ public class ItemWMICCone extends ItemFood implements IDynItem
 
     @Override public void registerRecipe()
     {
-        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(this),new ItemStack(DynItems.items.get("cone")),new ItemStack(DynItems.items.get("wmicecream")));
+        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(this), new ItemStack(DynItems.items.get("cone")), new ItemStack(DynItems.items.get("wmicecream")));
     }
 }

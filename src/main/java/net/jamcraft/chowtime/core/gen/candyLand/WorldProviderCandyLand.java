@@ -9,16 +9,19 @@ import net.minecraft.world.biome.BiomeGenBase;
 /**
  * Created by Kayla Marie on 5/17/14.
  */
-public class WorldProviderCandyLand extends WorldProviderSurface {
+public class WorldProviderCandyLand extends WorldProviderSurface
+{
 
-    public WorldProviderCandyLand() {
+    public WorldProviderCandyLand()
+    {
         this.setDimension(ModConstants.Dim_ID_CandyLand);
     }
 
     public BiomeGenBase getBiomeGenForCoords(int x, int z)
     {
         BiomeGenBase biome = super.getBiomeGenForCoords(x, z);
-        if (biome == null) {
+        if (biome == null)
+        {
 
         }
         return biome;
@@ -35,7 +38,8 @@ public class WorldProviderCandyLand extends WorldProviderSurface {
         return 32.0D;
     }
 
-    public String getDimentionName() {
+    public String getDimentionName()
+    {
         return "Candy Land";
     }
 

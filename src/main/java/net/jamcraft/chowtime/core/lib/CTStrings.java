@@ -3,7 +3,8 @@ package net.jamcraft.chowtime.core.lib;
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class CTStrings {
+public class CTStrings
+{
 
     public static String BlockLogs_Basic = "log_Basic";
     public static String BlockLeaves_Basic = "leaves_Basic";
@@ -24,6 +25,5 @@ public class CTStrings {
 
     public static String ItemFood_IceCreamCone_Strawberry = "iceCreamCone_Strawberry";
     public static String ItemFood_CottonCandy_Blue = "cottonCandy_Blue";
-
 
 }

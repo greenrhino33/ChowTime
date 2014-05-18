@@ -7,14 +7,11 @@ import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -32,7 +29,7 @@ public class CropBarley extends BlockCrops
         this.setTickRandomly(true);
         this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
         this.disableStats();
-//        this.setBlockTextureName(ModConstants.MODID + ":barley");
+        //        this.setBlockTextureName(ModConstants.MODID + ":barley");
     }
 
     public int getRenderType()
@@ -56,7 +53,7 @@ public class CropBarley extends BlockCrops
     {
         return meta == 7 ? CTInits.BarleyCrop : CTInits.BarleySeeds;
     }
-    
+
     @Override
     protected Item func_149866_i()
     {

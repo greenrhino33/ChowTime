@@ -19,23 +19,23 @@ public class DynTextures
 {
     public static void addDynTP()
     {
-        if(FMLCommonHandler.instance().getEffectiveSide()== Side.CLIENT)
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
         {
             //Make sure we have a folder to work with.
-            File dirLoad=new File(ModConstants.DYN_LOC);
-            if(!dirLoad.exists())
+            File dirLoad = new File(ModConstants.DYN_LOC);
+            if (!dirLoad.exists())
             {
                 dirLoad.mkdir();
             }
 
             //Add a pack.mcmeta if there isn't one.
-            File mcmeta=new File(ModConstants.DYN_LOC+"/pack.mcmeta");
-            if(!mcmeta.exists())
+            File mcmeta = new File(ModConstants.DYN_LOC + "/pack.mcmeta");
+            if (!mcmeta.exists())
             {
                 try
                 {
                     mcmeta.createNewFile();
-                    FileWriter fw=new FileWriter(mcmeta);
+                    FileWriter fw = new FileWriter(mcmeta);
                     fw.write("{\n" + " \"pack\": {\n" + "   \"description\": \"dummy pack for ChowTime DynResources\",\n" + "   \"pack_format\": 1\n" + "}\n" + "}");
                     fw.close();
                 }

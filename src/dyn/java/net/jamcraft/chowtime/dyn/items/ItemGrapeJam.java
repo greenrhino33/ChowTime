@@ -1,34 +1,34 @@
 package net.jamcraft.chowtime.dyn.items;
 
 import net.jamcraft.chowtime.ChowTime;
-import net.jamcraft.chowtime.core.CTInits;
 import net.jamcraft.chowtime.core.ModConstants;
-import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
+import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.common.IDynItem;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 
 /**
  * Created by James Hollowell on 5/17/2014.
  */
-public class ItemStrawberryJuice extends Item implements IDynItem
+public class ItemGrapeJam extends Item implements IDynItem
 {
-
-    public ItemStrawberryJuice()
+    public ItemGrapeJam()
     {
         super();
         setCreativeTab(ChowTime.creativeTab);
-        setTextureName(ModConstants.MODID + ":strawberryJuice");
-        setUnlocalizedName("strawberryJuice");
+        setTextureName(ModConstants.MODID + ":grapeJam");
+        setUnlocalizedName("grapeJam");
     }
 
     @Override public String getRegistrationName()
     {
-        return "strawberryJuice";
+        return "grapeJam";
     }
 
     @Override public void registerRecipe()
     {
-        JuicerRecipes.AddRecipe(new ItemStack(CTInits.Strawberry), new ItemStack(this), 200);
+        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(this), new ItemStack(DynItems.items.get("grapeJuice")), new ItemStack(Items.sugar));
     }
 }

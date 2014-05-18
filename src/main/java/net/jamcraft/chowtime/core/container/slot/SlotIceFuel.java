@@ -1,6 +1,5 @@
 package net.jamcraft.chowtime.core.container.slot;
 
-
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

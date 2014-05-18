@@ -1,6 +1,5 @@
 package net.jamcraft.chowtime.core;
 
-import net.jamcraft.chowtime.core.items.CTItemDrink;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fluids.Fluid;
@@ -8,7 +7,8 @@ import net.minecraftforge.fluids.Fluid;
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class CTInits {
+public class CTInits
+{
 
     //Block Inits
     public static Block CTLeaves;
@@ -33,7 +33,6 @@ public class CTInits {
     public static Item ItemBucketChoco;
 
     //Effect Inits
-
 
     //Machine Inits
     public static Block Juicer;

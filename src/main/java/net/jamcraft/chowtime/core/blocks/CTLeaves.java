@@ -7,7 +7,6 @@ import net.jamcraft.chowtime.core.CTInits;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
@@ -19,9 +18,11 @@ import java.util.Random;
 /**
  * Created by Kayla Marie on 5/14/14.
  */
-public class CTLeaves extends BlockLeaves{
+public class CTLeaves extends BlockLeaves
+{
 
-    public CTLeaves(){
+    public CTLeaves()
+    {
         super();
         this.setTickRandomly(true);
         this.setHardness(0.2F);
@@ -39,7 +40,7 @@ public class CTLeaves extends BlockLeaves{
     }
 
     @Override
-    public void updateTick (World world, int x, int y, int z, Random random)
+    public void updateTick(World world, int x, int y, int z, Random random)
     {
         if (!world.isRemote)
         {
@@ -68,7 +69,7 @@ public class CTLeaves extends BlockLeaves{
         }
     }
 
-    public void removeLeaves (World world, int x, int y, int z)
+    public void removeLeaves(World world, int x, int y, int z)
     {
         this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
         world.setBlock(x, y, z, Blocks.air, 0, 7);
@@ -92,12 +93,14 @@ public class CTLeaves extends BlockLeaves{
     }
 
     @Override
-    public IIcon getIcon(int var1, int var2) {
+    public IIcon getIcon(int var1, int var2)
+    {
         return null;
     }
 
     @Override
-    public String[] func_150125_e() {
+    public String[] func_150125_e()
+    {
         return new String[0];
     }
 

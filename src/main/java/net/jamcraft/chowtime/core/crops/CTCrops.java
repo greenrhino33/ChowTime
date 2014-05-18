@@ -9,12 +9,14 @@ import net.minecraft.util.IIcon;
 
 import java.util.Random;
 
-public class CTCrops extends BlockCrops {
+public class CTCrops extends BlockCrops
+{
 
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
-    public CTCrops(){
+    public CTCrops()
+    {
         super();
         float f = 0.5F;
         this.setTickRandomly(true);

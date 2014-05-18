@@ -8,13 +8,15 @@ import java.lang.reflect.Modifier;
 /**
  * Created by Kayla Marie on 5/17/14.
  */
-public class CTPotions {
+public class CTPotions
+{
 
     public static Potion fruitPunch;
     public static Potion gatorade_BLUE;
     public static Potion slurpee_Red;
 
-    public static void initPotions() {
+    public static void initPotions()
+    {
         Potion[] potionTypes = null;
 
         for (Field f : Potion.class.getDeclaredFields())
@@ -33,7 +35,8 @@ public class CTPotions {
                     System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
                     f.set(null, newPotionTypes);
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 System.err.println("Severe error, please report this to the mod author:");
                 System.err.println(e);

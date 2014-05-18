@@ -1,7 +1,5 @@
 package net.jamcraft.chowtime.core.tileentities;
 
-import net.jamcraft.chowtime.core.blocks.machines.Juicer;
-import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
 import net.jamcraft.chowtime.core.recipies.Recipe1_1;
 import net.minecraft.entity.player.EntityPlayer;
@@ -191,20 +189,20 @@ public class TEJuicer extends TileEntity implements ISidedInventory
                 maxTicks = r.getTime();
             }
         }
-        if (ticksLeft < maxTicks && JuicerRecipes.GetRecipeFromStack(inventory[0])!=null)
+        if (ticksLeft < maxTicks && JuicerRecipes.GetRecipeFromStack(inventory[0]) != null)
         {
-            if(inventory[1]==null||JuicerRecipes.GetRecipeFromStack(inventory[0]).getOutput().getItem().equals(inventory[1].getItem()))
+            if (inventory[1] == null || JuicerRecipes.GetRecipeFromStack(inventory[0]).getOutput().getItem().equals(inventory[1].getItem()))
             {
                 ticksLeft++;
             }
             else
             {
-                ticksLeft=0;
+                ticksLeft = 0;
             }
         }
-        if(JuicerRecipes.GetRecipeFromStack(inventory[0])==null&&ticksLeft>0)
+        if (JuicerRecipes.GetRecipeFromStack(inventory[0]) == null && ticksLeft > 0)
         {
-            ticksLeft=0;
+            ticksLeft = 0;
         }
         if (ticksLeft == maxTicks)
         {
@@ -215,7 +213,7 @@ public class TEJuicer extends TileEntity implements ISidedInventory
 
     private void juice()
     {
-        if(JuicerRecipes.GetRecipeFromStack(inventory[0])==null) return;
+        if (JuicerRecipes.GetRecipeFromStack(inventory[0]) == null) return;
         ItemStack res = JuicerRecipes.GetRecipeFromStack(inventory[0]).getOutput();
         if (inventory[1] == null)
             inventory[1] = res.copy();
@@ -247,7 +245,7 @@ public class TEJuicer extends TileEntity implements ISidedInventory
 
     public int getScaledProgress(int scale)
     {
-        if(maxTicks==0) return 0;
-        return ticksLeft * scale/maxTicks;
+        if (maxTicks == 0) return 0;
+        return ticksLeft * scale / maxTicks;
     }
 }

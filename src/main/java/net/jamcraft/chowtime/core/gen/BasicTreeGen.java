@@ -13,52 +13,59 @@ import java.util.Random;
 /**
  * Created by Kayla Marie on 5/15/14.
  */
-public class BasicTreeGen extends WorldGenerator {
+public class BasicTreeGen extends WorldGenerator
+{
 
     private final int minTreeHeight;
     private final int metaWood;
     private final boolean seekGround;
 
-    public BasicTreeGen(boolean par1) {
+    public BasicTreeGen(boolean par1)
+    {
         this(par1, 4, 0);
     }
 
-    public BasicTreeGen(boolean par1, int par2, int par3){
+    public BasicTreeGen(boolean par1, int par2, int par3)
+    {
         super(par1);
         this.minTreeHeight = par2;
         this.metaWood = par3;
         seekGround = !par1;
     }
 
-    int findGround(World world, int x, int y, int z){
+    int findGround(World world, int x, int y, int z)
+    {
         boolean foundGround = false;
         int height = y;
-        do{
+        do
+        {
             height--;
             Block underId = world.getBlock(x, height, z);
-            if(underId == Blocks.dirt || underId == Blocks.grass || height < 0)
+            if (underId == Blocks.dirt || underId == Blocks.grass || height < 0)
                 foundGround = true;
         } while (!foundGround);
-        return height+1;
+        return height + 1;
     }
 
-    public boolean generate (World world, Random random, int posX, int posY, int posZ){
-        int treeHeight = random.nextInt(3)+this.minTreeHeight;
-        if(treeHeight < 4)
+    public boolean generate(World world, Random random, int posX, int posY, int posZ)
+    {
+        int treeHeight = random.nextInt(3) + this.minTreeHeight;
+        if (treeHeight < 4)
             treeHeight = 4;
         boolean flag = true;
 
-        if(this.seekGround)
+        if (this.seekGround)
             posY = findGround(world, posX, posY, posZ);
 
-        if(posY >= 1 && posY + treeHeight + 1 <= 256)
+        if (posY >= 1 && posY + treeHeight + 1 <= 256)
         {
             int i1;
             byte b0;
             int j1;
             int k1;
 
-            for (i1 = posY; i1 <= posY + 1 + treeHeight; i1++){
+            for (i1 = posY; i1 <= posY + 1 + treeHeight; i1++)
+            {
                 b0 = 1;
 
                 if (i1 == posY)
@@ -160,5 +167,5 @@ public class BasicTreeGen extends WorldGenerator {
             return false;
         }
 
-        }
+    }
 }

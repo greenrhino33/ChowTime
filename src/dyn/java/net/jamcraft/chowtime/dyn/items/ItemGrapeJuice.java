@@ -11,24 +11,24 @@ import net.minecraft.item.ItemStack;
 /**
  * Created by James Hollowell on 5/17/2014.
  */
-public class ItemStrawberryJuice extends Item implements IDynItem
+public class ItemGrapeJuice extends Item implements IDynItem
 {
 
-    public ItemStrawberryJuice()
+    public ItemGrapeJuice()
     {
         super();
         setCreativeTab(ChowTime.creativeTab);
-        setTextureName(ModConstants.MODID + ":strawberryJuice");
-        setUnlocalizedName("strawberryJuice");
+        setTextureName(ModConstants.MODID + ":grapeJuice");
+        setUnlocalizedName("grapeJuice");
     }
 
     @Override public String getRegistrationName()
     {
-        return "strawberryJuice";
+        return "grapeJuice";
     }
 
     @Override public void registerRecipe()
     {
-        JuicerRecipes.AddRecipe(new ItemStack(CTInits.Strawberry), new ItemStack(this), 200);
+        JuicerRecipes.AddRecipe(new ItemStack(CTInits.Grape), new ItemStack(this), 200);
     }
 }

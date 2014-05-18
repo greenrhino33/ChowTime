@@ -4,11 +4,9 @@ import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.item.Item;
 
-/**
- * Created by Kayla Marie on 5/17/14.
- */
-public class ItemGrape extends Item {
 
+public class ItemGrape extends Item
+{
     public ItemGrape()
     {
         super();

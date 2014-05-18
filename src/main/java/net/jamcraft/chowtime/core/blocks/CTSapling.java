@@ -15,29 +15,31 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
-    /**
-     * Created by Kayla Marie on 5/15/14.
-     */
-    public class CTSapling extends BlockSapling{
+/**
+ * Created by Kayla Marie on 5/15/14.
+ */
+public class CTSapling extends BlockSapling
+{
 
-        public CTSapling(){
-            super();
-            float f = 0.4F;
-            setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-            this.setHardness(0.0F);
-            this.setStepSound(Block.soundTypeGrass);
-            this.setCreativeTab(ChowTime.creativeTab);
-        }
+    public CTSapling()
+    {
+        super();
+        float f = 0.4F;
+        setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
+        this.setHardness(0.0F);
+        this.setStepSound(Block.soundTypeGrass);
+        this.setCreativeTab(ChowTime.creativeTab);
+    }
 
-        @Override
-        @SideOnly(Side.CLIENT)
-    public void registerBlockIcons (IIconRegister iconRegister)
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister iconRegister)
     {
         blockIcon = iconRegister.registerIcon(ModConstants.MODID + ":" + this.getUnlocalizedName().substring(5));
     }
 
     @Override
-    public boolean canPlaceBlockAt (World world, int x, int y, int z)
+    public boolean canPlaceBlockAt(World world, int x, int y, int z)
     {
         Block block = world.getBlock(x, y, z);
         if (block == null || block.isReplaceable(world, x, y, z))
@@ -54,13 +56,14 @@ import java.util.Random;
         }
         return false;
     }
-    public boolean canThisPlantGrowOnThisBlock (Block id)
+
+    public boolean canThisPlantGrowOnThisBlock(Block id)
     {
         return id == Blocks.grass || id == Blocks.dirt;
     }
 
     @Override
-    public boolean canBlockStay (World world, int x, int y, int z)
+    public boolean canBlockStay(World world, int x, int y, int z)
     {
         int meta = world.getBlockMetadata(x, y, z) % 8;
         switch (meta)
@@ -85,7 +88,7 @@ import java.util.Random;
     }
 
     @Override
-    public EnumPlantType getPlantType (IBlockAccess world, int x, int y, int z)
+    public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
     {
         int meta = world.getBlockMetadata(x, y, z) % 8;
         if (meta <= 3)
@@ -95,7 +98,7 @@ import java.util.Random;
     }
 
     @Override
-    public void updateTick (World world, int x, int y, int z, Random random)
+    public void updateTick(World world, int x, int y, int z, Random random)
     {
         if (world.isRemote)
         {
@@ -163,6 +166,5 @@ import java.util.Random;
                 func_149879_c(world, x, y, z, random);
         }
     }
-
 
 }

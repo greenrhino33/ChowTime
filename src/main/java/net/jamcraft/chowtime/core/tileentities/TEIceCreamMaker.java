@@ -1,6 +1,7 @@
 package net.jamcraft.chowtime.core.tileentities;
 
-import net.jamcraft.chowtime.core.recipies.*;
+import net.jamcraft.chowtime.core.recipies.IceCreamRecipies;
+import net.jamcraft.chowtime.core.recipies.Recipe2_1;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -24,7 +25,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
     public static final int FUEL_LOC = 4;
     public static final int FREEZING_TEMP = -21000;
     public static final int ROOM_TEMP = 25000;
-    public static final int MIN_TEMP=-50000;
+    public static final int MIN_TEMP = -50000;
 
     public static final int INV_SIZE = 4;
     private ItemStack[] inventory = new ItemStack[INV_SIZE];
@@ -34,7 +35,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     public TEIceCreamMaker()
     {
-//        IceCreamRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.carrot), new ItemStack(Items.arrow), 60);
+        //        IceCreamRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.carrot), new ItemStack(Items.arrow), 60);
     }
 
     @Override public int getSizeInventory()
@@ -171,11 +172,11 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             tags.setTag("slot3", sl3);
         }
 
-        if(inventory[3] != null)
+        if (inventory[3] != null)
         {
             NBTTagCompound sl4 = new NBTTagCompound();
             inventory[3].writeToNBT(sl4);
-            tags.setTag("slot4",sl4);
+            tags.setTag("slot4", sl4);
         }
 
     }
@@ -201,7 +202,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         {
             inventory[2] = ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot3"));
         }
-        if(tags.hasKey("slot4"))
+        if (tags.hasKey("slot4"))
         {
             inventory[3] = ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot4"));
         }
@@ -220,7 +221,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             }
         }
         //Actual processing
-        if(temp<FREEZING_TEMP)
+        if (temp < FREEZING_TEMP)
         {
             if (ticksLeft < maxTicks && IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]) != null)
             {
@@ -233,7 +234,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
                     ticksLeft = 0;
                 }
             }
-            if(IceCreamRecipies.GetRecipeFromStack(inventory[0],inventory[1])==null&&ticksLeft>0)
+            if (IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]) == null && ticksLeft > 0)
             {
                 ticksLeft = 0;
             }
@@ -244,13 +245,13 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             }
         }
 
-        if(inventory[3]!=null && this.worldObj.getTotalWorldTime()%3==0)
+        if (inventory[3] != null && this.worldObj.getTotalWorldTime() % 3 == 0)
         {
-            if(temp>MIN_TEMP)
+            if (temp > MIN_TEMP)
             {
-                if(isIceFuel(inventory[3]))
+                if (isIceFuel(inventory[3]))
                 {
-                    temp-=iceFuelValue(inventory[3]);
+                    temp -= iceFuelValue(inventory[3]);
 
                     inventory[3].stackSize--;
                     if (inventory[3].stackSize <= 0)
@@ -261,7 +262,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             }
         }
 
-        if(temp<ROOM_TEMP && this.worldObj.getTotalWorldTime()%10==0)
+        if (temp < ROOM_TEMP && this.worldObj.getTotalWorldTime() % 10 == 0)
         {
             temp++;
         }
@@ -287,7 +288,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         {
             inventory[0] = null;
         }
-        temp+=200;
+        temp += 200;
     }
 
     /* Packets */
@@ -314,7 +315,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     public int getScaledTemp(int scale)
     {
-        return (ROOM_TEMP-temp) * scale / (ROOM_TEMP-MIN_TEMP);
+        return (ROOM_TEMP - temp) * scale / (ROOM_TEMP - MIN_TEMP);
     }
 
     public int getTemp()
@@ -324,26 +325,26 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     public static boolean isIceFuel(ItemStack stack)
     {
-        return iceFuelValue(stack)!=0;
+        return iceFuelValue(stack) != 0;
     }
 
     public static int iceFuelValue(ItemStack stack)
     {
-        if(stack==null) return 0;
-        Item i=stack.getItem();
-        if(i.equals(Items.snowball))
+        if (stack == null) return 0;
+        Item i = stack.getItem();
+        if (i.equals(Items.snowball))
         {
             return 100;
         }
-        if(i.equals(Item.getItemFromBlock(Blocks.snow)))
+        if (i.equals(Item.getItemFromBlock(Blocks.snow)))
         {
             return 400;
         }
-        if(i.equals(Item.getItemFromBlock(Blocks.ice)))
+        if (i.equals(Item.getItemFromBlock(Blocks.ice)))
         {
             return 300;
         }
-        if(i.equals(Item.getItemFromBlock(Blocks.packed_ice)))
+        if (i.equals(Item.getItemFromBlock(Blocks.packed_ice)))
         {
             return 1000;
         }
