@@ -13,11 +13,11 @@ net.jamcraft.chowtime.dyn.items.ItemChocoIceCream 0.0.3
 net.jamcraft.chowtime.dyn.items.ItemStrawberryICCone 0.0.2
 net.jamcraft.chowtime.dyn.items.ItemStrawberryIceCream 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemAppleJam 0.0.1
-net.jamcraft.chowtime.dyn.items.ItemGrapeBread 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemGrapeBread 0.0.2
 net.jamcraft.chowtime.dyn.items.ItemGrapeJam 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemGrapeJuice 0.0.1
 net.jamcraft.chowtime.dyn.items.ItemStrawberryJuice 0.0.1
-net.jamcraft.chowtime.dyn.items.ItemStrawberryBread 0.0.1
+net.jamcraft.chowtime.dyn.items.ItemStrawberryBread 0.0.2
 }
 resources
 {
@@ -40,5 +40,5 @@ textures/items/grapeJam.png 0.0.1
 textures/items/grapeJuice.png 0.0.1
 textures/items/strawberryBread.png 0.0.1
 textures/items/strawberryJuice.png 0.0.1
-lang/en_US.lang 0.0.8
+lang/en_US.lang 0.0.9
 }
