@@ -7,7 +7,6 @@ import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.crops.CropBarley;
 import net.jamcraft.chowtime.core.crops.CropStrawberry;
 import net.jamcraft.chowtime.remote.RemoteMain;
-import net.minecraft.block.BlockDirt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.util.ChatComponentText;
@@ -20,6 +19,9 @@ import net.minecraftforge.event.world.WorldEvent;
 
 import java.io.*;
 
+/**
+ * Created by DarkKnight on 5/18/14.
+ */
 public class EntityEventHandler
 {
     @SubscribeEvent

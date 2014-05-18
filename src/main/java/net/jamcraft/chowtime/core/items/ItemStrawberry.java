@@ -5,7 +5,7 @@ import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.item.Item;
 
 /**
- * Created by James Hollowell on 5/17/2014.
+ * Created by DarkKnight on 5/18/14.
  */
 public class ItemStrawberry extends Item
 {

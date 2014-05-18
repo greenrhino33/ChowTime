@@ -7,13 +7,13 @@ import net.minecraft.item.Item;
 /**
  * Created by DarkKnight on 5/18/14.
  */
-public class ItemGrape extends Item
+public class ItemCorn extends Item
 {
-    public ItemGrape()
+    public ItemCorn()
     {
         super();
         this.setCreativeTab(ChowTime.creativeTab);
-        setUnlocalizedName("grape");
-        this.setTextureName(ModConstants.MODID + ":grape");
+        setUnlocalizedName("corn");
+        this.setTextureName(ModConstants.MODID + ":corn");
     }
 }

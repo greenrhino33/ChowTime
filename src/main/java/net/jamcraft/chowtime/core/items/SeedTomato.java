@@ -9,12 +9,12 @@ import net.minecraft.item.ItemSeeds;
 /**
  * Created by DarkKnight on 5/18/14.
  */
-public class SeedStrawberry extends ItemSeeds{
+public class SeedTomato extends ItemSeeds {
 
-    public SeedStrawberry(){
-        super(CTInits.CropStrawberry, Blocks.farmland);
+    public SeedTomato(){
+        super(CTInits.CropTomato, Blocks.farmland);
         this.setCreativeTab(ChowTime.creativeTab);
-        this.setTextureName(ModConstants.MODID + ":" + "strawberrySeeds");
-        setUnlocalizedName("strawberrySeeds");
+        this.setTextureName(ModConstants.MODID + ":" + "tomatoSeeds");
+        setUnlocalizedName("tomatoSeeds");
     }
 }

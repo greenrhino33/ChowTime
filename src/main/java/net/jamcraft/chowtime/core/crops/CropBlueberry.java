@@ -16,12 +16,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 /**
  * Created by DarkKnight on 5/18/14.
  */
-public class CropStrawberry extends BlockCrops{
+public class CropBlueberry extends BlockCrops{
 
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
-    public CropStrawberry()
+    public CropBlueberry()
     {
         super();
         float f = 0.5F;
@@ -50,13 +50,13 @@ public class CropStrawberry extends BlockCrops{
     @Override
     public Item getItemDropped(int meta, Random rand, int p_149650_3_)
     {
-        return meta == 7 ? CTInits.Strawberry : CTInits.StrawberrySeeds;
+        return meta == 7 ? CTInits.Blueberry : CTInits.BlueberrySeeds;
     }
 
     @Override
     protected Item func_149866_i()
     {
-        return CTInits.StrawberrySeeds;
+        return CTInits.BlueberrySeeds;
     }
 
     public void updateTick(World world, int x, int y, int z, Random rand)
@@ -87,7 +87,7 @@ public class CropStrawberry extends BlockCrops{
 
         for (int i = 0; i < this.icons.length; ++i)
         {
-            this.icons[i] = icon.registerIcon(ModConstants.MODID + ":" + "strawberry_stage_" + i);
+            this.icons[i] = icon.registerIcon(ModConstants.MODID + ":" + "blueberry_stage_" + i);
         }
     }
 
