@@ -34,7 +34,7 @@ public class EntitySeedMob extends EntityAnimal
 
         this.setHealth(10.0F);
         this.getNavigator().setSpeed(0.222);
-        this.setSize(0.5F, 0.5F);
+        this.setSize(0.5F, 0.1F);
         this.isImmuneToFire = false;
         float var2 = 0.27F;
 
@@ -163,10 +163,13 @@ public class EntitySeedMob extends EntityAnimal
         int n = random.nextInt(9);
         int produce = random.nextInt(10) + 6;
 
-//        if(){
-        if (par1EntityPlayer.getCurrentEquippedItem() == null){
-            this.mountEntity(par1EntityPlayer);
-        }
+//        if (par1EntityPlayer.inventory.getCurrentItem() == new ItemStack(Items.lead)){
+//           if(!this.getLeashed()){
+//            this.setLeashedToEntity(par1EntityPlayer, true);
+//           }else{
+//            this.setLeashedToEntity(par1EntityPlayer, false);
+//           }
+//        }
         if (itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
         {
                 switch(n){
