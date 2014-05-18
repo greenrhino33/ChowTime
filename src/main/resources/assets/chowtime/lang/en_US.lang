@@ -10,7 +10,7 @@ tile.grapeCrop.name=Grape Crop
 tile.log_Basic.name=Test Log
 tile.sapling_Basic.name=Test Sapling
 tile.leaves_Basic.name=Test Leaves
-tile.blockIceCream_Strawberry.name=Strawberry Ice Cream
+tile.iceCreamBlock.name=Strawberry Ice Cream
 tile.blockCottonCandy_Blue.name=Blue Cotton Candy
 tile.ChocolateMilk.name=Chocolate Milk
 
@@ -38,3 +38,5 @@ item.Item_Bucket.name=Chocolate Bucket
 item.watermelonIceCreamCcone.name=Watermelon Ice Cream Cone
 
 itemGroup.ChowTime=ChowTime
+
+entity.SeedMob.name=TurtlePi
