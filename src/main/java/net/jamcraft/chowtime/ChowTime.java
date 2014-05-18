@@ -1,19 +1,23 @@
 package net.jamcraft.chowtime;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.jamcraft.chowtime.core.*;
 import net.jamcraft.chowtime.core.events.BucketHandler;
+import net.jamcraft.chowtime.core.events.ConnectionHandler;
 import net.jamcraft.chowtime.core.events.EntityEventHandler;
 import net.jamcraft.chowtime.core.items.CTPotions;
 //import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
+import net.jamcraft.chowtime.core.network.PacketHandler;
 import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
 import net.jamcraft.chowtime.remote.RemoteMain;
@@ -29,6 +33,7 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.util.EnumMap;
 
 /**
  * Created by James Hollowell on 5/14/2014.
@@ -36,6 +41,8 @@ import java.io.File;
 @Mod(modid = ModConstants.MODID, name = ModConstants.NAME)
 public class ChowTime
 {
+    public static EnumMap<Side, FMLEmbeddedChannel> channels;
+
     public static CreativeTabs creativeTab = new CreativeTabs("ChowTime")
     {
         @Override
@@ -70,8 +77,7 @@ public class ChowTime
         // FMLInterModComms.sendMessage("Waila", "register",
         // "allout58.mods.prisoncraft.compat.waila.WailaProvider.callbackRegister");
 
-        // channels = NetworkRegistry.INSTANCE.newChannel(ModConstants.MODID,
-        // new ChannelHandler());
+        channels = NetworkRegistry.INSTANCE.newChannel(ModConstants.MODID, new PacketHandler());
         // proxy.registerRenderers();
         logger = event.getModLog();
 
@@ -110,6 +116,8 @@ public class ChowTime
     {
         // FMLInterModComms.sendMessage("prisoncraft", "blacklist",
         // Block.blockRegistry.getNameForObject(Blocks.bookshelf));
+        FMLCommonHandler.instance().bus().register(new ConnectionHandler());
+
         DynItems.registerRecipes();
 
         proxy.registerRenderers();
