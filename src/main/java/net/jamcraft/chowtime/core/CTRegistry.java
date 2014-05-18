@@ -52,13 +52,13 @@ public class CTRegistry
 
     public static void CTBlocks()
     {
-        CTInits.CTLeaves = new CTLeaves().setBlockName(CTStrings.BlockLeaves_Basic);
-        GameRegistry.registerBlock(CTInits.CTLeaves, CTStrings.BlockLeaves_Basic);
-        CTInits.CTLog = new CTLog().setBlockName(CTStrings.BlockLogs_Basic);
-        GameRegistry.registerBlock(CTInits.CTLog, CTStrings.BlockLogs_Basic);
-        CTInits.CTSapling = new CTSapling().setBlockName(CTStrings.BlockSapling_Basic);
-        GameRegistry.registerBlock(CTInits.CTSapling, CTStrings.BlockSapling_Basic);
-        CTInits.IceCream = new CTBlock(Material.snow).setBlockName(CTStrings.BlockIceCream_Strawberry);
+//        CTInits.CTLeaves = new CTLeaves().setBlockName(CTStrings.BlockLeaves_Basic);
+//        GameRegistry.registerBlock(CTInits.CTLeaves, CTStrings.BlockLeaves_Basic);
+//        CTInits.CTLog = new CTLog().setBlockName(CTStrings.BlockLogs_Basic);
+//        GameRegistry.registerBlock(CTInits.CTLog, CTStrings.BlockLogs_Basic);
+//        CTInits.CTSapling = new CTSapling().setBlockName(CTStrings.BlockSapling_Basic);
+//        GameRegistry.registerBlock(CTInits.CTSapling, CTStrings.BlockSapling_Basic);
+        CTInits.IceCream = new CTBlock(Material.snow).setBlockName("blockIceCream");
         GameRegistry.registerBlock(CTInits.IceCream, CTStrings.BlockIceCream_Strawberry);
         CTInits.CottonCandyBLUE = new BlockCottonCandy().setBlockName(CTStrings.BlockCottonCandy_Blue);
         GameRegistry.registerBlock(CTInits.CottonCandyBLUE, CTStrings.BlockCottonCandy_Blue);

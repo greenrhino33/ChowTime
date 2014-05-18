@@ -29,7 +29,7 @@ public class CropBarley extends BlockCrops
         this.setTickRandomly(true);
         this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
         this.disableStats();
-        //        this.setBlockTextureName(ModConstants.MODID + ":barley");
+        //this.setBlockTextureName("barley");
     }
 
     public int getRenderType()
@@ -88,7 +88,7 @@ public class CropBarley extends BlockCrops
 
         for (int i = 0; i < this.icons.length; ++i)
         {
-            this.icons[i] = icon.registerIcon(ModConstants.MODID + ":" + "barley_stage_" + i);
+            this.icons[i] = icon.registerIcon(ModConstants.MODID + ":barley_stage_" + i);
         }
     }
 
