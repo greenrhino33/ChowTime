@@ -93,12 +93,13 @@ public class LooseObjList
             BufferedReader br = new BufferedReader(fr);
 
             String l = br.readLine();
-            if (!l.equals("classes")) return;
+            if (!"classes".equals(l)) return;
             l = br.readLine();
-            if (!l.equals("{")) return;
+            if (!"{".equals(l)) return;
             while (br.ready())
             {
                 String line = br.readLine();
+                if(line==null) return;
                 if (line.equals("}")) break;
                 DynClassDescription desc = new DynClassDescription();
                 desc.classname = line.split(" ")[0];
@@ -108,9 +109,9 @@ public class LooseObjList
             }
 
             l = br.readLine();
-            if (!l.equals("resources")) return;
+            if (!"resources".equals(l)) return;
             l = br.readLine();
-            if (!l.equals("{")) return;
+            if (!"{".equals(l)) return;
             while (br.ready())
             {
                 String line = br.readLine();

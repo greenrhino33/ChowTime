@@ -1,5 +1,6 @@
 package net.jamcraft.chowtime.core.tileentities;
 
+import net.jamcraft.chowtime.core.lib.ItemHelper;
 import net.jamcraft.chowtime.core.recipies.IceCreamRecipies;
 import net.jamcraft.chowtime.core.recipies.Recipe2_1;
 import net.minecraft.entity.player.EntityPlayer;
@@ -120,13 +121,13 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     @Override public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
-        return (slot == 0 || slot == 1) && IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]) != null;
+        return (slot == 0 || slot == 1) && IceCreamRecipies.GetRecipesFromStack(stack) != null;
     }
 
     @Override public int[] getAccessibleSlotsFromSide(int side)
     {
         //if(ForgeDirection.UP.flag==side) return new int[]{ 0 };
-        return new int[] { 0, 1, 2 };
+        return new int[] { 0, 1, 2, 3 };
     }
 
     @Override public boolean canInsertItem(int slot, ItemStack itemStack, int side)
@@ -247,7 +248,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
         if (inventory[3] != null && this.worldObj.getTotalWorldTime() % 3 == 0)
         {
-            if (temp > MIN_TEMP)
+            if (temp-iceFuelValue(inventory[3]) > MIN_TEMP)
             {
                 if (isIceFuel(inventory[3]))
                 {
@@ -277,17 +278,11 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         else
             inventory[2].stackSize += res.stackSize;
 
-        inventory[1].stackSize--;
-        if (inventory[1].stackSize <= 0)
-        {
-            inventory[1] = null;
-        }
+        inventory[1]= ItemHelper.decreaseStack(inventory[1],worldObj,xCoord,yCoord,zCoord);
 
-        inventory[0].stackSize--;
-        if (inventory[0].stackSize <= 0)
-        {
-            inventory[0] = null;
-        }
+        inventory[0]= ItemHelper.decreaseStack(inventory[0],worldObj,xCoord,yCoord,zCoord);
+
+        //TODO: make temp decrease while makeing, not just at end...
         temp += 200;
     }
 
