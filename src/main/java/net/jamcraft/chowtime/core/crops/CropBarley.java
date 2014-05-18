@@ -89,7 +89,6 @@ public class CropBarley extends BlockCrops
         for (int i = 0; i < this.icons.length; ++i)
         {
             this.icons[i] = icon.registerIcon(ModConstants.MODID + ":" + "barley_stage_" + i);
-            System.out.println(ModConstants.MODID + ":" + "barley_stage_" + i);
         }
     }
 

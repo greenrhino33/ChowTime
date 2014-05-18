@@ -1,11 +1,16 @@
 package net.jamcraft.chowtime.core.events;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.crops.CropBarley;
 import net.jamcraft.chowtime.core.crops.CropStrawberry;
+import net.jamcraft.chowtime.core.items.SeedStrawberry;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -14,10 +19,11 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.world.WorldEvent;
-
-import java.io.*;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Created by DarkKnight on 5/18/14.
@@ -30,10 +36,10 @@ public class EntityEventHandler
         if (event.entity instanceof EntityPlayer)
         {
             EntityPlayer player = (EntityPlayer) event.entity;
-
+            
             ChowTime.harvestXP = ChowTime.saveData.getInteger("harvestXP" + (player).getCommandSenderName());
             ChowTime.harvestLVL = ChowTime.saveData.getInteger("harvestLVL" + (player).getCommandSenderName());
-
+            
             if (event.world.isRemote)
             {
                 if (RemoteMain.hasUpdated)
@@ -47,7 +53,7 @@ public class EntityEventHandler
             }
         }
     }
-
+    
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event)
     {
@@ -57,21 +63,19 @@ public class EntityEventHandler
             ChowTime.harvestingLVL = new File(ChowTime.dir + File.separator + "ChowTime", "CT" + event.world.getWorldInfo().getWorldName() + ".cfg");
             try
             {
-                if (!ChowTime.harvestingLVL.exists())
-                    ChowTime.harvestingLVL.createNewFile();
+                if (!ChowTime.harvestingLVL.exists()) ChowTime.harvestingLVL.createNewFile();
             }
             catch (IOException e)
             {
                 e.printStackTrace();
             }
         }
-
+        
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
             try
             {
-                if (ChowTime.harvestingLVL.exists())
-                    ChowTime.saveData = CompressedStreamTools.readCompressed(new FileInputStream(ChowTime.harvestingLVL));
+                if (ChowTime.harvestingLVL.exists()) ChowTime.saveData = CompressedStreamTools.readCompressed(new FileInputStream(ChowTime.harvestingLVL));
             }
             catch (EOFException e)
             {
@@ -83,7 +87,7 @@ public class EntityEventHandler
             }
         }
     }
-
+    
     @SubscribeEvent
     public void onWorldSave(WorldEvent.Save event)
     {
@@ -91,8 +95,7 @@ public class EntityEventHandler
         {
             try
             {
-                if (ChowTime.harvestingLVL.exists())
-                    CompressedStreamTools.writeCompressed(ChowTime.saveData, new FileOutputStream(ChowTime.harvestingLVL));
+                if (ChowTime.harvestingLVL.exists()) CompressedStreamTools.writeCompressed(ChowTime.saveData, new FileOutputStream(ChowTime.harvestingLVL));
                 int i = event.world.playerEntities.size();
                 for (int j = 0; j < i; j++)
                 {
@@ -110,7 +113,7 @@ public class EntityEventHandler
             }
         }
     }
-
+    
     @SubscribeEvent
     public void onEntityUpdate(LivingEvent.LivingUpdateEvent event)
     {
@@ -121,34 +124,34 @@ public class EntityEventHandler
             }
         }
     }
-
+    
     @SubscribeEvent
     public void onItemUseStart(PlayerUseItemEvent.Start event)
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-
+            
         }
     }
-
+    
     @SubscribeEvent
     public void onItemUseTick(PlayerUseItemEvent.Tick event)
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-
+            
         }
     }
-
+    
     @SubscribeEvent
     public void onItemUseStopBeforeFinish(PlayerUseItemEvent.Stop event)
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-
+            
         }
     }
-
+    
     @SubscribeEvent
     public void onItemUseFinish(PlayerUseItemEvent.Finish event)
     {
@@ -161,30 +164,48 @@ public class EntityEventHandler
             // ChatComponentText("Munch munch munch"));
         }
     }
-
+    
     @SubscribeEvent
     public void breakSpeed(PlayerEvent.BreakSpeed event)
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-            if (event.block instanceof CropStrawberry && ChowTime.harvestXP < 130){
-                event.newSpeed = -1;
-                event.entityPlayer.worldObj.scheduleBlockUpdate(event.x, event.y, event.z, event.block, 0);
+            if ((event.block instanceof CropStrawberry || event.entityPlayer.worldObj.getBlock(event.x, event.y + 1, event.z) instanceof CropStrawberry) && ChowTime.harvestXP < 130)
+            {
+                event.entityPlayer.worldObj.markBlockForUpdate(event.x, event.y, event.z);
+                event.setCanceled(true);
+                event.entityPlayer.addChatMessage(new ChatComponentText("You are not experienced enough to harvest this crop. Try gaining more levels first."));
+                event.entityPlayer.addChatMessage(new ChatComponentText("To gaing more experience break fully grown barley."));
+                event.setCanceled(true);
             }
             if (event.block instanceof CropBarley && event.metadata == 7)
             {
                 ChowTime.harvestXP++;
-                event.entityPlayer.addChatMessage(new ChatComponentText(Integer.toString(ChowTime.harvestXP)));
+                // event.entityPlayer.addChatMessage(new
+                // ChatComponentText(Integer.toString(ChowTime.harvestXP)));
             }
         }
     }
-
+    
     @SubscribeEvent
     public void harvestCheck(PlayerEvent.HarvestCheck event)
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-
+            
+        }
+    }
+    
+    @SubscribeEvent
+    public void blockInteraction(PlayerInteractEvent event)
+    {
+        if (FMLCommonHandler.instance().getEffectiveSide().isServer())
+        {
+            if(event.action == event.action.RIGHT_CLICK_BLOCK && event.entityPlayer.getHeldItem() != null && event.entityPlayer.getHeldItem().getItem() instanceof SeedStrawberry && ChowTime.harvestXP < 130){
+                event.setCanceled(true);
+                event.entityPlayer.addChatMessage(new ChatComponentText("You are not experienced enough to plant these seeds. Try gaining more levels first."));
+                event.entityPlayer.addChatMessage(new ChatComponentText("To gaing more experience break fully grown barley."));
+            }
         }
     }
 }
