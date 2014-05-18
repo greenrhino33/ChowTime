@@ -17,8 +17,8 @@ public class ItemChocoIceCreamCone extends ItemFood implements IDynItem
     {
         super(1, false);
         setCreativeTab(ChowTime.creativeTab);
-        setTextureName(ModConstants.MODID + ":chocoicecreamcone");
-        setUnlocalizedName("chocoicecreamcone");
+        setTextureName(ModConstants.MODID + ":chocolateIceCreamCone");
+        setUnlocalizedName("chocolateIceCreamCone");
     }
 
     @Override public String getRegistrationName()

@@ -18,8 +18,8 @@ public class ItemCJuice extends Item implements IDynItem
     {
         super();
         setCreativeTab(ChowTime.creativeTab);
-        setTextureName(ModConstants.MODID + ":cjuice");
-        setUnlocalizedName("cjuice");
+        setTextureName(ModConstants.MODID + ":carrotJuice");
+        setUnlocalizedName("carrotJuice");
     }
 
     @Override public String getRegistrationName()
