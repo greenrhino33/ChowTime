@@ -7,8 +7,15 @@ public class DynMain
 {
     public static void init()
     {
-        DynTextures.addDynTP();
+        try
+        {
+            DynTextures.addDynTP();
 
-        DynItems.loadList();
+            DynItems.loadList();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
