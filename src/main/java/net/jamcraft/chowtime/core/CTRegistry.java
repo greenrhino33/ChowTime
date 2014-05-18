@@ -97,8 +97,7 @@ public class CTRegistry
         GameRegistry.registerItem(CTInits.ItemBucketChoco, CTStrings.Item_Bucket);
     }
     
-    public static void CTDrinks()
-    {
+    public static void CTDrinks() {
 
     }
     
