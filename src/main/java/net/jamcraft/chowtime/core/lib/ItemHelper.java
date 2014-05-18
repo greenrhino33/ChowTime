@@ -51,14 +51,17 @@ public class ItemHelper
 
     public static void spawnItemStackInWorld(ItemStack stack, World world, int x, int y, int z)
     {
-        Random rand = new Random();
-        final float f = rand.nextFloat() * 0.8F + 0.1F;
-        final float f1 = rand.nextFloat() * 0.8F + 0.1F;
-        final float f2 = rand.nextFloat() * 0.8F + 0.1F;
-        EntityItem entityitem = new EntityItem(world, (double) ((float) x + f), (double) ((float) y + f1), (double) ((float) z + f2), stack);
-        entityitem.motionX = (double) ((float) rand.nextGaussian() * .05F);
-        entityitem.motionY = (double) ((float) rand.nextGaussian() * 0.25F);
-        entityitem.motionZ = (double) ((float) rand.nextGaussian() * .05F);
-        world.spawnEntityInWorld(entityitem);
+        if(!world.isRemote)
+        {
+            Random rand = new Random();
+            final float f = rand.nextFloat() * 0.8F + 0.1F;
+            final float f1 = rand.nextFloat() * 0.8F + 0.1F;
+            final float f2 = rand.nextFloat() * 0.8F + 0.1F;
+            EntityItem entityitem = new EntityItem(world, (double) ((float) x + f), (double) ((float) y + f1), (double) ((float) z + f2), stack);
+            entityitem.motionX = (double) ((float) rand.nextGaussian() * .05F);
+            entityitem.motionY = (double) ((float) rand.nextGaussian() * 0.25F);
+            entityitem.motionZ = (double) ((float) rand.nextGaussian() * .05F);
+            world.spawnEntityInWorld(entityitem);
+        }
     }
 }
