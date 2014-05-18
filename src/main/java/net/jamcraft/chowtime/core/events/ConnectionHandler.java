@@ -29,7 +29,10 @@ public class ConnectionHandler
     {
         if (!e.isLocal)
         {
-            if(!RemoteMain.isSyncedWithServer) e.setCanceled(true);
+            if(!RemoteMain.isSyncedWithServer)
+            {
+                e.setCanceled(true);
+            }
         }
     }
 }

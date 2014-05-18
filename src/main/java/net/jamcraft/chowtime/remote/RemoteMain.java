@@ -5,6 +5,7 @@ import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.core.ObfHelper;
+import net.minecraft.entity.player.EntityPlayer;
 
 import java.io.*;
 import java.net.URL;
@@ -23,6 +24,7 @@ public class RemoteMain
     public static boolean hasUpdated = false;
     public static boolean isSyncedWithServer=false;
     public static String localHash="";
+    public static EntityPlayer  player;
 
     public static void init()
     {
@@ -185,7 +187,7 @@ public class RemoteMain
 
     public static boolean IsSyncedWithServer(String serverHash)
     {
-        isSyncedWithServer=false;//serverHash.equals(localHash);
+        isSyncedWithServer=serverHash.equals(localHash);
         return isSyncedWithServer;
     }
 }

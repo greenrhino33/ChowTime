@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.rmi.Remote;
 
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.Config;
@@ -50,6 +51,7 @@ public class EntityEventHandler
                 {
                     player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("string.warnlocal")));
                 }
+                RemoteMain.player=player;
             }
         }
     }
