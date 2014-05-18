@@ -58,7 +58,7 @@ public class CTRegistry
 //        GameRegistry.registerBlock(CTInits.CTLog, CTStrings.BlockLogs_Basic);
 //        CTInits.CTSapling = new CTSapling().setBlockName(CTStrings.BlockSapling_Basic);
 //        GameRegistry.registerBlock(CTInits.CTSapling, CTStrings.BlockSapling_Basic);
-        CTInits.IceCream = new CTBlock(Material.snow).setBlockName(CTStrings.BlockIceCream_Strawberry);
+        CTInits.IceCream = new CTBlock(Material.clay).setBlockName(CTStrings.BlockIceCream_Strawberry);
         GameRegistry.registerBlock(CTInits.IceCream, CTStrings.BlockIceCream_Strawberry);
         CTInits.CottonCandyBLUE = new BlockCottonCandy().setBlockName(CTStrings.BlockCottonCandy_Blue);
         GameRegistry.registerBlock(CTInits.CottonCandyBLUE, CTStrings.BlockCottonCandy_Blue);
@@ -150,8 +150,8 @@ public class CTRegistry
         CTInits.Raspberry = new ItemRaspberry();
         GameRegistry.registerItem(CTInits.Raspberry, "raspberry");
         
-        CTInits.ItemBucketChoco = new CTItemBucket(CTInits.ChocolateMilk, CTInits.ItemBucketChoco, "bucket_chocolate").setUnlocalizedName(CTStrings.Item_Bucket);
-        GameRegistry.registerItem(CTInits.ItemBucketChoco, CTStrings.Item_Bucket);
+//        CTInits.ItemBucketChoco = new CTItemBucket(CTInits.ChocolateMilk, CTInits.ItemBucketChoco, "bucket_chocolate").setUnlocalizedName(CTStrings.Item_Bucket);
+//        GameRegistry.registerItem(CTInits.ItemBucketChoco, CTStrings.Item_Bucket);
     }
 
     public static void CTDrinks()
