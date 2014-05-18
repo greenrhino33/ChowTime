@@ -36,6 +36,7 @@ public class EntityEventHandler
                 if (RemoteMain.hasUpdated)
                 {
                     player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("string.updated")));
+                    RemoteMain.hasUpdated=false;
                 }
                 if (Config.forceLocal)
                 {
@@ -179,7 +180,6 @@ public class EntityEventHandler
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-
         }
     }
 }
