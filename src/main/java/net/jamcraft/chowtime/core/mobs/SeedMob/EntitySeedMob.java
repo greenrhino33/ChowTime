@@ -193,7 +193,7 @@ public class EntitySeedMob extends EntityAnimal
                         par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.CornSeeds, 1, 0), false);
                         break;
                     case 4:
-                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.RasberrySeeds, 1, 0), false);
+                        par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.RaspberrySeeds, 1, 0), false);
                         break;
                     case 5:
                         par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(CTInits.BlueberrySeeds, 1, 0), false);
