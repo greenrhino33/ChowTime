@@ -7,13 +7,13 @@ import net.minecraft.item.Item;
 /**
  * Created by DarkKnight on 5/18/14.
  */
-public class ItemRasberry extends Item
+public class ItemRaspberry extends Item
 {
-    public ItemRasberry()
+    public ItemRaspberry()
     {
         super();
         this.setCreativeTab(ChowTime.creativeTab);
-        setUnlocalizedName("rasberry");
-        this.setTextureName(ModConstants.MODID + ":rasberry");
+        setUnlocalizedName("raspberry");
+        this.setTextureName(ModConstants.MODID + ":raspberry");
     }
 }

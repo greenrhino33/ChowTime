@@ -34,7 +34,7 @@ public class CTInits
     public static Item Tomato;
     public static Item Corn;
     public static Item Cranberry;
-    public static Item Rasberry;
+    public static Item Raspberry;
     public static Item Blueberry;
 
     //Effect Inits
@@ -54,8 +54,8 @@ public class CTInits
     public static Item GrapeSeeds;
     public static Block CropTomato;
     public static Item TomatoSeeds;
-    public static Block CropRasberry;
-    public static Item RasberrySeeds;
+    public static Block CropRaspberry;
+    public static Item RaspberrySeeds;
     public static Block CropCranberry;
     public static Item CranberrySeeds;
     public static Block CropCorn;

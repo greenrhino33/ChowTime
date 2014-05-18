@@ -15,7 +15,7 @@ import net.jamcraft.chowtime.core.crops.CropBlueberry;
 import net.jamcraft.chowtime.core.crops.CropCorn;
 import net.jamcraft.chowtime.core.crops.CropCranberry;
 import net.jamcraft.chowtime.core.crops.CropGrape;
-import net.jamcraft.chowtime.core.crops.CropRasberry;
+import net.jamcraft.chowtime.core.crops.CropRaspberry;
 import net.jamcraft.chowtime.core.crops.CropStrawberry;
 import net.jamcraft.chowtime.core.crops.CropTomato;
 import net.jamcraft.chowtime.core.items.CTItem;
@@ -24,7 +24,7 @@ import net.jamcraft.chowtime.core.items.ItemBlueberry;
 import net.jamcraft.chowtime.core.items.ItemCorn;
 import net.jamcraft.chowtime.core.items.ItemCranberry;
 import net.jamcraft.chowtime.core.items.ItemGrape;
-import net.jamcraft.chowtime.core.items.ItemRasberry;
+import net.jamcraft.chowtime.core.items.ItemRaspberry;
 import net.jamcraft.chowtime.core.items.ItemStrawberry;
 import net.jamcraft.chowtime.core.items.ItemTomato;
 import net.jamcraft.chowtime.core.items.SeedBarley;
@@ -32,7 +32,7 @@ import net.jamcraft.chowtime.core.items.SeedBlueberry;
 import net.jamcraft.chowtime.core.items.SeedCorn;
 import net.jamcraft.chowtime.core.items.SeedCranberry;
 import net.jamcraft.chowtime.core.items.SeedGrape;
-import net.jamcraft.chowtime.core.items.SeedRasberry;
+import net.jamcraft.chowtime.core.items.SeedRaspberry;
 import net.jamcraft.chowtime.core.items.SeedStrawberry;
 import net.jamcraft.chowtime.core.items.SeedTomato;
 import net.jamcraft.chowtime.core.lib.CTStrings;
@@ -76,9 +76,9 @@ public class CTRegistry
     
     public static void CTLiquids()
     {
-        CTInits.ChocolateMilkFluid = new Fluid("ChocolateMilk");
+        CTInits.ChocolateMilkFluid = new Fluid("ChocolateMilk").setUnlocalizedName("ChocolateMilk");
         FluidRegistry.registerFluid(CTInits.ChocolateMilkFluid);
-        CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "ChocolateMilk").setCreativeTab(ChowTime.creativeTab);
+        CTInits.ChocolateMilk = new CTFluid(CTInits.ChocolateMilkFluid, Material.water, "ChocolateMilk").setBlockName("ChocolateMilk").setCreativeTab(ChowTime.creativeTab);
         GameRegistry.registerBlock(CTInits.ChocolateMilk, "Chocolate Milk Fluid");
 
         //        CTInits.FruitPunchFluid = new Fluid("fruitPunch");
@@ -119,10 +119,10 @@ public class CTRegistry
         CTInits.CranberrySeeds = new SeedCranberry();
         GameRegistry.registerItem(CTInits.CranberrySeeds, "cranberrySeed");
 
-        CTInits.CropRasberry = new CropRasberry();
-        GameRegistry.registerBlock(CTInits.CropRasberry, "rasberryCrop").setBlockName("rasberryCrop");
-        CTInits.RasberrySeeds = new SeedRasberry();
-        GameRegistry.registerItem(CTInits.RasberrySeeds, "rasberrySeed");
+        CTInits.CropRaspberry = new CropRaspberry();
+        GameRegistry.registerBlock(CTInits.CropRaspberry, "raspberryCrop").setBlockName("raspberryCrop");
+        CTInits.RaspberrySeeds = new SeedRaspberry();
+        GameRegistry.registerItem(CTInits.RaspberrySeeds, "raspberrySeed");
 
         CTInits.CropTomato = new CropTomato();
         GameRegistry.registerBlock(CTInits.CropTomato, "tomatoCrop").setBlockName("tomatoCrop");
@@ -147,8 +147,8 @@ public class CTRegistry
         GameRegistry.registerItem(CTInits.Corn, "corn");
         CTInits.Cranberry = new ItemCranberry();
         GameRegistry.registerItem(CTInits.Cranberry, "cranberry");
-        CTInits.Rasberry = new ItemRasberry();
-        GameRegistry.registerItem(CTInits.Rasberry, "rasberry");
+        CTInits.Raspberry = new ItemRaspberry();
+        GameRegistry.registerItem(CTInits.Raspberry, "raspberry");
         
         CTInits.ItemBucketChoco = new CTItemBucket(CTInits.ChocolateMilk, CTInits.ItemBucketChoco, "bucket_chocolate").setUnlocalizedName(CTStrings.Item_Bucket);
         GameRegistry.registerItem(CTInits.ItemBucketChoco, CTStrings.Item_Bucket);

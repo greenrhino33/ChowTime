@@ -33,7 +33,7 @@ public class CropCorn extends BlockCrops{
 
     public int getRenderType()
     {
-        return 6;
+        return 1;
     }
 
     @SideOnly(Side.CLIENT)
