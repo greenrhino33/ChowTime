@@ -1,0 +1,23 @@
+[
+{
+  "modid": "chowtime",
+  "name" : "ChowTime",
+  "description" : "Not just another food mod! Dynamic items and recipies!",
+  "version": "${version}",
+  "url": "http://www.github.com/JamCraft/ChowTime",
+  "updateUrl": "",
+  "authorList": [
+    "allout58",
+    "kkaylium",
+    "OynxDarkNight",
+    "YSPilot"
+  ],
+  "credits": "allout58, kkaylium, OnyxDarkNight and YSPilot",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]
