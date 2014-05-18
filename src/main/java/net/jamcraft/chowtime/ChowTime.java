@@ -118,8 +118,8 @@ public class ChowTime
         CTRegistry.CTItems();
         CTRegistry.CTTileEntities();
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
-        MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-        BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
+//        MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+//        BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
         dir = event.getModConfigurationDirectory();
         // configBase=event.getModConfigurationDirectory();
 
@@ -143,7 +143,7 @@ public class ChowTime
 
         proxy.registerRenderers();
         EntityRegistry.registerModEntity(EntitySeedMob.class, "SeedMob", 2, this, 40, 3, true);
-        EntityRegistry.addSpawn(EntitySeedMob.class, 3, 5, 15, EnumCreatureType.monster, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.plains, BiomeGenBase.beach, BiomeGenBase.coldBeach, BiomeGenBase.frozenRiver);
+        EntityRegistry.addSpawn(EntitySeedMob.class, 15, 5, 10, EnumCreatureType.monster, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.plains, BiomeGenBase.beach, BiomeGenBase.coldBeach, BiomeGenBase.frozenRiver);
     }
 
     @Mod.EventHandler
