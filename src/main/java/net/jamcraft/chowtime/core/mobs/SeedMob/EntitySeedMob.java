@@ -124,7 +124,6 @@ public class EntitySeedMob extends EntityAnimal{
 
     public boolean isChild()
     {
-        //this.setSize(0.1F, 0.1F);
         return this.getGrowingAge() < 0;
     }
 
