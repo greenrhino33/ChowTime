@@ -31,7 +31,7 @@ public class ConnectionHandler
         {
             if(!RemoteMain.isSyncedWithServer)
             {
-                e.setCanceled(true);
+//                e.setCanceled(true);
             }
         }
     }
