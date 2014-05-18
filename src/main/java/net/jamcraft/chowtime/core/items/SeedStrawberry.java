@@ -15,5 +15,6 @@ public class SeedStrawberry extends ItemSeeds{
         super(CTInits.CropStrawberry, Blocks.farmland);
         this.setCreativeTab(ChowTime.creativeTab);
         this.setTextureName(ModConstants.MODID + ":" + "strawberrySeeds");
+        setUnlocalizedName("strawberrySeeds");
     }
 }

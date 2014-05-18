@@ -15,5 +15,6 @@ public class SeedGrape extends ItemSeeds {
         super(CTInits.CropGrape, Blocks.farmland);
         this.setCreativeTab(ChowTime.creativeTab);
         this.setTextureName(ModConstants.MODID + ":" + "grapeSeeds");
+        setUnlocalizedName("grapeSeeds");
     }
 }
