@@ -1,9 +1,14 @@
 package net.jamcraft.chowtime.core.mobs.SeedMob;
 
 import net.jamcraft.chowtime.core.CTInits;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.IEntityOwnable;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -37,6 +42,7 @@ public class EntitySeedMob extends EntityAnimal
         this.tasks.addTask(1, new EntityAIPanic(this, 0.33F));
         this.tasks.addTask(2, new EntityAIMate(this, var2));
         this.tasks.addTask(3, new EntityAITempt(this, 0.3F, CTInits.Strawberry, false));
+        //this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
         this.tasks.addTask(5, new EntityAIWander(this, 0.25F));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 5.0F));
@@ -158,7 +164,9 @@ public class EntitySeedMob extends EntityAnimal
         int produce = random.nextInt(10) + 6;
 
 //        if(){
-
+        if (par1EntityPlayer.getCurrentEquippedItem() == null){
+            this.mountEntity(par1EntityPlayer);
+        }
         if (itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
         {
                 switch(n){
@@ -221,4 +229,9 @@ public class EntitySeedMob extends EntityAnimal
     {
         return new EntitySeedMob(this.worldObj);
     }
+//
+//    @Override
+//    public String getOwnerName() {
+//        return null;
+//    }
 }
