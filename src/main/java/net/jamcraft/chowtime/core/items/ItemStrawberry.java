@@ -14,6 +14,7 @@ public class ItemStrawberry extends Item
     {
         super();
         this.setCreativeTab(ChowTime.creativeTab);
+        setUnlocalizedName("strawberry");
         this.setTextureName(ModConstants.MODID + ":strawberry");
     }
 }
