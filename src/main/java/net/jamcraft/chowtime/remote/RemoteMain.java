@@ -9,6 +9,7 @@ import net.jamcraft.chowtime.core.ObfHelper;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.MessageDigest;
 import java.util.List;
 
 /**
@@ -20,6 +21,8 @@ public class RemoteMain
     private static LooseObjList remote = new LooseObjList();
 
     public static boolean hasUpdated = false;
+    public static boolean isSyncedWithServer=false;
+    public static String localHash="";
 
     public static void init()
     {
@@ -66,6 +69,7 @@ public class RemoteMain
             //Reload local
             LoadLocal();
         }
+        HashCTD();
     }
 
     public static boolean LoadLocal()
@@ -143,6 +147,40 @@ public class RemoteMain
         catch (IOException e)
         {
             e.printStackTrace();
+        }
+    }
+
+    public static void HashCTD()
+    {
+        try
+        {
+
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            FileInputStream fis = new FileInputStream(ModConstants.DYN_LOC + "/local.ctd");
+            byte[] dataBytes = new byte[1024];
+
+            int nread = 0;
+
+            while ((nread = fis.read(dataBytes)) != -1)
+            {
+                md.update(dataBytes, 0, nread);
+            }
+
+            byte[] mdbytes = md.digest();
+
+            //convert the byte to hex format
+            StringBuffer sb = new StringBuffer("");
+            for (int i = 0; i < mdbytes.length; i++)
+            {
+                sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+            System.out.println("Digest(in hex format):: " + sb.toString());
+            localHash=sb.toString();
+        }
+        catch (Exception e)
+        {
+
         }
     }
 }

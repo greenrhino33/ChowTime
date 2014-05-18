@@ -3,6 +3,7 @@ package net.jamcraft.chowtime;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -15,6 +16,7 @@ import net.jamcraft.chowtime.core.items.CTPotions;
 //import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
+import net.jamcraft.chowtime.core.network.PacketHandler;
 import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
 import net.jamcraft.chowtime.remote.RemoteMain;
@@ -37,6 +39,8 @@ import java.io.File;
 @Mod(modid = ModConstants.MODID, name = ModConstants.NAME)
 public class ChowTime
 {
+    public static EnumMap<Side, FMLEmbeddedChannel> channels;
+
     public static CreativeTabs creativeTab = new CreativeTabs("ChowTime")
     {
         @Override
@@ -71,8 +75,7 @@ public class ChowTime
         // FMLInterModComms.sendMessage("Waila", "register",
         // "allout58.mods.prisoncraft.compat.waila.WailaProvider.callbackRegister");
 
-        // channels = NetworkRegistry.INSTANCE.newChannel(ModConstants.MODID,
-        // new ChannelHandler());
+        channels = NetworkRegistry.INSTANCE.newChannel(ModConstants.MODID, new PacketHandler());
         // proxy.registerRenderers();
         logger = event.getModLog();
 
