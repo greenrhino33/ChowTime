@@ -13,6 +13,11 @@ tile.leaves_Basic.name=Test Leaves
 tile.iceCreamBlock.name=Strawberry Ice Cream
 tile.blockCottonCandy_Blue.name=Blue Cotton Candy
 tile.ChocolateMilk.name=Chocolate Milk
+tile.cornCrop.name=Corn Crop
+tile.tomatoCrop.name=Tomato Crop
+tile.blueberryCrop.name=Blueberry Crop
+tile.cranberryCrop.name=Cranberry Crop
+tile.raspberryCrop.name=Raspberry Crop
 
 string.updated=ChowTime has updated! Look for new foods and recipies.
 string.warnlocal=[ChowTime]Warning! Remote update has been disabled!
