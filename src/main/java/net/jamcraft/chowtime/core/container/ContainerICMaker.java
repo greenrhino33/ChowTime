@@ -5,6 +5,7 @@ import net.jamcraft.chowtime.core.container.slot.SlotICMaker;
 import net.jamcraft.chowtime.core.container.slot.SlotIceFuel;
 import net.jamcraft.chowtime.core.container.slot.SlotOutput;
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
+import net.jamcraft.chowtime.core.recipies.IceCreamRecipies;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.minecraft.entity.player.EntityPlayer;
@@ -68,9 +69,9 @@ public class ContainerICMaker extends Container
              * container, attempt to put it in the first available slot in the
              * player's inventory
              */
-            if (slotIndex < TEFermenter.INV_SIZE)
+            if (slotIndex < TEIceCreamMaker.INV_SIZE)
             {
-                if (!this.mergeItemStack(slotItemStack, TEFermenter.INV_SIZE, inventorySlots.size(), false))
+                if (!this.mergeItemStack(slotItemStack, TEIceCreamMaker.INV_SIZE, inventorySlots.size(), false))
                 {
                     return null;
                 }
@@ -81,9 +82,17 @@ public class ContainerICMaker extends Container
                  * If the stack being shift-clicked into the assembler's
                  * container is a fuel, try to put it in the fuel slot.
                  */
-                if(FermenterRecipies.GetRecipeFromStack(slotItemStack)!=null)
+                if(TEIceCreamMaker.isIceFuel(slotItemStack))
                 {
-                    if (!this.mergeItemStack(slotItemStack, 0, TEFermenter.INV_SIZE, false))
+                    if (!this.mergeItemStack(slotItemStack, 3, TEIceCreamMaker.INV_SIZE, false))
+                    {
+                        return null;
+                    }
+                }
+
+                if(IceCreamRecipies.GetRecipesFromStack(slotItemStack)!=null)
+                {
+                    if (!this.mergeItemStack(slotItemStack, 0, TEIceCreamMaker.INV_SIZE, false)&&!this.mergeItemStack(slotItemStack, 1, TEIceCreamMaker.INV_SIZE, false))
                     {
                         return null;
                     }
