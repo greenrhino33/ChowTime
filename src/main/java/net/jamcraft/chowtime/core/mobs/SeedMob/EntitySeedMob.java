@@ -156,7 +156,6 @@ public class EntitySeedMob extends EntityAnimal
         Random random = new Random();
         int n = random.nextInt(9);
         int produce = random.nextInt(10) + 6;
-        if(){
         if (itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
         {
                 switch(n){
@@ -204,7 +203,6 @@ public class EntitySeedMob extends EntityAnimal
         else
         {
             return super.interact(par1EntityPlayer);
-        }
         }
     }
 
