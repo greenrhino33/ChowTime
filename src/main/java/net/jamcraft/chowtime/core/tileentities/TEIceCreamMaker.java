@@ -18,6 +18,8 @@ import net.minecraft.tileentity.TileEntity;
 /**
  * Created by James Hollowell on 5/16/2014.
  */
+
+//TODO: Work on ISided-ness
 public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 {
     public static final int IN1_LOC = 1;
@@ -132,9 +134,9 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     @Override public boolean canInsertItem(int slot, ItemStack itemStack, int side)
     {
-        return true;
+//        return true;
         //        if(slot!=0||side!=ForgeDirection.UP.flag) return false;
-        //        return isItemValidForSlot(slot,itemStack);
+                return isItemValidForSlot(slot,itemStack);
     }
 
     @Override public boolean canExtractItem(int slot, ItemStack itemStack, int side)
