@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.rmi.Remote;
 
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.Config;
@@ -24,7 +23,6 @@ import net.jamcraft.chowtime.core.items.SeedRaspberry;
 import net.jamcraft.chowtime.core.items.SeedStrawberry;
 import net.jamcraft.chowtime.core.items.SeedTomato;
 import net.jamcraft.chowtime.remote.RemoteMain;
-import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
