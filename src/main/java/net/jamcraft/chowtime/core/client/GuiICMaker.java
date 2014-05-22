@@ -31,8 +31,9 @@ public class GuiICMaker extends GuiContainer
         GL11.glPushMatrix();
         GL11.glScaled(0.51F, 0.51F, 0.51F);
         double tempD = ((double) te.getTemp()) / 1000;
-        String temp = Double.toString(tempD) + "°C";
-        fontRendererObj.drawString(temp, 18, 55, 4210752);
+        String temp = Double.toString(tempD) + "\u00B0C";
+        int width=fontRendererObj.getStringWidth(temp);
+        fontRendererObj.drawString(temp, width / 2 - 12, 55, 4210752);
         GL11.glPopMatrix();
     }
 
@@ -50,7 +51,10 @@ public class GuiICMaker extends GuiContainer
         int i1 = this.te.getScaledProgress(24);
         this.drawTexturedModalRect(xStart + 79, yStart + 34, 176, 14, i1 + 1, 16);
 
-        i1 = this.te.getScaledTemp(46);
+        i1 = this.te.getScaledTemp(47);
         this.drawTexturedModalRect(xStart + 8, yStart + 7, 176, 31, 15, i1 + 1);
+
+        i1 = this.te.getScaledFreezeTemp(47);
+        this.drawHorizontalLine(xStart+8,xStart+23,yStart+7+i1, GuiHelper.getIntFromRGBA(255,0,0,255));
     }
 }

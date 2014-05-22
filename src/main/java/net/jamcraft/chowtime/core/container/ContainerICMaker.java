@@ -62,7 +62,7 @@ public class ContainerICMaker extends Container
             itemStack = slotItemStack.copy();
 
             /**
-             * If we are shift-clicking an item out of the RocketAssembler
+             * If we are shift-clicking an item out of the IceCreamMaker's
              * container, attempt to put it in the first available slot in the
              * player's inventory
              */
@@ -76,7 +76,7 @@ public class ContainerICMaker extends Container
             else
             {
                 /**
-                 * If the stack being shift-clicked into the assembler's
+                 * If the stack being shift-clicked into the IceCreamMakers's
                  * container is a fuel, try to put it in the fuel slot.
                  */
                 if (TEIceCreamMaker.isIceFuel(slotItemStack))
@@ -100,14 +100,14 @@ public class ContainerICMaker extends Container
                 }
             }
 
-            if (slotItemStack.stackSize == 0)
+            if (slotItemStack.stackSize <= 0)
             {
                 slot.putStack((ItemStack) null);
             }
-            else
-            {
+//            else
+//            {
                 slot.onSlotChanged();
-            }
+//            }
         }
 
         return itemStack;

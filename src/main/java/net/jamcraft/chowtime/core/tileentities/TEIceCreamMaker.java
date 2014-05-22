@@ -26,7 +26,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
     public static final int IN2_LOC = 2;
     public static final int OUT_LOC = 3;
     public static final int FUEL_LOC = 4;
-    public static final int FREEZING_TEMP = -21000;
+    //    public static final int FREEZING_TEMP = -21000;
     public static final int ROOM_TEMP = 25000;
     public static final int MIN_TEMP = -50000;
 
@@ -35,6 +35,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
     private int ticksLeft = 0;
     private int maxTicks = 0;
     private int temp = ROOM_TEMP; //room temperature (1000=1 Degree Celcius)
+    private int freezeTemp = MIN_TEMP;
 
     public TEIceCreamMaker()
     {
@@ -134,9 +135,9 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     @Override public boolean canInsertItem(int slot, ItemStack itemStack, int side)
     {
-//        return true;
+        //        return true;
         //        if(slot!=0||side!=ForgeDirection.UP.flag) return false;
-                return isItemValidForSlot(slot,itemStack);
+        return isItemValidForSlot(slot, itemStack);
     }
 
     @Override public boolean canExtractItem(int slot, ItemStack itemStack, int side)
@@ -153,6 +154,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         tags.setInteger("timeleft", ticksLeft);
         tags.setInteger("maxTime", maxTicks);
         tags.setInteger("temp", temp);
+        tags.setInteger("freezingTemp", freezeTemp);
 
         if (inventory[0] != null)
         {
@@ -192,6 +194,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         ticksLeft = tags.getInteger("timeleft");
         maxTicks = tags.getInteger("maxTime");
         temp = tags.getInteger("temp");
+        freezeTemp = tags.getInteger("freezingTemp");
 
         if (tags.hasKey("slot1"))
         {
@@ -221,10 +224,11 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             if (r != null)
             {
                 maxTicks = r.getTime();
+                freezeTemp = r.getTemp();
             }
         }
         //Actual processing
-        if (temp < FREEZING_TEMP)
+        if (temp < freezeTemp)
         {
             if (ticksLeft < maxTicks && IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]) != null)
             {
@@ -241,7 +245,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             {
                 ticksLeft = 0;
             }
-            if (ticksLeft == maxTicks && maxTicks!=0)
+            if (ticksLeft == maxTicks && maxTicks != 0)
             {
                 ticksLeft = 0;
                 make();
@@ -250,7 +254,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
         if (inventory[3] != null && this.worldObj.getTotalWorldTime() % 3 == 0)
         {
-            if (temp-iceFuelValue(inventory[3]) > MIN_TEMP)
+            if (temp - iceFuelValue(inventory[3]) > MIN_TEMP)
             {
                 if (isIceFuel(inventory[3]))
                 {
@@ -280,9 +284,9 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         else
             inventory[2].stackSize += res.stackSize;
 
-        inventory[1]= ItemHelper.decreaseStack(inventory[1],worldObj,xCoord,yCoord,zCoord);
+        inventory[1] = ItemHelper.decreaseStack(inventory[1], worldObj, xCoord, yCoord, zCoord);
 
-        inventory[0]= ItemHelper.decreaseStack(inventory[0],worldObj,xCoord,yCoord,zCoord);
+        inventory[0] = ItemHelper.decreaseStack(inventory[0], worldObj, xCoord, yCoord, zCoord);
 
         //TODO: make temp decrease while makeing, not just at end...
         temp += 200;
@@ -318,6 +322,11 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
     public int getTemp()
     {
         return temp;
+    }
+
+    public int getScaledFreezeTemp(int scale)
+    {
+        return (ROOM_TEMP - freezeTemp) * scale / (ROOM_TEMP - MIN_TEMP);
     }
 
     public static boolean isIceFuel(ItemStack stack)

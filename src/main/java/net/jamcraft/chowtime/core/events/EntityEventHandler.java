@@ -243,6 +243,7 @@ public class EntityEventHandler
                         event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropGrape ||
                         event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropBarley)
                 {
+                    //This needs to change slightly... if you go from 99 to 101, you never get the message...
                     if(ChowTime.harvestXP == 20) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulation! You have gained 20 harvesting experience! You can now plant & harvest Tomatoes, Raspberries and Cranberries."));
                     if(ChowTime.harvestXP == 100) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulation! You have gained 100 harvesting experience! You can now plant & harvest Corn, Grapes."));
                     if(ChowTime.harvestXP == 300) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulation! You have gained 300 harvesting experience! You can now plant & harvest Strawberries."));

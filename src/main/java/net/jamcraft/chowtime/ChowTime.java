@@ -113,7 +113,6 @@ public class ChowTime
 
         OreDictionary.registerOre("ingotIron", Items.iron_ingot);
 
-
         CTRegistry.CTBlocks();
         CTRegistry.CTMachines();
         CTRegistry.CTLiquids();

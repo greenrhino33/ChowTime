@@ -127,7 +127,7 @@ public class RemoteMain
             ChowTime.logger.warn("Downloading remote " + remotepath + " to local " + localpath);
             if (remotepath == null) remotepath = localpath;
             final int blk_size = 1024;
-            URL url = new URL(Config.remoteLoc + "dyn/current" + remotepath);
+            URL url = new URL(Config.remoteLoc  + "dyn/current" + remotepath);
             URLConnection con = url.openConnection();
             InputStream reader = url.openStream();
             File f = new File(ModConstants.DYN_LOC + localpath);

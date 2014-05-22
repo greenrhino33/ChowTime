@@ -14,7 +14,8 @@ public class IceCreamRecipies
 
     public static void AddRecipe(ItemStack input1, ItemStack input2, ItemStack output, int time)
     {
-        Recipe2_1 r = new Recipe2_1(input1, input2, output, time);
+        int temp=-21000;
+        Recipe2_1 r = new Recipe2_1(input1, input2, output, time, temp);
         recipe11List.add(r);
     }
 
