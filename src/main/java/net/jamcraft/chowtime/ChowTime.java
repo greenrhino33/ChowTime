@@ -1,7 +1,6 @@
 package net.jamcraft.chowtime;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
@@ -19,6 +18,7 @@ import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
 import net.jamcraft.chowtime.core.network.PacketHandler;
 import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
+import net.jamcraft.chowtime.dyn.LockdownSecuityManager;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -36,7 +36,6 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.EnumMap;
 
 //import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
@@ -80,21 +79,21 @@ public class ChowTime
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        try
-        {
-            Class<?> c = Loader.class;
-            Field rplField = c.getDeclaredField("canonicalModsDir");
-            rplField.setAccessible(true);
-            Object rpList = rplField.get(Loader.instance());
-            if (rpList instanceof File)
-            {
-                ModConstants.DYN_LOC = ((File) rpList).getCanonicalPath() + "/ChowTimeDyn";
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+//        try
+//        {
+//            Class<?> c = Loader.class;
+//            Field rplField = c.getDeclaredField("canonicalModsDir");
+//            rplField.setAccessible(true);
+//            Object rpList = rplField.get(Loader.instance());
+//            if (rpList instanceof File)
+//            {
+//                ModConstants.DYN_LOC = ((File) rpList).getCanonicalPath() + "/ChowTimeDyn";
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
         // FMLInterModComms.sendMessage("Waila", "register",
         // "allout58.mods.prisoncraft.compat.waila.WailaProvider.callbackRegister");
 
@@ -108,17 +107,19 @@ public class ChowTime
 
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
 
-        RemoteMain.init();
-        DynMain.init();
-
-        OreDictionary.registerOre("ingotIron", Items.iron_ingot);
-
         CTRegistry.CTBlocks();
         CTRegistry.CTMachines();
         CTRegistry.CTLiquids();
         CTRegistry.CTCrops();
         CTRegistry.CTItems();
         CTRegistry.CTTileEntities();
+
+        RemoteMain.init();
+        DynMain.init();
+
+        OreDictionary.registerOre("ingotIron", Items.iron_ingot);
+
+
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
         //        MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         //        BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
@@ -126,9 +127,6 @@ public class ChowTime
 
         // MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
 
-        // BlockList.init();
-        // ItemList.init();
-        // TileEntityList.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
     }
@@ -143,11 +141,6 @@ public class ChowTime
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.Juicer, 1, 0), "WBW", "WPW", "ISI", 'W', "plankWood", 'B', Items.glass_bottle, 'P', Blocks.piston, 'I', "ingotIron", 'S', Blocks.stone));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.Fermenter, 1, 0), "WBW", "WBW", "ISI", 'W', "plankWood", 'B', Items.glass_bottle, 'I', "ingotIron", 'S', Blocks.stone));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.IceCreamMaker, 1, 0), "CBC","C C","SIS",'C',Blocks.ice,'B', Items.glass_bottle,'I',"ingotIron", 'S',Blocks.stone));
-
-//        GameRegistry.addRecipe(new ItemStack(CTInits.Juicer, 1, 0), "WBW", "WPW", "ISI", 'W', Blocks.planks, 'B', Items.glass_bottle, 'P', Blocks.piston, 'I', Items.iron_ingot, 'S', Blocks.stone);
-//        GameRegistry.addRecipe(new ItemStack(CTInits.Fermenter, 1, 0), "WBW", "WBW", "ISI", 'W', Blocks.planks, 'B', Items.glass_bottle, 'I', Items.iron_ingot, 'S', Blocks.stone);
-//        GameRegistry.addRecipe(new ItemStack(CTInits.IceCreamMaker, 1, 0), "CBC", "C C", "SIS", 'C', Blocks.ice, 'B', Items.glass_bottle, 'I', Items.iron_ingot, 'S', Blocks.stone);
-
 
         DynItems.registerRecipes();
 
