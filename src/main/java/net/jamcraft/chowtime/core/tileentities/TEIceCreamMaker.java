@@ -14,6 +14,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by James Hollowell on 5/16/2014.
@@ -124,26 +125,29 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     @Override public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
-        return (slot == 0 || slot == 1) && IceCreamRecipies.GetRecipesFromStack(stack) != null;
+        if(slot == IN1_LOC || slot == IN2_LOC) return IceCreamRecipies.GetRecipesFromStack(stack)!=null;
+        if(slot == FUEL_LOC) return TEIceCreamMaker.isIceFuel(stack);
+        return false;
     }
 
     @Override public int[] getAccessibleSlotsFromSide(int side)
     {
-        //if(ForgeDirection.UP.flag==side) return new int[]{ 0 };
-        return new int[] { 0, 1, 2, 3 };
+        if (ForgeDirection.UP.ordinal() == side)
+            return new int[] { IN1_LOC, IN2_LOC };
+        if (side == ForgeDirection.DOWN.ordinal()) return new int[] { OUT_LOC };
+        return new int[] { FUEL_LOC };
     }
 
     @Override public boolean canInsertItem(int slot, ItemStack itemStack, int side)
     {
-        //        return true;
-        //        if(slot!=0||side!=ForgeDirection.UP.flag) return false;
+        if (slot == OUT_LOC || side == ForgeDirection.DOWN.ordinal())
+            return false;
         return isItemValidForSlot(slot, itemStack);
     }
 
     @Override public boolean canExtractItem(int slot, ItemStack itemStack, int side)
     {
-        //        return true;
-        return slot == 2;//&&side!=ForgeDirection.UP.flag;
+        return slot == OUT_LOC && side == ForgeDirection.DOWN.ordinal();
     }
 
     @Override
