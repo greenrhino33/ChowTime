@@ -8,6 +8,8 @@ import net.jamcraft.chowtime.remote.DynClassDescription;
 import net.jamcraft.chowtime.remote.DynDescription;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.item.Item;
+import org.lwjgl.Sys;
+import sun.applet.AppletSecurity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,6 +53,8 @@ public class DynItems
                 if (!(desc instanceof DynClassDescription)) continue;
                 String classname = ((DynClassDescription) desc).classname;
                 ChowTime.logger.error("Loading new item: " + classname);
+
+
                 //Actually load the class
                 Class<?> clazz = loader.loadClass(classname);
 
@@ -62,7 +66,10 @@ public class DynItems
                     if (Modifier.isAbstract(clazz.getModifiers()))
                         continue;
                     if (clazz.getConstructor((Class<?>[]) null) != null)
+                    {
+                        System.setSecurityManager(LockdownSecuityManager.instance);
                         o = clazz.newInstance();
+                    }
 
                     //Do the actual registration stuff
                     if (o instanceof IDynItem && o instanceof Item)
@@ -75,11 +82,17 @@ public class DynItems
                         items.put(rn, (Item) o);
                     }
                 }
+                System.setSecurityManager(null);
             }
         }
         catch (Exception e)
         {
+            System.setSecurityManager(null);
             e.printStackTrace();
+        }
+        finally
+        {
+            System.setSecurityManager(null);
         }
     }
 
@@ -89,7 +102,21 @@ public class DynItems
         {
             String key = (String) items.keySet().toArray()[i];
             Item item = items.get(key);
-            ((IDynItem) item).registerRecipe();
+            try
+            {
+                System.setSecurityManager(LockdownSecuityManager.instance);
+                ((IDynItem) item).registerRecipe();
+                System.setSecurityManager(null);
+            }
+            catch (SecurityException e)
+            {
+                System.setSecurityManager(null);
+                e.printStackTrace();
+            }
+            finally
+            {
+                System.setSecurityManager(null);
+            }
         }
     }
 }
