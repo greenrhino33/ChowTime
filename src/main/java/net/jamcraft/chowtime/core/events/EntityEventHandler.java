@@ -22,11 +22,13 @@ import net.jamcraft.chowtime.core.items.SeedGrape;
 import net.jamcraft.chowtime.core.items.SeedRaspberry;
 import net.jamcraft.chowtime.core.items.SeedStrawberry;
 import net.jamcraft.chowtime.core.items.SeedTomato;
+import net.jamcraft.chowtime.core.registrars.HarvestLevelRegistry;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -43,6 +45,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
  */
 public class EntityEventHandler
 {
+    private static boolean HasBeenNotified=false;
     @SubscribeEvent
     public void onEntityJoinWorld(EntityJoinWorldEvent event)
     {
@@ -53,18 +56,23 @@ public class EntityEventHandler
             ChowTime.harvestXP = ChowTime.saveData.getInteger("harvestXP" + (player).getCommandSenderName());
             ChowTime.harvestLVL = ChowTime.saveData.getInteger("harvestLVL" + (player).getCommandSenderName());
             
-            if (event.world.isRemote)
+            if (event.world.isRemote && !HasBeenNotified)
             {
                 if (RemoteMain.hasUpdated)
                 {
-                    player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("string.updated")));
+                    player.addChatComponentMessage(new ChatComponentTranslation("string.updated"));
                     RemoteMain.hasUpdated = false;
                 }
                 if (Config.forceLocal)
                 {
-                    player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("string.warnlocal")));
+                    player.addChatComponentMessage(new ChatComponentTranslation("string.warnlocal"));
+                }
+                if (Config.useDev)
+                {
+                    player.addChatComponentMessage(new ChatComponentTranslation("string.usedev"));
                 }
                 RemoteMain.player=player;
+                HasBeenNotified=true;
             }
         }
     }
@@ -234,6 +242,7 @@ public class EntityEventHandler
         {
             if (event.action == event.action.LEFT_CLICK_BLOCK && !(event.entityPlayer instanceof FakePlayer))
             {
+//                if(HarvestLevelRegistry.IsInList(event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z)))
                 if(event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropStrawberry ||
                         event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropBlueberry ||
                         event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropCranberry ||

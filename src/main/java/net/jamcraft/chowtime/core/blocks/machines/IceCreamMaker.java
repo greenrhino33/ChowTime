@@ -30,6 +30,8 @@ public class IceCreamMaker extends BlockContainer
         this.setCreativeTab(ChowTime.creativeTab);
         setBlockName("icecreammaker");
         setBlockTextureName(ModConstants.MODID + ":icecreammaker");
+        setHarvestLevel("pickaxe",1);
+        setHardness(5);
     }
 
     @Override

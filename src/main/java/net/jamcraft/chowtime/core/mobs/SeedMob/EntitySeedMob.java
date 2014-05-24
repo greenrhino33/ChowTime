@@ -1,14 +1,11 @@
 package net.jamcraft.chowtime.core.mobs.SeedMob;
 
 import net.jamcraft.chowtime.core.CTInits;
-import net.minecraft.entity.Entity;
+import net.jamcraft.chowtime.core.registrars.SeedRegistry;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.IEntityOwnable;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -21,7 +18,7 @@ import java.util.Random;
 /**
  * Created by Kayla Marie on 5/16/14.
  */
-public class EntitySeedMob extends EntityAnimal
+public class EntitySeedMob extends EntityAnimal implements IMob
 {
 
     private int inLove;
@@ -142,7 +139,7 @@ public class EntitySeedMob extends EntityAnimal
 
     protected String getHurtSound()
     {
-        return "mob.glog.say";
+        return "mob.glog.hurt";
     }
 
     protected String getDeathSound()
@@ -160,19 +157,23 @@ public class EntitySeedMob extends EntityAnimal
         ItemStack itemstack = par1EntityPlayer.inventory.getCurrentItem();
 
         Random random = new Random();
-        int n = random.nextInt(9);
+        int n = random.nextInt(SeedRegistry.getSeeds().length);
         int produce = random.nextInt(10) + 6;
 
-//        if (par1EntityPlayer.inventory.getCurrentItem() == new ItemStack(Items.lead)){
-//           if(!this.getLeashed()){
-//            this.setLeashedToEntity(par1EntityPlayer, true);
-//           }else{
-//            this.setLeashedToEntity(par1EntityPlayer, false);
-//           }
-//        }
-        if (itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
+        //        if (par1EntityPlayer.inventory.getCurrentItem() == new ItemStack(Items.lead)){
+        //           if(!this.getLeashed()){
+        //            this.setLeashedToEntity(par1EntityPlayer, true);
+        //           }else{
+        //            this.setLeashedToEntity(par1EntityPlayer, false);
+        //           }
+        //        }
+        if (!worldObj.isRemote && itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
         {
-                switch(n){
+            par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(SeedRegistry.getSeeds()[n], 1, 0));
+            par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
+            par1EntityPlayer.inventoryContainer.detectAndSendChanges();
+            //Replaced with registrar code :D
+            /*    switch(n){
                     case 0:
                         par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.BarleySeeds, 1, 0));
                         par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
@@ -211,14 +212,14 @@ public class EntitySeedMob extends EntityAnimal
                         break;
                     default:
                         break;
-                }
+                }*/
             return true;
-          }
+        }
         else
         {
             return super.interact(par1EntityPlayer);
         }
-       //}
+        //}
 
     }
 
@@ -232,9 +233,9 @@ public class EntitySeedMob extends EntityAnimal
     {
         return new EntitySeedMob(this.worldObj);
     }
-//
-//    @Override
-//    public String getOwnerName() {
-//        return null;
-//    }
+    //
+    //    @Override
+    //    public String getOwnerName() {
+    //        return null;
+    //    }
 }

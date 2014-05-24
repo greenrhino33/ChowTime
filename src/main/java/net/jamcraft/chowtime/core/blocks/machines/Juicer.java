@@ -30,6 +30,8 @@ public class Juicer extends BlockContainer
         this.setCreativeTab(ChowTime.creativeTab);
         setBlockName("juicer");
         setBlockTextureName(ModConstants.MODID + ":juicer");
+        setHarvestLevel("pickaxe",1);
+        setHardness(5);
     }
 
     @Override

@@ -11,14 +11,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.jamcraft.chowtime.core.*;
+import net.jamcraft.chowtime.core.commands.ChowTimeCommand;
 import net.jamcraft.chowtime.core.events.ConnectionHandler;
 import net.jamcraft.chowtime.core.events.EntityEventHandler;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
 import net.jamcraft.chowtime.core.network.PacketHandler;
+import net.jamcraft.chowtime.core.registrars.SeedRegistry;
 import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
-import net.jamcraft.chowtime.dyn.LockdownSecuityManager;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,6 +27,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -43,7 +45,7 @@ import java.util.EnumMap;
 /**
  * Created by James Hollowell on 5/14/2014.
  */
-@Mod(modid = ModConstants.MODID, name = ModConstants.NAME)
+@Mod(modid = ModConstants.MODID, name = ModConstants.NAME, version = "")
 public class ChowTime
 {
     public static EnumMap<Side, FMLEmbeddedChannel> channels;
@@ -144,9 +146,18 @@ public class ChowTime
 
         DynItems.registerRecipes();
 
+        SeedRegistry.AddSeed((ItemSeeds) CTInits.BarleySeeds);
+        SeedRegistry.AddSeed((ItemSeeds) CTInits.BlueberrySeeds);
+        SeedRegistry.AddSeed((ItemSeeds) CTInits.CornSeeds);
+        SeedRegistry.AddSeed((ItemSeeds) CTInits.CranberrySeeds);
+        SeedRegistry.AddSeed((ItemSeeds) CTInits.GrapeSeeds);
+        SeedRegistry.AddSeed((ItemSeeds) CTInits.RaspberrySeeds);
+        SeedRegistry.AddSeed((ItemSeeds) CTInits.StrawberrySeeds);
+        SeedRegistry.AddSeed((ItemSeeds) CTInits.TomatoSeeds);
+
         proxy.registerRenderers();
         EntityRegistry.registerModEntity(EntitySeedMob.class, "SeedMob", 2, this, 40, 3, true);
-        EntityRegistry.addSpawn(EntitySeedMob.class, 1, 5, 10, EnumCreatureType.monster, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.plains, BiomeGenBase.beach, BiomeGenBase.coldBeach, BiomeGenBase.frozenRiver);
+        EntityRegistry.addSpawn(EntitySeedMob.class, 5, 2, 3, EnumCreatureType.monster, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.plains, BiomeGenBase.beach, BiomeGenBase.coldBeach, BiomeGenBase.frozenRiver);
     }
 
     @Mod.EventHandler
@@ -158,7 +169,7 @@ public class ChowTime
     @Mod.EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
-        // event.registerServerCommand(new JailCommand());
+        event.registerServerCommand(new ChowTimeCommand());
     }
 
     @Mod.EventHandler

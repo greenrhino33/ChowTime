@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 
 import java.io.*;
@@ -181,7 +182,7 @@ public class RemoteMain
                 sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
             }
 
-            System.out.println("Digest(in hex format):: " + sb.toString());
+//            System.out.println("Digest(in hex format):: " + sb.toString());
             localHash=sb.toString();
         }
         catch (Exception e)
@@ -195,7 +196,7 @@ public class RemoteMain
         isSyncedWithServer=serverHash.equals(localHash);
         if(!isSyncedWithServer && player!=null)
         {
-            player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("string.nosync")));
+            player.addChatComponentMessage(new ChatComponentTranslation("string.nosync"));
             if(FMLCommonHandler.instance().getEffectiveSide().isClient())
             {
                 Minecraft.getMinecraft().theWorld.sendQuittingDisconnectingPacket();

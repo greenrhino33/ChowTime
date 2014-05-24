@@ -29,6 +29,8 @@ public class Fermenter extends BlockContainer
         super(Material.iron);
         this.setCreativeTab(ChowTime.creativeTab);
         setBlockName("fermenter");
+        setHarvestLevel("pickaxe",1);
+        setHardness(5);
     }
 
     @Override

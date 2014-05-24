@@ -1,3 +1,9 @@
 -Add a license. GPLv2?
 -Fix Chocolate Textures
 -Add Candy Land Dimention
+-Refactor all the xp code out into its own package
+
+
+Distant future
+-Refactor dyn code to its own library
+-?Add support for dyn blocks?
