@@ -28,6 +28,7 @@ import java.util.List;
  */
 public class IceCreamRecipies
 {
+    //TODO: make meta sensitive
     public static List<Recipe2_1> recipe11List = new ArrayList<Recipe2_1>();
 
     public static void AddRecipe(ItemStack input1, ItemStack input2, ItemStack output, int time)

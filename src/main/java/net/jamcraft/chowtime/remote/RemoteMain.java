@@ -52,6 +52,7 @@ public class RemoteMain
 
     public static void init()
     {
+        ChowTime.logger.error("Starting remote checking...");
         File dyndir = new File(ModConstants.DYN_LOC);
         if (!dyndir.exists()) dyndir.mkdir();
         LoadLocal();
@@ -100,9 +101,11 @@ public class RemoteMain
 
     public static boolean LoadLocal()
     {
+        ChowTime.logger.error("Loading local..");
         local.getObjects().clear();
         File f = new File(ModConstants.DYN_LOC + "/local.ctd");
         local.readFromFile(f);
+        ChowTime.logger.error("Done loading local..");
         return true;
     }
 
@@ -110,6 +113,8 @@ public class RemoteMain
     {
         try
         {
+            ChowTime.logger.error("Loading remote...");
+            ChowTime.logger.error("Downloading remote...");
             URL url = new URL(Config.remoteLoc + "dyn/current.ctd");
             URLConnection con = url.openConnection();
             InputStreamReader isr = new InputStreamReader(con.getInputStream());
@@ -125,7 +130,11 @@ public class RemoteMain
             fw.close();
             br.close();
 
+            ChowTime.logger.error("Done downloading remote ctd...");
+            ChowTime.logger.error("Loading remote ctd...");
+
             remote.readFromFile(dyn);
+            ChowTime.logger.error("Done loading remote...");
             return true;
         }
         catch (IOException e)
