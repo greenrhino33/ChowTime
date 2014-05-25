@@ -39,7 +39,7 @@ public class Config
         remoteLoc = conf.get("Dynamic", "RemoteLocation", "http://jam-craft.github.io/ChowTime/").getString();
         forceLocal = conf.get("Dynamic", "ForceLocal", false).getBoolean(false);
         useDev=conf.get("Dynamic","UseDevVersions",false).getBoolean(false);
-        remoteLoc=(useDev?"dev/":"")+remoteLoc;
+        remoteLoc=remoteLoc+(useDev?"dev/":"");
         conf.save();
     }
 
