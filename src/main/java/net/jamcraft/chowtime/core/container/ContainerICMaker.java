@@ -99,7 +99,7 @@ public class ContainerICMaker extends Container
                  */
                 if (TEIceCreamMaker.isIceFuel(slotItemStack))
                 {
-                    if (!this.mergeItemStack(slotItemStack, 3, TEIceCreamMaker.INV_SIZE, false))
+                    if (!this.mergeItemStack(slotItemStack, 3, 3, false))
                     {
                         return null;
                     }
@@ -107,7 +107,7 @@ public class ContainerICMaker extends Container
 
                 if (IceCreamRecipies.GetRecipesFromStack(slotItemStack) != null)
                 {
-                    if (!this.mergeItemStack(slotItemStack, 0, TEIceCreamMaker.INV_SIZE, false) && !this.mergeItemStack(slotItemStack, 1, TEIceCreamMaker.INV_SIZE, false))
+                    if (!this.mergeItemStack(slotItemStack, 0, 2, false))
                     {
                         return null;
                     }

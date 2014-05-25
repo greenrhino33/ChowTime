@@ -110,7 +110,7 @@ public class RemoteMain
     {
         try
         {
-            URL url = new URL(Config.remoteLoc + "/dyn/current.ctd");
+            URL url = new URL(Config.remoteLoc + "dyn/current.ctd");
             URLConnection con = url.openConnection();
             InputStreamReader isr = new InputStreamReader(con.getInputStream());
             BufferedReader br = new BufferedReader(isr);
@@ -123,6 +123,7 @@ public class RemoteMain
                 fw.write("\n");
             }
             fw.close();
+            br.close();
 
             remote.readFromFile(dyn);
             return true;

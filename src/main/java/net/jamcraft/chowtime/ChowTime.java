@@ -35,6 +35,7 @@ import net.jamcraft.chowtime.core.mobs.GingerbreadMan.EntityGingerbreadMan;
 import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
 import net.jamcraft.chowtime.core.network.PacketHandler;
 import net.jamcraft.chowtime.core.registrars.SeedRegistry;
+import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.material.Material;
@@ -174,7 +175,7 @@ public class ChowTime
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.Fermenter, 1, 0), "WBW", "WBW", "ISI", 'W', "plankWood", 'B', Items.glass_bottle, 'I', "ingotIron", 'S', Blocks.stone));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.IceCreamMaker, 1, 0), "CBC","C C","SIS",'C',Blocks.ice,'B', Items.glass_bottle,'I',"ingotIron", 'S',Blocks.stone));
 
-//        DynItems.registerRecipes();
+        DynItems.registerRecipes();
 
         SeedRegistry.AddSeed((ItemSeeds) CTInits.BarleySeeds);
         SeedRegistry.AddSeed((ItemSeeds) CTInits.BlueberrySeeds);
