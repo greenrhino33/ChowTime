@@ -42,3 +42,4 @@ config/*
 mods/*
 crash-reports/*
 bin/*
+options.txt
