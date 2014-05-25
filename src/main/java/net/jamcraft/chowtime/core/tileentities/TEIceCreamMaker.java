@@ -1,3 +1,21 @@
+/*
+ * ChowTime - Dynamically updating food mod for Minecraft
+ *     Copyright (C) 2014  Team JamCraft
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.jamcraft.chowtime.core.tileentities;
 
 import net.jamcraft.chowtime.core.lib.ItemHelper;
@@ -239,6 +257,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
                 if (inventory[2] == null || IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]).getOutput().getItem().equals(inventory[2].getItem()))
                 {
                     ticksLeft++;
+                    temp+=3;
                 }
                 else
                 {
@@ -291,9 +310,6 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         inventory[1] = ItemHelper.decreaseStack(inventory[1], worldObj, xCoord, yCoord, zCoord);
 
         inventory[0] = ItemHelper.decreaseStack(inventory[0], worldObj, xCoord, yCoord, zCoord);
-
-        //TODO: make temp decrease while makeing, not just at end...
-        temp += 200;
     }
 
     /* Packets */

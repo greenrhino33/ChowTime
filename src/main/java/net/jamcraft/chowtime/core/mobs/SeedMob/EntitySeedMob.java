@@ -1,3 +1,21 @@
+/*
+ * ChowTime - Dynamically updating food mod for Minecraft
+ *     Copyright (C) 2014  Team JamCraft
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.jamcraft.chowtime.core.mobs.SeedMob;
 
 import net.jamcraft.chowtime.core.CTInits;
@@ -31,11 +49,12 @@ public class EntitySeedMob extends EntityAnimal implements IMob
 
         this.setHealth(10.0F);
         this.getNavigator().setSpeed(0.222);
+        this.getNavigator().setCanSwim(true);
         this.setSize(0.5F, 0.5F);
         this.isImmuneToFire = false;
         float var2 = 0.27F;
 
-        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(7, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.33F));
         this.tasks.addTask(2, new EntityAIMate(this, var2));
         this.tasks.addTask(3, new EntityAITempt(this, 0.3F, CTInits.Strawberry, false));
