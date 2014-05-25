@@ -10,12 +10,22 @@ tile.grapeCrop.name=Grape Crop
 tile.log_Basic.name=Test Log
 tile.sapling_Basic.name=Test Sapling
 tile.leaves_Basic.name=Test Leaves
-tile.blockIceCream_Strawberry.name=Strawberry Ice Cream
+tile.iceCreamBlock.name=Strawberry Ice Cream
 tile.blockCottonCandy_Blue.name=Blue Cotton Candy
 tile.ChocolateMilk.name=Chocolate Milk
+tile.cornCrop.name=Corn Crop
+tile.tomatoCrop.name=Tomato Crop
+tile.blueberryCrop.name=Blueberry Crop
+tile.cranberryCrop.name=Cranberry Crop
+tile.raspberryCrop.name=Raspberry Crop
 
-string.updated=ChowTime has updated! Look for new foods and recipies.
-string.warnlocal=[ChowTime]Warning! Remote update has been disabled!
+string.updated=ChowTime has updated! Look for new foods and recipes.
+string.warnlocal=[ChowTime] Warning! Remote update has been disabled!
+string.nosync=[ChowTime] Client dynamic version different than server.. Disconnecting.
+string.usedev=[ChowTime] You are updating with the development branch! Thanks for testing, but be careful, bugs are a definite possibility
+
+chat.getXP=[ChowTime] Your current harvesting XP is %d
+chat.setXP=[ChowTime] Setting your harvestign XP to %d
 
 item.barley.name=Barley
 item.seedBarley.name=Barley Seeds
@@ -37,3 +47,5 @@ item.Item_Bucket.name=Chocolate Bucket
 item.watermelonIceCreamCcone.name=Watermelon Ice Cream Cone
 
 itemGroup.ChowTime=ChowTime
+
+entity.SeedMob.name=TurtlePi
