@@ -172,7 +172,7 @@ public class RemoteMain
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            ChowTime.logger.error("Error downloading file "+remotepath);
         }
     }
 
