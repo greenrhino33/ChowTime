@@ -17,8 +17,8 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0.1-rev1"
-group= "net.jam-craft.chowTime" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "1.0.1-rev2"
+group= "net.jam-craft.chowTime"
 archivesBaseName = "ChowTime"
 
 minecraft {

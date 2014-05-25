@@ -3,7 +3,7 @@ ChowTime
 
 A food mod. It adds dynamically loaded items, tiered crops, TurtlePi's and ice cream, and other stuffs.
  
-To start off, find a TurtlePi. (Pink and Green, Too cute to miss)
+To start off, find a TurtlePi. (Pink and Green, too cute to miss)
 Right click on the TurtlePi with Wheat Seeds to get random ChowTime seeds.
 Only certain seeds can be planted at first, harvest things to level up to better crops.
 

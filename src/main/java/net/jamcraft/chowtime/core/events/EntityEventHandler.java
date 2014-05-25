@@ -1,3 +1,21 @@
+/*
+ * ChowTime - Dynamically updating food mod for Minecraft
+ *     Copyright (C) 2014  Team JamCraft
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.jamcraft.chowtime.core.events;
 
 import java.io.EOFException;
@@ -253,9 +271,10 @@ public class EntityEventHandler
                         event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropBarley)
                 {
                     //This needs to change slightly... if you go from 99 to 101, you never get the message...
-                    if(ChowTime.harvestXP == 20) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulation! You have gained 20 harvesting experience! You can now plant & harvest Tomatoes, Raspberries and Cranberries."));
-                    if(ChowTime.harvestXP == 100) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulation! You have gained 100 harvesting experience! You can now plant & harvest Corn, Grapes."));
-                    if(ChowTime.harvestXP == 300) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulation! You have gained 300 harvesting experience! You can now plant & harvest Strawberries."));
+                    if(ChowTime.harvestXP == 0) event.entityPlayer.addChatMessage(new ChatComponentText("Welcome to Chow Time! This mod adds harvesting experience that unlocks more plantable crops as you harvest. To start with, grow some Barley or Blueberries! More crops unlocked at 20 HXP!"));
+                    if(ChowTime.harvestXP == 20) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulations! You have gained 20 harvesting experience! You can now plant & harvest Tomatoes, Raspberries and Cranberries. More crops unlocked at 100 HXP!"));
+                    if(ChowTime.harvestXP == 100) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulations! You have gained 100 harvesting experience! You can now plant & harvest Corn, Grapes. More crops unlocked at 300 HXP!"));
+                    if(ChowTime.harvestXP == 300) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulations! You have gained 300 harvesting experience! You can now plant & harvest Strawberries. You are now the Harvest Master!"));
                 }
             }
             if (event.action == event.action.RIGHT_CLICK_BLOCK && !(event.entityPlayer instanceof FakePlayer) && event.entityPlayer.getHeldItem() != null && event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof BlockFarmland)
@@ -278,7 +297,7 @@ public class EntityEventHandler
                 {
                     event.setCanceled(true);
                     event.entityPlayer.addChatMessage(new ChatComponentText("You are not experienced enough to plant these seeds. Try gaining more levels first."));
-                    event.entityPlayer.addChatMessage(new ChatComponentText("To gaing more experience break fully grown crops that are on your level."));
+                    event.entityPlayer.addChatMessage(new ChatComponentText("To gain more experience break fully grown crops that are on your level."));
                 }
             }
         }
