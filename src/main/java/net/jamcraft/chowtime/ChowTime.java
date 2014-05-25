@@ -18,29 +18,28 @@
 
 package net.jamcraft.chowtime;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.*;
-import cpw.mods.fml.common.network.FMLEmbeddedChannel;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.jamcraft.chowtime.core.*;
+import java.io.File;
+import java.util.EnumMap;
+
+import net.jamcraft.chowtime.core.CTInits;
+import net.jamcraft.chowtime.core.CTRegistry;
+import net.jamcraft.chowtime.core.CommonProxy;
+import net.jamcraft.chowtime.core.Config;
+import net.jamcraft.chowtime.core.ModConstants;
+import net.jamcraft.chowtime.core.ObfHelper;
 import net.jamcraft.chowtime.core.commands.ChowTimeCommand;
 import net.jamcraft.chowtime.core.events.ConnectionHandler;
 import net.jamcraft.chowtime.core.events.EntityEventHandler;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
+import net.jamcraft.chowtime.core.mobs.GingerbreadMan.EntityGingerbreadMan;
 import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
 import net.jamcraft.chowtime.core.network.PacketHandler;
 import net.jamcraft.chowtime.core.registrars.SeedRegistry;
-import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -53,10 +52,23 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
-import java.util.EnumMap;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
+import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 //import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
 
@@ -162,7 +174,7 @@ public class ChowTime
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.Fermenter, 1, 0), "WBW", "WBW", "ISI", 'W', "plankWood", 'B', Items.glass_bottle, 'I', "ingotIron", 'S', Blocks.stone));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.IceCreamMaker, 1, 0), "CBC","C C","SIS",'C',Blocks.ice,'B', Items.glass_bottle,'I',"ingotIron", 'S',Blocks.stone));
 
-        DynItems.registerRecipes();
+//        DynItems.registerRecipes();
 
         SeedRegistry.AddSeed((ItemSeeds) CTInits.BarleySeeds);
         SeedRegistry.AddSeed((ItemSeeds) CTInits.BlueberrySeeds);
@@ -174,8 +186,16 @@ public class ChowTime
         SeedRegistry.AddSeed((ItemSeeds) CTInits.TomatoSeeds);
 
         proxy.registerRenderers();
-        EntityRegistry.registerModEntity(EntitySeedMob.class, "SeedMob", 2, this, 40, 3, true);
+        createEntity(EntitySeedMob.class, "SeedMob", 0x00AF00, 0xAA2167);
+        createEntity(EntityGingerbreadMan.class, "GingerbreadMan", 0xAF4200, 0x612400);
         EntityRegistry.addSpawn(EntitySeedMob.class, 5, 2, 3, EnumCreatureType.monster, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.plains, BiomeGenBase.beach, BiomeGenBase.coldBeach, BiomeGenBase.frozenRiver);
+    }
+    
+    public void createEntity(Class<? extends EntityLiving> entity, String entityName, int solidColor, int spotColor)
+    {
+        int randomID = EntityRegistry.findGlobalUniqueEntityId();
+        EntityRegistry.registerGlobalEntityID(entity, entityName, randomID, solidColor, spotColor);
+        EntityRegistry.registerModEntity(entity, entityName, randomID, this, 40, 3, true);
     }
 
     @Mod.EventHandler

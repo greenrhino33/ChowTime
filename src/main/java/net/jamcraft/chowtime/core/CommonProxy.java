@@ -31,6 +31,7 @@ import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -41,8 +42,6 @@ public class CommonProxy implements IGuiHandler
 {
     public void registerRenderers()
     {
-        EntityRegistry.registerGlobalEntityID(EntitySeedMob.class, "SeedMob", EntityRegistry.findGlobalUniqueEntityId(), 2, 0);
-        EntityRegistry.registerGlobalEntityID(EntityGingerbreadMan.class, "GingerbreadMan", EntityRegistry.findGlobalUniqueEntityId(), 5, 5);
     }
 
     @Override public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)

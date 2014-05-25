@@ -76,6 +76,7 @@ public class EntityEventHandler
             
             if (event.world.isRemote && !HasBeenNotified)
             {
+                if(ChowTime.harvestXP == 0) player.addChatMessage(new ChatComponentTranslation("chat.welcomeMessage"));
                 if (RemoteMain.hasUpdated)
                 {
                     player.addChatComponentMessage(new ChatComponentTranslation("string.updated"));
@@ -239,8 +240,6 @@ public class EntityEventHandler
                 if (ChowTime.harvestXP >= 100 && event.block instanceof CropGrape) ChowTime.harvestXP += 4;
                 if (ChowTime.harvestXP >= 100 && event.block instanceof CropCorn) ChowTime.harvestXP += 5;
                 if (ChowTime.harvestXP >= 300 && event.block instanceof CropStrawberry) ChowTime.harvestXP += 10;
-                // event.entityPlayer.addChatMessage(new
-                // ChatComponentText(Integer.toString(ChowTime.harvestXP)));
             }
         }
     }
@@ -271,10 +270,9 @@ public class EntityEventHandler
                         event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropBarley)
                 {
                     //This needs to change slightly... if you go from 99 to 101, you never get the message...
-                    if(ChowTime.harvestXP == 0) event.entityPlayer.addChatMessage(new ChatComponentText("Welcome to Chow Time! This mod adds harvesting experience that unlocks more plantable crops as you harvest. To start with, grow some Barley or Blueberries! More crops unlocked at 20 HXP!"));
-                    if(ChowTime.harvestXP == 20) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulations! You have gained 20 harvesting experience! You can now plant & harvest Tomatoes, Raspberries and Cranberries. More crops unlocked at 100 HXP!"));
-                    if(ChowTime.harvestXP == 100) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulations! You have gained 100 harvesting experience! You can now plant & harvest Corn, Grapes. More crops unlocked at 300 HXP!"));
-                    if(ChowTime.harvestXP == 300) event.entityPlayer.addChatMessage(new ChatComponentText("Congratulations! You have gained 300 harvesting experience! You can now plant & harvest Strawberries. You are now the Harvest Master!"));
+                    if(ChowTime.harvestXP == 20) event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain20"));
+                    if(ChowTime.harvestXP == 100) event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain100"));
+                    if(ChowTime.harvestXP == 300) event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain300"));
                 }
             }
             if (event.action == event.action.RIGHT_CLICK_BLOCK && !(event.entityPlayer instanceof FakePlayer) && event.entityPlayer.getHeldItem() != null && event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof BlockFarmland)
@@ -296,8 +294,8 @@ public class EntityEventHandler
                 if (!canPlant)
                 {
                     event.setCanceled(true);
-                    event.entityPlayer.addChatMessage(new ChatComponentText("You are not experienced enough to plant these seeds. Try gaining more levels first."));
-                    event.entityPlayer.addChatMessage(new ChatComponentText("To gain more experience break fully grown crops that are on your level."));
+                    event.entityPlayer.addChatMessage(new ChatComponentText("chat.notExperienced"));
+                    event.entityPlayer.addChatMessage(new ChatComponentText("chat.gainExperience"));
                 }
             }
         }
