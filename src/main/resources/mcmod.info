@@ -2,7 +2,7 @@
 {
   "modid": "chowtime",
   "name" : "ChowTime",
-  "description" : "Not just another food mod! Dynamic items and recipies!",
+  "description" : "Not just another food mod! Dynamic items and recipes!",
   "version": "${version}",
   "url": "http://www.github.com/Jam-Craft/ChowTime",
   "updateUrl": "",
