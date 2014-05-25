@@ -48,13 +48,13 @@ public class EntitySeedMob extends EntityAnimal implements IMob
         super(par1World);
 
         this.setHealth(10.0F);
+        this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setSpeed(0.222);
-        this.getNavigator().setCanSwim(true);
-        this.setSize(0.5F, 0.5F);
+        this.setSize(0.5F, 0.8F);
         this.isImmuneToFire = false;
         float var2 = 0.27F;
 
-        this.tasks.addTask(7, new EntityAISwimming(this));
+        this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.33F));
         this.tasks.addTask(2, new EntityAIMate(this, var2));
         this.tasks.addTask(3, new EntityAITempt(this, 0.3F, CTInits.Strawberry, false));
