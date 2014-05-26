@@ -1,0 +1,167 @@
+/*
+ * ChowTime - Dynamically updating food mod for Minecraft
+ *     Copyright (C) 2014  Team JamCraft
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package net.jamcraft.chowtime.api.nei;
+
+import codechicken.lib.gui.GuiDraw;
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
+import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
+import net.jamcraft.chowtime.core.recipies.Recipe1_1;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by James Hollowell on 5/25/2014.
+ */
+public class JuicerHandler extends TemplateRecipeHandler
+{
+    class CachedJuicerRecipe extends CachedRecipe
+    {
+        private ItemStack input;
+        private ItemStack output;
+
+        public CachedJuicerRecipe(ItemStack in, ItemStack out)
+        {
+            input = in;
+            output = out;
+        }
+
+        public CachedJuicerRecipe(Recipe1_1 r)
+        {
+            input=r.getInput();
+            output=r.getOutput();
+        }
+
+        @Override
+        public PositionedStack getResult()
+        {
+            return new PositionedStack(output, 116, 34);
+        }
+
+        @Override
+        public List<PositionedStack> getIngredients()
+        {
+            ArrayList<PositionedStack> stacks = new ArrayList<PositionedStack>();
+            stacks.add(new PositionedStack(input, 54, 34));
+            return stacks;
+        }
+    }
+
+    @Override public String getGuiTexture()
+    {
+        return "chowtime:textures/gui/guiJuicer.png";
+    }
+
+    @Override public String getRecipeName()
+    {
+        return "Juicer ";
+    }
+
+    @Override
+    public void loadCraftingRecipes(String outputId, Object... results)
+    {
+        if(outputId.equals("item"))
+            loadCraftingRecipes((ItemStack)results[0]);
+        else if (outputId.equals("allJuices")) {
+            for (Recipe1_1 r: JuicerRecipes.GetAllRecipies()) {
+                arecipes.add(new CachedJuicerRecipe(r));
+            }
+        }
+
+
+    }
+
+    @Override
+    public void loadCraftingRecipes(ItemStack result){
+        for(Recipe1_1 r:JuicerRecipes.GetAllRecipies())
+        {
+            if(r.getOutput().isItemEqual(result)) arecipes.add(new CachedJuicerRecipe(r));
+        }
+    }
+
+    @Override
+    public void loadUsageRecipes(String inputId, Object... ingredients)
+    {
+        if (ingredients.length == 0) return;
+
+    }
+
+    @Override
+    public void drawExtras(int recipe)
+    {
+//        CachedDesignexRecipe crecipe = (CachedDesignexRecipe) arecipes.get(recipe);
+
+        //render progress bar
+        drawProgressBar(79, 34, 0, 0, 176, 14, 16, 0);
+
+        //render blank card
+//        changeTexture("minestuck:textures/items/CardBlank.png");
+//        drawTexturedModalRect(21, 39, 0, 0, 16, 16,16,16);
+
+        //render combo mode
+//        GuiDraw.drawString(crecipe.mode ? "&&" : "||", 22, 18, 0);
+    }
+
+
+    public void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6,int w, int h) {
+        float f = (float)1/w;
+        float f1 = (float)1/h;
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + par6), 0.0F, (double)((float)(par3 + 0) * f), (double)((float)(par4 + par6) * f1));
+        tessellator.addVertexWithUV((double)(par1 + par5), (double)(par2 + par6), 0.0F, (double)((float)(par3 + par5) * f), (double)((float)(par4 + par6) * f1));
+        tessellator.addVertexWithUV((double)(par1 + par5), (double)(par2 + 0), 0.0F, (double)((float)(par3 + par5) * f), (double)((float)(par4 + 0) * f1));
+        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 0), 0.0F, (double)((float)(par3 + 0) * f), (double)((float)(par4 + 0) * f1));
+        tessellator.draw();
+    }
+
+    @Override
+    public void drawProgressBar(int x, int y, int tx, int ty, int w, int h, float completion, int direction)
+    {
+        if(direction > 3)
+        {
+            completion = 1-completion;
+            direction %= 4;
+        }
+        int var = (int) (completion * (direction % 2 == 0 ? w : h));
+
+        switch(direction)
+        {
+            case 0://right
+                this.drawTexturedModalRect(x, y, tx, ty, var, h,w,h);
+                break;
+            case 1://down
+                this.drawTexturedModalRect(x, y, tx, ty, w, var,w,h);
+                break;
+            case 2://left
+                this.drawTexturedModalRect(x+w-var, y, tx+w-var, ty, var, h,w,h);
+                break;
+            case 3://up
+                this.drawTexturedModalRect(x, y+h-var, tx, ty+h-var, w, var,w,h);
+                break;
+        }
+    }
+
+}
