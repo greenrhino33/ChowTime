@@ -77,18 +77,21 @@ jar {
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
     appendix = 'src'
+    classifier = 'src'
 }
 
 // add a javadoc jar
 task javadocJar(type: Jar, dependsOn: javadoc) {
     appendix = 'javadoc'
     from 'build/docs/javadoc'
+    classifier = 'javadoc'
 }
 
 // because the normal output has been made to be obfuscated
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     appendix = 'deobf'
+    classifier = 'deobf'
 }
 
 
