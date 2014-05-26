@@ -18,9 +18,6 @@
 
 package net.jamcraft.chowtime.dyn;
 
-
-import sun.applet.AppletSecurity;
-
 import java.io.FileDescriptor;
 import java.net.InetAddress;
 import java.security.Permission;

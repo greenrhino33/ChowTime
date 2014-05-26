@@ -42,6 +42,7 @@ public class JuicerRecipes
         if (stack == null) return null;
         for (Recipe1_1 r : recipe11List)
         {
+            //&&r.getInput().getItemDamage()==stack.getItemDamage() ??
             if (r.getInput().getItem().equals(stack.getItem())) return r;
         }
         return null;

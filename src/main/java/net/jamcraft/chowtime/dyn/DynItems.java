@@ -26,8 +26,6 @@ import net.jamcraft.chowtime.remote.DynClassDescription;
 import net.jamcraft.chowtime.remote.DynDescription;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.item.Item;
-import org.lwjgl.Sys;
-import sun.applet.AppletSecurity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -71,7 +69,6 @@ public class DynItems
                 if (!(desc instanceof DynClassDescription)) continue;
                 String classname = ((DynClassDescription) desc).classname;
                 ChowTime.logger.error("Loading new item: " + classname);
-
 
                 //Actually load the class
                 Class<?> clazz = loader.loadClass(classname);
