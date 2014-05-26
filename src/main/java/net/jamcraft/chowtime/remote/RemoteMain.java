@@ -116,19 +116,24 @@ public class RemoteMain
             ChowTime.logger.error("Loading remote...");
             ChowTime.logger.error("Downloading remote...");
             URL url = new URL(Config.remoteLoc + "dyn/current.ctd");
-            URLConnection con = url.openConnection();
-            InputStreamReader isr = new InputStreamReader(con.getInputStream());
-            BufferedReader br = new BufferedReader(isr);
+
             File dyn = new File(ModConstants.DYN_LOC + "/remote.ctd");
             if (!dyn.exists()) dyn.createNewFile();
-            FileWriter fw = new FileWriter(dyn);
-            while (br.ready())
-            {
-                fw.write(br.readLine());
-                fw.write("\n");
-            }
-            fw.close();
-            br.close();
+
+            org.apache.commons.io.FileUtils.copyURLToFile(url,dyn);
+
+//            URLConnection con = url.openConnection();
+//            InputStreamReader isr = new InputStreamReader(con.getInputStream());
+//            BufferedReader br = new BufferedReader(isr);
+//
+//            FileWriter fw = new FileWriter(dyn);
+//            while (br.ready())
+//            {
+//                fw.write(br.readLine());
+//                fw.write("\n");
+//            }
+//            fw.close();
+//            br.close();
 
             ChowTime.logger.error("Done downloading remote ctd...");
             ChowTime.logger.error("Loading remote ctd...");
@@ -140,10 +145,6 @@ public class RemoteMain
         catch (IOException e)
         {
             ChowTime.logger.error("Error reading remote CT file; falling back to local only");
-        }
-        catch (JsonIOException je)
-        {
-            ChowTime.logger.error("Error parsing remote CT file; falling back to local only");
         }
 
         return false;
