@@ -158,27 +158,32 @@ public class RemoteMain
             if (remotepath == null) remotepath = localpath;
             final int blk_size = 1024;
             URL url = new URL(Config.remoteLoc  + "dyn/current" + remotepath);
-            URLConnection con = url.openConnection();
-            InputStream reader = url.openStream();
+
             File f = new File(ModConstants.DYN_LOC + localpath);
             if (!f.exists())
             {
                 f.getParentFile().mkdirs();
                 f.createNewFile();
             }
-            FileOutputStream writer = new FileOutputStream(ModConstants.DYN_LOC + localpath);
-            int total = con.getContentLength();
-            int size_dl = 0;
-            byte[] buffer = new byte[blk_size];
-            int bytesRead = 0;
-            while ((bytesRead = reader.read(buffer)) > 0)
-            {
-                size_dl += bytesRead;
-                writer.write(buffer, 0, bytesRead);
-                buffer = new byte[blk_size];
-            }
-            writer.close();
-            reader.close();
+
+            org.apache.commons.io.FileUtils.copyURLToFile(url, f);
+
+//            URLConnection con = url.openConnection();
+//            InputStream reader = url.openStream();
+//
+//            FileOutputStream writer = new FileOutputStream(ModConstants.DYN_LOC + localpath);
+//            int total = con.getContentLength();
+//            int size_dl = 0;
+//            byte[] buffer = new byte[blk_size];
+//            int bytesRead = 0;
+//            while ((bytesRead = reader.read(buffer)) > 0)
+//            {
+//                size_dl += bytesRead;
+//                writer.write(buffer, 0, bytesRead);
+//                buffer = new byte[blk_size];
+//            }
+//            writer.close();
+//            reader.close();
             ChowTime.logger.warn("Download complete...");
         }
         catch (IOException e)
