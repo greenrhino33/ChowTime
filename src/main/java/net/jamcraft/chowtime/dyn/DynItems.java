@@ -122,9 +122,9 @@ public class DynItems
             Item item = items.get(key);
             try
             {
-                System.setSecurityManager(LockdownSecuityManager.instance);
+                //System.setSecurityManager(LockdownSecuityManager.instance);
                 ((IDynItem) item).registerRecipe();
-                System.setSecurityManager(null);
+                //System.setSecurityManager(null);
             }
             catch (SecurityException e)
             {
