@@ -28,6 +28,7 @@ import java.util.List;
  */
 public class JuicerRecipes
 {
+    //TODO: make meta sensitive
     public static List<Recipe1_1> recipe11List = new ArrayList<Recipe1_1>();
 
     public static void AddRecipe(ItemStack input, ItemStack output, int time)
@@ -41,6 +42,7 @@ public class JuicerRecipes
         if (stack == null) return null;
         for (Recipe1_1 r : recipe11List)
         {
+            //&&r.getInput().getItemDamage()==stack.getItemDamage() ??
             if (r.getInput().getItem().equals(stack.getItem())) return r;
         }
         return null;

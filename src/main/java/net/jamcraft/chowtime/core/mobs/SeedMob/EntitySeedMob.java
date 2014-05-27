@@ -36,7 +36,7 @@ import java.util.Random;
 /**
  * Created by Kayla Marie on 5/16/14.
  */
-public class EntitySeedMob extends EntityAnimal implements IMob
+public class EntitySeedMob extends EntityAnimal
 {
 
     private int inLove;

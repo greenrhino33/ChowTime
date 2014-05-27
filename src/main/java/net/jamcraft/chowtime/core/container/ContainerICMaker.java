@@ -46,6 +46,8 @@ public class ContainerICMaker extends Container
 
         this.addSlotToContainer(new SlotIceFuel(te, 3, 8, 62));
 
+        this.addSlotToContainer(new SlotOutput(te, 4, 54, 62));
+
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
         {
@@ -122,10 +124,8 @@ public class ContainerICMaker extends Container
             {
                 slot.putStack((ItemStack) null);
             }
-//            else
-//            {
-                slot.onSlotChanged();
-//            }
+
+            slot.onSlotChanged();
         }
 
         return itemStack;

@@ -52,6 +52,7 @@ public class RemoteMain
 
     public static void init()
     {
+        ChowTime.logger.error("Starting remote checking...");
         File dyndir = new File(ModConstants.DYN_LOC);
         if (!dyndir.exists()) dyndir.mkdir();
         LoadLocal();
@@ -100,9 +101,11 @@ public class RemoteMain
 
     public static boolean LoadLocal()
     {
+        ChowTime.logger.error("Loading local..");
         local.getObjects().clear();
         File f = new File(ModConstants.DYN_LOC + "/local.ctd");
         local.readFromFile(f);
+        ChowTime.logger.error("Done loading local..");
         return true;
     }
 
@@ -110,31 +113,38 @@ public class RemoteMain
     {
         try
         {
+            ChowTime.logger.error("Loading remote...");
+            ChowTime.logger.error("Downloading remote...");
             URL url = new URL(Config.remoteLoc + "dyn/current.ctd");
-            URLConnection con = url.openConnection();
-            InputStreamReader isr = new InputStreamReader(con.getInputStream());
-            BufferedReader br = new BufferedReader(isr);
+
             File dyn = new File(ModConstants.DYN_LOC + "/remote.ctd");
             if (!dyn.exists()) dyn.createNewFile();
-            FileWriter fw = new FileWriter(dyn);
-            while (br.ready())
-            {
-                fw.write(br.readLine());
-                fw.write("\n");
-            }
-            fw.close();
-            br.close();
+
+            org.apache.commons.io.FileUtils.copyURLToFile(url,dyn);
+
+//            URLConnection con = url.openConnection();
+//            InputStreamReader isr = new InputStreamReader(con.getInputStream());
+//            BufferedReader br = new BufferedReader(isr);
+//
+//            FileWriter fw = new FileWriter(dyn);
+//            while (br.ready())
+//            {
+//                fw.write(br.readLine());
+//                fw.write("\n");
+//            }
+//            fw.close();
+//            br.close();
+
+            ChowTime.logger.error("Done downloading remote ctd...");
+            ChowTime.logger.error("Loading remote ctd...");
 
             remote.readFromFile(dyn);
+            ChowTime.logger.error("Done loading remote...");
             return true;
         }
         catch (IOException e)
         {
             ChowTime.logger.error("Error reading remote CT file; falling back to local only");
-        }
-        catch (JsonIOException je)
-        {
-            ChowTime.logger.error("Error parsing remote CT file; falling back to local only");
         }
 
         return false;
@@ -148,27 +158,32 @@ public class RemoteMain
             if (remotepath == null) remotepath = localpath;
             final int blk_size = 1024;
             URL url = new URL(Config.remoteLoc  + "dyn/current" + remotepath);
-            URLConnection con = url.openConnection();
-            InputStream reader = url.openStream();
+
             File f = new File(ModConstants.DYN_LOC + localpath);
             if (!f.exists())
             {
                 f.getParentFile().mkdirs();
                 f.createNewFile();
             }
-            FileOutputStream writer = new FileOutputStream(ModConstants.DYN_LOC + localpath);
-            int total = con.getContentLength();
-            int size_dl = 0;
-            byte[] buffer = new byte[blk_size];
-            int bytesRead = 0;
-            while ((bytesRead = reader.read(buffer)) > 0)
-            {
-                size_dl += bytesRead;
-                writer.write(buffer, 0, bytesRead);
-                buffer = new byte[blk_size];
-            }
-            writer.close();
-            reader.close();
+
+            org.apache.commons.io.FileUtils.copyURLToFile(url, f);
+
+//            URLConnection con = url.openConnection();
+//            InputStream reader = url.openStream();
+//
+//            FileOutputStream writer = new FileOutputStream(ModConstants.DYN_LOC + localpath);
+//            int total = con.getContentLength();
+//            int size_dl = 0;
+//            byte[] buffer = new byte[blk_size];
+//            int bytesRead = 0;
+//            while ((bytesRead = reader.read(buffer)) > 0)
+//            {
+//                size_dl += bytesRead;
+//                writer.write(buffer, 0, bytesRead);
+//                buffer = new byte[blk_size];
+//            }
+//            writer.close();
+//            reader.close();
             ChowTime.logger.warn("Download complete...");
         }
         catch (IOException e)

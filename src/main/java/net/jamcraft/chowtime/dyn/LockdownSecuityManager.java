@@ -18,8 +18,6 @@
 
 package net.jamcraft.chowtime.dyn;
 
-import sun.applet.AppletSecurity;
-
 import java.io.FileDescriptor;
 import java.net.InetAddress;
 import java.security.Permission;
@@ -28,7 +26,7 @@ import java.util.logging.LoggingPermission;
 /**
  * Created by James Hollowell on 5/22/2014.
  */
-public class LockdownSecuityManager extends AppletSecurity
+public class LockdownSecuityManager extends SecurityManager
 {
     public static LockdownSecuityManager instance = new LockdownSecuityManager();
 

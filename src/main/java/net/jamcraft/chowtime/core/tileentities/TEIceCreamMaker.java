@@ -18,7 +18,6 @@
 
 package net.jamcraft.chowtime.core.tileentities;
 
-import net.jamcraft.chowtime.core.lib.ItemHelper;
 import net.jamcraft.chowtime.core.recipies.IceCreamRecipies;
 import net.jamcraft.chowtime.core.recipies.Recipe2_1;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,6 +25,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBucket;
+import net.minecraft.item.ItemBucketMilk;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -45,11 +46,12 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
     public static final int IN2_LOC = 1;
     public static final int OUT_LOC = 2;
     public static final int FUEL_LOC = 3;
+    public static final int BUCKET_OUT_LOC = 4;
     //    public static final int FREEZING_TEMP = -21000;
     public static final int ROOM_TEMP = 20000;
     public static final int MIN_TEMP = -50000;
 
-    public static final int INV_SIZE = 4;
+    public static final int INV_SIZE = 5;
     private ItemStack[] inventory = new ItemStack[INV_SIZE];
     private int ticksLeft = 0;
     private int maxTicks = 0;
@@ -58,7 +60,6 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     public TEIceCreamMaker()
     {
-        //        IceCreamRecipies.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.carrot), new ItemStack(Items.arrow), 60);
     }
 
     @Override public int getSizeInventory()
@@ -143,8 +144,9 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
     @Override public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
-        if(slot == IN1_LOC || slot == IN2_LOC) return IceCreamRecipies.GetRecipesFromStack(stack)!=null;
-        if(slot == FUEL_LOC) return TEIceCreamMaker.isIceFuel(stack);
+        if (slot == IN1_LOC || slot == IN2_LOC)
+            return IceCreamRecipies.GetRecipesFromStack(stack) != null;
+        if (slot == FUEL_LOC) return TEIceCreamMaker.isIceFuel(stack);
         return false;
     }
 
@@ -206,6 +208,13 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
             tags.setTag("slot4", sl4);
         }
 
+        if (inventory[4] != null)
+        {
+            NBTTagCompound sl4 = new NBTTagCompound();
+            inventory[3].writeToNBT(sl4);
+            tags.setTag("slot5", sl4);
+        }
+
     }
 
     @Override
@@ -234,6 +243,10 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         {
             inventory[3] = ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot4"));
         }
+        if (tags.hasKey("slot5"))
+        {
+            inventory[4] = ItemStack.loadItemStackFromNBT(tags.getCompoundTag("slot5"));
+        }
     }
 
     @Override
@@ -257,7 +270,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
                 if (inventory[2] == null || IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]).getOutput().getItem().equals(inventory[2].getItem()))
                 {
                     ticksLeft++;
-                    temp+=3;
+                    temp += 3;
                 }
                 else
                 {
@@ -307,9 +320,33 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         else
             inventory[2].stackSize += res.stackSize;
 
-        inventory[1] = ItemHelper.decreaseStack(inventory[1], worldObj, xCoord, yCoord, zCoord);
+        inventory[0].stackSize--;
+        if (inventory[0].getItem() instanceof ItemBucketMilk || inventory[0].getItem() instanceof ItemBucket)
+        {
+            if (inventory[BUCKET_OUT_LOC] == null)
+            {
+                inventory[BUCKET_OUT_LOC] = new ItemStack(Items.bucket);
+            }
+            else
+            {
+                inventory[BUCKET_OUT_LOC].stackSize++;
+            }
+        }
+        if (inventory[0].stackSize <= 0) inventory[0] = null;
 
-        inventory[0] = ItemHelper.decreaseStack(inventory[0], worldObj, xCoord, yCoord, zCoord);
+        inventory[1].stackSize--;
+        if (inventory[1].getItem() instanceof ItemBucketMilk || inventory[1].getItem() instanceof ItemBucket)
+        {
+            if (inventory[BUCKET_OUT_LOC] == null)
+            {
+                inventory[BUCKET_OUT_LOC] = new ItemStack(Items.bucket);
+            }
+            else
+            {
+                inventory[BUCKET_OUT_LOC].stackSize++;
+            }
+        }
+        if (inventory[1].stackSize <= 0) inventory[1] = null;
     }
 
     /* Packets */

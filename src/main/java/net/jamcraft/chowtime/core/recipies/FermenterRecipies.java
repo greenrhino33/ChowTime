@@ -28,6 +28,7 @@ import java.util.List;
  */
 public class FermenterRecipies
 {
+    //TODO: make meta sensitive
     public static List<Recipe1_1> recipe11List = new ArrayList<Recipe1_1>();
 
     public static void AddRecipe(ItemStack input, ItemStack output, int time)
