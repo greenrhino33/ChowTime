@@ -104,9 +104,8 @@ public class CTFarmland extends BlockFarmland
     {
         if (!world.isRemote && world.rand.nextFloat() < distance - 0.5F)
         {
-            if (!(entity instanceof EntityPlayer) && !world.getGameRules().getGameRuleBooleanValue("mobGriefing") || (entity instanceof EntityPlayer && ((EntityPlayer)entity).inventory.armorInventory[0].getItem() == Items.diamond_boots))
+            if (!(entity instanceof EntityPlayer) && !world.getGameRules().getGameRuleBooleanValue("mobGriefing") || (entity instanceof EntityPlayer && ((EntityPlayer)entity).inventory.armorInventory[0] != null && ((EntityPlayer)entity).inventory.armorInventory[0].getItem() == Items.diamond_boots))
             {
-                if(entity instanceof EntityPlayer) System.out.println(((EntityPlayer)entity).inventory.armorInventory[0].getItem());
                 return;
             }
 
