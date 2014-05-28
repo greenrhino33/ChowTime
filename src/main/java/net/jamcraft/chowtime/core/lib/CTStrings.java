@@ -27,6 +27,7 @@ public class CTStrings
     public static String BlockLogs_Basic = "log_Basic";
     public static String BlockLeaves_Basic = "leaves_Basic";
     public static String BlockSapling_Basic = "sapling_Basic";
+    public static String BlockFarmland = "farmland";
 
     public static String BlockIceCream_Strawberry = "iceCreamBlock";
     public static String BlockCottonCandy_Blue = "blockCottonCandy_Blue";

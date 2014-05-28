@@ -18,6 +18,7 @@ tile.tomatoCrop.name=Tomato Crop
 tile.blueberryCrop.name=Blueberry Crop
 tile.cranberryCrop.name=Cranberry Crop
 tile.raspberryCrop.name=Raspberry Crop
+tile.farmland.name=Tilted Soil
 
 string.updated=ChowTime has updated! Look for new foods and recipes.
 string.warnlocal=[ChowTime] Warning! Remote update has been disabled!

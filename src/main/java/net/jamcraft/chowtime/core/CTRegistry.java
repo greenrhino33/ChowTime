@@ -18,13 +18,9 @@
 
 package net.jamcraft.chowtime.core;
 
-import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.blocks.BlockCottonCandy;
 import net.jamcraft.chowtime.core.blocks.CTBlock;
-import net.jamcraft.chowtime.core.blocks.CTLeaves;
-import net.jamcraft.chowtime.core.blocks.CTLog;
-import net.jamcraft.chowtime.core.blocks.CTSapling;
-import net.jamcraft.chowtime.core.blocks.liquids.CTFluid;
+import net.jamcraft.chowtime.core.blocks.CTFarmland;
 import net.jamcraft.chowtime.core.blocks.machines.Fermenter;
 import net.jamcraft.chowtime.core.blocks.machines.IceCreamMaker;
 import net.jamcraft.chowtime.core.blocks.machines.Juicer;
@@ -37,7 +33,6 @@ import net.jamcraft.chowtime.core.crops.CropRaspberry;
 import net.jamcraft.chowtime.core.crops.CropStrawberry;
 import net.jamcraft.chowtime.core.crops.CropTomato;
 import net.jamcraft.chowtime.core.items.CTItem;
-import net.jamcraft.chowtime.core.items.CTItemBucket;
 import net.jamcraft.chowtime.core.items.ItemBlueberry;
 import net.jamcraft.chowtime.core.items.ItemCorn;
 import net.jamcraft.chowtime.core.items.ItemCranberry;
@@ -57,15 +52,9 @@ import net.jamcraft.chowtime.core.lib.CTStrings;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import scala.Char;
 
 /**
  * Created by Kayla Marie on 5/14/14.
@@ -85,6 +74,8 @@ public class CTRegistry
         GameRegistry.registerBlock(CTInits.IceCream, CTStrings.BlockIceCream_Strawberry);
         CTInits.CottonCandyBLUE = new BlockCottonCandy().setBlockName(CTStrings.BlockCottonCandy_Blue);
         GameRegistry.registerBlock(CTInits.CottonCandyBLUE, CTStrings.BlockCottonCandy_Blue);
+        CTInits.CTFarmland = new CTFarmland().setBlockName(CTStrings.BlockFarmland).setHardness(0.6F).setStepSound(Block.soundTypeGravel);
+        GameRegistry.registerBlock(CTInits.CTFarmland, CTStrings.BlockFarmland);
 
     }
 

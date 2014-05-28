@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import net.jamcraft.chowtime.ChowTime;
+import net.jamcraft.chowtime.core.CTInits;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.crops.CropBarley;
 import net.jamcraft.chowtime.core.crops.CropBlueberry;
@@ -40,20 +41,25 @@ import net.jamcraft.chowtime.core.items.SeedGrape;
 import net.jamcraft.chowtime.core.items.SeedRaspberry;
 import net.jamcraft.chowtime.core.items.SeedStrawberry;
 import net.jamcraft.chowtime.core.items.SeedTomato;
-import net.jamcraft.chowtime.core.registrars.HarvestLevelRegistry;
 import net.jamcraft.chowtime.remote.RemoteMain;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockFarmland;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
+import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -63,7 +69,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
  */
 public class EntityEventHandler
 {
-    private static boolean HasBeenNotified=false;
+    private static boolean HasBeenNotified = false;
+    
     @SubscribeEvent
     public void onEntityJoinWorld(EntityJoinWorldEvent event)
     {
@@ -76,7 +83,7 @@ public class EntityEventHandler
             
             if (event.world.isRemote && !HasBeenNotified)
             {
-                if(ChowTime.harvestXP == 0) player.addChatMessage(new ChatComponentTranslation("chat.welcomeMessage"));
+                if (ChowTime.harvestXP == 0) player.addChatMessage(new ChatComponentTranslation("chat.welcomeMessage"));
                 if (RemoteMain.hasUpdated)
                 {
                     player.addChatComponentMessage(new ChatComponentTranslation("string.updated"));
@@ -90,8 +97,8 @@ public class EntityEventHandler
                 {
                     player.addChatComponentMessage(new ChatComponentTranslation("string.usedev"));
                 }
-                RemoteMain.player=player;
-                HasBeenNotified=true;
+                RemoteMain.player = player;
+                HasBeenNotified = true;
             }
         }
     }
@@ -257,25 +264,20 @@ public class EntityEventHandler
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-            if (event.action == event.action.LEFT_CLICK_BLOCK && !(event.entityPlayer instanceof FakePlayer))
+            if (event.action == Action.LEFT_CLICK_BLOCK && !(event.entityPlayer instanceof FakePlayer))
             {
-//                if(HarvestLevelRegistry.IsInList(event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z)))
-                if(event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropStrawberry ||
-                        event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropBlueberry ||
-                        event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropCranberry ||
-                        event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropRaspberry ||
-                        event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropTomato ||
-                        event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropCorn ||
-                        event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropGrape ||
-                        event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropBarley)
+                // if(HarvestLevelRegistry.IsInList(event.entityPlayer.worldObj.getBlock(event.x,
+                // event.y, event.z)))
+                if (event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropStrawberry || event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropBlueberry || event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropCranberry || event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropRaspberry || event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropTomato || event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropCorn || event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropGrape || event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof CropBarley)
                 {
-                    //This needs to change slightly... if you go from 99 to 101, you never get the message...
-                    if(ChowTime.harvestXP == 20) event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain20"));
-                    if(ChowTime.harvestXP == 100) event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain100"));
-                    if(ChowTime.harvestXP == 300) event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain300"));
+                    // This needs to change slightly... if you go from 99 to
+                    // 101, you never get the message...
+                    if (ChowTime.harvestXP == 20) event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain20"));
+                    if (ChowTime.harvestXP == 100) event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain100"));
+                    if (ChowTime.harvestXP == 300) event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain300"));
                 }
             }
-            if (event.action == event.action.RIGHT_CLICK_BLOCK && !(event.entityPlayer instanceof FakePlayer) && event.entityPlayer.getHeldItem() != null && event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof BlockFarmland)
+            if (event.action == Action.RIGHT_CLICK_BLOCK && !(event.entityPlayer instanceof FakePlayer) && event.entityPlayer.getHeldItem() != null && event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof BlockFarmland)
             {
                 
                 boolean canPlant = true;
@@ -298,6 +300,19 @@ public class EntityEventHandler
                     event.entityPlayer.addChatMessage(new ChatComponentText("chat.gainExperience"));
                 }
             }
+        }
+    }
+    
+    @SubscribeEvent
+    public void useHoe(UseHoeEvent event)
+    {
+        Block block = event.world.getBlock(event.x, event.y, event.z);
+        if ((block instanceof BlockDirt || block instanceof BlockGrass) && event.world.getBlock(event.x, event.y + 1, event.z) instanceof BlockAir)
+        {
+            event.world.playSoundEffect((double)((float)event.x + 0.5F), (double)((float)event.y + 0.5F), (double)((float)event.z + 0.5F), Blocks.farmland.stepSound.getStepResourcePath(), (Blocks.farmland.stepSound.getVolume() + 1.0F) / 2.0F, Blocks.farmland.stepSound.getPitch() * 0.8F);
+            event.current.damageItem(1, event.entityPlayer);
+            event.world.setBlock(event.x, event.y, event.z, CTInits.CTFarmland);
+            event.current.useItemRightClick(event.world, event.entityPlayer);
         }
     }
 }
