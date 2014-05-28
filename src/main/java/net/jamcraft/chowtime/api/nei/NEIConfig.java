@@ -34,6 +34,9 @@ public class NEIConfig implements IConfigureNEI
 
         API.registerUsageHandler(new FermenterHandler());
         API.registerRecipeHandler(new FermenterHandler());
+
+        API.registerRecipeHandler(new IceCreamMakerHandler());
+        API.registerUsageHandler(new IceCreamMakerHandler());
     }
 
     @Override public String getName()
