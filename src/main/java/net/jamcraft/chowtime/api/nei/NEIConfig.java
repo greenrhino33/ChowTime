@@ -20,6 +20,7 @@ package net.jamcraft.chowtime.api.nei;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import codechicken.nei.recipe.TemplateRecipeHandler;
 
 /**
  * Created by James Hollowell on 5/25/2014.

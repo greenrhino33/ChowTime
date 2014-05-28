@@ -154,20 +154,20 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
     {
         if (ForgeDirection.UP.ordinal() == side)
             return new int[] { IN1_LOC, IN2_LOC };
-        if (side == ForgeDirection.DOWN.ordinal()) return new int[] { OUT_LOC };
+        if (side == ForgeDirection.DOWN.ordinal()) return new int[] { OUT_LOC, BUCKET_OUT_LOC };
         return new int[] { FUEL_LOC };
     }
 
     @Override public boolean canInsertItem(int slot, ItemStack itemStack, int side)
     {
-        if (slot == OUT_LOC || side == ForgeDirection.DOWN.ordinal())
+        if (slot == OUT_LOC || slot==BUCKET_OUT_LOC || side == ForgeDirection.DOWN.ordinal())
             return false;
         return isItemValidForSlot(slot, itemStack);
     }
 
     @Override public boolean canExtractItem(int slot, ItemStack itemStack, int side)
     {
-        return slot == OUT_LOC && side == ForgeDirection.DOWN.ordinal();
+        return (slot == OUT_LOC || slot==BUCKET_OUT_LOC)&& side == ForgeDirection.DOWN.ordinal();
     }
 
     @Override
@@ -211,7 +211,7 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         if (inventory[4] != null)
         {
             NBTTagCompound sl4 = new NBTTagCompound();
-            inventory[3].writeToNBT(sl4);
+            inventory[4].writeToNBT(sl4);
             tags.setTag("slot5", sl4);
         }
 
@@ -267,7 +267,8 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
         {
             if (ticksLeft < maxTicks && IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]) != null)
             {
-                if (inventory[2] == null || IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]).getOutput().getItem().equals(inventory[2].getItem()))
+                ItemStack output=IceCreamRecipies.GetRecipeFromStack(inventory[0], inventory[1]).getOutput();
+                if ((inventory[2] == null || output.getItem().equals(inventory[2].getItem())&&output.getMaxStackSize()>inventory[2].stackSize))
                 {
                     ticksLeft++;
                     temp += 3;

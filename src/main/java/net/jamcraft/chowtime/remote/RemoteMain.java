@@ -196,6 +196,7 @@ public class RemoteMain
     {
         try
         {
+            //TODO: Update to Guava
             MessageDigest md = MessageDigest.getInstance("SHA1");
             FileInputStream fis = new FileInputStream(ModConstants.DYN_LOC + "/local.ctd");
             byte[] dataBytes = new byte[1024];

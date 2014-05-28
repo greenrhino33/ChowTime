@@ -21,13 +21,17 @@ package net.jamcraft.chowtime.api.nei;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import net.jamcraft.chowtime.core.client.GuiJuicer;
 import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
 import net.jamcraft.chowtime.core.recipies.Recipe1_1;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -57,14 +61,14 @@ public class JuicerHandler extends TemplateRecipeHandler
         @Override
         public PositionedStack getResult()
         {
-            return new PositionedStack(output, 116, 34);
+            return new PositionedStack(output, 110, 23);
         }
 
         @Override
         public List<PositionedStack> getIngredients()
         {
             ArrayList<PositionedStack> stacks = new ArrayList<PositionedStack>();
-            stacks.add(new PositionedStack(input, 54, 34));
+            stacks.add(new PositionedStack(input, 50, 23));
             return stacks;
         }
     }
@@ -84,13 +88,11 @@ public class JuicerHandler extends TemplateRecipeHandler
     {
         if(outputId.equals("item"))
             loadCraftingRecipes((ItemStack)results[0]);
-        else if (outputId.equals("allJuices")) {
+        else if (outputId.equals("allJuicer")) {
             for (Recipe1_1 r: JuicerRecipes.GetAllRecipies()) {
                 arecipes.add(new CachedJuicerRecipe(r));
             }
         }
-
-
     }
 
     @Override
@@ -105,7 +107,13 @@ public class JuicerHandler extends TemplateRecipeHandler
     public void loadUsageRecipes(String inputId, Object... ingredients)
     {
         if (ingredients.length == 0) return;
-
+        if("item".equals(inputId))
+        {
+            for(Recipe1_1 r: JuicerRecipes.GetAllRecipies())
+            {
+                if(r.getInput().isItemEqual((ItemStack) ingredients[0])) arecipes.add(new CachedJuicerRecipe(r));
+            }
+        }
     }
 
     @Override
@@ -114,7 +122,7 @@ public class JuicerHandler extends TemplateRecipeHandler
 //        CachedDesignexRecipe crecipe = (CachedDesignexRecipe) arecipes.get(recipe);
 
         //render progress bar
-        drawProgressBar(79, 34, 0, 0, 176, 14, 16, 0);
+//        drawProgressBar(79, 34, 176, 14, 20, 14, 24, 17);
 
         //render blank card
 //        changeTexture("minestuck:textures/items/CardBlank.png");
@@ -164,4 +172,13 @@ public class JuicerHandler extends TemplateRecipeHandler
         }
     }
 
+    @Override
+    public void loadTransferRects()
+    {
+        RecipeTransferRect rect=new RecipeTransferRect(new Rectangle(81, 33, 21, 17),"allJuicer");
+        transferRects.add(rect);
+        List<Class<? extends GuiContainer>> guis= new ArrayList<Class<? extends GuiContainer>>();
+        guis.add(GuiJuicer.class);
+        RecipeTransferRectHandler.registerRectsToGuis(guis,transferRects);
+    }
 }
