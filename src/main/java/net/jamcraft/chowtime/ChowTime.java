@@ -45,12 +45,14 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -90,6 +92,7 @@ public class ChowTime
             return CTInits.BarleyCrop;
         }
     };
+    public static final ArmorMaterial FARMER_BOOTS = EnumHelper.addArmorMaterial("FarmerBoots", 5, new int[] {0,0,0,2}, 10);
 
     @Mod.Instance(ModConstants.MODID)
     public static ChowTime instance;

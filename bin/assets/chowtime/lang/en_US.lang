@@ -52,6 +52,7 @@ item.raspberry.name=Raspberry
 item.grape.name=Grape
 item.Item_Bucket.name=Chocolate Bucket
 item.watermelonIceCreamCcone.name=Watermelon Ice Cream Cone
+item.farmerBoots.name=Farmer Boots
 
 itemGroup.ChowTime=ChowTime
 
