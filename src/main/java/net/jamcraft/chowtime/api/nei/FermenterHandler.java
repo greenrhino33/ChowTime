@@ -18,42 +18,39 @@
 
 package net.jamcraft.chowtime.api.nei;
 
-import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import net.jamcraft.chowtime.core.client.GuiFermenter;
 import net.jamcraft.chowtime.core.client.GuiJuicer;
+import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
 import net.jamcraft.chowtime.core.recipies.Recipe1_1;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.StatCollector;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by James Hollowell on 5/25/2014.
  */
-public class JuicerHandler extends TemplateRecipeHandler
+public class FermenterHandler extends TemplateRecipeHandler
 {
-    class CachedJuicerRecipe extends CachedRecipe
+    class CachedFermenterRecipe extends CachedRecipe
     {
         private ItemStack input;
         private ItemStack output;
 
-        public CachedJuicerRecipe(ItemStack in, ItemStack out)
+        public CachedFermenterRecipe(ItemStack in, ItemStack out)
         {
             input = in;
             output = out;
         }
 
-        public CachedJuicerRecipe(Recipe1_1 r)
+        public CachedFermenterRecipe(Recipe1_1 r)
         {
             input=r.getInput();
             output=r.getOutput();
@@ -76,12 +73,12 @@ public class JuicerHandler extends TemplateRecipeHandler
 
     @Override public String getGuiTexture()
     {
-        return "chowtime:textures/gui/guiJuicer.png";
+        return "chowtime:textures/gui/guiFermenter.png";
     }
 
     @Override public String getRecipeName()
     {
-        return StatCollector.translateToLocal("container.Juicer");
+        return StatCollector.translateToLocal("container.Fermenter");
     }
 
     @Override
@@ -89,18 +86,18 @@ public class JuicerHandler extends TemplateRecipeHandler
     {
         if(outputId.equals("item"))
             loadCraftingRecipes((ItemStack)results[0]);
-        else if (outputId.equals("allJuicer")) {
-            for (Recipe1_1 r: JuicerRecipes.GetAllRecipies()) {
-                arecipes.add(new CachedJuicerRecipe(r));
+        else if (outputId.equals("allFermenter")) {
+            for (Recipe1_1 r: FermenterRecipies.GetAllRecipies()) {
+                arecipes.add(new CachedFermenterRecipe(r));
             }
         }
     }
 
     @Override
     public void loadCraftingRecipes(ItemStack result){
-        for(Recipe1_1 r:JuicerRecipes.GetAllRecipies())
+        for(Recipe1_1 r:FermenterRecipies.GetAllRecipies())
         {
-            if(r.getOutput().isItemEqual(result)) arecipes.add(new CachedJuicerRecipe(r));
+            if(r.getOutput().isItemEqual(result)) arecipes.add(new CachedFermenterRecipe(r));
         }
     }
 
@@ -110,9 +107,9 @@ public class JuicerHandler extends TemplateRecipeHandler
         if (ingredients.length == 0) return;
         if("item".equals(inputId))
         {
-            for(Recipe1_1 r: JuicerRecipes.GetAllRecipies())
+            for(Recipe1_1 r: FermenterRecipies.GetAllRecipies())
             {
-                if(r.getInput().isItemEqual((ItemStack) ingredients[0])) arecipes.add(new CachedJuicerRecipe(r));
+                if(r.getInput().isItemEqual((ItemStack) ingredients[0])) arecipes.add(new CachedFermenterRecipe(r));
             }
         }
     }
@@ -176,10 +173,10 @@ public class JuicerHandler extends TemplateRecipeHandler
     @Override
     public void loadTransferRects()
     {
-        RecipeTransferRect rect=new RecipeTransferRect(new Rectangle(73, 25, 24, 17),"allJuicer");
+        RecipeTransferRect rect=new RecipeTransferRect(new Rectangle(73, 25, 24, 17),"allFermenter");
         transferRects.add(rect);
         List<Class<? extends GuiContainer>> guis= new ArrayList<Class<? extends GuiContainer>>();
-        guis.add(GuiJuicer.class);
+        guis.add(GuiFermenter.class);
         RecipeTransferRectHandler.registerRectsToGuis(guis,transferRects);
     }
 }

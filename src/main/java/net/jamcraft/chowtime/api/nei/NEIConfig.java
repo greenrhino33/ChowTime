@@ -31,6 +31,9 @@ public class NEIConfig implements IConfigureNEI
     {
         API.registerRecipeHandler(new JuicerHandler());
         API.registerUsageHandler(new JuicerHandler());
+
+        API.registerUsageHandler(new FermenterHandler());
+        API.registerRecipeHandler(new FermenterHandler());
     }
 
     @Override public String getName()

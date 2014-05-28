@@ -18,6 +18,7 @@
 
 package net.jamcraft.chowtime.core.recipies;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -45,5 +46,10 @@ public class FermenterRecipies
             if (r.getInput().getItem().equals(stack.getItem())) return r;
         }
         return null;
+    }
+
+    public static List<Recipe1_1> GetAllRecipies()
+    {
+        return ImmutableList.copyOf(recipe11List);
     }
 }
