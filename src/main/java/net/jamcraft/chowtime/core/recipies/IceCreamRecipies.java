@@ -18,6 +18,7 @@
 
 package net.jamcraft.chowtime.core.recipies;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -29,19 +30,19 @@ import java.util.List;
 public class IceCreamRecipies
 {
     //TODO: make meta sensitive
-    public static List<Recipe2_1> recipe11List = new ArrayList<Recipe2_1>();
+    public static List<Recipe2_1> recipe21List = new ArrayList<Recipe2_1>();
 
     public static void AddRecipe(ItemStack input1, ItemStack input2, ItemStack output, int time)
     {
         int temp=-21000;
         Recipe2_1 r = new Recipe2_1(input1, input2, output, time, temp);
-        recipe11List.add(r);
+        recipe21List.add(r);
     }
 
     public static Recipe2_1 GetRecipeFromStack(ItemStack stack1, ItemStack stack2)
     {
         if (stack1 == null || stack2 == null) return null;
-        for (Recipe2_1 r : recipe11List)
+        for (Recipe2_1 r : recipe21List)
         {
             if (r.getInput1().getItem().equals(stack1.getItem()) && r.getInput2().getItem().equals(stack2.getItem()))
                 return r;
@@ -55,11 +56,16 @@ public class IceCreamRecipies
     {
         List<Recipe2_1> out = new ArrayList<Recipe2_1>();
         if (stack == null) return null;
-        for (Recipe2_1 r : recipe11List)
+        for (Recipe2_1 r : recipe21List)
         {
             if (r.getInput1().getItem().equals(stack.getItem()) || r.getInput2().getItem().equals(stack.getItem()))
                 out.add(r);
         }
         return out.toArray(new Recipe2_1[0]);
+    }
+
+    public static List<Recipe2_1> GetAllRecipes()
+    {
+        return ImmutableList.copyOf(recipe21List);
     }
 }

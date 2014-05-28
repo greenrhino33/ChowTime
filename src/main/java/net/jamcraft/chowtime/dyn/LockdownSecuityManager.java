@@ -148,11 +148,11 @@ public class LockdownSecuityManager extends SecurityManager
         throw new SecurityException("checkMulticast-Lockdown");
     }
 
-    @Override
-    public void checkMulticast(InetAddress maddr, byte ttl)
-    {
-        throw new SecurityException("checkMulticast-Lockdown");
-    }
+//    @Override
+//    public void checkMulticast(InetAddress maddr, byte ttl)
+//    {
+//        throw new SecurityException("checkMulticast-Lockdown");
+//    }
 
     @Override
     public void checkPropertiesAccess()
