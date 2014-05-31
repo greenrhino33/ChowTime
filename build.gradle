@@ -19,6 +19,9 @@ buildscript {
 apply plugin: 'forge'
 
 version = "1.0.1-rev4"
+if (System.getenv()['BUILD_NUMBER']) {
+    version += "-jnks" + System.getenv()['BUILD_NUMBER']
+}
 group = "net.jam-craft.chowTime"
 archivesBaseName = "ChowTime"
 
