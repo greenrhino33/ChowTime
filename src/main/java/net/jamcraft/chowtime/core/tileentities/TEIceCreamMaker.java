@@ -210,9 +210,9 @@ public class TEIceCreamMaker extends TileEntity implements ISidedInventory
 
         if (inventory[4] != null)
         {
-            NBTTagCompound sl4 = new NBTTagCompound();
-            inventory[4].writeToNBT(sl4);
-            tags.setTag("slot5", sl4);
+            NBTTagCompound sl5 = new NBTTagCompound();
+            inventory[4].writeToNBT(sl5);
+            tags.setTag("slot5", sl5);
         }
 
     }

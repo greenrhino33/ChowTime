@@ -70,6 +70,10 @@ dependencies {
 
 // add some stuff to the version
 version = "${minecraft.version}-$version"
+//Shinies for JamCraft Jenkins, but only on Jenkins
+if (System.getenv()['BUILD_NUMBER']) {
+    version += "-jc" + System.getenv()['BUILD_NUMBER']
+}
 
 // change the name of my obfuscated jar
 jar {
