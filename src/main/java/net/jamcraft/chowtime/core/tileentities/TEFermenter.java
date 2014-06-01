@@ -20,7 +20,9 @@ package net.jamcraft.chowtime.core.tileentities;
 
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
 import net.jamcraft.chowtime.core.recipies.Recipe1_1;
+import net.minecraft.block.BlockAir;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -251,6 +253,7 @@ public class TEFermenter extends TileEntity implements ISidedInventory
             ticksLeft = 0;
             ferment();
         }
+        if(this.worldObj.getBlock(xCoord, yCoord + 1, zCoord) instanceof BlockAir) worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.farmland);
     }
 
     private void ferment()

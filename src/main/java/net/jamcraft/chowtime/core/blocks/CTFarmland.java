@@ -34,8 +34,10 @@ public class CTFarmland extends BlockFarmland
         super();
         this.setTickRandomly(true);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
-        this.setLightOpacity(255);
         setBlockName("farmland");
+        this.setLightOpacity(255);
+        this.opaque = false;
+        this.lightOpacity = 255;
     }
 
     /**
@@ -46,20 +48,13 @@ public class CTFarmland extends BlockFarmland
     {
         return AxisAlignedBB.getAABBPool().getAABB((double)(x + 0), (double)(y + 0), (double)(z + 0), (double)(x + 1), (double)(y + 1), (double)(z + 1));
     }
-
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-     */
-    public boolean isOpaqueCube()
+    
+    public boolean renderAsNormalBlock()
     {
         return false;
     }
-
-    /**
-     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-     */
-    public boolean renderAsNormalBlock()
+    
+    public boolean isOpaqueCube()
     {
         return false;
     }
