@@ -19,11 +19,13 @@ buildscript {
 apply plugin: 'forge'
 
 version = "1.0.1-rev4"
+group = "net.jam-craft.chowTime"
+archivesBaseName = "ChowTime"
+
+//Shinies for JamCraft Jenkins, but only on Jenkins
 if (System.getenv()['BUILD_NUMBER']) {
     version += "-jnks" + System.getenv()['BUILD_NUMBER']
 }
-group = "net.jam-craft.chowTime"
-archivesBaseName = "ChowTime"
 
 minecraft {
     version = "1.7.2-10.12.1.1082"
@@ -70,10 +72,7 @@ dependencies {
 
 // add some stuff to the version
 version = "${minecraft.version}-$version"
-//Shinies for JamCraft Jenkins, but only on Jenkins
-if (System.getenv()['BUILD_NUMBER']) {
-    version += "-jc" + System.getenv()['BUILD_NUMBER']
-}
+
 
 // change the name of my obfuscated jar
 jar {

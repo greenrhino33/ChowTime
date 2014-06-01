@@ -20,10 +20,8 @@ package net.jamcraft.chowtime.api.nei;
 
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import net.jamcraft.chowtime.core.client.GuiFermenter;
-import net.jamcraft.chowtime.core.client.GuiJuicer;
+import net.jamcraft.chowtime.core.client.gui.GuiFermenter;
 import net.jamcraft.chowtime.core.recipies.FermenterRecipies;
-import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
 import net.jamcraft.chowtime.core.recipies.Recipe1_1;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;

@@ -18,24 +18,19 @@
 
 package net.jamcraft.chowtime.api.nei;
 
-import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import net.jamcraft.chowtime.core.client.GuiJuicer;
+import net.jamcraft.chowtime.core.client.gui.GuiJuicer;
 import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
 import net.jamcraft.chowtime.core.recipies.Recipe1_1;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.StatCollector;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by James Hollowell on 5/25/2014.
