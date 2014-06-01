@@ -73,8 +73,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-//import net.jamcraft.chowtime.core.gen.candyLand.BiomeGenCandyLand;
-
 /**
  * Created by James Hollowell on 5/14/2014.
  */

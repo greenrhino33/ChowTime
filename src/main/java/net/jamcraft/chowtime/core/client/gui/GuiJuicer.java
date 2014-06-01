@@ -16,8 +16,9 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.jamcraft.chowtime.core.client;
+package net.jamcraft.chowtime.core.client.gui;
 
+import net.jamcraft.chowtime.core.client.Textures;
 import net.jamcraft.chowtime.core.container.ContainerJuicer;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.client.gui.inventory.GuiContainer;

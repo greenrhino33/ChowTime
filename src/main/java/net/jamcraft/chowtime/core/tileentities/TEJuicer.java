@@ -208,7 +208,8 @@ public class TEJuicer extends TileEntity implements ISidedInventory
         }
         if (ticksLeft < maxTicks && JuicerRecipes.GetRecipeFromStack(inventory[0]) != null)
         {
-            if (inventory[1] == null || JuicerRecipes.GetRecipeFromStack(inventory[0]).getOutput().getItem().equals(inventory[1].getItem()))
+            Recipe1_1 r=JuicerRecipes.GetRecipeFromStack(inventory[0]);
+            if (inventory[1] == null || (r.getOutput().isItemEqual(inventory[1])&&r.getOutput().getMaxStackSize()>inventory[1].stackSize))
             {
                 ticksLeft++;
             }

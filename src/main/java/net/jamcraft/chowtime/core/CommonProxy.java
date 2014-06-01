@@ -19,19 +19,15 @@
 package net.jamcraft.chowtime.core;
 
 import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import net.jamcraft.chowtime.core.client.GuiFermenter;
-import net.jamcraft.chowtime.core.client.GuiICMaker;
-import net.jamcraft.chowtime.core.client.GuiJuicer;
+import net.jamcraft.chowtime.core.client.gui.GuiFermenter;
+import net.jamcraft.chowtime.core.client.gui.GuiICMaker;
+import net.jamcraft.chowtime.core.client.gui.GuiJuicer;
 import net.jamcraft.chowtime.core.container.ContainerFermenter;
 import net.jamcraft.chowtime.core.container.ContainerICMaker;
 import net.jamcraft.chowtime.core.container.ContainerJuicer;
-import net.jamcraft.chowtime.core.mobs.GingerbreadMan.EntityGingerbreadMan;
-import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
