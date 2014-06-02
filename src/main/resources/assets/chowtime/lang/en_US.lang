@@ -53,6 +53,7 @@ item.grape.name=Grape
 item.Item_Bucket.name=Chocolate Bucket
 item.watermelonIceCreamCcone.name=Watermelon Ice Cream Cone
 item.farmerBoots.name=Farmer Boots
+item.foodbook.name=The Book of Foods
 
 itemGroup.ChowTime=ChowTime
 

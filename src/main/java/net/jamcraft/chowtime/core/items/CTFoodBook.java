@@ -16,13 +16,33 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.jamcraft.chowtime.core.client.gui;
+package net.jamcraft.chowtime.core.items;
 
-import net.minecraft.client.gui.GuiScreen;
+import net.jamcraft.chowtime.ChowTime;
+import net.jamcraft.chowtime.core.client.gui.foodbook.GuiFoodBook;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 /**
- * Created by James Hollowell on 5/31/2014.
+ * Created by James Hollowell on 6/1/2014.
  */
-public class GuiFoodBook extends GuiScreen
+public class CTFoodBook extends Item
 {
+    public CTFoodBook()
+    {
+        setCreativeTab(ChowTime.creativeTab);
+        setUnlocalizedName("foodbook");
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+    {
+        if(world.isRemote)
+        {
+            Minecraft.getMinecraft().displayGuiScreen(new GuiFoodBook());
+        }
+    }
 }

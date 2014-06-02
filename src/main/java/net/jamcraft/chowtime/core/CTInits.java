@@ -56,6 +56,7 @@ public class CTInits
     public static Item Raspberry;
     public static Item Blueberry;
     public static Item FarmerBoots;
+    public static Item FoodBook;
 
     //Effect Inits
 
