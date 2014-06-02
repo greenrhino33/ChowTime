@@ -76,7 +76,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 /**
  * Created by James Hollowell on 5/14/2014.
  */
-@Mod(modid = ModConstants.MODID, name = ModConstants.NAME, version = "")
+@Mod(modid = ModConstants.MODID, name = ModConstants.NAME, version = "@VERSION@", acceptedMinecraftVersions = "@MC_VERSION@")
 public class ChowTime
 {
     public static EnumMap<Side, FMLEmbeddedChannel> channels;

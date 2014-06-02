@@ -28,6 +28,6 @@ public class ItemWatermellonIceCream extends Item implements IDynItem
 
     @Override public void registerRecipe()
     {
-        IceCreamRecipies.AddRecipe(new ItemStack(Items.melon), new ItemStack(Items.milk_bucket), new ItemStack(this), 60);
+        IceCreamRecipies.AddRecipe(new ItemStack(Items.melon), new ItemStack(Items.milk_bucket), new ItemStack(this), 60, -21000);
     }
 }

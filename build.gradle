@@ -30,6 +30,12 @@ if (System.getenv()['BUILD_NUMBER']) {
 minecraft {
     version = "1.7.2-10.12.1.1082"
     assetDir = "eclipse/assets"
+
+    // replacing
+    replace "@CHANGE_VERSION@", "[4.6,)"
+    replace "@MC_VERSION@", project.minecraft.version
+    replace "@VERSION@", project.version
+    replaceIn "ChowTime.java"
 }
 
 processResources

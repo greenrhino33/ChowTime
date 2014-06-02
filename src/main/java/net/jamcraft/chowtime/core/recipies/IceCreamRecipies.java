@@ -32,9 +32,8 @@ public class IceCreamRecipies
     //TODO: make meta sensitive
     public static List<Recipe2_1> recipe21List = new ArrayList<Recipe2_1>();
 
-    public static void AddRecipe(ItemStack input1, ItemStack input2, ItemStack output, int time)
+    public static void AddRecipe(ItemStack input1, ItemStack input2, ItemStack output, int time, int temp)
     {
-        int temp=-21000;
         Recipe2_1 r = new Recipe2_1(input1, input2, output, time, temp);
         recipe21List.add(r);
     }
