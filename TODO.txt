@@ -1,4 +1,4 @@
--Add a license. GPLv2?
+-Add a license. GPLv2? Done, correct?
 -Fix Chocolate Textures
 -Add Candy Land Dimention
 -Refactor all the xp code out into its own package
