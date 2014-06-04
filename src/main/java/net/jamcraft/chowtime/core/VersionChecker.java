@@ -21,7 +21,19 @@ package net.jamcraft.chowtime.core;
 /**
  * Created by James Hollowell on 6/2/2014.
  */
-public class VersionChecker
+public class VersionChecker implements Runnable
 {
+    private static VersionChecker instance = new VersionChecker();
 
+    //https://github.com/pahimar/Equivalent-Exchange-3/blob/1.6.4/src/main/java/com/pahimar/ee3/helper/VersionHelper.java
+    @Override
+    public void run()
+    {
+        
+    }
+
+    public static void execute()
+    {
+        new Thread(instance).start();
+    }
 }

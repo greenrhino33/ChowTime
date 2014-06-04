@@ -21,12 +21,7 @@ package net.jamcraft.chowtime;
 import java.io.File;
 import java.util.EnumMap;
 
-import net.jamcraft.chowtime.core.CTInits;
-import net.jamcraft.chowtime.core.CTRegistry;
-import net.jamcraft.chowtime.core.CommonProxy;
-import net.jamcraft.chowtime.core.Config;
-import net.jamcraft.chowtime.core.ModConstants;
-import net.jamcraft.chowtime.core.ObfHelper;
+import net.jamcraft.chowtime.core.*;
 import net.jamcraft.chowtime.core.commands.ChowTimeCommand;
 import net.jamcraft.chowtime.core.events.ConnectionHandler;
 import net.jamcraft.chowtime.core.events.EntityEventHandler;
@@ -37,6 +32,7 @@ import net.jamcraft.chowtime.core.network.PacketHandler;
 import net.jamcraft.chowtime.core.registrars.SeedRegistry;
 import net.jamcraft.chowtime.dyn.DynItems;
 import net.jamcraft.chowtime.dyn.DynMain;
+import net.jamcraft.chowtime.dyn.DynTextures;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -132,14 +128,17 @@ public class ChowTime
         // "allout58.mods.prisoncraft.compat.waila.WailaProvider.callbackRegister");
 
         channels = NetworkRegistry.INSTANCE.newChannel(ModConstants.MODID, new PacketHandler());
-        // proxy.registerRenderers();
         logger = event.getModLog();
 
         ObfHelper.init();
         // logger.error("Running in "+ (ObfHelper.isObf?"obf":"deobf") +
         // " environment");
 
+
+
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
+
+        VersionChecker.execute();
 
         CTRegistry.CTBlocks();
         CTRegistry.CTMachines();
@@ -148,6 +147,8 @@ public class ChowTime
         CTRegistry.CTItems();
         CTRegistry.CTTileEntities();
 
+        //Do this before items registered to *hopefully* remove all the annoying errors
+        DynTextures.addDynTP();
         RemoteMain.init();
         DynMain.init();
 
