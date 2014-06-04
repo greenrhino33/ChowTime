@@ -22,6 +22,8 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.jamcraft.chowtime.core.ModConstants;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.IResourcePack;
 
 import java.io.File;
@@ -74,7 +76,7 @@ public class DynTextures
                     IResourcePack rp = new DynFolderResourcePack(dirLoad);
                     ((List) rpList).add(rp);
                 }
-              //  FMLClientHandler.instance().updateResourcePackList();
+                Minecraft.getMinecraft().refreshResources();
             }
             catch (Exception e)
             {

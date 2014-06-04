@@ -18,6 +18,8 @@
 
 package net.jamcraft.chowtime.remote;
 
+import net.jamcraft.chowtime.core.Version;
+
 /**
  * Created by James Hollowell on 5/15/2014.
  */

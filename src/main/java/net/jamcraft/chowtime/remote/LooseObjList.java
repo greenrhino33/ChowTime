@@ -19,6 +19,7 @@
 package net.jamcraft.chowtime.remote;
 
 import com.google.gson.JsonIOException;
+import net.jamcraft.chowtime.core.Version;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -117,11 +118,11 @@ public class LooseObjList
             while (br.ready())
             {
                 String line = br.readLine();
-                if(line==null) return;
+                if (line == null) return;
                 if (line.equals("}")) break;
                 DynClassDescription desc = new DynClassDescription();
                 desc.classname = line.split(" ")[0];
-                desc.version = new Version(0, 0, 0);
+                desc.version = new Version(0, 0, 0, 0);
                 desc.version.readFromString(line.split(" ")[1]);
                 descriptions.add(desc);
             }
@@ -136,7 +137,7 @@ public class LooseObjList
                 if (line.equals("}")) break;
                 DynResourceDescription desc = new DynResourceDescription();
                 desc.path = line.split(" ")[0];
-                desc.version = new Version(0, 0, 0);
+                desc.version = new Version(0, 0, 0, 0);
                 desc.version.readFromString(line.split(" ")[1]);
                 descriptions.add(desc);
             }

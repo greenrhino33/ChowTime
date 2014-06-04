@@ -18,9 +18,16 @@
 
 package net.jamcraft.chowtime;
 
-import java.io.File;
-import java.util.EnumMap;
-
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.jamcraft.chowtime.core.*;
 import net.jamcraft.chowtime.core.commands.ChowTimeCommand;
 import net.jamcraft.chowtime.core.events.ConnectionHandler;
@@ -51,23 +58,10 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-
 import org.apache.logging.log4j.Logger;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.event.FMLServerStoppingEvent;
-import cpw.mods.fml.common.network.FMLEmbeddedChannel;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.io.File;
+import java.util.EnumMap;
 
 /**
  * Created by James Hollowell on 5/14/2014.
@@ -75,6 +69,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = ModConstants.MODID, name = ModConstants.NAME, version = "@VERSION@", acceptedMinecraftVersions = "@MC_VERSION@")
 public class ChowTime
 {
+    public static String version = "@VERSION@";
+
     public static EnumMap<Side, FMLEmbeddedChannel> channels;
 
     public static CreativeTabs creativeTab = new CreativeTabs("ChowTime")
@@ -86,7 +82,7 @@ public class ChowTime
             return CTInits.BarleyCrop;
         }
     };
-    public static final ArmorMaterial FARMER_BOOTS = EnumHelper.addArmorMaterial("FarmerBoots", 5, new int[] {0,0,0,2}, 10);
+    public static final ArmorMaterial FARMER_BOOTS = EnumHelper.addArmorMaterial("FarmerBoots", 5, new int[] { 0, 0, 0, 2 }, 10);
 
     @Mod.Instance(ModConstants.MODID)
     public static ChowTime instance;
@@ -109,21 +105,8 @@ public class ChowTime
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-//        try
-//        {
-//            Class<?> c = Loader.class;
-//            Field rplField = c.getDeclaredField("canonicalModsDir");
-//            rplField.setAccessible(true);
-//            Object rpList = rplField.get(Loader.instance());
-//            if (rpList instanceof File)
-//            {
-//                ModConstants.DYN_LOC = ((File) rpList).getCanonicalPath() + "/ChowTimeDyn";
-//            }
-//        }
-//        catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
+        if(version.contains("VERSION")) version="1.0.1-rev4";//Hardcode if in dev environment
+
         // FMLInterModComms.sendMessage("Waila", "register",
         // "allout58.mods.prisoncraft.compat.waila.WailaProvider.callbackRegister");
 
@@ -133,8 +116,6 @@ public class ChowTime
         ObfHelper.init();
         // logger.error("Running in "+ (ObfHelper.isObf?"obf":"deobf") +
         // " environment");
-
-
 
         Config.init(new Configuration(event.getSuggestedConfigurationFile()));
 
@@ -154,14 +135,13 @@ public class ChowTime
 
         OreDictionary.registerOre("ingotIron", Items.iron_ingot);
 
-
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
+        MinecraftForge.EVENT_BUS.register(VersionChecker.instance);
         //        MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         //        BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
         dir = event.getModConfigurationDirectory();
 
         // MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
-
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
     }
@@ -175,7 +155,7 @@ public class ChowTime
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.Juicer, 1, 0), "WBW", "WPW", "ISI", 'W', "plankWood", 'B', Items.glass_bottle, 'P', Blocks.piston, 'I', "ingotIron", 'S', Blocks.stone));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.Fermenter, 1, 0), "WBW", "WBW", "ISI", 'W', "plankWood", 'B', Items.glass_bottle, 'I', "ingotIron", 'S', Blocks.stone));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.IceCreamMaker, 1, 0), "CBC","C C","SIS",'C',Blocks.ice,'B', Items.glass_bottle,'I',"ingotIron", 'S',Blocks.stone));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.IceCreamMaker, 1, 0), "CBC", "C C", "SIS", 'C', Blocks.ice, 'B', Items.glass_bottle, 'I', "ingotIron", 'S', Blocks.stone));
 
         DynItems.registerRecipes();
 
@@ -193,7 +173,7 @@ public class ChowTime
         createEntity(EntityGingerbreadMan.class, "GingerbreadMan", 0xAF4200, 0x612400);
         EntityRegistry.addSpawn(EntitySeedMob.class, 5, 2, 3, EnumCreatureType.monster, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.plains, BiomeGenBase.beach, BiomeGenBase.coldBeach, BiomeGenBase.frozenRiver);
     }
-    
+
     public void createEntity(Class<? extends EntityLiving> entity, String entityName, int solidColor, int spotColor)
     {
         int randomID = EntityRegistry.findGlobalUniqueEntityId();
