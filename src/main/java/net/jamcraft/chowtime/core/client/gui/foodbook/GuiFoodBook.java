@@ -56,8 +56,8 @@ public class GuiFoodBook extends GuiScreen
 
         int bookXBegin = (width - 192) / 2;
 
-        buttons.add(nextPage = new GuiButtonChangePage(BUTTON_NEXT, bookXBegin + 120, 2 + 154, false));
-        buttons.add(prevPage = new GuiButtonChangePage(BUTTON_PREV, bookXBegin + 38, 2 + 154, true));
+        buttons.add(next = new GuiButtonPageChange(BOOK_BTN_NEXT, bookXBegin + 120, 2 + 154, false));
+        buttons.add(prev = new GuiButtonPageChange(BOOK_BTN_PREV, bookXBegin + 38, 2 + 154, true));
         updateButtonState();
     }
 
@@ -67,7 +67,7 @@ public class GuiFoodBook extends GuiScreen
             case BOOK_BTN_NEXT:
 
                 break;
-            case :
+            case BOOK_BTN_PREV:
                 --pageIndex;
                 break;
         }
