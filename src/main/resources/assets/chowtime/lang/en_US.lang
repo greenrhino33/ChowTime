@@ -58,3 +58,6 @@ item.foodbook.name=The Book of Foods
 itemGroup.ChowTime=ChowTime
 
 entity.SeedMob.name=TurtlePi
+
+gui.FoodBook.Title=The Book Of FOOD
+gui.

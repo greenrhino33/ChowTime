@@ -29,7 +29,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class ModelSeedMob extends ModelBase
 {
-
+    protected float movementTiming = 1.5F;
     protected float field_78145_g = 5.0F;
     protected float field_78151_h = 3.0F;
     //fields
@@ -148,9 +148,9 @@ public class ModelSeedMob extends ModelBase
         this.Head.rotateAngleX = f4 / (180F / (float) Math.PI);
         this.Head.rotateAngleY = f3 / (180F / (float) Math.PI);
         this.Base.rotateAngleX = ((float) Math.PI / 2F);
-        this.FrontLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
-        this.FrontLeg2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f2;
-        this.Leg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f2;
-        this.Leg2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f2;
+        this.FrontLeg.rotateAngleX = MathHelper.cos(f * movementTiming) * 1.4F * f1;
+        this.FrontLeg2.rotateAngleX = MathHelper.cos(f * movementTiming + (float) Math.PI) * 1.4F * f1;
+        this.Leg.rotateAngleX = MathHelper.cos(f * movementTiming + (float) Math.PI) * 1.4F * f1;
+        this.Leg2.rotateAngleX = MathHelper.cos(f * movementTiming) * 1.4F * f1;
     }
 }

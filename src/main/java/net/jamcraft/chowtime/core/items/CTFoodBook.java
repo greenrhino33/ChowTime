@@ -44,5 +44,6 @@ public class CTFoodBook extends Item
         {
             Minecraft.getMinecraft().displayGuiScreen(new GuiFoodBook());
         }
+        return stack;
     }
 }

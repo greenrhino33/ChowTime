@@ -18,6 +18,7 @@
 
 package net.jamcraft.chowtime.core.client.gui.foodbook;
 
+import cpw.mods.fml.common.registry.GameData;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemFood;
@@ -25,6 +26,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -34,22 +36,52 @@ public class GuiFoodBook extends GuiScreen
 {
     private static final ResourceLocation texture = new ResourceLocation("minecraft:textures/gui/book.png");
 
-    private static final int BOOK_BTN_NEXT=0;
-    private static final int BOOK_BTN_PREV=1;
+    private static final int BOOK_BTN_NEXT = 0;
+    private static final int BOOK_BTN_PREV = 1;
 
     public static List<ItemFood> foods = new ArrayList<ItemFood>();
+    public static List<BookPage> pages = new ArrayList<BookPage>();
 
-    private int foodStartIndex = -1;
-    private int foodEndIndex = -1;
     private GuiButton next;
     private GuiButton prev;
 
+    private int pageIndex = 0;
+
     public GuiFoodBook()
     {
-
+        super();
+        findFoods();
+        makePages();
     }
+
+    private void findFoods()
+    {
+        Iterator iter = GameData.getItemRegistry().iterator();
+        while (iter.hasNext())
+        {
+            Object item = iter.next();
+            if (item instanceof ItemFood)
+            {
+                foods.add((ItemFood) item);
+            }
+        }
+    }
+
+    private void makePages()
+    {
+        int foodCurrent = 0;
+        do
+        {
+            BookPage newBook = new BookPage(this, foodCurrent);
+            foodCurrent = newBook.calculateEndIndex();
+            pages.add(newBook);
+        }
+        while (foodCurrent < foods.size());
+    }
+
     @Override
-    public void initGui() {
+    public void initGui()
+    {
         super.initGui();
         @SuppressWarnings("unchecked")
         List<GuiButton> buttons = buttonList;
@@ -62,10 +94,12 @@ public class GuiFoodBook extends GuiScreen
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) {
-        switch (button.id) {
+    protected void actionPerformed(GuiButton button)
+    {
+        switch (button.id)
+        {
             case BOOK_BTN_NEXT:
-
+                pageIndex++;
                 break;
             case BOOK_BTN_PREV:
                 --pageIndex;
@@ -74,54 +108,60 @@ public class GuiFoodBook extends GuiScreen
         updateButtonState();
     }
 
-    private void updateButtonState() {
+    private void updateButtonState()
+    {
         next.visible = pageIndex < pages.size() - 1;
-        prev.visible =  > 0;
+        prev.visible = pageIndex > 0;
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float renderPartials) {
-        int bookXStart = (width - 192) / 2;
-        mc.renderEngine.bindTexture(texture);
-        drawTexturedModalRect(bookXStart, 2, 0, 0, 192, 192);
-
-
-        fontRendererObj.drawString("ยงn" + page.getDisplayName(), bookXStart + 40 + 4 + 16, 17, 0x000000);
-        fontRendererObj.drawSplitString(page.getDescriptionText(), bookXStart + 40, 17 + 15, 115, 0x000000);
+    public void drawScreen(int mouseX, int mouseY, float renderPartials)
+    {
+        drawBackground();
+        drawForeground();
 
         super.drawScreen(mouseX, mouseY, renderPartials);
     }
 
     @Override
-    public boolean doesGuiPauseGame() {
+    public boolean doesGuiPauseGame()
+    {
         return false;
     }
 
     @Override
-    protected void keyTyped(char c, int key) {
+    protected void keyTyped(char c, int key)
+    {
         char lowerCase = Character.toLowerCase(c);
-        if (key == Keyboard.KEY_ESCAPE) {
+        if (key == Keyboard.KEY_ESCAPE)
+        {
             mc.displayGuiScreen(null);
-        } else if (Character.getType(lowerCase) == Character.LOWERCASE_LETTER) {
-            for (int i = 0, len = pages.size(); i < len; ++i) {
-                OreBookPage page = pages.get(i);
-                if (Character.toLowerCase(page.getDisplayName().charAt(0)) == c) {
-                    pageIndex = i;
-                    updateButtonState();
-                    break;
-                }
-            }
+        }
+        else if (Character.getType(lowerCase) == Character.LOWERCASE_LETTER)
+        {
+            //            for (int i = 0, len = pages.size(); i < len; ++i)
+            //            {
+            //                OreBookPage page = pages.get(i);
+            //                if (Character.toLowerCase(page.getDisplayName().charAt(0)) == c)
+            //                {
+            //                    pageIndex = i;
+            //                    updateButtonState();
+            //                    break;
+            //                }
+            //            }
         }
     }
 
     protected void drawBackground()
     {
-
+        int bookXStart = (width - 192) / 2;
+        mc.renderEngine.bindTexture(texture);
+        drawTexturedModalRect(bookXStart, 2, 0, 0, 192, 192);
     }
 
     protected void drawForeground()
     {
-        if(foodStartIndex==-1&&foodEndIndex==-1)
+        if (pageIndex==0)
             drawStartScreen();
         else
             drawFoodPage();
@@ -129,11 +169,12 @@ public class GuiFoodBook extends GuiScreen
 
     protected void drawStartScreen()
     {
-
+        fontRendererObj.drawString()
     }
 
     protected void drawFoodPage()
     {
-
+        BookPage pg=pages.get(pageIndex-1);
+        pg.RenderPage();
     }
 }
