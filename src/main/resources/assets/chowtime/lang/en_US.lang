@@ -60,4 +60,4 @@ itemGroup.ChowTime=ChowTime
 entity.SeedMob.name=TurtlePi
 
 gui.FoodBook.Title=The Book Of FOOD
-gui.
+gui.FoodBook.MainDesc=This is the book of food. This book lists all the available foods in Minecraft and includes the amount of hunger it restores and a description (if it has one).

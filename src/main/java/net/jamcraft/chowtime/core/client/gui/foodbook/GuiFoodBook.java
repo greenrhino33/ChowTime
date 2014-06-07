@@ -23,6 +23,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemFood;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class GuiFoodBook extends GuiScreen
     private GuiButton prev;
 
     private int pageIndex = 0;
+    private int bookXStart = 0;
 
     public GuiFoodBook()
     {
@@ -86,10 +88,10 @@ public class GuiFoodBook extends GuiScreen
         @SuppressWarnings("unchecked")
         List<GuiButton> buttons = buttonList;
 
-        int bookXBegin = (width - 192) / 2;
+        bookXStart = (width - 192) / 2;
 
-        buttons.add(next = new GuiButtonPageChange(BOOK_BTN_NEXT, bookXBegin + 120, 2 + 154, false));
-        buttons.add(prev = new GuiButtonPageChange(BOOK_BTN_PREV, bookXBegin + 38, 2 + 154, true));
+        buttons.add(next = new GuiButtonPageChange(BOOK_BTN_NEXT, bookXStart + 120, 2 + 154, false));
+        buttons.add(prev = new GuiButtonPageChange(BOOK_BTN_PREV, bookXStart + 38, 2 + 154, true));
         updateButtonState();
     }
 
@@ -154,14 +156,14 @@ public class GuiFoodBook extends GuiScreen
 
     protected void drawBackground()
     {
-        int bookXStart = (width - 192) / 2;
+
         mc.renderEngine.bindTexture(texture);
         drawTexturedModalRect(bookXStart, 2, 0, 0, 192, 192);
     }
 
     protected void drawForeground()
     {
-        if (pageIndex==0)
+        if (pageIndex == 0)
             drawStartScreen();
         else
             drawFoodPage();
@@ -169,12 +171,13 @@ public class GuiFoodBook extends GuiScreen
 
     protected void drawStartScreen()
     {
-        fontRendererObj.drawString()
+        fontRendererObj.drawString(StatCollector.translateToLocal("gui.FoodBook.Title"), bookXStart + 60, 20, 0x000000);
+        fontRendererObj.drawSplitString(StatCollector.translateToLocal("gui.FoodBook.MainDesc"), bookXStart + 40, 40, 115, 0x000000);
     }
 
     protected void drawFoodPage()
     {
-        BookPage pg=pages.get(pageIndex-1);
-        pg.RenderPage();
+        BookPage pg = pages.get(pageIndex - 1);
+        pg.RenderPage(itemRender);
     }
 }
