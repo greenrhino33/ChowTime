@@ -19,6 +19,7 @@
 package net.jamcraft.chowtime.core.client.gui.foodbook;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -70,14 +71,17 @@ public class BookPage
 
     public void RenderPage(RenderItem itemRender)
     {
+        FontRenderer fontRenderer=Minecraft.getMinecraft().fontRenderer;
         int height = 0;
         for (int i = startNDX; i < parent.foods.size(); i++)
         {
             FoodItem food = new FoodItem(parent.foods.get(i));
             RenderItem(itemRender, 10, height, food.getItem());
+            fontRenderer.drawString(food.getLocalizedName(),20,height,0x000000);
             height += 20;
             if (food.hasDescription())
             {
+                fontRenderer.drawSplitString(food.getLocalizedDescription(),parent.width-20,10,height,0x000000);
                 List l = Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(food.getLocalizedDescription(), parent.width - 20);
                 height += Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * l.size();
             }

@@ -53,7 +53,6 @@ public class GuiFoodBook extends GuiScreen
     {
         super();
         findFoods();
-        makePages();
     }
 
     private void findFoods()
@@ -72,26 +71,26 @@ public class GuiFoodBook extends GuiScreen
     private void makePages()
     {
         int foodCurrent = 0;
-        do
-        {
+//        do
+//        {
             BookPage newBook = new BookPage(this, foodCurrent);
             foodCurrent = newBook.calculateEndIndex();
             pages.add(newBook);
-        }
-        while (foodCurrent < foods.size());
+//        }
+//        while (foodCurrent < foods.size());
     }
 
     @Override
     public void initGui()
     {
         super.initGui();
-        @SuppressWarnings("unchecked")
-        List<GuiButton> buttons = buttonList;
+
+        makePages();
 
         bookXStart = (width - 192) / 2;
 
-        buttons.add(next = new GuiButtonPageChange(BOOK_BTN_NEXT, bookXStart + 120, 2 + 154, false));
-        buttons.add(prev = new GuiButtonPageChange(BOOK_BTN_PREV, bookXStart + 38, 2 + 154, true));
+        buttonList.add(next = new GuiButtonPageChange(BOOK_BTN_NEXT, bookXStart + 120, 2 + 154, false));
+        buttonList.add(prev = new GuiButtonPageChange(BOOK_BTN_PREV, bookXStart + 38, 2 + 154, true));
         updateButtonState();
     }
 
@@ -156,7 +155,6 @@ public class GuiFoodBook extends GuiScreen
 
     protected void drawBackground()
     {
-
         mc.renderEngine.bindTexture(texture);
         drawTexturedModalRect(bookXStart, 2, 0, 0, 192, 192);
     }
@@ -171,8 +169,8 @@ public class GuiFoodBook extends GuiScreen
 
     protected void drawStartScreen()
     {
-        fontRendererObj.drawString(StatCollector.translateToLocal("gui.FoodBook.Title"), bookXStart + 60, 20, 0x000000);
-        fontRendererObj.drawSplitString(StatCollector.translateToLocal("gui.FoodBook.MainDesc"), bookXStart + 40, 40, 115, 0x000000);
+        fontRendererObj.drawString(StatCollector.translateToLocal("gui.FoodBook.Title"), bookXStart + 45, 20, 0x000000);
+        fontRendererObj.drawSplitString(StatCollector.translateToLocal("gui.FoodBook.MainDesc"), bookXStart + 40, 40, 105, 0x000000);
     }
 
     protected void drawFoodPage()
