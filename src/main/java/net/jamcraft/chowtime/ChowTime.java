@@ -156,6 +156,7 @@ public class ChowTime
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.Juicer, 1, 0), "WBW", "WPW", "ISI", 'W', "plankWood", 'B', Items.glass_bottle, 'P', Blocks.piston, 'I', "ingotIron", 'S', Blocks.stone));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.Fermenter, 1, 0), "WBW", "WBW", "ISI", 'W', "plankWood", 'B', Items.glass_bottle, 'I', "ingotIron", 'S', Blocks.stone));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.IceCreamMaker, 1, 0), "CBC", "C C", "SIS", 'C', Blocks.ice, 'B', Items.glass_bottle, 'I', "ingotIron", 'S', Blocks.stone));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CTInits.FarmerBoots, 1, 0), "W W", "WBW", 'W', Blocks.wool, 'B', Items.leather_boots));
 
         DynItems.registerRecipes();
 
