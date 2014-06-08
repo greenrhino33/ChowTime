@@ -19,6 +19,7 @@
 package net.jamcraft.chowtime.core.client.gui.foodbook;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;

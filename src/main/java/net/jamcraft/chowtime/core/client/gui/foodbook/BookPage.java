@@ -20,9 +20,11 @@ package net.jamcraft.chowtime.core.client.gui.foodbook;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,13 +51,13 @@ public class BookPage
         for (int i = startNDX; i < parent.foods.size(); i++)
         {
             FoodItem food = new FoodItem(parent.foods.get(i));
-            int foodHeight = 20;
+            int foodHeight = 24;
             if (food.hasDescription())
             {
-                List l = Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(food.getLocalizedDescription(), parent.width - 20);
+                List l = Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(food.getLocalizedDescription(), 110);
                 foodHeight += Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * l.size();
             }
-            if (height + foodHeight > 150)
+            if (height + foodHeight > 125)
             {
                 return endNDX;
             }
@@ -75,14 +77,16 @@ public class BookPage
         int height = 16;
         for (int i = 0; i < foodItems.size(); i++)
         {
+            height+=3;
             FoodItem food = foodItems.get(i);
-            RenderItem(itemRender, parent.bookXStart + 30, height, food.getItem());
-            fontRenderer.drawString(food.getLocalizedName(), parent.bookXStart + 55, height + 2, 0x000000);
-            height += 18;
+            RenderItem(itemRender, parent.bookXStart + 35, height, food.getItem());
+            fontRenderer.drawString(food.getLocalizedName(), parent.bookXStart + 55, height + 1, 0x000000);
+            RenderHaunches(food.getHaunches(), parent.bookXStart + 55, height + fontRenderer.FONT_HEIGHT+1);
+            height += 21;
             if (food.hasDescription())
             {
-                fontRenderer.drawSplitString(food.getLocalizedDescription(), parent.bookXStart + 45, height, parent.width - 20, 0x000000);
-                List l = Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(food.getLocalizedDescription(), parent.width - 20);
+                fontRenderer.drawSplitString(food.getLocalizedDescription(), parent.bookXStart + 45, height, 110, 0x000000);
+                List l = Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(food.getLocalizedDescription(), 110);
                 height += (Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT + 2) * l.size();
             }
         }
@@ -91,51 +95,42 @@ public class BookPage
     protected void RenderItem(RenderItem itemRenderer, int x, int y, Item food)
     {
         itemRenderer.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().renderEngine, new ItemStack(food), x, y, false);
+
     }
 
-    public void RenderHaunches()
+    public void RenderHaunches(int haunches, int x, int y)
     {
         //GuinIngam L705
 
-        int i1 = 5;
+        Minecraft.getMinecraft().renderEngine.bindTexture(Gui.icons);
+        final int fullX = 52;
+        final int halfX = 61;
+        final int bgX = 16;
+        final int dim = 8;
+        final int hungerY = 27;
 
-        for (int i = 0; i < 10; ++i)
+        int endHaunch = haunches / 2;
+
+        GL11.glPushMatrix();
+
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glColor4f(1, 1, 1, 1);
+
+        for (int i = 0; i < endHaunch; i++)
         {
-            //            int k5 = i2;
-            int i4 = 16;
-            byte b4 = 0;
-
-            //            if (this.mc.thePlayer.isPotionActive(Potion.hunger))
-            //            {
-            //                i4 += 36;
-            //                b4 = 13;
-            //            }
-
-            //            if (this.mc.thePlayer.getFoodStats().getSaturationLevel() <= 0.0F && this.updateCounter % (i1 * 3 + 1) == 0)
-            //            {
-            //                k5 = i2 + (this.rand.nextInt(3) - 1);
-            //            }
-
-            //            if (flag1)
-            //            {
-            //                b4 = 1;
-            //            }
-            //
-            //            k4 = l1 - i * 8 - 9;
-            //            this.drawTexturedModalRect(k4, k5, 16 + b4 * 9, 27, 9, 9);
-            //
-            //            if (flag1)
-            //            {
-            //                if (i * 2 + 1 < j1)
-            //                {
-            //                    this.drawTexturedModalRect(k4, k5, i4 + 54, 27, 9, 9);
-            //                }
-            //
-            //                if (i * 2 + 1 == j1)
-            //                {
-            //                    this.drawTexturedModalRect(k4, k5, i4 + 63, 27, 9, 9);
-            //                }
-            //            }
+            parent.drawTexturedModalRect(x, y, bgX, hungerY, dim, dim);
+            parent.drawTexturedModalRect(x, y, fullX, hungerY, dim, dim);
+            x += dim + 1;
         }
+
+        if (haunches % 2 == 1)
+        {
+            parent.drawTexturedModalRect(x, y, bgX, hungerY, dim, dim);
+            parent.drawTexturedModalRect(x, y, halfX, hungerY, dim, dim);
+        }
+
+        GL11.glEnable(GL11.GL_LIGHTING);
+
+        GL11.glPopMatrix();
     }
 }

@@ -18,6 +18,8 @@
 
 package net.jamcraft.chowtime.core.client.gui.foodbook;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Ordering;
 import cpw.mods.fml.common.registry.GameData;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -66,9 +68,18 @@ public class GuiFoodBook extends GuiScreen
             Object item = iter.next();
             if (item instanceof ItemFood)
             {
+                if
                 foods.add((ItemFood) item);
             }
         }
+        foods = Ordering.from(String.CASE_INSENSITIVE_ORDER).onResultOf(new Function<ItemFood, String>()
+        {
+            @Override
+            public String apply(ItemFood input)
+            {
+                return StatCollector.translateToLocal(input.getUnlocalizedName()+".name");
+            }
+        }).immutableSortedCopy(foods);
     }
 
     private void makePages()
@@ -78,7 +89,7 @@ public class GuiFoodBook extends GuiScreen
         do
         {
             BookPage newBook = new BookPage(this, foodCurrent);
-            foodCurrent = newBook.calculateEndIndex();
+            foodCurrent = newBook.calculateEndIndex()+1;
             pages.add(newBook);
         }
         while (foodCurrent < foods.size()-1);
@@ -169,6 +180,7 @@ public class GuiFoodBook extends GuiScreen
             drawStartScreen();
         else
             drawFoodPage();
+        drawPages();
     }
 
     protected void drawStartScreen()
@@ -181,5 +193,10 @@ public class GuiFoodBook extends GuiScreen
     {
         BookPage pg = pages.get(pageIndex - 1);
         pg.RenderPage(itemRender);
+    }
+
+    protected void drawPages()
+    {
+        fontRendererObj.drawString((pageIndex+1)+"/"+pages.size(),bookXStart+82,160,0x000000);
     }
 }

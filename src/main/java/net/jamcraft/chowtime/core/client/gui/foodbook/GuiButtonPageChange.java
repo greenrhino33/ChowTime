@@ -21,6 +21,7 @@ package net.jamcraft.chowtime.core.client.gui.foodbook;
 import net.jamcraft.chowtime.core.client.Textures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -53,7 +54,16 @@ public class GuiButtonPageChange extends GuiButton
                 v += 13;
             }
 
+            GL11.glPushMatrix();
+
+            GL11.glDisable(GL11.GL_LIGHTING);
+            GL11.glColor4f(1, 1, 1, 1);
+
             drawTexturedModalRect(xPosition, yPosition, u, v, 23, 13);
+
+            GL11.glEnable(GL11.GL_LIGHTING);
+
+            GL11.glPopMatrix();
         }
     }
 }
