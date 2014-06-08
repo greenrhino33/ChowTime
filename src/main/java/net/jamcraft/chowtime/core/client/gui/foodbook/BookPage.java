@@ -55,7 +55,7 @@ public class BookPage
                 List l = Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(food.getLocalizedDescription(), parent.width - 20);
                 foodHeight += Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * l.size();
             }
-            if (height + foodHeight > parent.height - 5)
+            if (height + foodHeight > 150)
             {
                 return endNDX;
             }
@@ -71,19 +71,19 @@ public class BookPage
 
     public void RenderPage(RenderItem itemRender)
     {
-        FontRenderer fontRenderer=Minecraft.getMinecraft().fontRenderer;
-        int height = 0;
-        for (int i = startNDX; i < parent.foods.size(); i++)
+        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+        int height = 16;
+        for (int i = 0; i < foodItems.size(); i++)
         {
-            FoodItem food = new FoodItem(parent.foods.get(i));
-            RenderItem(itemRender, 10, height, food.getItem());
-            fontRenderer.drawString(food.getLocalizedName(),20,height,0x000000);
-            height += 20;
+            FoodItem food = foodItems.get(i);
+            RenderItem(itemRender, parent.bookXStart + 30, height, food.getItem());
+            fontRenderer.drawString(food.getLocalizedName(), parent.bookXStart + 55, height + 2, 0x000000);
+            height += 18;
             if (food.hasDescription())
             {
-                fontRenderer.drawSplitString(food.getLocalizedDescription(),parent.width-20,10,height,0x000000);
+                fontRenderer.drawSplitString(food.getLocalizedDescription(), parent.bookXStart + 45, height, parent.width - 20, 0x000000);
                 List l = Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(food.getLocalizedDescription(), parent.width - 20);
-                height += Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * l.size();
+                height += (Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT + 2) * l.size();
             }
         }
     }

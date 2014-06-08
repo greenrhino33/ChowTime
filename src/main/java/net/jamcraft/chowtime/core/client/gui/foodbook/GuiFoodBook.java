@@ -40,19 +40,22 @@ public class GuiFoodBook extends GuiScreen
     private static final int BOOK_BTN_NEXT = 0;
     private static final int BOOK_BTN_PREV = 1;
 
-    public static List<ItemFood> foods = new ArrayList<ItemFood>();
-    public static List<BookPage> pages = new ArrayList<BookPage>();
+    public List<ItemFood> foods = new ArrayList<ItemFood>();
+    public List<BookPage> pages = new ArrayList<BookPage>();
 
     private GuiButton next;
     private GuiButton prev;
 
     private int pageIndex = 0;
-    private int bookXStart = 0;
+    public int bookXStart = 0;
 
     public GuiFoodBook()
     {
         super();
-        findFoods();
+        if(foods.size()==0)
+        {
+            findFoods();
+        }
     }
 
     private void findFoods()
@@ -70,14 +73,15 @@ public class GuiFoodBook extends GuiScreen
 
     private void makePages()
     {
+        pages.clear();
         int foodCurrent = 0;
-//        do
-//        {
+        do
+        {
             BookPage newBook = new BookPage(this, foodCurrent);
             foodCurrent = newBook.calculateEndIndex();
             pages.add(newBook);
-//        }
-//        while (foodCurrent < foods.size());
+        }
+        while (foodCurrent < foods.size()-1);
     }
 
     @Override
@@ -89,8 +93,8 @@ public class GuiFoodBook extends GuiScreen
 
         bookXStart = (width - 192) / 2;
 
-        buttonList.add(next = new GuiButtonPageChange(BOOK_BTN_NEXT, bookXStart + 120, 2 + 154, false));
-        buttonList.add(prev = new GuiButtonPageChange(BOOK_BTN_PREV, bookXStart + 38, 2 + 154, true));
+        buttonList.add(next = new GuiButtonPageChange(BOOK_BTN_NEXT, bookXStart + 120, 156, false));
+        buttonList.add(prev = new GuiButtonPageChange(BOOK_BTN_PREV, bookXStart + 38, 156, true));
         updateButtonState();
     }
 

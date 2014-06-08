@@ -35,7 +35,7 @@ public class FoodItem
     public FoodItem(ItemFood food)
     {
         wrappedFood=food;
-        descUnloc=food.getUnlocalizedName().substring(food.getUnlocalizedName().length()-5)+".desc";
+        descUnloc=food.getUnlocalizedName()+".desc";
     }
 
     public String getLocalizedDescription()
@@ -45,7 +45,7 @@ public class FoodItem
 
     public String getLocalizedName()
     {
-        return StatCollector.translateToLocal(wrappedFood.getUnlocalizedName());
+        return StatCollector.translateToLocal(wrappedFood.getUnlocalizedName()+".name");
     }
 
     public boolean hasDescription()
