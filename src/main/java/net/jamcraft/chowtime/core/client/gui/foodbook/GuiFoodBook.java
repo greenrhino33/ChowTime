@@ -68,7 +68,6 @@ public class GuiFoodBook extends GuiScreen
             Object item = iter.next();
             if (item instanceof ItemFood)
             {
-                if
                 foods.add((ItemFood) item);
             }
         }
