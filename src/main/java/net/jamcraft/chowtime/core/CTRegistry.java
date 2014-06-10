@@ -33,22 +33,7 @@ import net.jamcraft.chowtime.core.crops.CropGrape;
 import net.jamcraft.chowtime.core.crops.CropRaspberry;
 import net.jamcraft.chowtime.core.crops.CropStrawberry;
 import net.jamcraft.chowtime.core.crops.CropTomato;
-import net.jamcraft.chowtime.core.items.CTItem;
-import net.jamcraft.chowtime.core.items.ItemBlueberry;
-import net.jamcraft.chowtime.core.items.ItemCorn;
-import net.jamcraft.chowtime.core.items.ItemCranberry;
-import net.jamcraft.chowtime.core.items.ItemGrape;
-import net.jamcraft.chowtime.core.items.ItemRaspberry;
-import net.jamcraft.chowtime.core.items.ItemStrawberry;
-import net.jamcraft.chowtime.core.items.ItemTomato;
-import net.jamcraft.chowtime.core.items.SeedBarley;
-import net.jamcraft.chowtime.core.items.SeedBlueberry;
-import net.jamcraft.chowtime.core.items.SeedCorn;
-import net.jamcraft.chowtime.core.items.SeedCranberry;
-import net.jamcraft.chowtime.core.items.SeedGrape;
-import net.jamcraft.chowtime.core.items.SeedRaspberry;
-import net.jamcraft.chowtime.core.items.SeedStrawberry;
-import net.jamcraft.chowtime.core.items.SeedTomato;
+import net.jamcraft.chowtime.core.items.*;
 import net.jamcraft.chowtime.core.lib.CTStrings;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
@@ -212,6 +197,9 @@ public class CTRegistry
             }
         };
         GameRegistry.registerItem(CTInits.FarmerBoots, "farmer_boots");
+
+        CTInits.FoodBook=new CTFoodBook();
+        GameRegistry.registerItem(CTInits.FoodBook,"food_book");
         
         // CTInits.ItemBucketChoco = new CTItemBucket(CTInits.ChocolateMilk,
         // CTInits.ItemBucketChoco,

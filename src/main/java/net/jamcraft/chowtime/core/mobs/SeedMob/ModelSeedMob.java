@@ -22,16 +22,14 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-
 import org.lwjgl.opengl.GL11;
 
 /**
  * Created by Kayla Marie on 5/16/14.
- * Edited by Wade Nolan on 6/7/14
  */
 public class ModelSeedMob extends ModelBase
 {
-
+    protected float movementTiming = 1.5F;
     protected float field_78145_g = 5.0F;
     protected float field_78151_h = 3.0F;
     //fields
@@ -94,7 +92,7 @@ public class ModelSeedMob extends ModelBase
 
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
-        //super.render(entity, f, f1, f2, f3, f4, f5);
+        super.render(entity, f, f1, f2, f3, f4, f5);
         if (this.isChild)
         {
             float f6 = 2.0F;
@@ -125,7 +123,7 @@ public class ModelSeedMob extends ModelBase
             this.FrontLeg.render(f5);
             this.FrontLeg2.render(f5);
         }
-                setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+        //        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         //        Base.render(f5);
         //        Leg.render(f5);
         //        Leg2.render(f5);
@@ -142,22 +140,17 @@ public class ModelSeedMob extends ModelBase
         model.rotateAngleZ = z;
     }
 
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
     {
-        this.Head.rotateAngleY = par4 / (180F / (float)Math.PI);
-        this.Head.rotateAngleX = par5 / (180F / (float)Math.PI);
-        
-        /**
-         * Wade: This animation class is now being called. You have to include the
-         * setRotationAngles() method in the render() method. I got the head working,
-         * but the legs are a bit weird, Ill let someone else with more patience than me
-         * do that. 
-         */
-        
-        //this.FrontLeg.rotateAngleY = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-        //this.FrontLeg2.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
-        //this.Leg.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
-        //this.Leg2.rotateAngleY = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-        super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
+        super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+
+        float f6 = (180F / (float) Math.PI);
+        this.Head.rotateAngleX = f4 / (180F / (float) Math.PI);
+        this.Head.rotateAngleY = f3 / (180F / (float) Math.PI);
+        this.Base.rotateAngleX = ((float) Math.PI / 2F);
+        this.FrontLeg.rotateAngleX = MathHelper.cos(f * movementTiming) * 1.4F * f1;
+        this.FrontLeg2.rotateAngleX = MathHelper.cos(f * movementTiming + (float) Math.PI) * 1.4F * f1;
+        this.Leg.rotateAngleX = MathHelper.cos(f * movementTiming + (float) Math.PI) * 1.4F * f1;
+        this.Leg2.rotateAngleX = MathHelper.cos(f * movementTiming) * 1.4F * f1;
     }
 }

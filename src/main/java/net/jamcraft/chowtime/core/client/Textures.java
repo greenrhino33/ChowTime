@@ -28,4 +28,5 @@ public class Textures
     public static ResourceLocation Gui_Fermenter = new ResourceLocation("chowtime", "textures/gui/guiFermenter.png");
     public static ResourceLocation Gui_Juicer = new ResourceLocation("chowtime", "textures/gui/guiJuicer.png");
     public static ResourceLocation Gui_ICMaker = new ResourceLocation("chowtime", "textures/gui/guiIceCreamMaker.png");
+    public static ResourceLocation Gui_FoodBook = new ResourceLocation("chowtime","textures/gui/guiFoodBook.png"); //new ResourceLocation("minecraft","textures/gui/book.png");
 }
