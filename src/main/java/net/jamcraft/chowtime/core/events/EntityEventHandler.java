@@ -27,7 +27,6 @@ import java.io.IOException;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.CTInits;
 import net.jamcraft.chowtime.core.Config;
-import net.jamcraft.chowtime.core.blocks.CTFarmland;
 import net.jamcraft.chowtime.core.crops.CropBarley;
 import net.jamcraft.chowtime.core.crops.CropBlueberry;
 import net.jamcraft.chowtime.core.crops.CropCorn;
@@ -48,11 +47,15 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrass;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -61,9 +64,10 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
-import net.minecraftforge.event.terraingen.InitMapGenEvent;
-import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -73,6 +77,71 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class EntityEventHandler
 {
     private static boolean HasBeenNotified = false;
+    Minecraft mc = Minecraft.getMinecraft();
+    
+    @SubscribeEvent
+    public void renderGameOverlay(RenderGameOverlayEvent.Text event)
+    {
+        ScaledResolution scaledresolution = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+        int k = scaledresolution.getScaledWidth();
+        int l = scaledresolution.getScaledHeight();
+        FontRenderer fontrenderer = this.mc.fontRenderer;
+        
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        int j2;
+        int k2;
+        String s3 = "ChowTime";
+        j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 75 - fontrenderer.getStringWidth(s3);
+        k2 = l - 31 - 4 - 10;
+        fontrenderer.drawString(s3, j2 + 1, k2, 0);
+        fontrenderer.drawString(s3, j2 - 1, k2, 0);
+        fontrenderer.drawString(s3, j2, k2 + 1, 0);
+        fontrenderer.drawString(s3, j2, k2 - 1, 0);
+        for(int i=0; i<=7; i++) fontrenderer.drawString("_", j2 + i*6 - 2, k2 + 2, 0);
+        fontrenderer.drawString(s3, j2, k2, 0x00c2e0);
+        
+        s3 = "XP: " + ChowTime.harvestXP;
+        j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 80 - fontrenderer.getStringWidth(s3);
+        k2 += 12;
+        fontrenderer.drawString(s3, j2 + 1, k2, 0);
+        fontrenderer.drawString(s3, j2 - 1, k2, 0);
+        fontrenderer.drawString(s3, j2, k2 + 1, 0);
+        fontrenderer.drawString(s3, j2, k2 - 1, 0);
+        fontrenderer.drawString(s3, j2, k2, 0x22c530);
+        
+        int xp=0;
+        if(ChowTime.harvestXP < 20) xp = 20;
+        if(ChowTime.harvestXP >= 20 && ChowTime.harvestXP < 100) xp = 100;
+        if(ChowTime.harvestXP >= 100 && ChowTime.harvestXP < 300) xp = 300;
+        if(ChowTime.harvestXP < 300)
+        {            
+            s3 = "Next farming upgrade:";
+            j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 150;
+            k2 += 12;
+            fontrenderer.drawString(s3, j2 + 1, k2, 0);
+            fontrenderer.drawString(s3, j2 - 1, k2, 0);
+            fontrenderer.drawString(s3, j2, k2 + 1, 0);
+            fontrenderer.drawString(s3, j2, k2 - 1, 0);
+            fontrenderer.drawString(s3, j2, k2, 0xfeee00);
+            
+            s3 = "" + xp;
+            j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 120;
+            k2 += 12;
+            fontrenderer.drawString(s3, j2 + 1, k2, 0);
+            fontrenderer.drawString(s3, j2 - 1, k2, 0);
+            fontrenderer.drawString(s3, j2, k2 + 1, 0);
+            fontrenderer.drawString(s3, j2, k2 - 1, 0);
+            fontrenderer.drawString(s3, j2, k2, 0xfe0000);
+            
+            s3 = " XP";
+            j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 102;
+            fontrenderer.drawString(s3, j2 + 1, k2, 0);
+            fontrenderer.drawString(s3, j2 - 1, k2, 0);
+            fontrenderer.drawString(s3, j2, k2 + 1, 0);
+            fontrenderer.drawString(s3, j2, k2 - 1, 0);
+            fontrenderer.drawString(s3, j2, k2, 0xfeee00);
+        }
+    }
     
     @SubscribeEvent
     public void onEntityJoinWorld(EntityJoinWorldEvent event)
