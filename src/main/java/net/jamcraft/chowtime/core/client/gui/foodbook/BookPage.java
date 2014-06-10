@@ -51,13 +51,12 @@ public class BookPage
         for (int i = startNDX; i < parent.foods.size(); i++)
         {
             FoodItem food = new FoodItem(parent.foods.get(i));
-            int foodHeight = 24;
+            int foodHeight = 25;
             if (food.hasDescription())
             {
-                List l = Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(food.getLocalizedDescription(), 110);
-                foodHeight += Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * l.size();
+                foodHeight += Minecraft.getMinecraft().fontRenderer.splitStringWidth(food.getLocalizedDescription(),GuiFoodBook.WIDTH - 30);
             }
-            if (height + foodHeight > 125)
+            if (height + foodHeight > GuiFoodBook.HEIGHT - 40)
             {
                 return endNDX;
             }
@@ -77,17 +76,17 @@ public class BookPage
         int height = 16;
         for (int i = 0; i < foodItems.size(); i++)
         {
-            height+=3;
+            height += 4;
             FoodItem food = foodItems.get(i);
-            RenderItem(itemRender, parent.bookXStart + 35, height, food.getItem());
-            fontRenderer.drawString(food.getLocalizedName(), parent.bookXStart + 55, height + 1, 0x000000);
-            RenderHaunches(food.getHaunches(), parent.bookXStart + 55, height + fontRenderer.FONT_HEIGHT+1);
+            RenderItem(itemRender, parent.bookXStart + 10, height, food.getItem());
+            String name=fontRenderer.trimStringToWidth(food.getLocalizedName(), GuiFoodBook.WIDTH - 31);
+            fontRenderer.drawString(name, parent.bookXStart + 30, height + 1, 0x000000);
+            RenderHaunches(food.getHaunches(), parent.bookXStart + 30, height + fontRenderer.FONT_HEIGHT + 1);
             height += 21;
             if (food.hasDescription())
             {
-                fontRenderer.drawSplitString(food.getLocalizedDescription(), parent.bookXStart + 45, height, 110, 0x000000);
-                List l = Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(food.getLocalizedDescription(), 110);
-                height += (Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT + 2) * l.size();
+                fontRenderer.drawSplitString(food.getLocalizedDescription(), parent.bookXStart + 26, height, GuiFoodBook.WIDTH - 30, 0x000000);
+                height += fontRenderer.splitStringWidth(food.getLocalizedDescription(),GuiFoodBook.WIDTH-30);
             }
         }
     }
@@ -132,5 +131,15 @@ public class BookPage
         GL11.glEnable(GL11.GL_LIGHTING);
 
         GL11.glPopMatrix();
+    }
+
+    public boolean containsCharacter(char character)
+    {
+        for (FoodItem food : foodItems)
+        {
+            if (food.getLocalizedName().toLowerCase().charAt(0) == character)
+                return true;
+        }
+        return false;
     }
 }

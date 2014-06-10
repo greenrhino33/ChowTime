@@ -21,10 +21,11 @@ package net.jamcraft.chowtime.core.client.gui.foodbook;
 import com.google.common.base.Function;
 import com.google.common.collect.Ordering;
 import cpw.mods.fml.common.registry.GameData;
+import net.jamcraft.chowtime.core.client.Textures;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemFood;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Keyboard;
 
@@ -37,24 +38,26 @@ import java.util.List;
  */
 public class GuiFoodBook extends GuiScreen
 {
-    private static final ResourceLocation texture = new ResourceLocation("minecraft:textures/gui/book.png");
-
     private static final int BOOK_BTN_NEXT = 0;
     private static final int BOOK_BTN_PREV = 1;
 
-    public List<ItemFood> foods = new ArrayList<ItemFood>();
-    public List<BookPage> pages = new ArrayList<BookPage>();
+    public static final int WIDTH = 175;
+    public static final int HEIGHT = 228;
 
     private GuiButton next;
     private GuiButton prev;
 
     private int pageIndex = 0;
+
+    public List<ItemFood> foods = new ArrayList<ItemFood>();
+    public List<BookPage> pages = new ArrayList<BookPage>();
+
     public int bookXStart = 0;
 
     public GuiFoodBook()
     {
         super();
-        if(foods.size()==0)
+        if (foods.size() == 0)
         {
             findFoods();
         }
@@ -68,6 +71,7 @@ public class GuiFoodBook extends GuiScreen
             Object item = iter.next();
             if (item instanceof ItemFood)
             {
+                if (item instanceof ItemFishFood) continue; //for now... ;)
                 foods.add((ItemFood) item);
             }
         }
@@ -76,7 +80,7 @@ public class GuiFoodBook extends GuiScreen
             @Override
             public String apply(ItemFood input)
             {
-                return StatCollector.translateToLocal(input.getUnlocalizedName()+".name");
+                return StatCollector.translateToLocal(input.getUnlocalizedName() + ".name");
             }
         }).immutableSortedCopy(foods);
     }
@@ -88,10 +92,10 @@ public class GuiFoodBook extends GuiScreen
         do
         {
             BookPage newBook = new BookPage(this, foodCurrent);
-            foodCurrent = newBook.calculateEndIndex()+1;
+            foodCurrent = newBook.calculateEndIndex() + 1;
             pages.add(newBook);
         }
-        while (foodCurrent < foods.size()-1);
+        while (foodCurrent < foods.size() - 1);
     }
 
     @Override
@@ -101,10 +105,10 @@ public class GuiFoodBook extends GuiScreen
 
         makePages();
 
-        bookXStart = (width - 192) / 2;
+        bookXStart = (width - WIDTH) / 2;
 
-        buttonList.add(next = new GuiButtonPageChange(BOOK_BTN_NEXT, bookXStart + 120, 156, false));
-        buttonList.add(prev = new GuiButtonPageChange(BOOK_BTN_PREV, bookXStart + 38, 156, true));
+        buttonList.add(next = new GuiButtonPageChange(BOOK_BTN_NEXT, bookXStart + WIDTH - 26, 210, false));
+        buttonList.add(prev = new GuiButtonPageChange(BOOK_BTN_PREV, bookXStart + 10, 210, true));
         updateButtonState();
     }
 
@@ -125,7 +129,7 @@ public class GuiFoodBook extends GuiScreen
 
     private void updateButtonState()
     {
-        next.visible = pageIndex < pages.size() - 1;
+        next.visible = pageIndex < pages.size();
         prev.visible = pageIndex > 0;
     }
 
@@ -154,23 +158,34 @@ public class GuiFoodBook extends GuiScreen
         }
         else if (Character.getType(lowerCase) == Character.LOWERCASE_LETTER)
         {
-            //            for (int i = 0, len = pages.size(); i < len; ++i)
-            //            {
-            //                OreBookPage page = pages.get(i);
-            //                if (Character.toLowerCase(page.getDisplayName().charAt(0)) == c)
-            //                {
-            //                    pageIndex = i;
-            //                    updateButtonState();
-            //                    break;
-            //                }
-            //            }
+            for (int i = 0, len = pages.size(); i < len; ++i)
+            {
+                BookPage page = pages.get(i);
+                if (page.containsCharacter(lowerCase))
+                {
+                    //Go to the next page w/ that char if we have it...
+                    if (pageIndex == i + 1)
+                    {
+                        if (i + 1 < pages.size() && pages.get(i + 1).containsCharacter(lowerCase))
+                        {
+                            pageIndex = i + 2;
+                        }
+                    }
+                    else
+                    {
+                        pageIndex = i + 1;
+                    }
+                    updateButtonState();
+                    break;
+                }
+            }
         }
     }
 
     protected void drawBackground()
     {
-        mc.renderEngine.bindTexture(texture);
-        drawTexturedModalRect(bookXStart, 2, 0, 0, 192, 192);
+        mc.renderEngine.bindTexture(Textures.Gui_FoodBook);
+        drawTexturedModalRect(bookXStart, 5, 0, 0, WIDTH, HEIGHT);
     }
 
     protected void drawForeground()
@@ -185,7 +200,7 @@ public class GuiFoodBook extends GuiScreen
     protected void drawStartScreen()
     {
         fontRendererObj.drawString(StatCollector.translateToLocal("gui.FoodBook.Title"), bookXStart + 45, 20, 0x000000);
-        fontRendererObj.drawSplitString(StatCollector.translateToLocal("gui.FoodBook.MainDesc"), bookXStart + 40, 40, 105, 0x000000);
+        fontRendererObj.drawSplitString(StatCollector.translateToLocal("gui.FoodBook.MainDesc"), bookXStart + 20, 60, WIDTH-40, 0x000000);
     }
 
     protected void drawFoodPage()
@@ -196,6 +211,6 @@ public class GuiFoodBook extends GuiScreen
 
     protected void drawPages()
     {
-        fontRendererObj.drawString((pageIndex+1)+"/"+pages.size(),bookXStart+82,160,0x000000);
+        fontRendererObj.drawString((pageIndex + 1) + "/" + (pages.size()+1), bookXStart + 82, 215, 0x000000);
     }
 }

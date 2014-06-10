@@ -19,6 +19,7 @@
 package net.jamcraft.chowtime.core.items;
 
 import net.jamcraft.chowtime.ChowTime;
+import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.core.client.gui.foodbook.GuiFoodBook;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,6 +36,7 @@ public class CTFoodBook extends Item
     {
         setCreativeTab(ChowTime.creativeTab);
         setUnlocalizedName("foodbook");
+        setTextureName(ModConstants.MODID + ":foodbook");
     }
 
     @Override
