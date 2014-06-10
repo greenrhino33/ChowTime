@@ -21,6 +21,7 @@ package net.jamcraft.chowtime.core.client;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.jamcraft.chowtime.core.CommonProxy;
+import net.jamcraft.chowtime.core.client.gui.foodbook.GuiFoodBook;
 import net.jamcraft.chowtime.core.mobs.GingerbreadMan.EntityGingerbreadMan;
 import net.jamcraft.chowtime.core.mobs.GingerbreadMan.ModelGingerbreadMan;
 import net.jamcraft.chowtime.core.mobs.GingerbreadMan.RenderGingerbreadMan;
@@ -29,12 +30,14 @@ import net.jamcraft.chowtime.core.mobs.SeedMob.ModelSeedMob;
 import net.jamcraft.chowtime.core.mobs.SeedMob.RenderSeedMob;
 import net.jamcraft.chowtime.core.renders.TileEntityFermenterRenderer;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
+import net.minecraft.client.Minecraft;
 
 /**
  * Created by James Hollowell on 5/14/2014.
  */
 public class ClientProxy extends CommonProxy
 {
+    @Override
     public void registerRenderers()
     {
         super.registerRenderers();
@@ -42,5 +45,11 @@ public class ClientProxy extends CommonProxy
 
         RenderingRegistry.registerEntityRenderingHandler(EntitySeedMob.class, new RenderSeedMob(new ModelSeedMob(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityGingerbreadMan.class, new RenderGingerbreadMan(new ModelGingerbreadMan(), 0.5F));
+    }
+
+    @Override
+    public void openBook()
+    {
+        Minecraft.getMinecraft().displayGuiScreen(new GuiFoodBook());
     }
 }

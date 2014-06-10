@@ -20,8 +20,6 @@ package net.jamcraft.chowtime.core.items;
 
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.ModConstants;
-import net.jamcraft.chowtime.core.client.gui.foodbook.GuiFoodBook;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -42,9 +40,9 @@ public class CTFoodBook extends Item
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
-        if(world.isRemote)
+        if (world.isRemote)
         {
-            Minecraft.getMinecraft().displayGuiScreen(new GuiFoodBook());
+            ChowTime.proxy.openBook();
         }
         return stack;
     }

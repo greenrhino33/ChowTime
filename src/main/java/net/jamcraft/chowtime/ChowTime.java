@@ -32,6 +32,7 @@ import net.jamcraft.chowtime.core.*;
 import net.jamcraft.chowtime.core.commands.ChowTimeCommand;
 import net.jamcraft.chowtime.core.events.ConnectionHandler;
 import net.jamcraft.chowtime.core.events.EntityEventHandler;
+import net.jamcraft.chowtime.core.events.GuiEventHandler;
 import net.jamcraft.chowtime.core.materials.CloudMaterial;
 import net.jamcraft.chowtime.core.mobs.GingerbreadMan.EntityGingerbreadMan;
 import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
@@ -137,6 +138,10 @@ public class ChowTime
 
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
         MinecraftForge.EVENT_BUS.register(VersionChecker.instance);
+
+        if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT)
+            MinecraftForge.EVENT_BUS.register(new GuiEventHandler());
+
         //        MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         //        BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
         dir = event.getModConfigurationDirectory();
