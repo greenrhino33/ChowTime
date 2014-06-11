@@ -125,6 +125,7 @@ public class EntityEventHandler
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
+            Config.save();
             try
             {
                 if (ChowTime.harvestingLVL.exists())

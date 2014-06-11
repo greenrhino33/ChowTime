@@ -18,13 +18,16 @@
 
 package net.jamcraft.chowtime.core.events;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.jamcraft.chowtime.ChowTime;
+import net.jamcraft.chowtime.core.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Created by James Hollowell on 6/10/2014.
@@ -32,12 +35,11 @@ import org.lwjgl.opengl.GL11;
 public class GuiEventHandler
 {
     Minecraft mc = Minecraft.getMinecraft();
-    public static boolean shouldRenderXP=false;
 
     @SubscribeEvent
     public void renderGameOverlay(RenderGameOverlayEvent.Text event)
     {
-        if(shouldRenderXP)
+        if(Config.shouldRenderXP)
         {
             ScaledResolution scaledresolution = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
             int k = scaledresolution.getScaledWidth();
