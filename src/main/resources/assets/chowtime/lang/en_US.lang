@@ -27,6 +27,7 @@ string.usedev=[ChowTime] You are updating with the development branch! Thanks fo
 
 chat.getXP=[ChowTime] Your current harvesting XP is %d
 chat.setXP=[ChowTime] Setting your harvesting XP to %d
+chat.toggleXPBar=[ChowTime] Toggled ChowTime info.
 chat.welcomeMessage=[ChowTime] Welcome to Chow Time! This mod adds harvesting experience that unlocks more plantable crops as you harvest. To start with, grow some Barley or Blueberries! More crops unlocked at 20 HXP!
 chat.HXPGain20=[ChowTime] Congratulations! You have gained 20 harvesting experience! You can now plant & harvest Tomatoes, Raspberries and Cranberries. More crops unlocked at 100 HXP!
 chat.HXPGain100=[ChowTime] Congratulations! You have gained 100 harvesting experience! You can now plant & harvest Corn, Grapes. More crops unlocked at 300 HXP!

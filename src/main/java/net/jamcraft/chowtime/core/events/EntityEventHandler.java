@@ -125,7 +125,6 @@ public class EntityEventHandler
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-            Config.save();
             try
             {
                 if (ChowTime.harvestingLVL.exists())
@@ -195,7 +194,7 @@ public class EntityEventHandler
             // event.item.getItem() instanceof ItemFood || event.item.getItem()
             // instanceof ItemSoup || event.item.getItem() instanceof
             // ItemFishFood) event.entityPlayer.addChatMessage(new
-            // ChatComponentText("Munch munch munch"));
+            // ChatComponentTranslation("Munch munch munch"));
         }
     }
 
@@ -266,11 +265,11 @@ public class EntityEventHandler
                     // This needs to change slightly... if you go from 99 to
                     // 101, you never get the message...
                     if (ChowTime.harvestXP == 20)
-                        event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain20"));
+                        event.entityPlayer.addChatMessage(new ChatComponentTranslation("chat.HXPGain20"));
                     if (ChowTime.harvestXP == 100)
-                        event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain100"));
+                        event.entityPlayer.addChatMessage(new ChatComponentTranslation("chat.HXPGain100"));
                     if (ChowTime.harvestXP == 300)
-                        event.entityPlayer.addChatMessage(new ChatComponentText("chat.HXPGain300"));
+                        event.entityPlayer.addChatMessage(new ChatComponentTranslation("chat.HXPGain300"));
                 }
             }
             if (event.action == Action.RIGHT_CLICK_BLOCK && !(event.entityPlayer instanceof FakePlayer) && event.entityPlayer.getHeldItem() != null && event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) instanceof BlockFarmland)
@@ -295,8 +294,8 @@ public class EntityEventHandler
                 if (!canPlant)
                 {
                     event.setCanceled(true);
-                    event.entityPlayer.addChatMessage(new ChatComponentText("chat.notExperienced"));
-                    event.entityPlayer.addChatMessage(new ChatComponentText("chat.gainExperience"));
+                    event.entityPlayer.addChatMessage(new ChatComponentTranslation("chat.notExperienced"));
+                    event.entityPlayer.addChatMessage(new ChatComponentTranslation("chat.gainExperience"));
                 }
             }
         }

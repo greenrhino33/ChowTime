@@ -78,7 +78,7 @@ public class ChowTimeCommand implements ICommand
         else if (astring[0].equals("toggleXPBar"))
         {
             Config.shouldRenderXP = !Config.shouldRenderXP;
-            commandSender.addChatMessage(new ChatComponentTranslation("Toggled ChowTime info"));
+            commandSender.addChatMessage(new ChatComponentTranslation("chat.toggleXPBar"));
         }
     }
 

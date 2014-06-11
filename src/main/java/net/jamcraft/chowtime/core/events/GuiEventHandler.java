@@ -50,8 +50,8 @@ public class GuiEventHandler
             int j2;
             int k2;
             String s3 = "ChowTime";
-            j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 75 - fontrenderer.getStringWidth(s3);
-            k2 = l - 31 - 4 - 10;
+            j2 = k - fontrenderer.getStringWidth(s3) - 5;
+            k2 = l - 131;
             fontrenderer.drawString(s3, j2 + 1, k2, 0);
             fontrenderer.drawString(s3, j2 - 1, k2, 0);
             fontrenderer.drawString(s3, j2, k2 + 1, 0);
@@ -61,7 +61,7 @@ public class GuiEventHandler
             fontrenderer.drawString(s3, j2, k2, 0x00c2e0);
 
             s3 = "XP: " + ChowTime.harvestXP;
-            j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 80 - fontrenderer.getStringWidth(s3);
+            j2 = k - fontrenderer.getStringWidth(s3) - 5;
             k2 += 12;
             fontrenderer.drawString(s3, j2 + 1, k2, 0);
             fontrenderer.drawString(s3, j2 - 1, k2, 0);
@@ -76,7 +76,7 @@ public class GuiEventHandler
             if (ChowTime.harvestXP < 300)
             {
                 s3 = "Next farming upgrade:";
-                j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 150;
+                j2 = k - fontrenderer.getStringWidth(s3) - 5;
                 k2 += 12;
                 fontrenderer.drawString(s3, j2 + 1, k2, 0);
                 fontrenderer.drawString(s3, j2 - 1, k2, 0);
@@ -85,7 +85,7 @@ public class GuiEventHandler
                 fontrenderer.drawString(s3, j2, k2, 0xfeee00);
 
                 s3 = "" + xp;
-                j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 120;
+                j2 = k - fontrenderer.getStringWidth(s3) - 8 - fontrenderer.getStringWidth("XP");
                 k2 += 12;
                 fontrenderer.drawString(s3, j2 + 1, k2, 0);
                 fontrenderer.drawString(s3, j2 - 1, k2, 0);
@@ -94,7 +94,7 @@ public class GuiEventHandler
                 fontrenderer.drawString(s3, j2, k2, 0xfe0000);
 
                 s3 = " XP";
-                j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 102;
+                j2 = k - fontrenderer.getStringWidth(s3) - 5;
                 fontrenderer.drawString(s3, j2 + 1, k2, 0);
                 fontrenderer.drawString(s3, j2 - 1, k2, 0);
                 fontrenderer.drawString(s3, j2, k2 + 1, 0);
