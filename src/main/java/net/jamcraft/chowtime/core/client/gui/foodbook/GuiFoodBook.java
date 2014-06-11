@@ -137,7 +137,7 @@ public class GuiFoodBook extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float renderPartials)
     {
         drawBackground();
-        drawForeground();
+//        drawForeground();
 
         super.drawScreen(mouseX, mouseY, renderPartials);
     }

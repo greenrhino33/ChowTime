@@ -40,22 +40,29 @@ public class ChowTimeCommand implements ICommand
         this.aliases.add("chowtime");
     }
 
-    @Override public String getCommandName()
+    @Override
+    public String getCommandName()
     {
         return "chowtime";
     }
 
-    @Override public String getCommandUsage(ICommandSender var1)
+    @Override
+    public String getCommandUsage(ICommandSender var1)
     {
-        return "/chowtime getXP\n/chowtime setXP <xp>";
+        String use = "/chowtime getXP\n";
+        use += "/chowtime setXP <xp>";
+        use += "/chowtime toggleXPBar";
+        return use;
     }
 
-    @Override public List getCommandAliases()
+    @Override
+    public List getCommandAliases()
     {
         return aliases;
     }
 
-    @Override public void processCommand(ICommandSender commandSender, String[] astring)
+    @Override
+    public void processCommand(ICommandSender commandSender, String[] astring)
     {
         if (astring.length == 1 && astring[0].equals("getXP"))
         {
@@ -69,12 +76,14 @@ public class ChowTimeCommand implements ICommand
         }
     }
 
-    @Override public boolean canCommandSenderUseCommand(ICommandSender var1)
+    @Override
+    public boolean canCommandSenderUseCommand(ICommandSender var1)
     {
         return true;
     }
 
-    @Override public List addTabCompletionOptions(ICommandSender icommandsender, String[] astring)
+    @Override
+    public List addTabCompletionOptions(ICommandSender icommandsender, String[] astring)
     {
         final List<String> MATCHES = new LinkedList<String>();
         final String ARG_LC = astring[astring.length - 1].toLowerCase();
@@ -86,12 +95,14 @@ public class ChowTimeCommand implements ICommand
         return MATCHES.isEmpty() ? null : MATCHES;
     }
 
-    @Override public boolean isUsernameIndex(String[] var1, int var2)
+    @Override
+    public boolean isUsernameIndex(String[] var1, int var2)
     {
         return false;
     }
 
-    @Override public int compareTo(Object o)
+    @Override
+    public int compareTo(Object o)
     {
         return 0;
     }

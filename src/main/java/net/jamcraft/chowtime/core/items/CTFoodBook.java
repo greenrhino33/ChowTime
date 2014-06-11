@@ -42,7 +42,8 @@ public class CTFoodBook extends Item
     {
         if (world.isRemote)
         {
-            ChowTime.proxy.openBook();
+            net.minecraft.client.Minecraft.getMinecraft().displayGuiScreen(new net.jamcraft.chowtime.core.client.gui.foodbook.GuiFoodBook());
+            //            ChowTime.proxy.openBook();
         }
         return stack;
     }

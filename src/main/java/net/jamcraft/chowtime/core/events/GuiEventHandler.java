@@ -32,69 +32,73 @@ import org.lwjgl.opengl.GL11;
 public class GuiEventHandler
 {
     Minecraft mc = Minecraft.getMinecraft();
+    public static boolean shouldRenderXP=false;
 
     @SubscribeEvent
     public void renderGameOverlay(RenderGameOverlayEvent.Text event)
     {
-        ScaledResolution scaledresolution = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
-        int k = scaledresolution.getScaledWidth();
-        int l = scaledresolution.getScaledHeight();
-        FontRenderer fontrenderer = this.mc.fontRenderer;
-
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        int j2;
-        int k2;
-        String s3 = "ChowTime";
-        j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 75 - fontrenderer.getStringWidth(s3);
-        k2 = l - 31 - 4 - 10;
-        fontrenderer.drawString(s3, j2 + 1, k2, 0);
-        fontrenderer.drawString(s3, j2 - 1, k2, 0);
-        fontrenderer.drawString(s3, j2, k2 + 1, 0);
-        fontrenderer.drawString(s3, j2, k2 - 1, 0);
-        for (int i = 0; i <= 7; i++)
-            fontrenderer.drawString("_", j2 + i * 6 - 2, k2 + 2, 0);
-        fontrenderer.drawString(s3, j2, k2, 0x00c2e0);
-
-        s3 = "XP: " + ChowTime.harvestXP;
-        j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 80 - fontrenderer.getStringWidth(s3);
-        k2 += 12;
-        fontrenderer.drawString(s3, j2 + 1, k2, 0);
-        fontrenderer.drawString(s3, j2 - 1, k2, 0);
-        fontrenderer.drawString(s3, j2, k2 + 1, 0);
-        fontrenderer.drawString(s3, j2, k2 - 1, 0);
-        fontrenderer.drawString(s3, j2, k2, 0x22c530);
-
-        int xp = 0;
-        if (ChowTime.harvestXP < 20) xp = 20;
-        if (ChowTime.harvestXP >= 20 && ChowTime.harvestXP < 100) xp = 100;
-        if (ChowTime.harvestXP >= 100 && ChowTime.harvestXP < 300) xp = 300;
-        if (ChowTime.harvestXP < 300)
+        if(shouldRenderXP)
         {
-            s3 = "Next farming upgrade:";
-            j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 150;
+            ScaledResolution scaledresolution = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+            int k = scaledresolution.getScaledWidth();
+            int l = scaledresolution.getScaledHeight();
+            FontRenderer fontrenderer = this.mc.fontRenderer;
+
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            int j2;
+            int k2;
+            String s3 = "ChowTime";
+            j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 75 - fontrenderer.getStringWidth(s3);
+            k2 = l - 31 - 4 - 10;
+            fontrenderer.drawString(s3, j2 + 1, k2, 0);
+            fontrenderer.drawString(s3, j2 - 1, k2, 0);
+            fontrenderer.drawString(s3, j2, k2 + 1, 0);
+            fontrenderer.drawString(s3, j2, k2 - 1, 0);
+            for (int i = 0; i <= 7; i++)
+                fontrenderer.drawString("_", j2 + i * 6 - 2, k2 + 2, 0);
+            fontrenderer.drawString(s3, j2, k2, 0x00c2e0);
+
+            s3 = "XP: " + ChowTime.harvestXP;
+            j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 80 - fontrenderer.getStringWidth(s3);
             k2 += 12;
             fontrenderer.drawString(s3, j2 + 1, k2, 0);
             fontrenderer.drawString(s3, j2 - 1, k2, 0);
             fontrenderer.drawString(s3, j2, k2 + 1, 0);
             fontrenderer.drawString(s3, j2, k2 - 1, 0);
-            fontrenderer.drawString(s3, j2, k2, 0xfeee00);
+            fontrenderer.drawString(s3, j2, k2, 0x22c530);
 
-            s3 = "" + xp;
-            j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 120;
-            k2 += 12;
-            fontrenderer.drawString(s3, j2 + 1, k2, 0);
-            fontrenderer.drawString(s3, j2 - 1, k2, 0);
-            fontrenderer.drawString(s3, j2, k2 + 1, 0);
-            fontrenderer.drawString(s3, j2, k2 - 1, 0);
-            fontrenderer.drawString(s3, j2, k2, 0xfe0000);
+            int xp = 0;
+            if (ChowTime.harvestXP < 20) xp = 20;
+            if (ChowTime.harvestXP >= 20 && ChowTime.harvestXP < 100) xp = 100;
+            if (ChowTime.harvestXP >= 100 && ChowTime.harvestXP < 300) xp = 300;
+            if (ChowTime.harvestXP < 300)
+            {
+                s3 = "Next farming upgrade:";
+                j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 150;
+                k2 += 12;
+                fontrenderer.drawString(s3, j2 + 1, k2, 0);
+                fontrenderer.drawString(s3, j2 - 1, k2, 0);
+                fontrenderer.drawString(s3, j2, k2 + 1, 0);
+                fontrenderer.drawString(s3, j2, k2 - 1, 0);
+                fontrenderer.drawString(s3, j2, k2, 0xfeee00);
 
-            s3 = " XP";
-            j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 102;
-            fontrenderer.drawString(s3, j2 + 1, k2, 0);
-            fontrenderer.drawString(s3, j2 - 1, k2, 0);
-            fontrenderer.drawString(s3, j2, k2 + 1, 0);
-            fontrenderer.drawString(s3, j2, k2 - 1, 0);
-            fontrenderer.drawString(s3, j2, k2, 0xfeee00);
+                s3 = "" + xp;
+                j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 120;
+                k2 += 12;
+                fontrenderer.drawString(s3, j2 + 1, k2, 0);
+                fontrenderer.drawString(s3, j2 - 1, k2, 0);
+                fontrenderer.drawString(s3, j2, k2 + 1, 0);
+                fontrenderer.drawString(s3, j2, k2 - 1, 0);
+                fontrenderer.drawString(s3, j2, k2, 0xfe0000);
+
+                s3 = " XP";
+                j2 = (k - fontrenderer.getStringWidth(s3)) / 2 - 102;
+                fontrenderer.drawString(s3, j2 + 1, k2, 0);
+                fontrenderer.drawString(s3, j2 - 1, k2, 0);
+                fontrenderer.drawString(s3, j2, k2 + 1, 0);
+                fontrenderer.drawString(s3, j2, k2 - 1, 0);
+                fontrenderer.drawString(s3, j2, k2, 0xfeee00);
+            }
         }
     }
 }
