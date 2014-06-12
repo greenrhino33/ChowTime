@@ -177,7 +177,7 @@ public class ChowTime
         proxy.registerRenderers();
         createEntity(EntitySeedMob.class, "SeedMob", 0x00AF00, 0xAA2167);
         createEntity(EntityGingerbreadMan.class, "GingerbreadMan", 0xAF4200, 0x612400);
-        EntityRegistry.addSpawn(EntitySeedMob.class, 5, 2, 3, EnumCreatureType.monster, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.plains, BiomeGenBase.beach, BiomeGenBase.coldBeach, BiomeGenBase.frozenRiver);
+        EntityRegistry.addSpawn(EntitySeedMob.class, 10, 2, 3, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.plains, BiomeGenBase.beach, BiomeGenBase.coldBeach, BiomeGenBase.frozenRiver);
     }
 
     public void createEntity(Class<? extends EntityLiving> entity, String entityName, int solidColor, int spotColor)

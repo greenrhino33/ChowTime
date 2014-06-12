@@ -24,10 +24,12 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -238,6 +240,14 @@ public class EntitySeedMob extends EntityAnimal
     protected Item getDropItem()
     {
         return null;
+    }
+    
+    public boolean getCanSpawnHere()
+    {
+        int i = MathHelper.floor_double(this.posX);
+        int j = MathHelper.floor_double(this.boundingBox.minY);
+        int k = MathHelper.floor_double(this.posZ);
+        return (this.worldObj.getBlock(i, j - 1, k) == Blocks.grass || this.worldObj.getBlock(i, j - 1, k) == Blocks.sand) && this.worldObj.getFullBlockLightValue(i, j, k) > 8 && super.getCanSpawnHere();
     }
 
     public EntityAgeable createChild(EntityAgeable var1)
