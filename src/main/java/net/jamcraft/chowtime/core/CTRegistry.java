@@ -18,6 +18,7 @@
 
 package net.jamcraft.chowtime.core;
 
+import com.google.common.base.Throwables;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.blocks.BlockCottonCandy;
 import net.jamcraft.chowtime.core.blocks.CTBlock;
@@ -39,22 +40,26 @@ import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 /**
  * Created by Kayla Marie on 5/14/14.
  */
 public class CTRegistry
 {
-    
     public static void CTBlocks()
     {
         // CTInits.CTLeaves = new
@@ -71,9 +76,18 @@ public class CTRegistry
         GameRegistry.registerBlock(CTInits.IceCream, CTStrings.BlockIceCream_Strawberry);
         CTInits.CottonCandyBLUE = new BlockCottonCandy().setBlockName(CTStrings.BlockCottonCandy_Blue);
         GameRegistry.registerBlock(CTInits.CottonCandyBLUE, CTStrings.BlockCottonCandy_Blue);
-        CTInits.CTFarmland = new CTFarmland().setBlockName(CTStrings.BlockFarmland).setHardness(0.6F).setStepSound(Block.soundTypeGravel);
-        GameRegistry.registerBlock(CTInits.CTFarmland, CTStrings.BlockFarmland);
-        
+
+        try
+        {
+            Block blkFarmland = new CTFarmland();
+            GameRegistry.registerBlock(blkFarmland,CTStrings.BlockFarmland);
+            Field farmland = ObfHelper.getField(Blocks.class, "farmland", "ak");
+            ObfHelper.setFinalStatic(farmland, blkFarmland);
+        }
+        catch (Exception e)
+        {
+            Throwables.propagate(e);
+        }
     }
     
     public static void CTMachines()

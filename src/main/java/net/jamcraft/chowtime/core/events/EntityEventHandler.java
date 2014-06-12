@@ -304,13 +304,13 @@ public class EntityEventHandler
     @SubscribeEvent
     public void useHoe(UseHoeEvent event)
     {
-        Block block = event.world.getBlock(event.x, event.y, event.z);
-        if ((block instanceof BlockDirt || block instanceof BlockGrass) && event.world.getBlock(event.x, event.y + 1, event.z) instanceof BlockAir)
-        {
-            event.world.playSoundEffect((double) ((float) event.x + 0.5F), (double) ((float) event.y + 0.5F), (double) ((float) event.z + 0.5F), Blocks.farmland.stepSound.getStepResourcePath(), (Blocks.farmland.stepSound.getVolume() + 1.0F) / 2.0F, Blocks.farmland.stepSound.getPitch() * 0.8F);
-            event.current.damageItem(1, event.entityPlayer);
-            event.world.setBlock(event.x, event.y, event.z, CTInits.CTFarmland);
-            event.current.useItemRightClick(event.world, event.entityPlayer);
-        }
+//        Block block = event.world.getBlock(event.x, event.y, event.z);
+//        if ((block instanceof BlockDirt || block instanceof BlockGrass) && event.world.getBlock(event.x, event.y + 1, event.z) instanceof BlockAir)
+//        {
+//            event.world.playSoundEffect((double) ((float) event.x + 0.5F), (double) ((float) event.y + 0.5F), (double) ((float) event.z + 0.5F), Blocks.farmland.stepSound.getStepResourcePath(), (Blocks.farmland.stepSound.getVolume() + 1.0F) / 2.0F, Blocks.farmland.stepSound.getPitch() * 0.8F);
+//            event.current.damageItem(1, event.entityPlayer);
+//            event.world.setBlock(event.x, event.y, event.z, CTInits.CTFarmland);
+//            event.current.useItemRightClick(event.world, event.entityPlayer);
+//        }
     }
 }

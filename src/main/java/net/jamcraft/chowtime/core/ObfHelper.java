@@ -18,6 +18,9 @@
 
 package net.jamcraft.chowtime.core;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
 /**
  * Created by James Hollowell on 5/16/2014.
  */
@@ -36,5 +39,21 @@ public class ObfHelper
         {
             isObf = true;
         }
+    }
+
+    public static Field getField(Class<?> c, String deobfName, String obfName) throws NoSuchFieldException
+    {
+        return (isObf)?c.getDeclaredField(obfName):c.getDeclaredField(deobfName);
+    }
+
+    public static void setFinalStatic(Field f, Object newVal) throws Exception
+    {
+        f.setAccessible(true);
+
+        Field modifiersField=Field.class.getDeclaredField("modifiers");
+        modifiersField.setAccessible(true);
+        modifiersField.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+
+        f.set(null, newVal);
     }
 }
