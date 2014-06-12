@@ -18,7 +18,6 @@
 
 package net.jamcraft.chowtime.remote;
 
-import com.google.gson.JsonIOException;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.Config;
@@ -26,14 +25,9 @@ import net.jamcraft.chowtime.core.ModConstants;
 import net.jamcraft.chowtime.core.ObfHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.StatCollector;
-
 import java.io.*;
 import java.net.URL;
-import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.util.List;
 
@@ -156,7 +150,6 @@ public class RemoteMain
         {
             ChowTime.logger.warn("Downloading remote " + remotepath + " to local " + localpath);
             if (remotepath == null) remotepath = localpath;
-            final int blk_size = 1024;
             URL url = new URL(Config.remoteLoc  + "dyn/current" + remotepath);
 
             File f = new File(ModConstants.DYN_LOC + localpath);
@@ -192,6 +185,7 @@ public class RemoteMain
         }
     }
 
+    @SuppressWarnings("resource")
     public static void HashCTD()
     {
         try

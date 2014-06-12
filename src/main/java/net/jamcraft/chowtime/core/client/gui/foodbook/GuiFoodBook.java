@@ -63,6 +63,7 @@ public class GuiFoodBook extends GuiScreen
         }
     }
 
+    @SuppressWarnings("rawtypes")
     private void findFoods()
     {
         Iterator iter = GameData.getItemRegistry().iterator();
@@ -98,6 +99,7 @@ public class GuiFoodBook extends GuiScreen
         while (foodCurrent < foods.size() - 1);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void initGui()
     {

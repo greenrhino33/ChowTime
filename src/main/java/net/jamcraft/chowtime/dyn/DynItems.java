@@ -46,6 +46,7 @@ public class DynItems
      * Add all the required classes to the classpath and register them with Forge
      */
 
+    @SuppressWarnings("resource")
     public static void loadList()
     {
         File dynLoc = new File(ModConstants.DYN_LOC);

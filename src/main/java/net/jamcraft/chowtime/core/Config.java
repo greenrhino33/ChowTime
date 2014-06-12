@@ -18,7 +18,6 @@
 
 package net.jamcraft.chowtime.core;
 
-import net.jamcraft.chowtime.ChowTime;
 import net.minecraftforge.common.config.Configuration;
 
 /**

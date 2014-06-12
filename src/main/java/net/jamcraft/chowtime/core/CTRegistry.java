@@ -40,7 +40,6 @@ import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -53,7 +52,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 /**
  * Created by Kayla Marie on 5/14/14.

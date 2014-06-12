@@ -23,7 +23,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.jamcraft.chowtime.core.ModConstants;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.IResourcePack;
 
 import java.io.File;
@@ -37,6 +36,7 @@ import java.util.List;
  */
 public class DynTextures
 {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public static void addDynTP()
     {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)

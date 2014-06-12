@@ -82,7 +82,6 @@ public class Version implements Comparable<Version>
         return this.compareTo(other)==0;
     }
 
-    @SuppressWarnings("unused")
     @Override
     public int compareTo(Version o)
     {

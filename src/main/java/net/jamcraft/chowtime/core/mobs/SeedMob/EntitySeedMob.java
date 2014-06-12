@@ -22,7 +22,6 @@ import net.jamcraft.chowtime.core.CTInits;
 import net.jamcraft.chowtime.core.registrars.SeedRegistry;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -40,7 +39,6 @@ public class EntitySeedMob extends EntityAnimal
 {
 
     private int inLove;
-    private int breeding;
     private EntityPlayer field_146084_br;
 
     public EntitySeedMob(World par1World)
@@ -97,12 +95,9 @@ public class EntitySeedMob extends EntityAnimal
                 this.worldObj.spawnParticle(s, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
             }
         }
-        else
-        {
-            this.breeding = 0;
-        }
     }
 
+    @SuppressWarnings("unused")
     private void procreate(EntitySeedMob par1EntityAnimal)
     {
         EntityAgeable entityageable = this.createChild(par1EntityAnimal);
@@ -123,8 +118,6 @@ public class EntitySeedMob extends EntityAnimal
             this.setGrowingAge(6000);
             par1EntityAnimal.setGrowingAge(6000);
             this.inLove = 0;
-            this.breeding = 0;
-            par1EntityAnimal.breeding = 0;
             par1EntityAnimal.inLove = 0;
             entityageable.setGrowingAge(-24000);
             entityageable.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
@@ -177,7 +170,6 @@ public class EntitySeedMob extends EntityAnimal
 
         Random random = new Random();
         int n = random.nextInt(SeedRegistry.getSeeds().length);
-        int produce = random.nextInt(10) + 6;
 
         //        if (par1EntityPlayer.inventory.getCurrentItem() == new ItemStack(Items.lead)){
         //           if(!this.getLeashed()){

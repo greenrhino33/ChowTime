@@ -33,8 +33,10 @@ import net.minecraft.util.ChatComponentTranslation;
  */
 public class ChowTimeCommand implements ICommand
 {
+    @SuppressWarnings("rawtypes")
     private List aliases;
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public ChowTimeCommand()
     {
         this.aliases = new ArrayList();
@@ -56,6 +58,7 @@ public class ChowTimeCommand implements ICommand
         return use;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public List getCommandAliases()
     {
@@ -88,6 +91,7 @@ public class ChowTimeCommand implements ICommand
         return true;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public List addTabCompletionOptions(ICommandSender icommandsender, String[] astring)
     {

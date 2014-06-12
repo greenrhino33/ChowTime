@@ -12,8 +12,6 @@ import net.minecraft.item.ItemFood;
 public class ItemCottonCandy extends ItemFood implements IDynItem
 {
 
-    private boolean alwaysEdible = true;
-
     public ItemCottonCandy()
     {
         super(3, 2.0F, false);
@@ -32,7 +30,6 @@ public class ItemCottonCandy extends ItemFood implements IDynItem
 
     public ItemFood setAlwaysEdible()
     {
-        this.alwaysEdible = true;
         return this;
     }
 

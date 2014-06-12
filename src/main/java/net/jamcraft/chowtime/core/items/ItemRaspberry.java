@@ -20,7 +20,6 @@ package net.jamcraft.chowtime.core.items;
 
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.ModConstants;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 
 /**

@@ -103,6 +103,7 @@ public class LooseObjList
         isLoaded = true;
     }
 
+    @SuppressWarnings("resource")
     public void readFromFile(File in)
     {
         try

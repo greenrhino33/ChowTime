@@ -144,7 +144,6 @@ public class ModelSeedMob extends ModelBase
     {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-        float f6 = (180F / (float) Math.PI);
         this.Head.rotateAngleX = f4 / (180F / (float) Math.PI);
         this.Head.rotateAngleY = f3 / (180F / (float) Math.PI);
         this.Base.rotateAngleX = ((float) Math.PI / 2F);

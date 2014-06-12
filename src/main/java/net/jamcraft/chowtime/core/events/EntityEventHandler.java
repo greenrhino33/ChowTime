@@ -21,16 +21,13 @@ package net.jamcraft.chowtime.core.events;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.jamcraft.chowtime.ChowTime;
-import net.jamcraft.chowtime.core.CTInits;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.crops.*;
 import net.jamcraft.chowtime.core.items.*;
 import net.jamcraft.chowtime.remote.RemoteMain;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -304,13 +301,5 @@ public class EntityEventHandler
     @SubscribeEvent
     public void useHoe(UseHoeEvent event)
     {
-//        Block block = event.world.getBlock(event.x, event.y, event.z);
-//        if ((block instanceof BlockDirt || block instanceof BlockGrass) && event.world.getBlock(event.x, event.y + 1, event.z) instanceof BlockAir)
-//        {
-//            event.world.playSoundEffect((double) ((float) event.x + 0.5F), (double) ((float) event.y + 0.5F), (double) ((float) event.z + 0.5F), Blocks.farmland.stepSound.getStepResourcePath(), (Blocks.farmland.stepSound.getVolume() + 1.0F) / 2.0F, Blocks.farmland.stepSound.getPitch() * 0.8F);
-//            event.current.damageItem(1, event.entityPlayer);
-//            event.world.setBlock(event.x, event.y, event.z, CTInits.CTFarmland);
-//            event.current.useItemRightClick(event.world, event.entityPlayer);
-//        }
     }
 }

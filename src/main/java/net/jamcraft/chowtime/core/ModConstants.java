@@ -18,9 +18,6 @@
 
 package net.jamcraft.chowtime.core;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import net.minecraft.client.Minecraft;
-
 import java.io.File;
 import java.io.IOException;
 
