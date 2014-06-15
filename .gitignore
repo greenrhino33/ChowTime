@@ -41,10 +41,11 @@ logs/*
 config/*
 mods/*
 crash-reports/*
-bin/*
+bin/
 options.txt
-screenshots/*
+screenshots/
 asm/*
+gradle/
 
 banned-ips.txt
 banned-players.txt
@@ -53,3 +54,6 @@ server.properties
 servers.dat
 white-list.txt
 world/
+build.gradle
+CREDITS-fml.txt
+*.xcf
