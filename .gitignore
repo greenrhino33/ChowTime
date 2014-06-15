@@ -41,9 +41,9 @@ logs/*
 config/*
 mods/*
 crash-reports/*
-bin/
+bin/*
 options.txt
-screenshots/
+screenshots/*
 asm/*
 gradle/
 
