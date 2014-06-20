@@ -77,10 +77,8 @@ public class CTRegistry
 
         try
         {
-            Block blkFarmland = new CTFarmland();
-            GameRegistry.registerBlock(blkFarmland,CTStrings.BlockFarmland);
-            Field farmland = ObfHelper.getField(Blocks.class, "farmland", "ak");
-            ObfHelper.setFinalStatic(farmland, blkFarmland);
+            CTInits.CTFarmland = new CTFarmland();
+            GameRegistry.registerBlock(CTInits.CTFarmland,CTStrings.BlockFarmland);
         }
         catch (Exception e)
         {

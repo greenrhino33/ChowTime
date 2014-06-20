@@ -51,17 +51,16 @@ public class VersionChecker implements Runnable
     public static final VersionChecker instance = new VersionChecker();
 
     //https://github.com/pahimar/Equivalent-Exchange-3/blob/1.6.4/src/main/java/com/pahimar/ee3/helper/VersionHelper.java
-
     @SubscribeEvent
-    public void onEntityJoinWorld(EntityJoinWorldEvent event)
+    public void onClientConnectToServer(EntityJoinWorldEvent event)
     {
-        if (event.entity instanceof EntityPlayer)
+        if (event.entity instanceof EntityPlayer && event.world.isRemote)
         {
-            EntityPlayer player = (EntityPlayer) event.entity;
-            if (event.world.isRemote && !HasBeenNotified && needsUpdate)
+            if (!HasBeenNotified && needsUpdate)
             {
+                EntityPlayer player = (EntityPlayer) event.entity;
                 player.addChatComponentMessage(new ChatComponentText("ChowTime has updated! Latest version " + remote.toString()));
-                player.addChatComponentMessage(new ChatComponentText("Changelog: "+changelog));
+                player.addChatComponentMessage(new ChatComponentText("Changelog: " + changelog));
             }
         }
     }
@@ -104,7 +103,7 @@ public class VersionChecker implements Runnable
                 }
             }
         }
-        ChowTime.logger.error("ChowTime Remote version check failed after {} attempts.",CHECK_COUNT);
+        ChowTime.logger.error("ChowTime Remote version check failed after {} attempts.", CHECK_COUNT);
     }
 
     private void LogResult()

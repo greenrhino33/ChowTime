@@ -18,14 +18,16 @@
 
 package net.jamcraft.chowtime.core.events;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.Config;
 import net.jamcraft.chowtime.core.crops.*;
 import net.jamcraft.chowtime.core.items.*;
 import net.jamcraft.chowtime.remote.RemoteMain;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockFarmland;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.util.ChatComponentTranslation;
@@ -57,7 +59,6 @@ public class EntityEventHandler
 
             ChowTime.harvestXP = ChowTime.saveData.getInteger("harvestXP" + (player).getCommandSenderName());
             ChowTime.harvestLVL = ChowTime.saveData.getInteger("harvestLVL" + (player).getCommandSenderName());
-
             if (event.world.isRemote && !HasBeenNotified)
             {
                 if (ChowTime.harvestXP == 0)

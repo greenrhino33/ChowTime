@@ -18,6 +18,7 @@
 
 package net.jamcraft.chowtime;
 
+import com.google.common.base.Throwables;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -62,6 +63,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.EnumMap;
 
 /**
@@ -106,7 +108,8 @@ public class ChowTime
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        if(version.contains("VERSION")) version="1.0.1-rev4";//Hardcode if in dev environment
+        if (version.contains("VERSION"))
+            version = "1.0.1-rev4";//Hardcode if in dev environment
 
         // FMLInterModComms.sendMessage("Waila", "register",
         // "allout58.mods.prisoncraft.compat.waila.WailaProvider.callbackRegister");
@@ -129,6 +132,16 @@ public class ChowTime
         CTRegistry.CTItems();
         CTRegistry.CTTileEntities();
 
+        try
+        {
+            Field farmland = ObfHelper.getField(Blocks.class, "farmland", "ak");
+            ObfHelper.setFinalStatic(farmland, CTInits.CTFarmland);
+        }
+        catch (Exception e)
+        {
+            Throwables.propagate(e);
+        }
+
         //Do this before items registered to *hopefully* remove all the annoying errors
         DynTextures.addDynTP();
         RemoteMain.init();
@@ -139,14 +152,13 @@ public class ChowTime
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
         MinecraftForge.EVENT_BUS.register(VersionChecker.instance);
 
-        if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT)
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
             MinecraftForge.EVENT_BUS.register(new GuiEventHandler());
 
         //        MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         //        BucketHandler.INSTANCE.buckets.put(CTInits.ChocolateMilk, CTInits.ItemBucketChoco);
-        dir = event.getModConfigurationDirectory();
 
-        // MinecraftForge.EVENT_BUS.register(new ConfigToolHighlightHandler());
+        dir = event.getModConfigurationDirectory();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
     }
@@ -154,6 +166,15 @@ public class ChowTime
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+        try
+        {
+            Field farmland = ObfHelper.getField(Blocks.class, "farmland", "ak");
+            ObfHelper.setFinalStatic(farmland, CTInits.CTFarmland);
+        }
+        catch (Exception e)
+        {
+            Throwables.propagate(e);
+        }
         // FMLInterModComms.sendMessage("prisoncraft", "blacklist",
         // Block.blockRegistry.getNameForObject(Blocks.bookshelf));
         FMLCommonHandler.instance().bus().register(new ConnectionHandler());
@@ -175,6 +196,7 @@ public class ChowTime
         SeedRegistry.AddSeed((ItemSeeds) CTInits.TomatoSeeds);
 
         proxy.registerRenderers();
+
         createEntity(EntitySeedMob.class, "SeedMob", 0x00AF00, 0xAA2167);
         createEntity(EntityGingerbreadMan.class, "GingerbreadMan", 0xAF4200, 0x612400);
         EntityRegistry.addSpawn(EntitySeedMob.class, 5, 2, 3, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.plains, BiomeGenBase.beach, BiomeGenBase.coldBeach, BiomeGenBase.frozenRiver);
