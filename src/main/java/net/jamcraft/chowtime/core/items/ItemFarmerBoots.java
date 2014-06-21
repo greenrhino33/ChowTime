@@ -22,11 +22,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.ModConstants;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFarmland;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 /**
  * Created by James Hollowell on 6/20/2014.
@@ -63,6 +67,19 @@ public class ItemFarmerBoots extends ItemArmor
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
     {
         return "chowtime:textures/armor/farmer_boots.png";
+    }
+
+    @Override
+    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
+    {
+        //Check 1 & 2 blocks beneath player (2 for those random times it fails... go figure...)
+        Block block1 = world.getBlock((int) player.posX - 1, (int) player.posY - 1, (int) player.posZ);
+        Block block2 = world.getBlock((int) player.posX - 1, (int) player.posY - 2, (int) player.posZ);
+        if (block1 instanceof BlockFarmland || block2 instanceof BlockFarmland)
+        {
+            //Yes, this is exploitable... IDK what else to do...
+            player.fallDistance = 0.0F;
+        }
     }
 }
 

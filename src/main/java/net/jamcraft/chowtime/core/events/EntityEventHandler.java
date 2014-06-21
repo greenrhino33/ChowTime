@@ -302,9 +302,9 @@ public class EntityEventHandler
         }
     }
 
-    @SubscribeEvent
-    public void useHoe(UseHoeEvent event)
-    {
+//    @SubscribeEvent
+//    public void useHoe(UseHoeEvent event)
+//    {
 //        Block block = event.world.getBlock(event.x, event.y, event.z);
 //        if ((block instanceof BlockDirt || block instanceof BlockGrass) && event.world.getBlock(event.x, event.y + 1, event.z) instanceof BlockAir)
 //        {
@@ -313,5 +313,5 @@ public class EntityEventHandler
 //            event.world.setBlock(event.x, event.y, event.z, CTInits.CTFarmland);
 //            event.current.useItemRightClick(event.world, event.entityPlayer);
 //        }
-    }
+//    }
 }

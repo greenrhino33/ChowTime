@@ -133,15 +133,15 @@ public class ChowTime
         CTRegistry.CTItems();
         CTRegistry.CTTileEntities();
 
-        try
-        {
-            Field farmland = ObfHelper.getField(Blocks.class, "farmland", "ak");
-            ObfHelper.setFinalStatic(farmland, CTInits.CTFarmland);
-        }
-        catch (Exception e)
-        {
-            Throwables.propagate(e);
-        }
+//        try
+//        {
+//            Field farmland = ObfHelper.getField(Blocks.class, "farmland", "ak");
+//            ObfHelper.setFinalStatic(farmland, CTInits.CTFarmland);
+//        }
+//        catch (Exception e)
+//        {
+//            Throwables.propagate(e);
+//        }
 
         //Do this before items registered to *hopefully* remove all the annoying errors
         DynTextures.addDynTP();
@@ -167,15 +167,15 @@ public class ChowTime
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        try
-        {
-            Field farmland = ObfHelper.getField(Blocks.class, "farmland", "ak");
-            ObfHelper.setFinalStatic(farmland, CTInits.CTFarmland);
-        }
-        catch (Exception e)
-        {
-            Throwables.propagate(e);
-        }
+//        try
+//        {
+//            Field farmland = ObfHelper.getField(Blocks.class, "farmland", "ak");
+//            ObfHelper.setFinalStatic(farmland, CTInits.CTFarmland);
+//        }
+//        catch (Exception e)
+//        {
+//            Throwables.propagate(e);
+//        }
         // FMLInterModComms.sendMessage("prisoncraft", "blacklist",
         // Block.blockRegistry.getNameForObject(Blocks.bookshelf));
         FMLCommonHandler.instance().bus().register(new ConnectionHandler());

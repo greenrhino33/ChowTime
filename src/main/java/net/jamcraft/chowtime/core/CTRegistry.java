@@ -18,7 +18,6 @@
 
 package net.jamcraft.chowtime.core;
 
-import com.google.common.base.Throwables;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.jamcraft.chowtime.core.blocks.BlockCottonCandy;
 import net.jamcraft.chowtime.core.blocks.CTBlock;
@@ -56,15 +55,8 @@ public class CTRegistry
         CTInits.CottonCandyBLUE = new BlockCottonCandy().setBlockName(CTStrings.BlockCottonCandy_Blue);
         GameRegistry.registerBlock(CTInits.CottonCandyBLUE, CTStrings.BlockCottonCandy_Blue);
 
-        try
-        {
-            CTInits.CTFarmland = new CTFarmland();
-            GameRegistry.registerBlock(CTInits.CTFarmland, CTStrings.BlockFarmland);
-        }
-        catch (Exception e)
-        {
-            Throwables.propagate(e);
-        }
+//        CTInits.CTFarmland = new CTFarmland();
+//        GameRegistry.registerBlock(CTInits.CTFarmland, CTStrings.BlockFarmland);
     }
 
     public static void CTMachines()
@@ -147,7 +139,6 @@ public class CTRegistry
         GameRegistry.registerItem(CTInits.Strawberry, "strawberry");
         CTInits.Grape = new ItemGrape();
         GameRegistry.registerItem(CTInits.Grape, "grape");
-
         CTInits.Blueberry = new ItemBlueberry();
         GameRegistry.registerItem(CTInits.Blueberry, "blueberry");
         CTInits.Tomato = new ItemTomato();
@@ -158,6 +149,7 @@ public class CTRegistry
         GameRegistry.registerItem(CTInits.Cranberry, "cranberry");
         CTInits.Raspberry = new ItemRaspberry();
         GameRegistry.registerItem(CTInits.Raspberry, "raspberry");
+
         CTInits.FarmerBoots = new ItemFarmerBoots();
         GameRegistry.registerItem(CTInits.FarmerBoots, "farmer_boots");
 

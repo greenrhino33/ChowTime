@@ -18,15 +18,16 @@
 
 package net.jamcraft.chowtime.core.commands;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.Config;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
 import net.minecraft.util.ChatComponentTranslation;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by James Hollowell on 5/24/2014.
@@ -52,8 +53,8 @@ public class ChowTimeCommand implements ICommand
     @Override
     public String getCommandUsage(ICommandSender var1)
     {
-        String use = "/chowtime getXP\n";
-        use += "/chowtime setXP <xp>";
+        String use = "/chowtime getXP | ";
+        use += "/chowtime setXP <xp> | ";
         use += "/chowtime toggleXPBar";
         return use;
     }
@@ -68,6 +69,8 @@ public class ChowTimeCommand implements ICommand
     @Override
     public void processCommand(ICommandSender commandSender, String[] astring)
     {
+        if (astring.length != 1 || astring[0].equals("help"))
+            throw new WrongUsageException(getCommandUsage(commandSender));
         if (astring[0].equals("getXP"))
         {
             commandSender.addChatMessage(new ChatComponentTranslation("chat.getXP", ChowTime.harvestXP));
@@ -101,7 +104,8 @@ public class ChowTimeCommand implements ICommand
         {
             if ("getXP".toLowerCase().startsWith(ARG_LC)) MATCHES.add("getXP");
             if ("setXP".toLowerCase().startsWith(ARG_LC)) MATCHES.add("setXP");
-            if ("toggleXPBar".toLowerCase().startsWith(ARG_LC)) MATCHES.add("toggleXPBar");
+            if ("toggleXPBar".toLowerCase().startsWith(ARG_LC))
+                MATCHES.add("toggleXPBar");
         }
         return MATCHES.isEmpty() ? null : MATCHES;
     }
