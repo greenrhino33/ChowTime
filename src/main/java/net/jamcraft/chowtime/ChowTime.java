@@ -85,6 +85,7 @@ public class ChowTime
             return CTInits.BarleyCrop;
         }
     };
+
     public static final ArmorMaterial FARMER_BOOTS = EnumHelper.addArmorMaterial("FarmerBoots", 5, new int[] { 0, 0, 0, 2 }, 10);
 
     @Mod.Instance(ModConstants.MODID)
