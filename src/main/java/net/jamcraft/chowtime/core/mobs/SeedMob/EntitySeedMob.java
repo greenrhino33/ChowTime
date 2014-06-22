@@ -1,19 +1,35 @@
+/*
+ * ChowTime - Dynamically updating food mod for Minecraft
+ *     Copyright (C) 2014  Team JamCraft
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.jamcraft.chowtime.core.mobs.SeedMob;
 
 import net.jamcraft.chowtime.core.CTInits;
-import net.minecraft.entity.Entity;
+import net.jamcraft.chowtime.core.registrars.SeedRegistry;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.IEntityOwnable;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -25,7 +41,6 @@ public class EntitySeedMob extends EntityAnimal
 {
 
     private int inLove;
-    private int breeding;
     private EntityPlayer field_146084_br;
 
     public EntitySeedMob(World par1World)
@@ -33,8 +48,9 @@ public class EntitySeedMob extends EntityAnimal
         super(par1World);
 
         this.setHealth(10.0F);
+        this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setSpeed(0.222);
-        this.setSize(0.5F, 0.5F);
+        this.setSize(0.5F, 0.8F);
         this.isImmuneToFire = false;
         float var2 = 0.27F;
 
@@ -81,12 +97,9 @@ public class EntitySeedMob extends EntityAnimal
                 this.worldObj.spawnParticle(s, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
             }
         }
-        else
-        {
-            this.breeding = 0;
-        }
     }
 
+    @SuppressWarnings("unused")
     private void procreate(EntitySeedMob par1EntityAnimal)
     {
         EntityAgeable entityageable = this.createChild(par1EntityAnimal);
@@ -107,8 +120,6 @@ public class EntitySeedMob extends EntityAnimal
             this.setGrowingAge(6000);
             par1EntityAnimal.setGrowingAge(6000);
             this.inLove = 0;
-            this.breeding = 0;
-            par1EntityAnimal.breeding = 0;
             par1EntityAnimal.inLove = 0;
             entityageable.setGrowingAge(-24000);
             entityageable.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
@@ -142,7 +153,7 @@ public class EntitySeedMob extends EntityAnimal
 
     protected String getHurtSound()
     {
-        return "mob.glog.say";
+        return "mob.glog.hurt";
     }
 
     protected String getDeathSound()
@@ -160,19 +171,22 @@ public class EntitySeedMob extends EntityAnimal
         ItemStack itemstack = par1EntityPlayer.inventory.getCurrentItem();
 
         Random random = new Random();
-        int n = random.nextInt(9);
-        int produce = random.nextInt(10) + 6;
+        int n = random.nextInt(SeedRegistry.getSeeds().length);
 
-//        if (par1EntityPlayer.inventory.getCurrentItem() == new ItemStack(Items.lead)){
-//           if(!this.getLeashed()){
-//            this.setLeashedToEntity(par1EntityPlayer, true);
-//           }else{
-//            this.setLeashedToEntity(par1EntityPlayer, false);
-//           }
-//        }
-        if (itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
+        //        if (par1EntityPlayer.inventory.getCurrentItem() == new ItemStack(Items.lead)){
+        //           if(!this.getLeashed()){
+        //            this.setLeashedToEntity(par1EntityPlayer, true);
+        //           }else{
+        //            this.setLeashedToEntity(par1EntityPlayer, false);
+        //           }
+        //        }
+        if (!worldObj.isRemote && itemstack != null && itemstack.getItem() == Items.wheat_seeds && !par1EntityPlayer.capabilities.isCreativeMode)
         {
-                switch(n){
+            par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(SeedRegistry.getSeeds()[n], 1, 0));
+            par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
+            par1EntityPlayer.inventoryContainer.detectAndSendChanges();
+            //Replaced with registrar code :D
+            /*    switch(n){
                     case 0:
                         par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CTInits.BarleySeeds, 1, 0));
                         par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
@@ -211,14 +225,14 @@ public class EntitySeedMob extends EntityAnimal
                         break;
                     default:
                         break;
-                }
+                }*/
             return true;
-          }
+        }
         else
         {
             return super.interact(par1EntityPlayer);
         }
-       //}
+        //}
 
     }
 
@@ -227,14 +241,22 @@ public class EntitySeedMob extends EntityAnimal
     {
         return null;
     }
+    
+    public boolean getCanSpawnHere()
+    {
+        int i = MathHelper.floor_double(this.posX);
+        int j = MathHelper.floor_double(this.boundingBox.minY);
+        int k = MathHelper.floor_double(this.posZ);
+        return (this.worldObj.getBlock(i, j - 1, k) == Blocks.grass || this.worldObj.getBlock(i, j - 1, k) == Blocks.sand) && this.worldObj.getFullBlockLightValue(i, j, k) > 8 && super.getCanSpawnHere();
+    }
 
     public EntityAgeable createChild(EntityAgeable var1)
     {
         return new EntitySeedMob(this.worldObj);
     }
-//
-//    @Override
-//    public String getOwnerName() {
-//        return null;
-//    }
+    //
+    //    @Override
+    //    public String getOwnerName() {
+    //        return null;
+    //    }
 }

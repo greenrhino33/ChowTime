@@ -3,8 +3,6 @@ package net.jamcraft.chowtime.dyn.items;
 import net.jamcraft.chowtime.ChowTime;
 import net.jamcraft.chowtime.core.CTInits;
 import net.jamcraft.chowtime.core.ModConstants;
-import net.jamcraft.chowtime.core.items.ItemBarley;
-import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
 import net.jamcraft.chowtime.dyn.common.IDynItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

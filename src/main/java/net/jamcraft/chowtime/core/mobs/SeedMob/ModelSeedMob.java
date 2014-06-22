@@ -1,3 +1,21 @@
+/*
+ * ChowTime - Dynamically updating food mod for Minecraft
+ *     Copyright (C) 2014  Team JamCraft
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.jamcraft.chowtime.core.mobs.SeedMob;
 
 import net.minecraft.client.model.ModelBase;
@@ -11,7 +29,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class ModelSeedMob extends ModelBase
 {
-
+    protected float movementTiming = 1.5F;
     protected float field_78145_g = 5.0F;
     protected float field_78151_h = 3.0F;
     //fields
@@ -126,13 +144,12 @@ public class ModelSeedMob extends ModelBase
     {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-        float f6 = (180F / (float) Math.PI);
         this.Head.rotateAngleX = f4 / (180F / (float) Math.PI);
         this.Head.rotateAngleY = f3 / (180F / (float) Math.PI);
         this.Base.rotateAngleX = ((float) Math.PI / 2F);
-        this.FrontLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
-        this.FrontLeg2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f2;
-        this.Leg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f2;
-        this.Leg2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f2;
+        this.FrontLeg.rotateAngleX = MathHelper.cos(f * movementTiming) * 1.4F * f1;
+        this.FrontLeg2.rotateAngleX = MathHelper.cos(f * movementTiming + (float) Math.PI) * 1.4F * f1;
+        this.Leg.rotateAngleX = MathHelper.cos(f * movementTiming + (float) Math.PI) * 1.4F * f1;
+        this.Leg2.rotateAngleX = MathHelper.cos(f * movementTiming) * 1.4F * f1;
     }
 }

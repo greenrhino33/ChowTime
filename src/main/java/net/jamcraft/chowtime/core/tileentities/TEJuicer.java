@@ -1,9 +1,26 @@
+/*
+ * ChowTime - Dynamically updating food mod for Minecraft
+ *     Copyright (C) 2014  Team JamCraft
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.jamcraft.chowtime.core.tileentities;
 
 import net.jamcraft.chowtime.core.recipies.JuicerRecipes;
 import net.jamcraft.chowtime.core.recipies.Recipe1_1;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,7 +41,6 @@ public class TEJuicer extends TileEntity implements ISidedInventory
 
     public TEJuicer()
     {
-        JuicerRecipes.AddRecipe(new ItemStack(Items.apple), new ItemStack(Items.blaze_powder), 60);
     }
 
     @Override public int getSizeInventory()
@@ -191,7 +207,8 @@ public class TEJuicer extends TileEntity implements ISidedInventory
         }
         if (ticksLeft < maxTicks && JuicerRecipes.GetRecipeFromStack(inventory[0]) != null)
         {
-            if (inventory[1] == null || JuicerRecipes.GetRecipeFromStack(inventory[0]).getOutput().getItem().equals(inventory[1].getItem()))
+            Recipe1_1 r=JuicerRecipes.GetRecipeFromStack(inventory[0]);
+            if (inventory[1] == null || (r.getOutput().isItemEqual(inventory[1])&&r.getOutput().getMaxStackSize()>inventory[1].stackSize))
             {
                 ticksLeft++;
             }

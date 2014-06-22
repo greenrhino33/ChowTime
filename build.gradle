@@ -9,6 +9,7 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
+
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
@@ -17,31 +18,98 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0.1"
-group= "net.jam-craft.chowTime" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "1.0.1-rev5"
+group = "net.jam-craft.chowTime"
 archivesBaseName = "ChowTime"
 
+//Shinies for JamCraft Jenkins, but only on Jenkins
+if (System.getenv()['BUILD_NUMBER']) {
+    version += "-jnks" + System.getenv()['BUILD_NUMBER']
+}
+
 minecraft {
-    version = "1.7.2-10.12.1.1082"
+    version = "1.7.2-10.12.2.1121"
     assetDir = "eclipse/assets"
+
+    // replacing
+    replace "@MC_VERSION@", project.minecraft.version
+    replace "@VERSION@", project.version
+    replaceIn "ChowTime.java"
 }
 
 processResources
-{
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+        {
+            // this will ensure that this task is redone when the versions change.
+            inputs.property "version", project.version
+            inputs.property "mcversion", project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+            // replace stuff in mcmod.info, nothing else
+            from(sourceSets.main.resources.srcDirs) {
+                include 'mcmod.info'
+
+                // replace version and mcversion
+                expand 'version': project.version, 'mcversion': project.minecraft.version
+            }
+
+            // copy everything else, thats not the mcmod.info
+            from(sourceSets.main.resources.srcDirs) {
+                exclude 'mcmod.info'
+            }
+        }
+
+//Taken with love from AbrarSyed's SecretRoomsMod
+repositories {
+    maven { // The repo from which to get waila
+        name "Mobius Repo"
+        url "http://mobiusstrip.eu/maven"
     }
-        
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+    maven { // the repo from which to get NEI and stuff
+        name 'CB Repo'
+        url "http://chickenbones.net/maven/"
     }
+}
+
+dependencies {
+    // I dont have to specify NEI.. because gradle magic. aka: transitive dependency resolution
+    compile "mcp.mobius.waila:Waila:1.5.2a"
+    //compile "org.reflections:reflections:0.9.9-RC1"
+    //compile 'org.projectlombok:lombok:1.12.6'
+}
+
+// add some stuff to the version
+version = "${minecraft.version}-$version"
+
+
+// change the name of my obfuscated jar
+jar {
+//    appendix = 'universal'
+    classifier = 'universal'
+}
+
+// add a source jar
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+//    appendix = 'src'
+    classifier = 'src'
+}
+
+// add a javadoc jar
+task javadocJar(type: Jar, dependsOn: javadoc) {
+//    appendix = 'javadoc'
+    from 'build/docs/javadoc'
+    classifier = 'javadoc'
+}
+
+// because the normal output has been made to be obfuscated
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    //appendix = 'deobf'
+    classifier = 'deobf'
+}
+
+
+artifacts {
+//    archives sourceJar
+    archives deobfJar
+//    archives javadocJar
 }

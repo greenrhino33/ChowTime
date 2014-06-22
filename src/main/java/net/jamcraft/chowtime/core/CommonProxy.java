@@ -1,15 +1,30 @@
+/*
+ * ChowTime - Dynamically updating food mod for Minecraft
+ *     Copyright (C) 2014  Team JamCraft
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.jamcraft.chowtime.core;
 
 import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import net.jamcraft.chowtime.core.client.GuiFermenter;
-import net.jamcraft.chowtime.core.client.GuiICMaker;
-import net.jamcraft.chowtime.core.client.GuiJuicer;
+import net.jamcraft.chowtime.core.client.gui.GuiFermenter;
+import net.jamcraft.chowtime.core.client.gui.GuiICMaker;
+import net.jamcraft.chowtime.core.client.gui.GuiJuicer;
 import net.jamcraft.chowtime.core.container.ContainerFermenter;
 import net.jamcraft.chowtime.core.container.ContainerICMaker;
 import net.jamcraft.chowtime.core.container.ContainerJuicer;
-import net.jamcraft.chowtime.core.mobs.GingerbreadMan.EntityGingerbreadMan;
-import net.jamcraft.chowtime.core.mobs.SeedMob.EntitySeedMob;
 import net.jamcraft.chowtime.core.tileentities.TEFermenter;
 import net.jamcraft.chowtime.core.tileentities.TEIceCreamMaker;
 import net.jamcraft.chowtime.core.tileentities.TEJuicer;
@@ -23,11 +38,10 @@ public class CommonProxy implements IGuiHandler
 {
     public void registerRenderers()
     {
-        EntityRegistry.registerGlobalEntityID(EntitySeedMob.class, "SeedMob", EntityRegistry.findGlobalUniqueEntityId(), 2, 0);
-        EntityRegistry.registerGlobalEntityID(EntityGingerbreadMan.class, "GingerbreadMan", EntityRegistry.findGlobalUniqueEntityId(), 5, 5);
     }
 
-    @Override public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    @Override
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
         if (ID == GuiIDS.Fermenter_Gui)
         {
@@ -47,7 +61,8 @@ public class CommonProxy implements IGuiHandler
         return null;
     }
 
-    @Override public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    @Override
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
         if (ID == GuiIDS.Fermenter_Gui)
         {
@@ -65,5 +80,9 @@ public class CommonProxy implements IGuiHandler
             return new GuiICMaker(player.inventory, te);
         }
         return null;
+    }
+
+    public void openBook()
+    {
     }
 }

@@ -1,3 +1,21 @@
+/*
+ * ChowTime - Dynamically updating food mod for Minecraft
+ *     Copyright (C) 2014  Team JamCraft
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.jamcraft.chowtime.core.items;
 
 import cpw.mods.fml.relauncher.Side;
@@ -19,19 +37,6 @@ public class CTItemFood extends ItemFood
 
     public final int itemUseDuration;
     /**
-     * The amount this food item heals the player.
-     */
-    private final int healAmount;
-    private final float saturationModifier;
-    /**
-     * Whether wolves like this food (true for raw and cooked porkchop).
-     */
-    private final boolean isWolfsFavoriteMeat;
-    /**
-     * If this field is true, the food can be consumed even if the player don't need to eat.
-     */
-    private boolean alwaysEdible;
-    /**
      * represents the potion effect that will occurr upon eating this food. Set by setPotionEffect
      */
     private int potionId;
@@ -52,9 +57,6 @@ public class CTItemFood extends ItemFood
     {
         super(filling, saturation, wolfMeat);
         this.itemUseDuration = 32;
-        this.healAmount = filling;
-        this.isWolfsFavoriteMeat = wolfMeat;
-        this.saturationModifier = saturation;
         this.setCreativeTab(ChowTime.creativeTab);
     }
 

@@ -1,3 +1,21 @@
+/*
+ * ChowTime - Dynamically updating food mod for Minecraft
+ *     Copyright (C) 2014  Team JamCraft
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.jamcraft.chowtime.core.container;
 
 import net.jamcraft.chowtime.core.container.slot.SlotICMaker;
@@ -27,6 +45,8 @@ public class ContainerICMaker extends Container
         this.addSlotToContainer(new SlotOutput(te, 2, 116, 34));
 
         this.addSlotToContainer(new SlotIceFuel(te, 3, 8, 62));
+
+        this.addSlotToContainer(new SlotOutput(te, 4, 54, 62));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
@@ -81,7 +101,7 @@ public class ContainerICMaker extends Container
                  */
                 if (TEIceCreamMaker.isIceFuel(slotItemStack))
                 {
-                    if (!this.mergeItemStack(slotItemStack, 3, TEIceCreamMaker.INV_SIZE, false))
+                    if (!this.mergeItemStack(slotItemStack, 3, 3, false))
                     {
                         return null;
                     }
@@ -89,7 +109,7 @@ public class ContainerICMaker extends Container
 
                 if (IceCreamRecipies.GetRecipesFromStack(slotItemStack) != null)
                 {
-                    if (!this.mergeItemStack(slotItemStack, 0, TEIceCreamMaker.INV_SIZE, false) && !this.mergeItemStack(slotItemStack, 1, TEIceCreamMaker.INV_SIZE, false))
+                    if (!this.mergeItemStack(slotItemStack, 0, 2, false))
                     {
                         return null;
                     }
@@ -104,10 +124,8 @@ public class ContainerICMaker extends Container
             {
                 slot.putStack((ItemStack) null);
             }
-//            else
-//            {
-                slot.onSlotChanged();
-//            }
+
+            slot.onSlotChanged();
         }
 
         return itemStack;
